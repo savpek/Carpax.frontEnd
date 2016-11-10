@@ -1,0 +1,476 @@
+$main-color: white;
+$light: lighten(#000, 20%);
+$white-text: lighten(#000, 95%);
+$dark: lighten(#000, 0%);
+
+body{
+    background: url('/images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+table {
+    width:100%;
+}
+
+tr {
+    height: 1.8em;
+}
+
+.container {
+	color:$main-color;
+	font-size:1.0em;
+	background:$dark;
+    opacity: 0.85;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 2px;
+    margin-top: 3%;
+    min-height:90vh;
+}
+
+.pageHeader {
+    border-radius:2px;
+    color:$white-text;
+    padding:10px;
+    width: 100%;
+    clear: both;
+}
+
+div.notifications {
+    padding:10px;
+}
+
+.alert-info {
+    background-color:$light;
+    color: $main-color;
+    border-color:$main-color;
+}
+
+.filter {
+    float:left;
+    padding-bottom:10px;
+}
+
+input:disabled {
+    background-color: lighten($light, 1%)
+}
+
+a
+{
+    color:darken($main-color, 25%) !important;
+    text-decoration:none;
+}
+
+a:hover
+{
+  text-decoration:none;
+  color:$main-color !important;
+}
+
+a:active
+{
+  text-decoration:none;
+  color:$main-color !important;
+}
+
+.form-control {
+    width:100%;
+    border-radius:2px;
+    background-color:$light;
+    border:2px;
+    color:white;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: $light;
+}
+
+.form-control:disabled {
+    background-color:darken($light, 10%);
+    border:2px;
+    color:darken($white-text, 40%);
+    cursor: auto;
+}
+
+input.ng-invalid {
+  border: 1px solid red;
+  background-color: #5f0000;
+}
+
+.imageholder {
+    padding: 10px;
+    margin: 10px;
+    width: 90%;
+    background-color: $light;
+    height:auto;
+    border-radius:3px;
+}
+
+.thumbnail {
+    width: 100%;
+    margin-bottom:3px;
+}
+
+.image-in-modal {
+    width: 100%;
+}
+
+.a-remove {
+    color: red;
+    float: right;
+    margin-bottom: -15px;
+    margin-right: -7px;
+    font-size: 1.2em;
+}
+
+tr.mouseover {
+    background-color: darken($light, 10%);
+    cursor: pointer;
+}
+
+#fileUpload {
+    display:none;
+}
+
+.imageUploadWrap {
+    cursor: pointer;
+    border-color: #adadad;
+    background-color: #e6e6e6;
+    color: #333333;
+    width: 30%;
+    font-weight: lighter;
+    min-width:130px;
+}
+
+.navbar {
+    border-radius: 3px;
+}
+
+.dropdown-menu {
+    background-color: lighten($dark, 12%);
+    cursor: pointer;
+    min-width: 25px;
+}
+
+th.tableHeader {
+    border-bottom: 2px solid $light;
+}
+
+img.login-image {
+    width: 30px;
+    margin-bottom: -10px;
+    margin-top: -10px;
+}
+
+[ng-cloak]
+{
+  display: none !important;
+}
+
+div.email {
+    font-size: 0.7em;
+    margin-top: -10px;
+    padding:0;
+    margin-bottom: -10px;
+}
+
+div.fileHolder {
+    width: 100%;
+    height:auto;
+    border-radius:3px;
+    font-size: 1.5em;
+    color: white;
+    margin:8px;
+}
+
+a.file-text {
+    padding: 2px;
+    padding-left: 8px;
+    color:white;
+    text-decoration:underline;
+}
+
+i.logo {
+    color: lighten($light, 40%);
+    padding-right:10px;
+    text-shadow: 0 0 3px black;
+}
+
+i.logo-text {
+    color: lighten($light, 40%);
+}
+
+
+td.nonActiveTicket {
+    color: darken($main-color, 30%);
+}
+
+div.image-button {
+    color: red;
+    float: right;
+    margin-bottom: -30px;
+    margin-right: -5px;
+    font-size: 1.2em;
+    height: 2.3em;
+    width: 2.3em;
+    position: relative;
+}
+
+#loading-bar .bar { 
+   background: darken($main-color, 10%) !important; 
+ } 
+
+#loading-bar-spinner .spinner-icon { 
+   border-top-color:  darken($main-color, 10%) !important; 
+   border-left-color: darken($main-color, 10%) !important; 
+}
+
+#loading-bar .peg { 
+  -moz-box-shadow: darken($main-color, 10%) 1px 0 6px 1px; 
+  -ms-box-shadow: darken($main-color, 10%) 1px 0 6px 1px; 
+  -webkit-box-shadow: darken($main-color, 10%) 1px 0 6px 1px; 
+  box-shadow: darken($main-color, 10%) 1px 0 6px 1px; 
+}
+
+div.login {
+    margin:auto;
+    width: 50%;
+    clear: both;
+    padding: 30px;
+
+    @media (max-width: 500px) {
+        width: 100% !important
+    }
+}
+
+button.custom-btn-dark, button.custom-btn-dark:focus {
+    background-color: darken($light, 5%);
+    color: $white-text;
+    margin-left: 5px
+}
+
+button.custom-btn-dark:hover {
+    background-color: darken($light, 2%);
+    color: $white-text;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: $light
+}
+
+.tab-content {
+    padding:10px;
+}
+
+.nav-tabs {
+    border: 0px;
+    margin-top: -5px
+}
+
+
+.nav-tabs > li {
+    margin-bottom:0;
+}
+
+.nav-tabs > li > a, .nav-tabs > li > a:focus {
+    background-color: darken($light, 10%);
+    border: 0;
+    border-radius: 2px;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: $light;
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+    background-color: $light !important;
+    color: white;
+    border: 0 !important;
+}
+
+.nav-tabs > li >  a, .nav-tabs > a:hover, .nav-tabs > a:focus {
+    color: white;
+}
+
+div.history-column {
+    background-color: $light;
+    border-radius: 3px;
+    border-width: 3px;
+    border-color: $dark;
+    color: $main-color;
+    padding: 6px;
+}
+
+div.row > div.old-value {
+    background-color: darken(#f2dede, 50%);
+}
+
+div.row > div.new-value {
+    background-color: darken(#dff0d8, 50%);
+}
+
+div.row > div.header {
+    font-weight: bold;
+    color: darken($main-color, 20%);
+    background-color: darken($light, 10%);
+    margin-top: 20px;
+}
+
+div.user-row {
+    margin: 8px;
+}
+
+textarea.form-control {
+    min-height: 60px   
+}
+
+
+label.textbox-label {
+    color: darken($main-color, 30%);
+    font-size: 80%;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+div.noty_type_error {
+    background-color:darken(#f2dede, 40%);
+}
+
+[ui-view].ng-enter, [ng-include].ng-enter {
+  -webkit-transition:opacity 0.5s;
+  transition:opacity 0.6s;
+}
+
+[ui-view].ng-enter, [ng-include].ng-enter {
+  opacity: 0;
+}
+
+[ui-view].ng-enter-active, [ng-include].ng-enter-active {
+  opacity: 1;
+}
+
+a.navbar-brand {
+    font-weight: 600;
+    font-stretch: narrower;
+}
+
+h2.partnerNameLogin {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 10px;
+    color:darken($main-color, 25%);
+}
+
+i.new-items-marker {
+    color:lighten( red, 10%);
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+.red-test {
+    background-color: red; 
+}
+
+.part-addon-text {
+    background-color: lighten($dark, 10%);
+    border-color: lighten($dark, 10%);
+    margin-right: 10px;
+    color: darken($main-color, 15%);
+    font-weight: bold;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    width: 50px !important;
+}
+
+.part-row {
+    background-color: lighten($dark, 4%);
+}
+
+.part-input {
+    margin: 5px;   
+}
+
+.part-row-last {
+    border-color: $light;
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    margin-bottom: 20px;
+}
+
+div.expenses-total {
+    border-color: $light;
+    border-width: 2px 0px 2px 0px;
+    border-style: solid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.part-toggle-btn {
+    min-width: 50px;
+    margin-right: 10px;
+}
+
+div.ng-enter {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+div.ng-enter-active {
+    opacity: 1;
+}
+
+div.ng-move {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0;
+}
+div.ng-move-active {
+    opacity: 1;
+}
+
+div.navigation-current-user {
+    float: left !important;
+    margin-top: -10px !important;
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    margin-right: 15px;
+}
+
+.calendar .fc-state-highlight {
+    background-color: darken($light, 10%);
+}
+
+.fc th, .fc td {
+    border-width: 1px !important;
+    border-color: $light !important;
+}
+
+.fc th {
+    background-color: $light;
+}
+
+.fc-left h2 {
+    //color: lighten($light, 10%);
+    font-size: 1.5em !important;
+}
+
+a.fc-event  {
+    background-color: #449d44;
+    border-color: #398439;
+    color: white;
+    font-weight: 700
+}
+
+span.fc-title {
+    color: white;
+}
+
+button.fc-button {
+    background-color: darken($light, 5%) !important;
+    color: $white-text !important;
+    background-image: none !important;
+    border: 0 !important;
+    text-shadow: none;
+    box-shadow: none;
+}
