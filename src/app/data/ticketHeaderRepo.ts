@@ -9,6 +9,7 @@ export class TicketHeader {
     public lastMofidied: Date;
 
     constructor(
+        public id: string,
         public registerPlate: string,
         public model: string,
         public customer: string,
@@ -24,7 +25,7 @@ export class TicketHeaderRepo implements IRepository<TicketHeader> {
     constructor(private http: Http) {
         this._current = this.http.get(`${environment.apiBase}/ticket/`)
             .map(response => {
-                return response.json().map(x => new TicketHeader(x.registerPlate, x.model, x.customer, x.lastModified));
+                return response.json().map(x => new TicketHeader(x.id, x.registerPlate, x.model, x.customer, x.lastModified));
             })
             .flatMap(x => x);
     }

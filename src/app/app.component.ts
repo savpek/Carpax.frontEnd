@@ -1,6 +1,7 @@
 import { TicketHeaderService } from './service/ticketHeaderService';
 import { TicketHeaderRepo } from './data/ticketHeaderRepo';
-import { Component } from '@angular/core';
+import { Component,  } from '@angular/core';
+import { Routes } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   providers: [TicketHeaderRepo, TicketHeaderService]
 })
+
 export class AppComponent {
 }
+

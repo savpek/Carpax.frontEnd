@@ -1,12 +1,12 @@
 import { TicketHeader, TicketHeaderRepo } from '../data/ticketHeaderRepo';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/toArray';
 
 @Injectable()
 export class TicketHeaderService {
     private allTickets: TicketHeader[] = [];
-    private subject: Subject<TicketHeader[]> = new Subject<TicketHeader[]>();
+    private subject: BehaviorSubject<TicketHeader[]> = new BehaviorSubject<TicketHeader[]>([]);
 
     private regex: string;
     private textfilterFunc = (x: TicketHeader) : boolean => {

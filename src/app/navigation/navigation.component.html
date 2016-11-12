@@ -13,9 +13,9 @@
       </div>
       <div class="collapse navbar-collapse" ng-if="settings.navigationBar === 'default'">
         <ul class="nav navbar-nav">
-          <li ng-class="{active: isLinkActive('/')}"><a href="/" id="naviFrontPageLink"><i class="fa fa-home fa-m"></i> Etusivu</a></li>
-          <li ng-class="{active: isLinkActive('/new')}"><a href="#" ng-click="new()" id="naviNewLink"><i class="fa fa-file fa-m" id="newButton"></i> Uusi</a></li>
-          <li ng-class="{active: isLinkActive('/management')}"><a href="/management/" id="naviControlPanelLink"><i class="fa fa-cog fa-m"></i> Hallinta</a></li>
+          <li><a routerLink="/"><i class="fa fa-home fa-m"></i> Etusivu</a></li>
+          <li><a routerLink="/new/"><i class="fa fa-file fa-m" id="newButton"></i> Uusi</a></li>
+          <li><a routerLink="/"><i class="fa fa-cog fa-m"></i> Hallinta</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>

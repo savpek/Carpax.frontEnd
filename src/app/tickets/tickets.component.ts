@@ -2,6 +2,7 @@ import { TicketHeaderService } from '../service/ticketHeaderService';
 import { TicketHeader } from '../data/ticketHeaderRepo';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -14,7 +15,7 @@ export class TicketsComponent implements OnInit {
   public tickets: Observable<TicketHeader>;
   public tickets2: TicketHeader[];
 
-  constructor(private ticketService: TicketHeaderService) {}
+  constructor(private ticketService: TicketHeaderService, private router: Router) {}
 
   ngOnInit() {
     this.ticketService
@@ -25,5 +26,6 @@ export class TicketsComponent implements OnInit {
   }
 
   public openTicket(ticketId: string) {
+    this.router.navigate([`/edit/${ticketId}`]);
   }
 }

@@ -10,6 +10,9 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 
+import { RouterModule }   from '@angular/router';
+import { EditComponent } from './edit/edit.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,12 +20,18 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     ContentComponent,
     TicketsComponent,
     TicketFilterComponent,
-    DropdownComponent
+    DropdownComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      { path: '', component: TicketsComponent},
+      { path: 'edit/:id', component: EditComponent },
+      { path: 'new', component: EditComponent }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
