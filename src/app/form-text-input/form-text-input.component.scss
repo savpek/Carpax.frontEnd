@@ -20,6 +20,13 @@ input:disabled {
 }
 
 .invalid { 
-    border: 1px solid red;
-    background-color: #5f0000;
+    border-width: 0 0 0 4px !important;
+    border-style: solid !important;
+    border-color: red !important;
+}
+
+.dirty {
+    border-width: 0 0 0 4px;
+    border-style: solid;
+    border-color: yellow;
 }

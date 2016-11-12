@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter} from '@angular/core';
 })
 export class ButtonComponent {
   @Input()
-  public disabled = false;
+  public disabled: boolean = false;
 
   @Input()
   public icon: string;

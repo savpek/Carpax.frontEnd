@@ -2,7 +2,6 @@ import { TicketHeaderService } from '../service/ticketHeaderService';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 
-
 @Component({
   selector: 'cx-ticket-filter',
   templateUrl: './ticket-filter.component.html',

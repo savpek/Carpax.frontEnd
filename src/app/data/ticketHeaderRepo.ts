@@ -20,10 +20,10 @@ export class TicketHeader {
 
 @Injectable()
 export class TicketHeaderRepo implements IRepository<TicketHeader> {
-    private _current: Observable<any>;
+    private current: Observable<any>;
 
     constructor(private http: Http) {
-        this._current = this.http.get(`${environment.apiBase}/ticket/`)
+        this.current = this.http.get(`${environment.apiBase}/ticket/`)
             .map(response => {
                 return response.json().map(x => new TicketHeader(x.id, x.registerPlate, x.model, x.customer, x.lastModified));
             })
@@ -31,7 +31,7 @@ export class TicketHeaderRepo implements IRepository<TicketHeader> {
     }
 
     public Observe(): Observable<TicketHeader> {
-        return this._current;
+        return this.current;
     }
 }
 
