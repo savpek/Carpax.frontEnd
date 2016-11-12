@@ -25,10 +25,11 @@ export class TicketHeaderRepo implements IRepository<TicketHeader> {
         this._current = this.http.get(`${environment.apiBase}/ticket/`)
             .map(response => {
                 return response.json().map(x => new TicketHeader(x.registerPlate, x.model, x.customer, x.lastModified));
-            });
+            })
+            .flatMap(x => x);
     }
 
-    public Observe<TicketHeader>(): Observable<TicketHeader> {
+    public Observe(): Observable<TicketHeader> {
         return this._current;
     }
 }

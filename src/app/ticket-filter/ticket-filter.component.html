@@ -1,0 +1,20 @@
+<div class="btn-toolbar" role="toolbar">
+  <cx-dropdown headerIcon="fa-calendar" 
+    [items]="[{icon: 'fa-list-alt', value: 'list'},{icon: 'fa-calendar', value: 'calendar'}]"
+    (onSelect)="showReadyFilter($event.value)">
+  </cx-dropdown>
+  <div class="btn-group">
+    <div class="filter">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Hae..." 
+        (keyup)="textFilterChanged($event.target.value)"/>
+    </div>
+  </div>
+  <cx-dropdown 
+    header="Näytä" 
+    [items]="[{text: 'Kaikki', value: 'all'}, {text: 'Valmiit', value: 'ready'}, {text: 'Keskeneräiset', value: 'nonready'}]" 
+    (onSelect)="showReadyFilter($event.value)">
+  </cx-dropdown>
+</div>

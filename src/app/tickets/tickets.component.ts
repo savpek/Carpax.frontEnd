@@ -1,4 +1,5 @@
-import { TicketHeaderRepo, TicketHeader } from '../data/ticketHeaderRepo';
+import { TicketHeaderService } from '../service/ticketHeaderService';
+import { TicketHeader } from '../data/ticketHeaderRepo';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -7,15 +8,20 @@ import 'rxjs/add/operator/map';
   selector: 'cx-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss'],
-  providers: [TicketHeaderRepo]
+  providers: []
 })
 export class TicketsComponent implements OnInit {
   public tickets: Observable<TicketHeader>;
+  public tickets2: TicketHeader[];
 
-  constructor(private ticketRepo: TicketHeaderRepo) {}
+  constructor(private ticketService: TicketHeaderService) {}
 
   ngOnInit() {
-    this.tickets = this.ticketRepo.Observe<TicketHeader>();
+    this.ticketService
+      .GetHeaders()
+      .subscribe(x => {
+        this.tickets2 = x;
+      });
   }
 
   public openTicket(ticketId: string) {

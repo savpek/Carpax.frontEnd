@@ -35,10 +35,6 @@ div.notifications {
     border-color:$main-color;
 }
 
-.filter {
-    float:left;
-    padding-bottom:10px;
-}
 
 input:disabled {
     background-color: lighten($light, 1%)
@@ -123,11 +119,7 @@ input.ng-invalid {
     min-width:130px;
 }
 
-.dropdown-menu {
-    background-color: lighten($dark, 12%);
-    cursor: pointer;
-    min-width: 25px;
-}
+
 
 th.tableHeader {
     border-bottom: 2px solid $light;
@@ -231,9 +223,6 @@ button.custom-btn-dark:hover {
     color: $white-text;
 }
 
-.dropdown-menu > li > a:hover {
-    background-color: $light
-}
 
 .tab-content {
     padding:10px;

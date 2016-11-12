@@ -1,0 +1,22 @@
+@import '../../styles.mixins.scss';
+
+button.btn-dark, button.btn-dark:focus {
+    background-color: darken($light, 5%);
+    color: $white-text;
+    margin-left: 5px
+}
+
+button.btn-dark:hover {
+    background-color: darken($light, 2%);
+    color: $white-text;
+}
+
+.dropdown-menu {
+    background-color: lighten($dark, 12%);
+    cursor: pointer;
+    min-width: 25px;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: $light
+}
