@@ -9,6 +9,10 @@ import { ActivatedRoute } from '@angular/router';
 export class EditComponent implements OnInit {
   private foo: any;
 
+  public ticket: any = {
+    registerPlate: 'lol'
+  };
+
   constructor(private router: ActivatedRoute) {
     router.params.subscribe(x =>
       this.foo = x);

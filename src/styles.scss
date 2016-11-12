@@ -35,11 +35,6 @@ div.notifications {
     border-color:$main-color;
 }
 
-
-input:disabled {
-    background-color: lighten($light, 1%)
-}
-
 a
 {
     color:darken($main-color, 25%) !important;
@@ -56,21 +51,6 @@ a:active
 {
   text-decoration:none;
   color:$main-color !important;
-}
-
-.form-control {
-    width:100%;
-    border-radius:2px;
-    background-color:$light;
-    border:2px;
-    color:white;
-}
-
-.form-control:disabled {
-    background-color:darken($light, 10%);
-    border:2px;
-    color:darken($white-text, 40%);
-    cursor: auto;
 }
 
 input.ng-invalid {
@@ -118,8 +98,6 @@ input.ng-invalid {
     font-weight: lighter;
     min-width:130px;
 }
-
-
 
 th.tableHeader {
     border-bottom: 2px solid $light;

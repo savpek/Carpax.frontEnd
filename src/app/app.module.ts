@@ -5,23 +5,25 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { ContentComponent } from './content/content.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 
 import { RouterModule }   from '@angular/router';
 import { EditComponent } from './edit/edit.component';
+import { FormTextInputComponent } from './form-text-input/form-text-input.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    ContentComponent,
     TicketsComponent,
     TicketFilterComponent,
     DropdownComponent,
-    EditComponent
+    EditComponent,
+    FormTextInputComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

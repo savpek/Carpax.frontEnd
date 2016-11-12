@@ -1,4 +1,14 @@
+@import '../../styles.mixins.scss';
+
 .filter {
     float:left;
     padding-bottom:10px;
+    
+}
+
+.filter-input {
+    border-radius:2px;
+    background-color:$light;
+    border:2px;
+    color:white;
 }

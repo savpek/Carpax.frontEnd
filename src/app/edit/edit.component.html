@@ -1,3 +1,14 @@
-<p>
-  edit works!
-</p>
+<div>
+  <form class="form-horizontal" role="form" name="editForm">
+    <cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate"></cx-form-text-input>
+    <div class="form-group">
+      <label class="col-sm-3 control-label"></label>
+      <div class="col-sm-8">
+        <cx-button icon="fa-floppy-o" (action)="save()" text="Tallenna"></cx-button>
+        <cx-button icon="fa-undo" (action)="save()" text="Peruuta"></cx-button>
+        <cx-dropdown headerIcon="caret" [items]="[{text: 'Poista', value: 'remove'}]" (onSelect)="dropdownAction($event.value)">
+        </cx-dropdown>
+      </div>
+    </div>
+  </form>
+</div>
