@@ -201,41 +201,6 @@ button.custom-btn-dark:hover {
     color: $white-text;
 }
 
-
-.tab-content {
-    padding:10px;
-}
-
-.nav-tabs {
-    border: 0px;
-    margin-top: -5px
-}
-
-
-.nav-tabs > li {
-    margin-bottom:0;
-}
-
-.nav-tabs > li > a, .nav-tabs > li > a:focus {
-    background-color: darken($light, 10%);
-    border: 0;
-    border-radius: 2px;
-}
-
-.nav-tabs > li > a:hover {
-    background-color: $light;
-}
-
-.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
-    background-color: $light !important;
-    color: white;
-    border: 0 !important;
-}
-
-.nav-tabs > li >  a, .nav-tabs > a:hover, .nav-tabs > a:focus {
-    color: white;
-}
-
 div.history-column {
     background-color: $light;
     border-radius: 3px;

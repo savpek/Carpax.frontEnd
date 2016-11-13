@@ -14,6 +14,8 @@ import { EditComponent } from './edit/edit.component';
 import { FormTextInputComponent } from './form-text-input/form-text-input.component';
 import { ButtonComponent } from './button/button.component';
 import { FormDropdownInputComponent } from './form-dropdown-input/form-dropdown-input.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
+import { FilesFormComponent } from './files-form/files-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { FormDropdownInputComponent } from './form-dropdown-input/form-dropdown-
     EditComponent,
     FormTextInputComponent,
     ButtonComponent,
-    FormDropdownInputComponent
+    FormDropdownInputComponent,
+    EditFormComponent,
+    FilesFormComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,14 @@ import { FormDropdownInputComponent } from './form-dropdown-input/form-dropdown-
     HttpModule,
     RouterModule.forRoot([
       { path: '', component: TicketsComponent},
-      { path: 'edit/:id', component: EditComponent },
+      {
+        path: 'edit/:id',
+        component: EditComponent,
+        children: [
+          { path: '', component: EditFormComponent },
+          { path: 'files', component: FilesFormComponent }
+        ]
+      },
       { path: 'new', component: EditComponent }
     ])
   ],
