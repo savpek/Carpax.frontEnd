@@ -13,6 +13,8 @@ export class FormTextInputComponent implements OnChanges {
   @Input() public validate;
   @Input() public label: string = 'DEFAULT LABEL';
 
+  @Input() public disabled = false;
+
   public entry: FormEntry;
 
   constructor(form: FormContext) {

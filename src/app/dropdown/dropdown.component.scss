@@ -3,7 +3,7 @@
 button.btn-dark, button.btn-dark:focus {
     background-color: darken($light, 5%);
     color: $white-text;
-    margin-left: 5px
+    border-radius: 2px;
 }
 
 button.btn-dark:hover {
@@ -19,4 +19,9 @@ button.btn-dark:hover {
 
 .dropdown-menu > li > a:hover {
     background-color: $light
+}
+
+.dropdown-menu > li {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

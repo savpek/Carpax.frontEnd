@@ -13,6 +13,7 @@ import { RouterModule }   from '@angular/router';
 import { EditComponent } from './edit/edit.component';
 import { FormTextInputComponent } from './form-text-input/form-text-input.component';
 import { ButtonComponent } from './button/button.component';
+import { FormDropdownInputComponent } from './form-dropdown-input/form-dropdown-input.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ButtonComponent } from './button/button.component';
     DropdownComponent,
     EditComponent,
     FormTextInputComponent,
-    ButtonComponent
+    ButtonComponent,
+    FormDropdownInputComponent
   ],
   imports: [
     BrowserModule,

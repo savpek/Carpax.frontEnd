@@ -1,12 +1,12 @@
 <div class="dropdown">
   <button type="button" class="btn btn-toggle btn-dark" data-toggle="dropdown">
-      <span *ngIf="header"> {{header}} <span class="caret"></span></span>
+      <span *ngIf="!headerIcon"> {{ getHeaderText() }} <span class="caret"></span></span>
       <i *ngIf="headerIcon" class="fa {{headerIcon}}" aria-hidden="true"></i>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <li *ngFor="let item of items">
-      <a *ngIf="item.text" href="#" (click)="click(item)">{{item.text}}</a>
-      <a *ngIf="item.icon" href="#" (click)="click(item)"><i class="fa {{item.icon}}" aria-hidden="true"></i></a>
+    <li *ngFor="let item of items" (click)="dropdownClick(item)">
+      <a *ngIf="item.text">{{item.text}}</a>
+      <a *ngIf="item.icon"><i class="fa {{item.icon}}" aria-hidden="true"></i></a>
     </li>
   </ul>
 </div>

@@ -1,0 +1,11 @@
+@import '../../styles.mixins.scss';
+
+.dropdown-overrides {
+    width: 100%
+}
+
+.dirty /deep/ button {
+    border-width: 0 0 0 4px;
+    border-style: solid;
+    border-color: $yellow;
+}

@@ -1,23 +1,39 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'cx-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit {
-  @Input() public items: any[];
+export class DropdownComponent {
+  @Input() public items: DropdownItem[];
   @Input() public header: string;
   @Input() public headerIcon: string;
 
-  @Output() public onSelect = new EventEmitter();
+  @Input() public value: any;
+  @Output() public valueChange = new EventEmitter();
 
-  constructor() {}
-  ngOnInit() {}
+  public getHeaderText() {
+    let current = '';
 
-  public click(item: any) {
-    this.onSelect.emit({
-      newSelection: item
-    });
+    if (this.value !== undefined) {
+      current = this.items
+        .filter(x => x.value === this.value)
+        .map(x => x.text)[0];
+
+    }
+
+    if (this.header) {
+      return `${this.header}: ${current}`;
+    }
+    return current;
   }
+
+  public dropdownClick(item: any) {
+    this.value = item.value;
+    this.valueChange.emit(this.value);
+  }
+}
+export class DropdownItem {
+  constructor(public text: string, public value: any) {}
 }
