@@ -2,7 +2,8 @@
   <form class="form-horizontal" role="form">
     <cx-form-dropdown-input 
       label="Korjaamo" 
-      [items]="insuranceTypes">
+      [items]="partners"
+      [(value)]="currentPartnerId">
     </cx-form-dropdown-input>
     <h3>Auton tiedot</h3>
     <cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate"></cx-form-text-input>

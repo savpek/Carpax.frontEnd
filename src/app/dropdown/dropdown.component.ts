@@ -20,7 +20,6 @@ export class DropdownComponent {
       current = this.items
         .filter(x => x.value === this.value)
         .map(x => x.text)[0];
-
     }
 
     if (this.header) {
