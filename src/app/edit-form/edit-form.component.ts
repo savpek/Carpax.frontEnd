@@ -37,17 +37,19 @@ export class EditFormComponent {
   }
 
   public saveDisabled() {
-    return false;
+    return !this.form.isValid();
   }
 
   public save() {
-    this.form.submitted();
-    this.repo.Update(this.ticket);
+    this.repo.Update(this.ticket)
+      .subscribe(x => this.form.submitted());
   }
 
   public saveAndClose() {
-    this.save();
-    this.router.navigateByUrl('/');
+    this.repo.Update(this.ticket).subscribe(x => {
+      this.router.navigateByUrl('/');
+      this.form.submitted();
+    });
   }
 
   public cancel() {

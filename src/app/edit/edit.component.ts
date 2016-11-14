@@ -1,6 +1,5 @@
 import { FormContext } from '../service/formContext';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'cx-edit',
@@ -9,6 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   providers: [FormContext]
 })
 export class EditComponent {
-  constructor(private activeRoute: ActivatedRoute, private router: Router) {
+  constructor() {
   }
 }

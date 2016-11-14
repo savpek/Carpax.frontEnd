@@ -22,5 +22,7 @@ export class TicketRepo {
     }
 
     public Update(ticket: ITicket) {
+        return this.http.post(`${environment.apiBase}/ticket/${ticket.id}`, ticket)
+            .map(response => response.json());
     }
 }

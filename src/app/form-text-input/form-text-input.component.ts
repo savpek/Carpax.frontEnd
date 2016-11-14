@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 })
 export class FormTextInputComponent implements OnChanges {
   @Input() public text: string = '';
-  @Output() textChange = new EventEmitter<number>();
+  @Output() textChange = new EventEmitter();
 
   @Input() public validate;
   @Input() public label: string = 'DEFAULT LABEL';
@@ -24,6 +24,7 @@ export class FormTextInputComponent implements OnChanges {
   public keyboardEvent() {
     this.entry.isDirty = true;
     this.validateData();
+    this.textChange.emit(this.text);
   }
 
   private validateData() {
