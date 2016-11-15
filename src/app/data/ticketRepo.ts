@@ -25,4 +25,9 @@ export class TicketRepo {
         return this.http.post(`${environment.apiBase}/ticket/${ticket.id}`, ticket)
             .map(response => response.json());
     }
+
+    public Delete(ticket: ITicket) {
+        return this.http.delete(`${environment.apiBase}/ticket/${ticket.id}`)
+            .map(response => response.json());
+    }
 }

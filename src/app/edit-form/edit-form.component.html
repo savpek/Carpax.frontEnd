@@ -52,6 +52,8 @@
       <cx-form-text-input label="Omavastuu" [(text)]="ticket.excess"></cx-form-text-input>
     </div>
 
+    <cx-form-date-input></cx-form-date-input>
+    
     <cx-form-text-input label="Selite" [(text)]="ticket.description"></cx-form-text-input>
     <cx-form-text-input label="Luotu" [text]="ticket.created" [disabled]="true"></cx-form-text-input>
 
@@ -61,7 +63,7 @@
         <cx-button icon="fa-floppy-o" (action)="save()" text="Tallenna" [disabled]="saveDisabled()"></cx-button>
         <cx-button icon="fa-floppy-o" (action)="saveAndClose()" text="Tallenna ja sulje" [disabled]="saveDisabled()"></cx-button>
         <cx-button icon="fa-undo" (action)="cancel()" text="Peruuta"></cx-button>
-        <cx-dropdown headerIcon="caret" [items]="[{text: 'Poista', value: 'remove'}]" (onSelect)="dropdownAction($event.value)">
+        <cx-dropdown headerIcon="fa-pencil-square-o" [items]="[{text: 'Poista', value: 'remove'}]" (valueChange)="extracActions($event)">
         </cx-dropdown>
       </div>
     </div>

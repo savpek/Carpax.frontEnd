@@ -82,6 +82,11 @@ export class EditFormComponent {
 
   public cancel() {
     this.form.submitted();
-    this.router.navigateByUrl('/');
+    ;
+  }
+
+  public extracActions(event) {
+    this.ticketRepo.Delete(this.ticket)
+      .subscribe(() => this.router.navigateByUrl('/'));
   }
 }

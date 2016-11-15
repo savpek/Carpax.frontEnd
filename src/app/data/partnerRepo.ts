@@ -34,6 +34,7 @@ export class PartnerRepo {
     public UpdateCurrentForTicket(ticketId: string, partnerId: string) {
         return this.http.post(`${environment.apiBase}/partnerforticket/`, {
             ticketId: ticketId, partnerId: partnerId
-        }).map(response => <IPartnerMap[]>response.json());
+        }).map(
+            response => <IPartnerMap[]>response.json());
     }
 }

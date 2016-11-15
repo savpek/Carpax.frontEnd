@@ -16,6 +16,7 @@ import { ButtonComponent } from './button/button.component';
 import { FormDropdownInputComponent } from './form-dropdown-input/form-dropdown-input.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
 import { FilesFormComponent } from './files-form/files-form.component';
+import { FormDateInputComponent } from './form-date-input/form-date-input.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FilesFormComponent } from './files-form/files-form.component';
     ButtonComponent,
     FormDropdownInputComponent,
     EditFormComponent,
-    FilesFormComponent
+    FilesFormComponent,
+    FormDateInputComponent
   ],
   imports: [
     BrowserModule,

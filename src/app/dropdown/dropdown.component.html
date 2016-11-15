@@ -1,7 +1,8 @@
 <div class="dropdown">
   <button type="button" class="btn btn-toggle btn-dark" data-toggle="dropdown">
-      <span *ngIf="!headerIcon"> {{ getHeaderText() }} <span class="caret"></span></span>
+      <span *ngIf="!headerIcon"> {{ getHeaderText() }} </span>
       <i *ngIf="headerIcon" class="fa {{headerIcon}}" aria-hidden="true"></i>
+      <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
     <li *ngFor="let item of items" (click)="dropdownClick(item)">
