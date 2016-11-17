@@ -10,8 +10,11 @@ export class DropdownComponent {
   @Input() public header: string;
   @Input() public headerIcon: string;
 
+  @Input() public theme: string = 'dark';
+
   @Input() public value: any;
   @Output() public valueChange = new EventEmitter();
+
 
   public getHeaderText() {
     let current = '';

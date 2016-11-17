@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IRepository } from './IRepository';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 

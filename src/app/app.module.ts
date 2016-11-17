@@ -17,6 +17,8 @@ import { FormDropdownInputComponent } from './form-dropdown-input/form-dropdown-
 import { EditFormComponent } from './edit-form/edit-form.component';
 import { FilesFormComponent } from './files-form/files-form.component';
 import { FormDateInputComponent } from './form-date-input/form-date-input.component';
+import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,14 @@ import { FormDateInputComponent } from './form-date-input/form-date-input.compon
     FormDropdownInputComponent,
     EditFormComponent,
     FilesFormComponent,
-    FormDateInputComponent
+    FormDateInputComponent,
+    ImageThumbnailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    DatepickerModule,
     RouterModule.forRoot([
       { path: '', component: TicketsComponent},
       {

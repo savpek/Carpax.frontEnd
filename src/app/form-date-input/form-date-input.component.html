@@ -1,13 +1,12 @@
 <div class="form-group">
-    <label class="col-sm-3 control-label"> DUMMY </label>
-    <div class="col-sm-8">
-      <div class="form-group">
-          <div class='input-group date' id=''>
-              <input type='text' class="form-control date-input" />
-              <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-          </div>
-      </div>
-    </div>
+  <label class="col-sm-3 control-label"> {{ label }} </label>
+  <div class="col-sm-8">
+    <p class="input-group">
+      <input type='text' [class.dirty]="entry.isDirty" class="form-control date-input disabled" [value]="formatCurrent()" disabled/>
+      <span class="input-group-btn" >
+          <button *ngIf="editAllowed" type="button" class="btn btn-default" (click)="toggleCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+    <datepicker *ngIf="showDatepicker" [startingDay]="1" class="popup" [(ngModel)]="dateModel" [showWeeks]="true" (selectionDone)="hidePopup($event)"></datepicker>
+  </div>
 </div>

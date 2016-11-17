@@ -30,7 +30,7 @@ export class TicketHeaderRepo implements IRepository<TicketHeader> {
             .flatMap(x => x);
     }
 
-    public Observe(): Observable<TicketHeader> {
+    public Get(): Observable<TicketHeader> {
         return this.current;
     }
 }

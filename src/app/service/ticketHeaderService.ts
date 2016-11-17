@@ -20,7 +20,7 @@ export class TicketHeaderService {
     };
 
     constructor(private repo: TicketHeaderRepo) {
-        repo.Observe()
+        repo.Get()
         .toArray()
         .subscribe(x => {
             this.allTickets = x;

@@ -58,19 +58,6 @@ input.ng-invalid {
   background-color: #5f0000;
 }
 
-.imageholder {
-    padding: 10px;
-    margin: 10px;
-    width: 90%;
-    background-color: $light;
-    height:auto;
-    border-radius:3px;
-}
-
-.thumbnail {
-    width: 100%;
-    margin-bottom:3px;
-}
 
 .image-in-modal {
     width: 100%;
@@ -152,16 +139,6 @@ td.nonActiveTicket {
     color: darken($main-color, 30%);
 }
 
-div.image-button {
-    color: red;
-    float: right;
-    margin-bottom: -30px;
-    margin-right: -5px;
-    font-size: 1.2em;
-    height: 2.3em;
-    width: 2.3em;
-    position: relative;
-}
 
 #loading-bar .bar { 
    background: darken($main-color, 10%) !important; 

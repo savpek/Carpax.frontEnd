@@ -33,7 +33,6 @@
       <cx-form-text-input label="Vastapuolen vakuutus" [(text)]="ticket.otherSideInsurance"></cx-form-text-input>
     </div>
 
-
     <cx-form-dropdown-input
       *ngIf="ticket.insurance == 1" 
       label="Vahinkolaji" 
@@ -52,18 +51,19 @@
       <cx-form-text-input label="Omavastuu" [(text)]="ticket.excess"></cx-form-text-input>
     </div>
 
-    <cx-form-date-input></cx-form-date-input>
-    
     <cx-form-text-input label="Selite" [(text)]="ticket.description"></cx-form-text-input>
-    <cx-form-text-input label="Luotu" [text]="ticket.created" [disabled]="true"></cx-form-text-input>
+    
+    <cx-form-date-input label="Tapahtuma-aika" [(dateModel)]="ticket.when"></cx-form-date-input>
+    <cx-form-date-input label="Aloituspäivä" [(dateModel)]="ticket.workStartDate"></cx-form-date-input>
+    <cx-form-date-input label="Valmistumispäivä" [(dateModel)]="ticket.workEndDate"></cx-form-date-input>
+    <cx-form-date-input label="Luotu" [editAllowed]="false" [(dateModel)]="ticket.created"></cx-form-date-input>
 
     <div class="form-group">
       <label class="col-sm-3 control-label"></label>
       <div class="col-sm-8">
         <cx-button icon="fa-floppy-o" (action)="save()" text="Tallenna" [disabled]="saveDisabled()"></cx-button>
-        <cx-button icon="fa-floppy-o" (action)="saveAndClose()" text="Tallenna ja sulje" [disabled]="saveDisabled()"></cx-button>
         <cx-button icon="fa-undo" (action)="cancel()" text="Peruuta"></cx-button>
-        <cx-dropdown headerIcon="fa-pencil-square-o" [items]="[{text: 'Poista', value: 'remove'}]" (valueChange)="extracActions($event)">
+        <cx-dropdown headerIcon="fa-pencil-square-o" [items]="[{text: 'Poista', value: 'remove'}]" (valueChange)="extracActions($event)" theme="light">
         </cx-dropdown>
       </div>
     </div>

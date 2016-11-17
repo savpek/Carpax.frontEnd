@@ -1,27 +1,41 @@
 @import '../../styles.mixins.scss';
 
-button.btn-dark, button.btn-dark:focus {
-    background-color: darken($light, 5%);
-    color: $white-text;
-    border-radius: 2px;
-}
-
-button.btn-dark:hover {
-    background-color: darken($light, 2%);
-    color: $white-text;
+button.btn {
+    border-radius: 3px !important;
 }
 
 .dropdown-menu {
-    background-color: lighten($dark, 12%);
     cursor: pointer;
-    min-width: 25px;
-}
-
-.dropdown-menu > li > a:hover {
-    background-color: $light
+    min-width: 50px;
 }
 
 .dropdown-menu > li {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.light {
+    .dropdown-menu > li > a {
+        color: $dark !important;
+    }
+}
+
+.dark {
+    button.btn, button.btn:focus {
+        background-color: darken($light, 5%);
+        border-color: $dark;
+        color: $white-text;
+    }
+
+    button.btn:hover {
+        background-color: darken($light, 2%);
+        color: $white-text;
+    }
+
+    .dropdown-menu > li > a:hover {
+        background-color: $light
+    }
+    .dropdown-menu {
+        background-color: lighten($dark, 12%);
+    }
 }

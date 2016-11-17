@@ -1,0 +1,17 @@
+<div class="thumbnail-container">
+    <cx-button class="pull-right remove-button" icon="fa-trash-o" (click)="delete(file)"></cx-button>
+    <div>
+        <img src="{{file.uri}}" class="thumbnail img-responsive" (click)="openImage(file)" />
+    </div>
+</div>
+
+<div class="modal fade" *ngIf="isOpen" [ngClass]="{ in: isOpen }" [ngStyle]="{ display: isOpen ? 'block' : 'none' }"
+    tabindex="-1" role="dialog" (click)="closeImage()">
+    <div class="modal-dialog modal-lg"  role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="{{file.uri}}" class="image-in-modal" />
+            </div>
+        </div>
+    </div>
+</div>

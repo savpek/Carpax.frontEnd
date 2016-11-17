@@ -24,7 +24,8 @@
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
@@ -35,7 +36,8 @@
   ],
   "addons": [
     "../node_modules/bootstrap/dist/fonts*.+(otf|eot|svg|ttf|woff|woff2)",
-    "../node_modules/font-awesome/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
+    "../node_modules/font-awesome/fonts/*.+(otf|eot|svg|ttf|woff|woff2)",
+    "../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
   ],
   "packages": [],
   "e2e": {
