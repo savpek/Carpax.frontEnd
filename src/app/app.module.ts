@@ -19,6 +19,7 @@ import { FilesFormComponent } from './files-form/files-form.component';
 import { FormDateInputComponent } from './form-date-input/form-date-input.component';
 import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
+import { FileThumbnailComponent } from './file-thumbnail/file-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.compo
     EditFormComponent,
     FilesFormComponent,
     FormDateInputComponent,
-    ImageThumbnailComponent
+    ImageThumbnailComponent,
+    FileThumbnailComponent
   ],
   imports: [
     BrowserModule,

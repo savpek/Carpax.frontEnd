@@ -1,4 +1,6 @@
 <div class="thumbnails">
-<cx-image-thumbnail *ngFor="let file of files" [file]="file">
-</cx-image-thumbnail>
+    <div *ngFor="let file of files" >
+        <cx-image-thumbnail [file]="file" *ngIf="isImage(file)"></cx-image-thumbnail>
+        <cx-file-thumbnail [file]="file" *ngIf="!isImage(file)"></cx-file-thumbnail>
+    </div>
 </div>

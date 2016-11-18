@@ -1,6 +1,6 @@
-import { FileRepo, IFile } from '../data/FileRepo';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileRepo, FileEntry } from '../data/fileRepo';
 
 @Component({
   selector: 'cx-files-form',
@@ -9,12 +9,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   providers: [FileRepo]
 })
 export class FilesFormComponent {
-  public files: IFile[] = [];
+  public files: FileEntry[] = [];
 
   constructor(private fileRepo: FileRepo, private activeRoute: ActivatedRoute) {
       activeRoute.parent.params.subscribe(params =>
       fileRepo.Get(params['id']).subscribe(images => {
         this.files = images;
       }));
+  }
+
+  public isImage(file: FileEntry): boolean {
+    return !!['.jpg', '.jpeg', '.png', '.bmp', '.JPG'].find(x => x === file.extension);
   }
 }

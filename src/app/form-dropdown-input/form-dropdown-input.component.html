@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="col-sm-3 control-label">{{label}}</label>
     <div class="col-sm-8">
-      <cx-dropdown [class.dirty]="entry.isDirty"  [header]="dropdownHeader" [items]="items" [value]="value" (valueChange)="valueChange.emit($event)"  (keyup)="keyboardEvent()">
+      <cx-dropdown [dirty]="entry.isDirty"  [header]="dropdownHeader" [items]="items" [value]="value" (valueChange)="valueChange.emit($event)"  (keyup)="keyboardEvent()">
       </cx-dropdown>
     </div>
 </div>

@@ -11,6 +11,12 @@
     cursor: pointer;
     width: 100%;
     margin-bottom:3px;
+    border-width: 0px;
+    background: darken($main-color, 30%);
+}
+
+.thumbnail:hover {
+    background: darken($main-color, 20%);
 }
 
 .top-bar {

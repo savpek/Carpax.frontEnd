@@ -1,5 +1,5 @@
-import { FileRepo, IFile } from '../data/FileRepo';
-import { Component, Input, OnInit } from '@angular/core';
+import { FileRepo, FileEntry } from '../data/fileRepo';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'cx-image-thumbnail',
@@ -24,7 +24,7 @@ export class ImageThumbnailComponent {
     this.isOpen = false;
   }
 
-  public delete(file: IFile) {
+  public delete(file: FileEntry) {
     this.fileRepo.delete(file);
   }
 }

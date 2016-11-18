@@ -4,39 +4,40 @@ import { Observable, Subject} from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
-export interface IFile {
-    id: string;
-    uri: string;
-    name: string;
-    originalName: string;
-    added: Date;
-}
-
 @Injectable()
 export class FileRepo {
-    private subject: Subject<IFile[]> = new Subject<IFile[]>();
-    private data: IFile[] = [];
+    private subject: Subject<FileEntry[]> = new Subject<FileEntry[]>();
+    private data: FileEntry[] = [];
 
     constructor(private http: Http) {}
 
-    public Get(ticketId: string): Observable<IFile[]> {
+    public Get(ticketId: string): Observable<FileEntry[]> {
         this.http.get(`${environment.apiBase}/file/${ticketId}`)
             .subscribe(response => {
-                this.data = <IFile[]>response.json();
+                this.data = <FileEntry[]>response.json();
                 this.subject.next(this.data);
             });
 
         return this.subject;
     }
 
-    public upload(file: IFile): void {
+    public upload(file: FileEntry): void {
     }
 
-    public delete(file: IFile): void {
+    public delete(file: FileEntry): void {
         this.http.delete(`${environment.apiBase}/file/${file.id}`)
             .subscribe(response => {
                 this.data = this.data.filter(f => f.uri !== file.uri);
                 this.subject.next(this.data);
             });
     }
+}
+
+export class FileEntry {
+    id: string;
+    uri: string;
+    name: string;
+    originalName: string;
+    added: Date;
+    extension: string;
 }

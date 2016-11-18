@@ -15,6 +15,7 @@ export class DropdownComponent {
   @Input() public value: any;
   @Output() public valueChange = new EventEmitter();
 
+  @Input() public dirty: boolean;
 
   public getHeaderText() {
     let current = '';
