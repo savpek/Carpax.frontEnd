@@ -29,10 +29,13 @@ export class FileRepo {
         return this.subject;
     }
 
+    public upload(file: IFile): void {
+    }
+
     public delete(file: IFile): void {
         this.http.delete(`${environment.apiBase}/file/${file.id}`)
-            .subscribe(x => {
-                this.data = this.data.filter(x => x.uri !== file.uri);
+            .subscribe(response => {
+                this.data = this.data.filter(f => f.uri !== file.uri);
                 this.subject.next(this.data);
             });
     }
