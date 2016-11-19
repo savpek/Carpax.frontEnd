@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable, Subject} from 'rxjs';
 
 import { environment } from '../../environments/environment';
@@ -22,10 +22,12 @@ export class FileRepo {
     }
 
     public upload(ticketId: string, data: any): Observable<FileEntry> {
-        return this.http.post(`${environment.apiBase}/file/${ticketId}`, {
-                headers: { 'Content-Type': undefined }
-            }, data)
+        return this.http.post(`${environment.apiBase}/file/${ticketId}`, data)
             .map(response => <FileEntry>response.json())
+            .do(entry => {
+                this.data.push(entry);
+                this.subject.next(this.data);
+            });
     }
 
     public delete(file: FileEntry): void {

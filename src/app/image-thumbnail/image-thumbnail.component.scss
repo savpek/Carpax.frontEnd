@@ -12,11 +12,11 @@
     width: 100%;
     margin-bottom:3px;
     border-width: 0px;
-    background: darken($main-color, 30%);
+    background: $light;
 }
 
 .thumbnail:hover {
-    background: darken($main-color, 20%);
+    background: lighten($light, 20%)
 }
 
 .top-bar {
