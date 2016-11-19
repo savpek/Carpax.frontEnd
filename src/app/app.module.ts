@@ -21,6 +21,9 @@ import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
 import { FileThumbnailComponent } from './file-thumbnail/file-thumbnail.component';
 import { FileInputComponent } from './file-input/file-input.component';
+import { ExpensesFormComponent } from './expenses-form/expenses-form.component';
+import { FormTextInputSmallComponent } from './form-text-input-small/form-text-input-small.component';
+import { TooltipDirective } from './tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { FileInputComponent } from './file-input/file-input.component';
     FormDateInputComponent,
     ImageThumbnailComponent,
     FileThumbnailComponent,
-    FileInputComponent
+    FileInputComponent,
+    ExpensesFormComponent,
+    FormTextInputSmallComponent,
+    TooltipDirective
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,8 @@ import { FileInputComponent } from './file-input/file-input.component';
         component: EditComponent,
         children: [
           { path: '', component: EditFormComponent },
-          { path: 'files', component: FilesFormComponent }
+          { path: 'files', component: FilesFormComponent },
+          { path: 'expenses', component: ExpensesFormComponent }
         ]
       },
       { path: 'new', component: EditComponent }

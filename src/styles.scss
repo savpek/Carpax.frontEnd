@@ -233,16 +233,6 @@ i.new-items-marker {
     background-color: red; 
 }
 
-.part-addon-text {
-    background-color: lighten($dark, 10%);
-    border-color: lighten($dark, 10%);
-    margin-right: 10px;
-    color: darken($main-color, 15%);
-    font-weight: bold;
-    min-width: 50px !important;
-    max-width: 50px !important;
-    width: 50px !important;
-}
 
 .part-row {
     background-color: lighten($dark, 4%);
