@@ -21,7 +21,11 @@ export class FileRepo {
         return this.subject;
     }
 
-    public upload(file: FileEntry): void {
+    public upload(ticketId: string, data: any): Observable<FileEntry> {
+        return this.http.post(`${environment.apiBase}/file/${ticketId}`, {
+                headers: { 'Content-Type': undefined }
+            }, data)
+            .map(response => <FileEntry>response.json())
     }
 
     public delete(file: FileEntry): void {

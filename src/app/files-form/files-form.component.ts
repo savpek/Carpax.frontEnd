@@ -10,11 +10,13 @@ import { FileRepo, FileEntry } from '../data/fileRepo';
 })
 export class FilesFormComponent {
   public files: FileEntry[] = [];
+  public currentTicket: string;
 
   constructor(private fileRepo: FileRepo, private activeRoute: ActivatedRoute) {
       activeRoute.parent.params.subscribe(params =>
       fileRepo.Get(params['id']).subscribe(images => {
         this.files = images;
+        this.currentTicket = params['id']; 
       }));
   }
 
