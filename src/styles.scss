@@ -234,28 +234,11 @@ i.new-items-marker {
 }
 
 
-.part-row {
-    background-color: lighten($dark, 4%);
-}
-
 .part-input {
     margin: 5px;   
 }
 
-.part-row-last {
-    border-color: $light;
-    border-width: 0px 0px 2px 0px;
-    border-style: solid;
-    margin-bottom: 20px;
-}
 
-div.expenses-total {
-    border-color: $light;
-    border-width: 2px 0px 2px 0px;
-    border-style: solid;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 
 .part-toggle-btn {
     min-width: 50px;

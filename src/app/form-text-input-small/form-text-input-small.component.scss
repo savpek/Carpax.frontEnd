@@ -17,4 +17,16 @@
     background-color:$light;
     border:2px;
     color:white;
+    width: 100%
+}
+
+div {
+    margin-top: 5px;
+    width: 100%
+}
+
+input:disabled {
+    background-color: lighten($dark, 10%);
+    cursor: auto;
+    color: $main-color
 }
