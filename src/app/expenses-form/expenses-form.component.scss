@@ -3,6 +3,10 @@
 .part-row {
     background-color: lighten($dark, 4%);
     min-height: 100px;
+    display: block;
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
 }
 
 .part-row-last {

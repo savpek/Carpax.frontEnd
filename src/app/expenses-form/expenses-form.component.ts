@@ -6,6 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expenses-form.component.scss']
 })
 export class ExpensesFormComponent implements OnInit {
+  public partRows: any[] = [{
+    description: 'PartName',
+    identifier: 'PartIdentifier',
+    price: 5,
+    amount: 2,
+    discount: 10
+  }];
+  
   public workRows: any[] = [{
     description: 'dummyDesc',
     amount: 1,
@@ -18,7 +26,22 @@ export class ExpensesFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  public deletePart() {
+
+  }
+
   public calculateWorkCost(work: any): number {
-    return work.units * work.price;
+    return (work.units * 0.01) * work.price;
+  }
+
+  public deleteWork() {
+  }
+
+  public calculatePartCost(part: any): number {
+    return part.price * part.amount * ((100 - part.discount) / 100);
+  }
+
+  public calculateTotal() {
+    return 0;
   }
 }
