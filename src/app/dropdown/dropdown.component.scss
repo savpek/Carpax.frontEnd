@@ -40,6 +40,19 @@ button.btn {
     }
 }
 
+button.yellow {
+    background-color: $yellow;
+    border-color: $yellow;
+}
+
+button.green {
+    background-color: $green;
+    border-color: $green;
+}
+
+button.default {
+}
+
 .dirty {
     border-width: 0 0 0 4px !important;
     border-style: solid !important;

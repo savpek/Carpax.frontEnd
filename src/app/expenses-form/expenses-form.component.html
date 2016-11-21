@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div>
     <div *ngFor="let part of partRows" class="part-row">
-        <div class="row-fluid form-inline">
-            <div class="col-sm-4 col-xs-4 visible-xs visible-sm">
-                <cx-dropdown></cx-dropdown>
-                <cx-button icon="fa-times" text="Poista" (action)="deletePart(part)" class="pull-right"></cx-button>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 visible-xs visible-sm">
+                <cx-button icon="fa-times" text="Poista" class="pull-right"></cx-button>
+                <cx-dropdown [items]="partStates" class="pull-right" theme="light"></cx-dropdown>
             </div>
             <div class="col-lg-4 col-md-4 col-xs-12">
                 <cx-form-text-input-small headerIcon="fa-info-circle" [(text)]="part.description"></cx-form-text-input-small>
@@ -11,35 +11,35 @@
             <div class="col-lg-4 col-md-4 col-xs-12">
                 <cx-form-text-input-small headerText="Id" [(text)]="part.identifier"></cx-form-text-input-small>
             </div>
-            <div class="col-lg-3 col-md-3 hidden-xs hidden-sm">
-                <cx-dropdown theme="dark"></cx-dropdown>
-                <cx-button icon="fa-times" text="Poista" (action)="delete(part)" class="pull-right"></cx-button>
+            <div class="col-lg-3 col-md-4 hidden-xs hidden-sm">
+                <cx-button icon="fa-times" text="Poista" class="pull-right"></cx-button>
+                <cx-dropdown [items]="partStates" class="pull-right" theme="light"></cx-dropdown>
             </div>
         </div>
-        <div class="row-fluid form-inline">
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-xs-12">
                 <cx-form-text-input-small headerIcon="fa-ellipsis-h" [(text)]="part.amount" footerText="kpl"></cx-form-text-input-small>
             </div>
             <div class="col-lg-4 col-md-4 col-xs-12">
                 <cx-form-text-input-small headerIcon="fa-credit-card" [(text)]="part.price" footerText="€/kpl"></cx-form-text-input-small>
             </div>
-            <div class="input-group col-lg-3 col-md-3 col-xs-12 part-input">
+            <div class="col-lg-3 col-md-4 col-xs-12">
                 <cx-form-text-input-small headerIcon="fa-level-down" [(text)]="part.discount" footerText="%"></cx-form-text-input-small>
             </div>
         </div>
-        <div class="row-fluid form-inline">
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-xs-12">
             </div>
             <div class="col-lg-4 col-md-4 col-xs-12">
                 <cx-form-text-input-small headerText="∑" footerText="€" [text]="calculatePartCost(part)" [disabled]="true"></cx-form-text-input-small>
             </div>
-            <div class="input-group col-lg-3 col-md-3 col-xs-12 part-input">
+            <div class="input-group col-lg-3 col-md-3 col-xs-12">
             </div>
         </div>
     </div>
 
     <div *ngFor="let work of workRows" class="part-row">
-        <div class="row-fluid form-inline">
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-xs-8">
                 <cx-form-text-input-small headerText="..." footerText="TU" [(text)]="work.units" constraint="[0-9\.]"></cx-form-text-input-small>
             </div>
@@ -53,7 +53,7 @@
                 <cx-button icon="fa-times" text="Poista" (action)="delete(work)" class="pull-right"></cx-button>
             </div>
         </div>
-        <div class="row-fluid form-inline">
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-xs-12">
                 <cx-form-text-input-small headerIcon="fa-credit-card" footerText="€" [(text)]="work.price" constraint="[0-9\.]"></cx-form-text-input-small>
             </div>
@@ -64,9 +64,9 @@
             </div>
         </div>
     </div>
-    
+
     <div class="part-row">
-        <div class="row-fluid form-inline">
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-xs-12">
             </div>
             <div class="col-lg-4 col-md-4 col-xs-12">

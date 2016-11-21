@@ -1,3 +1,4 @@
+import { DropdownItem } from '../dropdown/dropdown.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,13 +14,19 @@ export class ExpensesFormComponent implements OnInit {
     amount: 2,
     discount: 10
   }];
-  
+
   public workRows: any[] = [{
     description: 'dummyDesc',
     amount: 1,
     price: 5,
     units: 5
   }];
+
+  public partStates: DropdownItem[] = [
+    { text: 'Saapunut', value: 0, color: 'green' },
+    { text: 'Tilattu', value: 1, color: 'yellow' },
+    { text: 'Tilaamatta', value: 2 },
+  ];
 
   constructor() { }
 

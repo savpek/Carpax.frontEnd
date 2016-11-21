@@ -17,26 +17,40 @@ export class DropdownComponent {
 
   @Input() public dirty: boolean;
 
-  public getHeaderText() {
-    let current = '';
-
+  private getCurrent(): DropdownItem {
     if (this.value !== undefined) {
-      current = this.items
-        .filter(x => x.value === this.value)
-        .map(x => x.text)[0];
+      return this.items
+        .filter(x => x.value === this.value)[0];
     }
+    return undefined;
+  }
+
+  public getHeaderText() {
+    let current = this.getCurrent() || { text: ''};
 
     if (this.header) {
-      return `${this.header}: ${current}`;
+      return `${this.header}: ${current.text}`;
     }
-    return current;
+    return current.text;
   }
 
   public dropdownClick(item: any) {
     this.value = item.value;
     this.valueChange.emit(this.value);
   }
+
+  public getColor() {
+    let current = this.getCurrent();
+
+    if (!current || !current.color) {
+      return 'default';
+    }
+    return current.color;
+  }
 }
+
 export class DropdownItem {
-  constructor(public text: string, public value: any) {}
+  public color?: string;
+  public text: string;
+  public value: any;
 }
