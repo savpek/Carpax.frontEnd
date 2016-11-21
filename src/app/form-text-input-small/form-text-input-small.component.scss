@@ -30,3 +30,9 @@ input:disabled {
     cursor: auto;
     color: $main-color
 }
+
+.dirty {
+    border-width: 0 0 0 4px;
+    border-style: solid;
+    border-color: $yellow;
+}
