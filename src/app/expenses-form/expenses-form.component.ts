@@ -1,26 +1,14 @@
 import { DropdownItem } from '../dropdown/dropdown.component';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cx-expenses-form',
   templateUrl: './expenses-form.component.html',
   styleUrls: ['./expenses-form.component.scss']
 })
-export class ExpensesFormComponent implements OnInit {
-  public partRows: any[] = [{
-    description: 'PartName',
-    identifier: 'PartIdentifier',
-    price: 5,
-    amount: 2,
-    discount: 10
-  }];
-
-  public workRows: any[] = [{
-    description: 'dummyDesc',
-    amount: 1,
-    price: 5,
-    units: 5
-  }];
+export class ExpensesFormComponent {
+  public partRows: any[] = [];
+  public workRows: any[] = [];
 
   public partStates: DropdownItem[] = [
     { text: 'Saapunut', value: 0, color: 'green' },
@@ -28,20 +16,37 @@ export class ExpensesFormComponent implements OnInit {
     { text: 'Tilaamatta', value: 2 },
   ];
 
-  constructor() { }
-
-  ngOnInit() {
+  public delete(item) {
+    item.transient = 'delete';
   }
 
-  public deletePart() {
+  public restore(item) {
+    item.transient = undefined;
+  }
 
+  public addWorkRow() {
+    this.workRows.push({
+      description: '',
+      amount: 0,
+      price: 0,
+      units: 0,
+      transient: 'new'
+    });
+  }
+
+  public addPartRow() {
+    this.partRows.push({
+      description: '',
+      identifier: '',
+      price: 0,
+      amount: 0,
+      discount: 0,
+      transient: 'new'
+    });
   }
 
   public calculateWorkCost(work: any): number {
     return (work.units * 0.01) * work.price;
-  }
-
-  public deleteWork() {
   }
 
   public calculatePartCost(part: any): number {
@@ -49,6 +54,10 @@ export class ExpensesFormComponent implements OnInit {
   }
 
   public calculateTotal() {
-    return 0;
+    return this.workRows.reduce((a, b) => a + this.calculateWorkCost(b), 0) +
+      this.partRows.reduce((a, b) => a + this.calculatePartCost(b), 0);
+  }
+
+  public save() {
   }
 }
