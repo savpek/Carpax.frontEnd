@@ -1,3 +1,5 @@
+import { PartnerRepo } from '../data/partnerRepo';
+import { IPartRepo, PartRepoFactory } from '../data/partRepo';
 import { IWorkRepo, WorkRepoFactory } from '../data/workRepo';
 import { DropdownItem } from '../dropdown/dropdown.component';
 import { Component } from '@angular/core';
@@ -7,10 +9,11 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'cx-expenses-form',
   templateUrl: './expenses-form.component.html',
   styleUrls: ['./expenses-form.component.scss'],
-  providers: [WorkRepoFactory]
+  providers: [WorkRepoFactory, PartRepoFactory]
 })
 export class ExpensesFormComponent {
   private workRepo: IWorkRepo;
+  private partRepo: IPartRepo;
 
   public partRows: any[] = [];
   public workRows: any[] = [];
@@ -21,12 +24,17 @@ export class ExpensesFormComponent {
     { text: 'Tilaamatta', value: 2 },
   ];
 
-  public constructor(workRepoFactory: WorkRepoFactory, activeRoute: ActivatedRoute) {
-    activeRoute.parent.params.subscribe(params =>
-        this.workRepo = workRepoFactory.Create(params['id']));
-        this.workRepo.Get()
-          .subscribe(x =>
-            this.workRows = x);
+  public constructor(workRepoFactory: WorkRepoFactory, activeRoute: ActivatedRoute, partRepoFactory: PartRepoFactory) {
+    activeRoute.parent.params.subscribe(params => {
+      this.workRepo = workRepoFactory.Create(params['id']);
+      this.partRepo = partRepoFactory.Create(params['id']);
+
+      this.workRepo.Get()
+        .subscribe(x => this.workRows = x);
+
+      this.partRepo.Get()
+        .subscribe(x => this.partRows = x);
+    });
   }
 
   public delete(item) {
@@ -72,9 +80,14 @@ export class ExpensesFormComponent {
   }
 
   public save() {
-    let updatedRows = this.workRows.filter(x => x.transient !== 'delete');
-    let removedRows = this.workRows.filter(x => x.transient === 'delete');
-    this.workRepo.AddOrUpdate(updatedRows);
-    this.workRepo.Delete(removedRows);
+    let updatedWorkRows = this.workRows.filter(x => x.transient !== 'delete');
+    let removedWorkRows = this.workRows.filter(x => x.transient === 'delete');
+    this.workRepo.AddOrUpdate(updatedWorkRows);
+    this.workRepo.Delete(removedWorkRows);
+
+    let updatedPartRows = this.partRows.filter(x => x.transient !== 'delete');
+    let removedPartRows = this.partRows.filter(x => x.transient === 'delete');
+    this.partRepo.AddOrUpdate(updatedPartRows);
+    this.partRepo.Delete(removedPartRows);
   }
 }
