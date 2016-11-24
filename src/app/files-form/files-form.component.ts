@@ -14,9 +14,9 @@ export class FilesFormComponent {
 
   constructor(private fileRepo: FileRepo, private activeRoute: ActivatedRoute) {
       activeRoute.parent.params.subscribe(params =>
-      fileRepo.Get(params['id']).subscribe(images => {
-        this.files = images;
-        this.currentTicket = params['id']; 
+        fileRepo.Get(params['id']).subscribe(images => {
+          this.files = images;
+          this.currentTicket = params['id'];
       }));
   }
 

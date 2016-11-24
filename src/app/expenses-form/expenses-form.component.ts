@@ -1,12 +1,17 @@
+import { IWorkRepo, WorkRepoFactory } from '../data/workRepo';
 import { DropdownItem } from '../dropdown/dropdown.component';
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'cx-expenses-form',
   templateUrl: './expenses-form.component.html',
-  styleUrls: ['./expenses-form.component.scss']
+  styleUrls: ['./expenses-form.component.scss'],
+  providers: [WorkRepoFactory]
 })
 export class ExpensesFormComponent {
+  private workRepo: IWorkRepo;
+
   public partRows: any[] = [];
   public workRows: any[] = [];
 
@@ -15,6 +20,14 @@ export class ExpensesFormComponent {
     { text: 'Tilattu', value: 1, color: 'yellow' },
     { text: 'Tilaamatta', value: 2 },
   ];
+
+  public constructor(workRepoFactory: WorkRepoFactory, activeRoute: ActivatedRoute) {
+    activeRoute.parent.params.subscribe(params =>
+        this.workRepo = workRepoFactory.Create(params['id']));
+        this.workRepo.Get()
+          .subscribe(x =>
+            this.workRows = x);
+  }
 
   public delete(item) {
     item.transient = 'delete';
@@ -59,5 +72,9 @@ export class ExpensesFormComponent {
   }
 
   public save() {
+    let updatedRows = this.workRows.filter(x => x.transient !== 'delete');
+    let removedRows = this.workRows.filter(x => x.transient === 'delete');
+    this.workRepo.AddOrUpdate(updatedRows);
+    this.workRepo.Delete(removedRows);
   }
 }
