@@ -24,6 +24,8 @@ export class FormTextInputSmallComponent {
 
   @Input() format: string;
 
+  @Input() placeholder: string = '';
+
   constructor(private form: FormContext) {
     this.entry = form.Join();
   }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IRepository } from './IRepository';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
@@ -19,7 +18,7 @@ export class TicketHeader {
 }
 
 @Injectable()
-export class TicketHeaderRepo implements IRepository<TicketHeader> {
+export class TicketHeaderRepo {
     private current: Observable<any>;
 
     constructor(private http: Http) {

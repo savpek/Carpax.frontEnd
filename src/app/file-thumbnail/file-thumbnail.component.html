@@ -1,8 +1,10 @@
 <div class="thumbnail-container">
     <cx-button class="pull-right remove-button" icon="fa-trash-o" (click)="delete(file)"></cx-button>
-    <div class="file-container">
-        <i class="fa fa-file-o file-icon" aria-hidden="true"></i>
-        <br>
-        {{file.originalName}}
-    </div>
+    <a href="{{file.uri}}">
+        <div class="file-container">
+            <i class="fa fa-file-o file-icon" aria-hidden="true"></i>
+            <br>
+            {{file.originalName}}
+        </div>
+    </a>
 </div>

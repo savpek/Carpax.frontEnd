@@ -24,6 +24,9 @@ import { FileInputComponent } from './file-input/file-input.component';
 import { ExpensesFormComponent } from './expenses-form/expenses-form.component';
 import { FormTextInputSmallComponent } from './form-text-input-small/form-text-input-small.component';
 import { TooltipDirective } from './tooltip.directive';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { ControlPanelUsersComponent } from './control-panel-users/control-panel-users.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { TooltipDirective } from './tooltip.directive';
     FileInputComponent,
     ExpensesFormComponent,
     FormTextInputSmallComponent,
-    TooltipDirective
+    TooltipDirective,
+    ControlPanelComponent,
+    ControlPanelUsersComponent,
+    TabsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,15 @@ import { TooltipDirective } from './tooltip.directive';
           { path: 'expenses', component: ExpensesFormComponent }
         ]
       },
-      { path: 'new', component: EditComponent }
+      { path: 'new', component: EditComponent },
+      {
+        path: 'controlpanel',
+        component: ControlPanelComponent,
+        children: [
+          { path: '', component: ControlPanelUsersComponent },
+          { path: 'partners', component: ControlPanelUsersComponent },
+        ]
+      },
     ])
   ],
   providers: [],

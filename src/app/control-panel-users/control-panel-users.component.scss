@@ -1,0 +1,20 @@
+@import '../../styles.mixins.scss';
+
+.dirty {
+    border-width: 0 0 0 4px !important;
+    border-style: solid !important;
+    border-color: $yellow !important;
+}
+
+.cx-row {
+    background-color: lighten($dark, 4%);
+    display: block;
+    width: 100%;
+    float: left;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+cx-button {
+    margin-top: 5px
+}

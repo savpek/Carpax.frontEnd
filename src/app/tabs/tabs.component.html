@@ -1,0 +1,10 @@
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" *ngFor="let route of routes">
+      <a [routerLink]="route.path" role="tab">{{route.text}}</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
