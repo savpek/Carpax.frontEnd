@@ -1,0 +1,19 @@
+<div class="cx-row" *ngFor="let partner of partners" [class.dirty]="!!partner.transient">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-xs-12">
+      <cx-form-text-input-small *ngIf="partner.transient !== 'delete'" headerIcon="fa-info" [(text)]="partner.name" [disabled]="partner.transient !== 'new'" placeholder="Yritys OY AB"></cx-form-text-input-small>
+    </div>
+    <div class="col-lg-3 col-md-3 col-xs-12">
+      <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-location-arrow" [text]="buildUri(partner)" [disabled]="true"></cx-form-text-input-small>
+    </div>
+    <div class="col-lg-3 col-md-3 col-xs-12">
+      <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-key" [text]="partner.pin" [disabled]="true"></cx-form-text-input-small>
+    </div>
+    <div class="input-group col-lg-2 col-md-2 col-xs-12">
+      <cx-button *ngIf="partner.transient !== 'delete'" icon="fa-times" text="Poista" class="pull-right" (action)="delete(partner)"></cx-button>
+      <cx-button *ngIf="partner.transient === 'delete'" icon="fa-undo" text="Palauta" class="pull-right" (action)="restore(partner)"></cx-button>
+    </div>
+  </div>
+</div>
+<cx-button icon="fa-plus-circle" text="Lisää kumppani" (action)="add()"></cx-button>
+<cx-button icon="fa-floppy-o" text="Tallenna" (action)="save()"></cx-button>

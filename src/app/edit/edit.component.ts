@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'cx-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
-  providers: [FormContext]
+  providers: []
 })
 export class EditComponent {
   constructor() {

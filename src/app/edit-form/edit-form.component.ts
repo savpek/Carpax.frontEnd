@@ -6,12 +6,13 @@ import { Component, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { Uuid } from './utils';
 
 @Component({
   selector: 'cx-edit-form',
   templateUrl: './edit-form.component.html',
   styleUrls: ['./edit-form.component.scss'],
-  providers: [PartnerRepo]
+  providers: [FormContext, PartnerRepo]
 })
 export class EditFormComponent {
   public ticket: ITicket = {
@@ -38,6 +39,8 @@ export class EditFormComponent {
   public currentPartnerId: string;
   public currentPartnerIdChange = new EventEmitter();
 
+  private new: boolean;
+
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
@@ -45,14 +48,22 @@ export class EditFormComponent {
     private partnerRepo: PartnerRepo,
     private form: FormContext) {
     activeRoute.params.subscribe(params => {
-      ticketRepo.Get(params['id']).subscribe(ticket => this.ticket = ticket);
+      let ticketId = params['id'];
+      if (!ticketId) {
+        ticketId = Uuid.create();
+        this.new = true;
+      }
 
-      partnerRepo.GetCurrentForTicket(params['id']).subscribe(partner => {
-        if (!partner[0].partnerId) { return; };
+      ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
 
-        this.currentPartnerId = partner[0].partnerId;
-        this.currentPartnerIdChange.emit(this.currentPartnerId);
-      });
+      if (!this.new) {
+        partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
+          if (!partner[0].partnerId) { return; };
+
+          this.currentPartnerId = partner[0].partnerId;
+          this.currentPartnerIdChange.emit(this.currentPartnerId);
+        });
+      }
     });
 
     partnerRepo.Get().subscribe(
@@ -71,19 +82,19 @@ export class EditFormComponent {
   }
 
   public save() {
-    this.saveRoutine().subscribe(() => this.form.submitted());
-  }
-
-  public saveAndClose() {
-    this.saveRoutine().subscribe(x => {
-      this.form.submitted();
-      this.router.navigateByUrl('/');
-    });
+    if (this.new) {
+      this.saveRoutine().subscribe(() => {
+        this.form.submitted();
+        this.router.navigateByUrl(`/edit/${this.ticket.id}`);
+      });
+    } else {
+      this.saveRoutine().subscribe(() => this.form.submitted());
+    }
   }
 
   public cancel() {
     this.form.submitted();
-    ;
+    this.router.navigateByUrl('/');
   }
 
   public extracActions(event) {

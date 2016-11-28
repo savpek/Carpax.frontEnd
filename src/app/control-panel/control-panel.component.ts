@@ -11,6 +11,6 @@ import { Component, OnInit } from '@angular/core';
 export class ControlPanelComponent {
   public routes: ITabRoute[] = [
     {path: './', text: 'Käyttäjät'},
-    {path: 'partners', text: 'Partnerit'}
+    {path: 'partners', text: 'Kumppanit'}
   ];
 }

@@ -27,6 +27,7 @@ import { TooltipDirective } from './tooltip.directive';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelUsersComponent } from './control-panel-users/control-panel-users.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { ControlPanelPartnersComponent } from './control-panel-partners/control-panel-partners.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { TabsComponent } from './tabs/tabs.component';
     TooltipDirective,
     ControlPanelComponent,
     ControlPanelUsersComponent,
-    TabsComponent
+    TabsComponent,
+    ControlPanelPartnersComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ import { TabsComponent } from './tabs/tabs.component';
     DatepickerModule,
     RouterModule.forRoot([
       { path: '', component: TicketsComponent},
+      { path: 'new', component: EditFormComponent},
       {
         path: 'edit/:id',
         component: EditComponent,
@@ -74,7 +77,7 @@ import { TabsComponent } from './tabs/tabs.component';
         component: ControlPanelComponent,
         children: [
           { path: '', component: ControlPanelUsersComponent },
-          { path: 'partners', component: ControlPanelUsersComponent },
+          { path: 'partners', component: ControlPanelPartnersComponent },
         ]
       },
     ])
