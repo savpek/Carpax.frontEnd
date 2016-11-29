@@ -4,10 +4,10 @@
       <cx-form-text-input-small *ngIf="partner.transient !== 'delete'" headerIcon="fa-info" [(text)]="partner.name" [disabled]="partner.transient !== 'new'" placeholder="Yritys OY AB"></cx-form-text-input-small>
     </div>
     <div class="col-lg-3 col-md-3 col-xs-12">
-      <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-location-arrow" [text]="buildUri(partner)" [disabled]="true"></cx-form-text-input-small>
+      <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-location-arrow" [text]="buildUri(partner)" [disabled]="true" [clipboard]="true"></cx-form-text-input-small>
     </div>
     <div class="col-lg-3 col-md-3 col-xs-12">
-      <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-key" [text]="partner.pin" [disabled]="true"></cx-form-text-input-small>
+      <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-key" [text]="partner.pin" [disabled]="true" [clipboard]="true"></cx-form-text-input-small>
     </div>
     <div class="input-group col-lg-2 col-md-2 col-xs-12">
       <cx-button *ngIf="partner.transient !== 'delete'" icon="fa-times" text="Poista" class="pull-right" (action)="delete(partner)"></cx-button>

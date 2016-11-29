@@ -1,4 +1,4 @@
-import { PartnerRepo } from '../data/partnerRepo';
+import { FormContext } from '../service/formContext';
 import { IPartRepo, PartRepoFactory } from '../data/partRepo';
 import { IWorkRepo, WorkRepoFactory } from '../data/workRepo';
 import { DropdownItem } from '../dropdown/dropdown.component';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'cx-expenses-form',
   templateUrl: './expenses-form.component.html',
   styleUrls: ['./expenses-form.component.scss'],
-  providers: [WorkRepoFactory, PartRepoFactory]
+  providers: [WorkRepoFactory, PartRepoFactory, FormContext]
 })
 export class ExpensesFormComponent {
   private workRepo: IWorkRepo;

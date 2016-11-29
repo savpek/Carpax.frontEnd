@@ -36,3 +36,8 @@ input:disabled {
     border-style: solid;
     border-color: $yellow;
 }
+
+.copy:hover {
+    cursor: pointer;
+    background-color: lighten($dark, 15%);
+}
