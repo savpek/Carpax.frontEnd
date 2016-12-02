@@ -28,6 +28,8 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelUsersComponent } from './control-panel-users/control-panel-users.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ControlPanelPartnersComponent } from './control-panel-partners/control-panel-partners.component';
+import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import { FormTextAreaInputComponent } from './form-text-area-input/form-text-area-input.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ControlPanelPartnersComponent } from './control-panel-partners/control-
     ControlPanelComponent,
     ControlPanelUsersComponent,
     TabsComponent,
-    ControlPanelPartnersComponent
+    ControlPanelPartnersComponent,
+    FeedbackFormComponent,
+    FormTextAreaInputComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,7 @@ import { ControlPanelPartnersComponent } from './control-panel-partners/control-
         children: [
           { path: '', component: EditFormComponent },
           { path: 'files', component: FilesFormComponent },
+          { path: 'feedback', component: FeedbackFormComponent },
           { path: 'expenses', component: ExpensesFormComponent }
         ]
       },
