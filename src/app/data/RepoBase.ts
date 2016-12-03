@@ -9,7 +9,7 @@ export abstract class RepoBase<T> {
 
     constructor(private http: Http) {}
 
-    protected Get(api: string, ): Observable<T[]> {
+    protected Get(api: string): Observable<T[]> {
         this.http.get(`${environment.apiBase}/${api}`)
             .map(response => response.json())
             .subscribe(result => {
@@ -18,5 +18,14 @@ export abstract class RepoBase<T> {
             });
 
         return this.subject;
+    }
+
+    protected Post(api: string, data: any): void {
+        this.http.post(`${environment.apiBase}/${api}`, data)
+            .map(response => response.json())
+            .subscribe(result => {
+                this.current.push(result);
+                this.subject.next(this.current.slice());
+            });
     }
 }

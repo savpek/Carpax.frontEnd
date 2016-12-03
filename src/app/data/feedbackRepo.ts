@@ -5,6 +5,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface IFeedback {
+    message: string;
+    created?: Date;
+    whoIs?: string;
 }
 
 @Injectable()
@@ -17,6 +20,7 @@ export class FeedbackRepo extends RepoBase<IFeedback> {
         return super.Get(`feedbackmessages/${ticketId}`);
     }
 
-    public Add(feedback: IFeedback) {
+    public Add(ticketId: string, feedback: IFeedback) {
+        super.Post(`feedbackmessages/${ticketId}`, feedback);
     }
 }

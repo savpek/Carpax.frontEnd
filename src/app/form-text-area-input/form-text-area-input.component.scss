@@ -1,0 +1,32 @@
+@import '../../styles.mixins.scss';
+
+input:disabled {
+    background-color: lighten($light, 1%)
+}
+
+.form-control {
+    width:100%;
+    border-radius:2px;
+    background-color:$light;
+    border:2px;
+    color:white;
+}
+
+.form-control:disabled {
+    background-color:darken($light, 10%);
+    border:2px;
+    color:darken($white-text, 40%);
+    cursor: auto;
+}
+
+.invalid { 
+    border-width: 0 0 0 4px !important;
+    border-style: solid !important;
+    border-color: $red !important;
+}
+
+.dirty {
+    border-width: 0 0 0 4px;
+    border-style: solid;
+    border-color: $yellow;
+}
