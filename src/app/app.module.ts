@@ -30,6 +30,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ControlPanelPartnersComponent } from './control-panel-partners/control-panel-partners.component';
 import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 import { FormTextAreaInputComponent } from './form-text-area-input/form-text-area-input.component';
+import { ControlPanelAttachedPartnersComponent } from './control-panel-attached-partners/control-panel-attached-partners.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { FormTextAreaInputComponent } from './form-text-area-input/form-text-are
     TabsComponent,
     ControlPanelPartnersComponent,
     FeedbackFormComponent,
-    FormTextAreaInputComponent
+    FormTextAreaInputComponent,
+    ControlPanelAttachedPartnersComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +85,7 @@ import { FormTextAreaInputComponent } from './form-text-area-input/form-text-are
         children: [
           { path: '', component: ControlPanelUsersComponent },
           { path: 'partners', component: ControlPanelPartnersComponent },
+          { path: 'attached', component: ControlPanelAttachedPartnersComponent }
         ]
       },
     ])

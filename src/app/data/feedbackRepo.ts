@@ -16,11 +16,11 @@ export class FeedbackRepo extends RepoBase<IFeedback> {
         super(http);
     }
 
-    public Get(ticketId: string): Observable<IFeedback[]> {
-        return super.Get(`feedbackmessages/${ticketId}`);
+    public get(ticketId: string): Observable<IFeedback[]> {
+        return super.get(`feedbackmessages/${ticketId}`);
     }
 
     public Add(ticketId: string, feedback: IFeedback) {
-        super.Post(`feedbackmessages/${ticketId}`, feedback);
+        super.post(`feedbackmessages/${ticketId}`, feedback);
     }
 }

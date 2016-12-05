@@ -16,7 +16,7 @@ export class FeedbackFormComponent {
   constructor(private repo: FeedbackRepo, private activeRoute: ActivatedRoute) {
         activeRoute.parent.params.subscribe(params => {
           this.currentTicket = params['id'];
-          repo.Get(this.currentTicket).subscribe(x => this.feedback = x);
+          repo.get(this.currentTicket).subscribe(x => this.feedback = x);
         });
   }
 

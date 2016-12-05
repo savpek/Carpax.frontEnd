@@ -3,13 +3,17 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
+export interface IEntry {
+    transient?: string;
+}
+
 export abstract class RepoBase<T> {
     protected subject: BehaviorSubject<T[]> = new BehaviorSubject([]);
     protected current: T[] = [];
 
     constructor(private http: Http) {}
 
-    protected Get(api: string): Observable<T[]> {
+    protected get(api: string): Observable<T[]> {
         this.http.get(`${environment.apiBase}/${api}`)
             .map(response => response.json())
             .subscribe(result => {
@@ -20,7 +24,7 @@ export abstract class RepoBase<T> {
         return this.subject;
     }
 
-    protected Post(api: string, data: any): void {
+    protected post(api: string, data: any): void {
         this.http.post(`${environment.apiBase}/${api}`, data)
             .map(response => response.json())
             .subscribe(result => {
