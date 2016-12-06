@@ -1,4 +1,4 @@
-import { TicketHeaderService } from '../service/ticketHeaderService';
+import { TicketHeaderServiceFactory } from '../service/ticketHeaderFilter';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -11,11 +11,11 @@ import { Subject } from 'rxjs';
 export class TicketFilterComponent implements OnInit {
   private filter: Subject<string> = new Subject<string>();
 
-  constructor(private headerService: TicketHeaderService) {
+  constructor(private headerService: TicketHeaderServiceFactory) {
     this.filter
       .debounceTime(700)
       .subscribe(x =>
-        this.headerService.SetTextFilter(x));
+        this.headerService.create().textFilter(x));
   }
 
   ngOnInit() {

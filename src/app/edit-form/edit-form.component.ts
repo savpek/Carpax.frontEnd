@@ -12,7 +12,7 @@ import { Uuid } from './utils';
   selector: 'cx-edit-form',
   templateUrl: './edit-form.component.html',
   styleUrls: ['./edit-form.component.scss'],
-  providers: [FormContext, PartnerRepo]
+  providers: [FormContext, PartnerRepo, TicketRepo]
 })
 export class EditFormComponent {
   public ticket: ITicket = {

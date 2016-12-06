@@ -28,7 +28,7 @@ export class ControlPanelPartnersComponent {
   }
 
   public buildUri(partner: IPartner) {
-    return 'TODO:' + partner.pin;
+    return partner.id;
   }
 
   public save() {

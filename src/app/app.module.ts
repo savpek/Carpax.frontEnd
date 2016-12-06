@@ -66,7 +66,9 @@ import { ControlPanelAttachedPartnersComponent } from './control-panel-attached-
     HttpModule,
     DatepickerModule,
     RouterModule.forRoot([
-      { path: '', component: TicketsComponent},
+      { path: '', redirectTo: '/tickets', pathMatch: 'full' },
+      { path: 'tickets', component: TicketsComponent },
+      { path: 'tickets/:id', component: TicketsComponent },
       { path: 'new', component: EditFormComponent},
       {
         path: 'edit/:id',

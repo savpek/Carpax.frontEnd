@@ -1,28 +1,53 @@
-import { TicketHeaderService } from '../service/ticketHeaderService';
-import { TicketHeader } from '../data/ticketHeaderRepo';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
+import { AttachedPartnerRepo } from '../data/attachedPartnerRepo';
+import { ITabRoute } from '../tabs/tabs.component';
+import { ITicketHeader, TicketHeaderRepoFactory } from '../data/ticketHeaderRepo';
+import { TicketHeaderServiceFactory } from '../service/ticketHeaderFilter';
 
 @Component({
   selector: 'cx-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss'],
-  providers: []
+  providers: [AttachedPartnerRepo, TicketHeaderRepoFactory, TicketHeaderServiceFactory]
 })
-export class TicketsComponent implements OnInit {
-  public tickets: Observable<TicketHeader>;
-  public tickets2: TicketHeader[];
+export class TicketsComponent {
+  public tickets: ITicketHeader[];
+  public tabs: ITabRoute[] = [{
+    path: '/tickets',
+    text: 'Omat'
+  }];
 
-  constructor(private ticketService: TicketHeaderService, private router: Router) {}
+  constructor(
+    private headerFactory: TicketHeaderRepoFactory,
+    private router: Router,
+    private attachedPartnerRepo: AttachedPartnerRepo,
+    private activeRoute: ActivatedRoute) {
 
-  ngOnInit() {
-    this.ticketService
-      .GetHeaders()
-      .subscribe(x => {
-        this.tickets2 = x;
-      });
+    activeRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.headerFactory.createForPartner(params['id'])
+          .get()
+          .subscribe(x => {
+            this.tickets = x;
+          });
+      } else {
+        this.headerFactory.create()
+          .get()
+          .subscribe(x => {
+            this.tickets = x;
+          });
+      }
+    });
+
+    this.attachedPartnerRepo.get()
+      .flatMap(x => x)
+      .subscribe(attachedPartner => this.tabs.push({
+        path: `/tickets/${attachedPartner.partnerId}`,
+        text: attachedPartner.description
+      }));
   }
 
   public openTicket(ticketId: string) {

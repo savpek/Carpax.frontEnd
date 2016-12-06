@@ -1,36 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
+import { RepoBase } from './RepoBase';
 
-import { environment } from '../../environments/environment';
+export interface ITicketHeader {
+        id: string;
+        registerPlate: string;
+        model: string;
+        customer: string;
+        lastModified: Date;
+}
 
-export class TicketHeader {
-    public lastMofidied: Date;
-
-    constructor(
-        public id: string,
-        public registerPlate: string,
-        public model: string,
-        public customer: string,
-        lastModified: string) {
-            this.lastMofidied = new Date(lastModified);
-        }
+export interface ITicketHeaderRepo {
+    get(): Observable<ITicketHeader[]>;
 }
 
 @Injectable()
-export class TicketHeaderRepo {
-    private current: Observable<any>;
-
+export class TicketHeaderRepoFactory {
     constructor(private http: Http) {
-        this.current = this.http.get(`${environment.apiBase}/ticket/`)
-            .map(response => {
-                return response.json().map(x => new TicketHeader(x.id, x.registerPlate, x.model, x.customer, x.lastModified));
-            })
-            .flatMap(x => x);
     }
 
-    public Get(): Observable<TicketHeader> {
-        return this.current;
+    public createForPartner(partnerId: string): ITicketHeaderRepo {
+        return new TicketHeaderRepoForPartners(this.http, partnerId);
+    }
+
+    public create(): ITicketHeaderRepo {
+        return new TicketHeaderRepo(this.http);
     }
 }
 
+class TicketHeaderRepoForPartners extends RepoBase<ITicketHeader> implements ITicketHeaderRepo {
+    constructor(http: Http, private partnerId: string) {
+        super(http);
+    }
+
+    public get(): Observable<ITicketHeader[]> {
+        return super.get(`ticketforpartner/${this.partnerId}`);
+    }
+}
+
+class TicketHeaderRepo extends RepoBase<ITicketHeader> implements ITicketHeaderRepo {
+    constructor(http: Http) {
+        super(http);
+    }
+
+    public get(): Observable<ITicketHeader[]> {
+        return super.get(`ticket/`);
+    }
+}
