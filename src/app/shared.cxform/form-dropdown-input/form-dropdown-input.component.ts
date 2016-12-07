@@ -1,6 +1,5 @@
-import { FormContext, FormEntry } from '../service/formContext';
-import { DropdownItem } from '../dropdown/dropdown.component';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormEntry, FormContext } from '../formContext';
 
 @Component({
   selector: 'cx-form-dropdown-input',
@@ -16,7 +15,7 @@ export class FormDropdownInputComponent {
   @Input() public value: any;
   @Output() public valueChange = new EventEmitter();
 
-  @Input() public items: DropdownItem[];
+  @Input() public items: any[];
 
   public entry: FormEntry;
 

@@ -1,6 +1,5 @@
 import { IPartner, PartnerRepo } from '../data/partnerRepo';
-import { DropdownItem } from '../dropdown/dropdown.component';
-import { FormContext } from '../service/formContext';
+import { FormContext } from '../shared.cxform/formContext';
 import { ITicket, TicketRepo } from '../data/ticketRepo';
 import { Component, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,14 +18,14 @@ export class EditFormComponent {
     id: ''
   };
 
-  public insuranceTypes: DropdownItem[] = [
+  public insuranceTypes: any[] = [
     { text: 'Liikenne', value: 0 },
     { text: 'Kasko', value: 1 },
     { text: 'Vastuuvakuutus', value: 2 },
     { text: 'Asiakas maksaa', value: 3 }
   ];
 
-  public accidentTypes: DropdownItem[] = [
+  public accidentTypes: any[] = [
     { text: 'Törmäys', value: 0 },
     { text: 'Ilkivalta', value: 1 },
     { text: 'Parkkipaikka', value: 2 },
@@ -35,7 +34,7 @@ export class EditFormComponent {
     { text: 'Lasivakuutus', value: 5 }
   ];
 
-  public partners: DropdownItem[] = [];
+  public partners: any[] = [];
   public currentPartnerId: string;
   public currentPartnerIdChange = new EventEmitter();
 
@@ -67,7 +66,7 @@ export class EditFormComponent {
     });
 
     partnerRepo.Get().subscribe(
-      result => this.partners = result.map<DropdownItem>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id}; }));
+      result => this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id}; }));
   }
 
   public saveDisabled() {

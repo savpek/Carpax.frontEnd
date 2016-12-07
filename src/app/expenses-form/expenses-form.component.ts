@@ -1,7 +1,6 @@
-import { FormContext } from '../service/formContext';
+import { FormContext } from '../shared.cxform/formContext';
 import { IPartRepo, PartRepoFactory } from '../data/partRepo';
 import { IWorkRepo, WorkRepoFactory } from '../data/workRepo';
-import { DropdownItem } from '../dropdown/dropdown.component';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,7 +17,7 @@ export class ExpensesFormComponent {
   public partRows: any[] = [];
   public workRows: any[] = [];
 
-  public partStates: DropdownItem[] = [
+  public partStates: any[] = [
     { text: 'Saapunut', value: 0, color: 'green' },
     { text: 'Tilattu', value: 1, color: 'yellow' },
     { text: 'Tilaamatta', value: 2 },

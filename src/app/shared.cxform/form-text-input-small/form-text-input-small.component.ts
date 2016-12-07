@@ -1,4 +1,4 @@
-import { FormContext, FormEntry } from '../service/formContext';
+import { FormContext, FormEntry } from '../formContext';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import * as Clipboard from 'clipboard-js';
 

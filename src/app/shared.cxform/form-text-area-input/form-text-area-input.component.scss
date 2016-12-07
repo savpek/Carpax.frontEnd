@@ -1,15 +1,7 @@
-@import '../../styles.mixins.scss';
+@import '../../../styles.mixins.scss';
 
 input:disabled {
     background-color: lighten($light, 1%)
-}
-
-* {
-    color: black;
-}
-
-label {
-    color: $main-color
 }
 
 .form-control {
@@ -34,13 +26,7 @@ label {
 }
 
 .dirty {
-    border-width: 0 0 0 4px !important;
-    border-style: solid !important;
-    border-color: $yellow !important;
-}
-
-div.well-sm /deep/ {
-    color: black !important;
-    background-color: none;
-
+    border-width: 0 0 0 4px;
+    border-style: solid;
+    border-color: $yellow;
 }

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormContext, FormEntry } from '../service/formContext';
+import { FormContext, FormEntry } from '../formContext';
 import * as moment from 'moment';
 
 @Component({

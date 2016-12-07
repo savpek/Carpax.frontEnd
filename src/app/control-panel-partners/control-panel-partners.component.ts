@@ -1,4 +1,4 @@
-import { FormContext } from '../service/formContext';
+import { FormContext } from '../shared.cxform/formContext';
 import { IPartner, PartnerRepo } from '../data/partnerRepo';
 import { Component } from '@angular/core';
 

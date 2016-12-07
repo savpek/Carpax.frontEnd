@@ -6,7 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent {
-  @Input() public items: DropdownItem[];
+  @Input() public items: IDropdownItem[];
   @Input() public header: string;
   @Input() public headerIcon: string;
 
@@ -17,7 +17,7 @@ export class DropdownComponent {
 
   @Input() public dirty: boolean;
 
-  private getCurrent(): DropdownItem {
+  private getCurrent(): IDropdownItem {
     if (this.value !== undefined) {
       return this.items
         .filter(x => x.value === this.value)[0];
@@ -49,8 +49,8 @@ export class DropdownComponent {
   }
 }
 
-export class DropdownItem {
-  public color?: string;
-  public text: string;
-  public value: any;
+export interface IDropdownItem {
+  color?: string;
+  text: string;
+  value: any;
 }

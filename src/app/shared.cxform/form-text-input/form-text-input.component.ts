@@ -1,5 +1,5 @@
-import { FormContext, FormEntry } from '../service/formContext';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormEntry, FormContext } from '../formContext';
 
 @Component({
   selector: 'cx-form-text-input',
