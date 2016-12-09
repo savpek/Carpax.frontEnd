@@ -17,7 +17,7 @@ export class TicketHeaderServiceFactory {
     }
 }
 
-class TicketHeaderService {
+export class TicketHeaderService {
     private allTickets: ITicketHeader[] = [];
     private subject: BehaviorSubject<ITicketHeader[]> = new BehaviorSubject<ITicketHeader[]>([]);
 
