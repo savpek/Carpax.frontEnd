@@ -9,8 +9,6 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 
 import { RouterModule }   from '@angular/router';
-import { EditComponent } from './edit/edit.component';
-import { EditFormComponent } from './edit-form/edit-form.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ControlPanelUsersComponent } from './control-panel-users/control-panel-users.component';
 import { TabsComponent } from './tabs/tabs.component';
@@ -39,12 +37,11 @@ import { CxFormModule } from './shared.cxform/cxform.module';
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
       { path: 'tickets', component: TicketsComponent },
       { path: 'tickets/:id', component: TicketsComponent },
-      { path: 'new', component: EditFormComponent},
+      { path: 'new', component: TicketsComponent },
       {
-        path: 'edit/:id',
+        path: 'edit',
         loadChildren: './edit/edit.module#EditModule'
       },
-      { path: 'new', component: EditComponent },
       {
         path: 'controlpanel',
         component: ControlPanelComponent,

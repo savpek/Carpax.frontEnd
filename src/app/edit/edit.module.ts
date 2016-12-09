@@ -14,7 +14,7 @@ import { CxFormModule } from '../shared.cxform/cxform.module';
 
 const routes: any = [
     {
-        path: 'edit/:id',
+        path: ':id',
         component: EditComponent,
         children: [
             { path: '', component: EditFormComponent },
