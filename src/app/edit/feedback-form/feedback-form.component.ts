@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FeedbackRepo, IFeedback } from '../data/feedbackRepo';
+import { FeedbackRepo, IFeedback } from '../../data/feedbackRepo';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -1,6 +1,6 @@
-import { FormContext } from '../shared.cxform/formContext';
-import { IPartRepo, PartRepoFactory } from '../data/partRepo';
-import { IWorkRepo, WorkRepoFactory } from '../data/workRepo';
+import { FormContext } from '../../shared.cxform/formContext';
+import { IPartRepo, PartRepoFactory } from '../../data/partRepo';
+import { IWorkRepo, WorkRepoFactory } from '../../data/workRepo';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

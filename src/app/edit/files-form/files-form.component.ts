@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileRepo, FileEntry } from '../data/fileRepo';
+import { FileRepo, FileEntry } from '../../data/fileRepo';
 
 @Component({
   selector: 'cx-files-form',

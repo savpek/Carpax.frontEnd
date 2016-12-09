@@ -1,15 +1,15 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EditComponent } from './edit.component';
-import { EditFormComponent } from '../edit-form/edit-form.component';
-import { FilesFormComponent } from '../files-form/files-form.component';
-import { ExpensesFormComponent } from '../expenses-form/expenses-form.component';
-import { FeedbackFormComponent } from '../feedback-form/feedback-form.component';
-import { FileInputComponent } from '../file-input/file-input.component';
-import { FileThumbnailComponent } from '../file-thumbnail/file-thumbnail.component';
-import { ImageThumbnailComponent } from '../image-thumbnail/image-thumbnail.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
+import { FilesFormComponent } from './files-form/files-form.component';
+import { ExpensesFormComponent } from './expenses-form/expenses-form.component';
+import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import { FileInputComponent } from './file-input/file-input.component';
+import { FileThumbnailComponent } from './file-thumbnail/file-thumbnail.component';
+import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
 import { CxFormModule } from '../shared.cxform/cxform.module';
 
 const routes: any = [
