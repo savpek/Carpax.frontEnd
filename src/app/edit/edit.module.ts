@@ -42,7 +42,6 @@ const routes: any = [
         ExpensesFormComponent
     ],
     exports: [
-        RouterModule
     ],
     providers: []
 })

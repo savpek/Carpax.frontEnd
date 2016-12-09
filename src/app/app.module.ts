@@ -17,7 +17,6 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ControlPanelPartnersComponent } from './control-panel-partners/control-panel-partners.component';
 import { ControlPanelAttachedPartnersComponent } from './control-panel-attached-partners/control-panel-attached-partners.component';
 import { CxFormModule } from './shared.cxform/cxform.module';
-import { EditModule } from './edit/edit.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,6 @@ import { EditModule } from './edit/edit.module';
     FormsModule,
     HttpModule,
     CxFormModule,
-    EditModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
       { path: 'tickets', component: TicketsComponent },
@@ -44,7 +42,7 @@ import { EditModule } from './edit/edit.module';
       { path: 'new', component: EditFormComponent},
       {
         path: 'edit/:id',
-        loadChildren: () => EditModule
+        loadChildren: './edit/edit.module#EditModule'
       },
       { path: 'new', component: EditComponent },
       {
