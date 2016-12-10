@@ -1,6 +1,7 @@
 import { FormContext } from '../shared.cxform/formContext';
 import { IPartner, PartnerRepo } from '../data/partnerRepo';
 import { Component } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'cx-control-panel-partners',
@@ -28,7 +29,7 @@ export class ControlPanelPartnersComponent {
   }
 
   public buildUri(partner: IPartner) {
-    return partner.id;
+    return `${environment.base}/partner/${partner.id}`;
   }
 
   public save() {
