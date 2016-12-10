@@ -9,30 +9,22 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 
 import { RouterModule }   from '@angular/router';
-import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { ControlPanelUsersComponent } from './control-panel-users/control-panel-users.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { ControlPanelPartnersComponent } from './control-panel-partners/control-panel-partners.component';
-import { ControlPanelAttachedPartnersComponent } from './control-panel-attached-partners/control-panel-attached-partners.component';
 import { CxFormModule } from './shared.cxform/cxform.module';
+import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     TicketsComponent,
-    TicketFilterComponent,
-    ControlPanelComponent,
-    ControlPanelUsersComponent,
-    TabsComponent,
-    ControlPanelPartnersComponent,
-    ControlPanelAttachedPartnersComponent,
+    TicketFilterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     CxFormModule,
+    CxComponentModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
       { path: 'tickets', component: TicketsComponent },
@@ -44,12 +36,7 @@ import { CxFormModule } from './shared.cxform/cxform.module';
       },
       {
         path: 'controlpanel',
-        component: ControlPanelComponent,
-        children: [
-          { path: '', component: ControlPanelUsersComponent },
-          { path: 'partners', component: ControlPanelPartnersComponent },
-          { path: 'attached', component: ControlPanelAttachedPartnersComponent }
-        ]
+        loadChildren: './control-panel/controlpanel.module#ControlPanelModule'
       },
     ])
   ],

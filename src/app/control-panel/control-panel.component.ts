@@ -1,5 +1,5 @@
-import { ITabRoute } from '../tabs/tabs.component';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
 
 @Component({
   selector: 'cx-control-panel',
@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControlPanelComponent {
   public routes: ITabRoute[] = [
-    {path: './', text: 'Käyttäjät'},
+    {path: 'users', text: 'Käyttäjät'},
     {path: 'partners', text: 'Kumppanit'},
     {path: 'attached', text: 'Liitetyt kumppanit'}
   ];
