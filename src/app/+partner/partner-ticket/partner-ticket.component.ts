@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { ITabRoute } from '../shared.cxcomponent/tabs/tabs.component';
+import { ITabRoute } from '../../shared.cxcomponent/cxcomponent.module';
 
 @Component({
-  selector: 'cx-edit',
+  selector: 'cx-partner-ticket',
   template: '<cx-tabs [routes]="routes"></cx-tabs>',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
-export class EditComponent {
-  public routes: ITabRoute[] = [
+export class PartnerTicketComponent {
+public routes: ITabRoute[] = [
     { path: '', text: 'Tiedot' },
     { path: 'files', text: 'Liitteet' },
     { path: 'feedback', text: 'Palaute' },

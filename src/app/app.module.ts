@@ -38,6 +38,10 @@ import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
         path: 'controlpanel',
         loadChildren: './+control-panel/controlpanel.module#ControlPanelModule'
       },
+      {
+        path: 'partner',
+        loadChildren: './+partner/partner.module#PartnerModule'
+      },
     ])
   ],
   providers: [],
