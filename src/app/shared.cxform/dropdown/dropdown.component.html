@@ -1,6 +1,6 @@
 <div class="btn-group">
   <div class="dropdown" [className]="theme">
-    <button type="button" class="btn btn-default" data-toggle="dropdown" [class.dirty]="dirty" [ngClass]="getColor()">
+    <button type="button" class="btn btn-default" data-toggle="dropdown" [class.dirty]="dirty" [ngClass]="getColor()" [disabled]="disabled">
       <span *ngIf="!headerIcon"> {{ getHeaderText() }} </span>
       <i *ngIf="headerIcon" class="fa {{headerIcon}}" aria-hidden="true"></i>
       <span class="caret"></span>

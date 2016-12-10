@@ -13,8 +13,11 @@ import { PartnerRepo } from '../../data/partnerRepo';
 export class PartnerTicketFieldsComponent {
   public ticket: any = {};
 
-  constructor(private activeRoute: ActivatedRoute, private ticketRepo: TicketRepo) {
+  constructor(private activeRoute: ActivatedRoute, private ticketRepo: TicketRepo, private form: FormContext) {
+    form.disabled = true;
+
     this.activeRoute.params.subscribe(params =>
           this.ticketRepo.Get(params['ticketId']).subscribe(ticket => this.ticket = ticket));
+
    }
 }

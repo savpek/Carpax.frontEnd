@@ -7,6 +7,7 @@ import { CxComponentModule } from '../shared.cxcomponent/cxcomponent.module';
 import { PartnerTicketsComponent } from './partner-tickets/partner-tickets.component';
 import { PartnerTicketFieldsComponent } from './partner-ticket-fields/partner-ticket-fields.component';
 import { PartnerTicketComponent } from './partner-ticket/partner-ticket.component';
+import { PartnerTicketFeedbackComponent } from './partner-ticket-feedback/partner-ticket-feedback.component';
 
 const routes: any = [
     {
@@ -18,6 +19,7 @@ const routes: any = [
         component: PartnerTicketComponent,
         children: [
             { path: '', component: PartnerTicketFieldsComponent },
+            { path: 'feedback', component: PartnerTicketFeedbackComponent },
         ]
     }
 ];
@@ -32,7 +34,8 @@ const routes: any = [
     declarations: [
         PartnerTicketsComponent,
         PartnerTicketFieldsComponent,
-        PartnerTicketComponent
+        PartnerTicketComponent,
+        PartnerTicketFeedbackComponent
     ],
     exports: [
     ],

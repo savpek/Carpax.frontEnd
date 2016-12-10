@@ -1,0 +1,14 @@
+@import '../../../styles.mixins.scss';
+
+table {
+    width:100%;
+}
+
+tr {
+    height: 1.8em;
+}
+
+tr.mouseover {
+    background-color: darken($light, 10%);
+    cursor: pointer;
+}

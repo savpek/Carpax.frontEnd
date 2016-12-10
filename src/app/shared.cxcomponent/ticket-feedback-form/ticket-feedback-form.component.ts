@@ -1,24 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FeedbackRepo, IFeedback } from '../../data/feedbackRepo';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'cx-feedback-form',
-  templateUrl: './feedback-form.component.html',
-  styleUrls: ['./feedback-form.component.scss'],
+  selector: 'cx-ticket-feedback-form',
+  templateUrl: './ticket-feedback-form.component.html',
+  styleUrls: ['./ticket-feedback-form.component.scss'],
   providers: [FeedbackRepo]
 })
-export class FeedbackFormComponent {
+export class TicketFeedbackFormComponent {
   private feedback: IFeedback[] = [];
   private currentTicket: string;
+
+  @Input()
+  set ticketId(value: string) {
+    this.currentTicket = value;
+    this.repo.get(this.currentTicket)
+      .subscribe(x => this.feedback = x);
+  }
+
   private newMessageText: string = '';
 
-  constructor(private repo: FeedbackRepo, private activeRoute: ActivatedRoute) {
-        activeRoute.parent.params.subscribe(params => {
-          this.currentTicket = params['id'];
-          repo.get(this.currentTicket).subscribe(x => this.feedback = x);
-        });
-  }
+  constructor(private repo: FeedbackRepo) {}
 
   public getLabel(feedback: IFeedback) {
     return `${feedback.created} ${feedback.whoIs}`;

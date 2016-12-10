@@ -17,6 +17,8 @@ export class DropdownComponent {
 
   @Input() public dirty: boolean;
 
+  @Input() public disabled: boolean;
+
   private getCurrent(): IDropdownItem {
     if (this.value !== undefined) {
       return this.items

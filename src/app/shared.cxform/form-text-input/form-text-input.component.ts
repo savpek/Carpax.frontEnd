@@ -17,8 +17,12 @@ export class FormTextInputComponent implements OnChanges {
 
   public entry: FormEntry;
 
-  constructor(form: FormContext) {
+  constructor(private form: FormContext) {
     this.entry = form.Join();
+  }
+
+  public isDisabled(): boolean {
+    return this.disabled || this.form.disabled;
   }
 
   public keyboardEvent() {

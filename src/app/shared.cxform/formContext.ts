@@ -6,6 +6,8 @@ export class FormEntry {
 export class FormContext {
     private entries: FormEntry[] = [];
 
+    public disabled: boolean = false;
+
     public Join(): FormEntry {
         let entry = new FormEntry();
         this.entries.push(entry);

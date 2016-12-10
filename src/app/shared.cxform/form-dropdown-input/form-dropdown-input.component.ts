@@ -24,4 +24,8 @@ export class FormDropdownInputComponent {
     this.valueChange.asObservable().subscribe(x =>
       this.entry.isDirty = true);
   }
+
+  public isDisabled(): boolean {
+    return this.disabled || this.form.disabled;
+  }
 }
