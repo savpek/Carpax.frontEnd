@@ -1,7 +1,7 @@
-import { FormContext } from '../shared.cxform/formContext';
-import { IPartner, PartnerRepo } from '../data/partnerRepo';
+import { FormContext } from '../../shared.cxform/formContext';
+import { IPartner, PartnerRepo } from '../../data/partnerRepo';
 import { Component } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'cx-control-panel-partners',

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { AttachedPartnerRepo } from '../data/attachedPartnerRepo';
-import { ITabRoute } from '../tabs/tabs.component';
+import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
 import { ITicketHeader, TicketHeaderRepoFactory } from '../data/ticketHeaderRepo';
 import { TicketHeaderServiceFactory } from '../service/ticketHeaderFilter';
 

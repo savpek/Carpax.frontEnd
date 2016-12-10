@@ -3,8 +3,8 @@ import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
 
 @Component({
   selector: 'cx-control-panel',
-  templateUrl: './control-panel.component.html',
-  styleUrls: ['./control-panel.component.scss'],
+  template: '<cx-tabs [routes]="routes"></cx-tabs>',
+  styleUrls: [],
   providers: []
 })
 export class ControlPanelComponent {

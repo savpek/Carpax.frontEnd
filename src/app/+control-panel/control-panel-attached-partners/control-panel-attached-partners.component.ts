@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AttachedPartnerRepo, IAttachedPartner } from '../data/attachedPartnerRepo';
-import { FormContext } from '../shared.cxform/formContext';
+import { AttachedPartnerRepo, IAttachedPartner } from '../../data/attachedPartnerRepo';
+import { FormContext } from '../../shared.cxform/formContext';
 
 @Component({
   selector: 'cx-control-panel-attached-partners',

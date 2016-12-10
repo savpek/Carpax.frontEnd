@@ -1,5 +1,5 @@
-import { FormContext } from '../shared.cxform/formContext';
-import { IUser, UserRepo } from '../data/userRepo';
+import { FormContext } from '../../shared.cxform/formContext';
+import { IUser, UserRepo } from '../../data/userRepo';
 import { Component } from '@angular/core';
 
 @Component({

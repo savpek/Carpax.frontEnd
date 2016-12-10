@@ -32,11 +32,11 @@ import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
       { path: 'new', component: TicketsComponent },
       {
         path: 'edit',
-        loadChildren: './edit/edit.module#EditModule'
+        loadChildren: './+edit/edit.module#EditModule'
       },
       {
         path: 'controlpanel',
-        loadChildren: './control-panel/controlpanel.module#ControlPanelModule'
+        loadChildren: './+control-panel/controlpanel.module#ControlPanelModule'
       },
     ])
   ],
