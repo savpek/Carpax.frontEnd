@@ -1,63 +1,6 @@
 <div>
   <form class="form-horizontal" role="form">
-    <cx-form-dropdown-input 
-      label="Korjaamo" 
-      [items]="partners"
-      [(value)]="currentPartnerId">
-    </cx-form-dropdown-input>
-    <h3>Auton tiedot</h3>
-    <cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate"></cx-form-text-input>
-    <cx-form-text-input label="VIN" [(text)]="ticket.vin"></cx-form-text-input>
-    <cx-form-text-input label="Merkki" [(text)]="ticket.brand"></cx-form-text-input>
-    <cx-form-text-input label="Malli" [(text)]="ticket.model"></cx-form-text-input>
-    <cx-form-text-input label="Värikoodi" [(text)]="ticket.colorCode"></cx-form-text-input>
-    <cx-form-text-input label="Ajetut kilometrit" [(text)]="ticket.kilometersDriven"></cx-form-text-input>
-
-    <h3>Asiakastiedot</h3>
-    <cx-form-text-input validate=".+" label="Asiakas*" [(text)]="ticket.customer"></cx-form-text-input>
-    <cx-form-text-input validate="[0-9+].*?" label="Puhelin*" [(text)]="ticket.phone"></cx-form-text-input>
-    <cx-form-text-input label="Sähköposti" [(text)]="ticket.email"></cx-form-text-input>
-    <cx-form-text-input label="Lähiosoite" [(text)]="ticket.address"></cx-form-text-input>
-    <cx-form-text-input label="Postinumero" [(text)]="ticket.postNumber"></cx-form-text-input>
-    <cx-form-text-input label="Kaupunki" [(text)]="ticket.city"></cx-form-text-input>
-
-    <h3>Vahinkotiedot</h3>
-    <cx-form-dropdown-input 
-      label="Vakuutus" 
-      [items]="insuranceTypes" 
-      [(value)]="ticket.insurance">
-    </cx-form-dropdown-input>
-
-    <div *ngIf="ticket.insurance == 0">
-      <cx-form-text-input label="Vastapuolen rekisterinumero" [(text)]="ticket.otherSideRegisterPlate"></cx-form-text-input>
-      <cx-form-text-input label="Vastapuolen vakuutus" [(text)]="ticket.otherSideInsurance"></cx-form-text-input>
-    </div>
-
-    <cx-form-dropdown-input
-      *ngIf="ticket.insurance == 1" 
-      label="Vahinkolaji" 
-      [items]="accidentTypes" 
-      [(value)]="ticket.accidentType">
-    </cx-form-dropdown-input>
-
-    <div *ngIf="ticket.insurance == 2">
-      <cx-form-text-input label="Vakuutuksenottajan nimi" [(text)]="ticket.insuranceHolder"></cx-form-text-input>
-      <cx-form-text-input label="Vakuutuksenottajan puhelinnumero" [(text)]="ticket.insuranceHolderPhone"></cx-form-text-input>
-    </div>
-
-    <div *ngIf="ticket.insurance != 3">
-      <cx-form-text-input label="Vahinkonumero" [(text)]="ticket.accidentNumber"></cx-form-text-input>
-      <cx-form-text-input label="Vakuutusyhtiö" [(text)]="ticket.insuranceCompany"></cx-form-text-input>
-      <cx-form-text-input label="Omavastuu" [(text)]="ticket.excess"></cx-form-text-input>
-    </div>
-
-    <cx-form-text-input label="Selite" [(text)]="ticket.description"></cx-form-text-input>
-    
-    <cx-form-date-input label="Tapahtuma-aika" [(dateModel)]="ticket.when"></cx-form-date-input>
-    <cx-form-date-input label="Aloituspäivä" [(dateModel)]="ticket.workStartDate"></cx-form-date-input>
-    <cx-form-date-input label="Valmistumispäivä" [(dateModel)]="ticket.workEndDate"></cx-form-date-input>
-    <cx-form-date-input label="Luotu" [editAllowed]="false" [(dateModel)]="ticket.created"></cx-form-date-input>
-
+    <cx-ticket-fields [ticket]="ticket" [(currentPartnerId)]="currentPartnerId"></cx-ticket-fields>
     <div class="form-group">
       <label class="col-sm-3 control-label"></label>
       <div class="col-sm-8">

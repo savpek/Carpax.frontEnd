@@ -11,6 +11,7 @@ import { FileInputComponent } from './file-input/file-input.component';
 import { FileThumbnailComponent } from './file-thumbnail/file-thumbnail.component';
 import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
 import { CxFormModule } from '../shared.cxform/cxform.module';
+import { CxComponentModule } from '../shared.cxcomponent/cxcomponent.module';
 
 const routes: any = [
     {
@@ -28,8 +29,9 @@ const routes: any = [
 @NgModule({
     imports: [
         CommonModule,
-        CxFormModule,
         FormsModule,
+        CxFormModule,
+        CxComponentModule,
         RouterModule.forChild(routes)],
     declarations: [
         FileInputComponent,

@@ -26,7 +26,7 @@ import { CxFormModule } from './shared.cxform/cxform.module';
     ControlPanelUsersComponent,
     TabsComponent,
     ControlPanelPartnersComponent,
-    ControlPanelAttachedPartnersComponent
+    ControlPanelAttachedPartnersComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { IPartner, PartnerRepo } from '../../data/partnerRepo';
 import { FormContext } from '../../shared.cxform/formContext';
 import { ITicket, TicketRepo } from '../../data/ticketRepo';
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -18,23 +18,6 @@ export class EditFormComponent {
     id: ''
   };
 
-  public insuranceTypes: any[] = [
-    { text: 'Liikenne', value: 0 },
-    { text: 'Kasko', value: 1 },
-    { text: 'Vastuuvakuutus', value: 2 },
-    { text: 'Asiakas maksaa', value: 3 }
-  ];
-
-  public accidentTypes: any[] = [
-    { text: 'Törmäys', value: 0 },
-    { text: 'Ilkivalta', value: 1 },
-    { text: 'Parkkipaikka', value: 2 },
-    { text: 'Varkaus', value: 3 },
-    { text: 'Palo', value: 4 },
-    { text: 'Lasivakuutus', value: 5 }
-  ];
-
-  public partners: any[] = [];
   public currentPartnerId: string;
   public currentPartnerIdChange = new EventEmitter();
 
@@ -46,17 +29,17 @@ export class EditFormComponent {
     private ticketRepo: TicketRepo,
     private partnerRepo: PartnerRepo,
     private form: FormContext) {
-    activeRoute.params.subscribe(params => {
+    this.activeRoute.params.subscribe(params => {
       let ticketId = params['id'];
       if (!ticketId) {
         ticketId = Uuid.create();
         this.new = true;
       }
 
-      ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
+      this.ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
 
       if (!this.new) {
-        partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
+        this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
           if (!partner[0].partnerId) { return; };
 
           this.currentPartnerId = partner[0].partnerId;
@@ -64,9 +47,6 @@ export class EditFormComponent {
         });
       }
     });
-
-    partnerRepo.Get().subscribe(
-      result => this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id}; }));
   }
 
   public saveDisabled() {

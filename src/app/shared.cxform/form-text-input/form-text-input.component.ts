@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { FormEntry, FormContext } from '../formContext';
 
 @Component({
@@ -42,6 +42,6 @@ export class FormTextInputComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.validateData()
+    //this.validateData();
   }
 }
