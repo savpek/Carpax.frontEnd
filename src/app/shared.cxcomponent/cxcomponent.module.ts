@@ -6,6 +6,7 @@ import { TabsComponent, ITabRoute } from './tabs/tabs.component';
 import { RouterModule } from '@angular/router';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketFeedbackFormComponent } from './ticket-feedback-form/ticket-feedback-form.component';
+import { TicketExpensesFormComponent } from './ticket-expenses-form/ticket-expenses-form.component';
 
 @NgModule({
   imports: [CommonModule, CxFormModule, RouterModule],
@@ -13,13 +14,15 @@ import { TicketFeedbackFormComponent } from './ticket-feedback-form/ticket-feedb
       TicketFieldsComponent,
       TabsComponent,
       TicketListComponent,
-      TicketFeedbackFormComponent
+      TicketFeedbackFormComponent,
+      TicketExpensesFormComponent
   ],
   exports: [
       TicketFieldsComponent,
       TabsComponent,
       TicketListComponent,
-      TicketFeedbackFormComponent
+      TicketFeedbackFormComponent,
+      TicketExpensesFormComponent
   ],
   providers: []
 })

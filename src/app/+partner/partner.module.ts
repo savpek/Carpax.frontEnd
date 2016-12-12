@@ -8,6 +8,7 @@ import { PartnerTicketsComponent } from './partner-tickets/partner-tickets.compo
 import { PartnerTicketFieldsComponent } from './partner-ticket-fields/partner-ticket-fields.component';
 import { PartnerTicketComponent } from './partner-ticket/partner-ticket.component';
 import { PartnerTicketFeedbackComponent } from './partner-ticket-feedback/partner-ticket-feedback.component';
+import { PartnerTicketExpensesComponent } from './partner-ticket-expenses/partner-ticket-expenses.component';
 
 const routes: any = [
     {
@@ -20,6 +21,7 @@ const routes: any = [
         children: [
             { path: '', component: PartnerTicketFieldsComponent },
             { path: 'feedback', component: PartnerTicketFeedbackComponent },
+            { path: 'expenses', component: PartnerTicketExpensesComponent },
         ]
     }
 ];
@@ -35,7 +37,8 @@ const routes: any = [
         PartnerTicketsComponent,
         PartnerTicketFieldsComponent,
         PartnerTicketComponent,
-        PartnerTicketFeedbackComponent
+        PartnerTicketFeedbackComponent,
+        PartnerTicketExpensesComponent
     ],
     exports: [
     ],

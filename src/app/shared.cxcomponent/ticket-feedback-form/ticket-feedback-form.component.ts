@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FeedbackRepo, IFeedback } from '../../data/feedbackRepo';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'cx-ticket-feedback-form',

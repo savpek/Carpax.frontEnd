@@ -1,0 +1,39 @@
+@import '../../../styles.mixins.scss';
+
+.part-row {
+    background-color: lighten($dark, 4%);
+    display: block;
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.part-row-last {
+    border-color: $light;
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    margin-bottom: 20px;
+}
+
+div.expenses-total {
+    border-color: $light;
+    border-width: 2px 0px 2px 0px;
+    border-style: solid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+cx-button {
+    margin-top: 5px
+}
+
+cx-dropdown {
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.dirty {
+    border-width: 0 0 0 4px !important;
+    border-style: solid !important;
+    border-color: $yellow !important;
+}

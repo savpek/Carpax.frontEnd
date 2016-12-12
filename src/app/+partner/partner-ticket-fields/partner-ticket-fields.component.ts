@@ -7,7 +7,6 @@ import { PartnerRepo } from '../../data/partnerRepo';
 @Component({
   selector: 'cx-partner-ticket-fields',
   templateUrl: './partner-ticket-fields.component.html',
-  styleUrls: ['./partner-ticket-fields.component.scss'],
   providers: [FormContext, TicketRepo,, PartnerRepo]
 })
 export class PartnerTicketFieldsComponent {
@@ -18,6 +17,5 @@ export class PartnerTicketFieldsComponent {
 
     this.activeRoute.params.subscribe(params =>
           this.ticketRepo.Get(params['ticketId']).subscribe(ticket => this.ticket = ticket));
-
    }
 }
