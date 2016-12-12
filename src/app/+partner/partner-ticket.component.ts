@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ITabRoute } from '../../shared.cxcomponent/cxcomponent.module';
+import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
 
 @Component({
   selector: 'cx-partner-ticket',

@@ -4,14 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EditComponent } from './edit.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
-import { FilesFormComponent } from './files-form/files-form.component';
-import { ExpensesFormComponent } from './expenses-form/expenses-form.component';
+import { FilesComponent } from './files.component';
 import { FeedbackComponent } from './feedback.component';
-import { FileInputComponent } from './file-input/file-input.component';
-import { FileThumbnailComponent } from './file-thumbnail/file-thumbnail.component';
-import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
 import { CxFormModule } from '../shared.cxform/cxform.module';
 import { CxComponentModule } from '../shared.cxcomponent/cxcomponent.module';
+import { ExpensesComponent } from './expenses.component';
 
 const routes: any = [
     {
@@ -19,9 +16,9 @@ const routes: any = [
         component: EditComponent,
         children: [
             { path: '', component: EditFormComponent },
-            { path: 'files', component: FilesFormComponent },
+            { path: 'files', component: FilesComponent },
             { path: 'feedback', component: FeedbackComponent },
-            { path: 'expenses', component: ExpensesFormComponent }
+            { path: 'expenses', component: ExpensesComponent }
         ]
     }
 ];
@@ -34,14 +31,11 @@ const routes: any = [
         CxComponentModule,
         RouterModule.forChild(routes)],
     declarations: [
-        FileInputComponent,
-        FileThumbnailComponent,
-        ImageThumbnailComponent,
         EditComponent,
         EditFormComponent,
-        FilesFormComponent,
+        FilesComponent,
         FeedbackComponent,
-        ExpensesFormComponent
+        ExpensesComponent
     ],
     exports: [
     ],
