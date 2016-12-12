@@ -6,7 +6,7 @@ import { EditComponent } from './edit.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
 import { FilesFormComponent } from './files-form/files-form.component';
 import { ExpensesFormComponent } from './expenses-form/expenses-form.component';
-import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import { FeedbackComponent } from './feedback.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { FileThumbnailComponent } from './file-thumbnail/file-thumbnail.component';
 import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
@@ -20,7 +20,7 @@ const routes: any = [
         children: [
             { path: '', component: EditFormComponent },
             { path: 'files', component: FilesFormComponent },
-            { path: 'feedback', component: FeedbackFormComponent },
+            { path: 'feedback', component: FeedbackComponent },
             { path: 'expenses', component: ExpensesFormComponent }
         ]
     }
@@ -40,7 +40,7 @@ const routes: any = [
         EditComponent,
         EditFormComponent,
         FilesFormComponent,
-        FeedbackFormComponent,
+        FeedbackComponent,
         ExpensesFormComponent
     ],
     exports: [
