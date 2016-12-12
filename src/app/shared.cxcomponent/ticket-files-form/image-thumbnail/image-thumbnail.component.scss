@@ -1,0 +1,33 @@
+@import '../../../../styles.mixins.scss';
+
+.thumbnail-container {
+    max-width: 400px;
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:3px;
+    border-width: 0px;
+    background: $light;
+}
+
+.thumbnail:hover {
+    background: lighten($light, 20%)
+}
+
+.top-bar {
+    background-color: $main-color;
+    border-radius: 3px;
+    color: $dark;
+}
+
+.remove-button {
+    margin-bottom: -35px;
+    z-index: 100; 
+    position: relative;
+
+}

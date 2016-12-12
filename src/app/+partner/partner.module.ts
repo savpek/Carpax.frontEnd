@@ -9,6 +9,7 @@ import { PartnerTicketFieldsComponent } from './partner-ticket-fields/partner-ti
 import { PartnerTicketComponent } from './partner-ticket/partner-ticket.component';
 import { PartnerTicketFeedbackComponent } from './partner-ticket-feedback/partner-ticket-feedback.component';
 import { PartnerTicketExpensesComponent } from './partner-ticket-expenses/partner-ticket-expenses.component';
+import { PartnerTicketFilesComponent } from './partner-files/partner-ticket-files.component';
 
 const routes: any = [
     {
@@ -22,6 +23,7 @@ const routes: any = [
             { path: '', component: PartnerTicketFieldsComponent },
             { path: 'feedback', component: PartnerTicketFeedbackComponent },
             { path: 'expenses', component: PartnerTicketExpensesComponent },
+            { path: 'files', component: PartnerTicketFilesComponent },
         ]
     }
 ];
@@ -38,7 +40,8 @@ const routes: any = [
         PartnerTicketFieldsComponent,
         PartnerTicketComponent,
         PartnerTicketFeedbackComponent,
-        PartnerTicketExpensesComponent
+        PartnerTicketExpensesComponent,
+        PartnerTicketFilesComponent
     ],
     exports: [
     ],

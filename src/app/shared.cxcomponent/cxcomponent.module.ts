@@ -7,6 +7,10 @@ import { RouterModule } from '@angular/router';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketFeedbackFormComponent } from './ticket-feedback-form/ticket-feedback-form.component';
 import { TicketExpensesFormComponent } from './ticket-expenses-form/ticket-expenses-form.component';
+import { TicketFilesFormComponent } from './ticket-files-form/ticket-files-form.component';
+import { FileInputComponent } from './ticket-files-form/file-input/file-input.component';
+import { ImageThumbnailComponent } from './ticket-files-form/image-thumbnail/image-thumbnail.component';
+import { FileThumbnailComponent } from './ticket-files-form/file-thumbnail/file-thumbnail.component';
 
 @NgModule({
   imports: [CommonModule, CxFormModule, RouterModule],
@@ -15,14 +19,19 @@ import { TicketExpensesFormComponent } from './ticket-expenses-form/ticket-expen
       TabsComponent,
       TicketListComponent,
       TicketFeedbackFormComponent,
-      TicketExpensesFormComponent
+      TicketExpensesFormComponent,
+      TicketFilesFormComponent,
+      FileInputComponent,
+      ImageThumbnailComponent,
+      FileThumbnailComponent
   ],
   exports: [
       TicketFieldsComponent,
       TabsComponent,
       TicketListComponent,
       TicketFeedbackFormComponent,
-      TicketExpensesFormComponent
+      TicketExpensesFormComponent,
+      TicketFilesFormComponent
   ],
   providers: []
 })

@@ -1,0 +1,7 @@
+<div class="file-input-outer">
+  <label class="image-holder image-upload-wrap">
+      <i class="fa fa-upload  fa-lg"></i> Tuo tiedostoja
+      <input type="file" class="inputfile" (change)="upload($event)" multiple />
+  </label>
+  <i *ngFor="let file of uploadedfiles" class="fa fa-file icon-default fa-2x" aria-hidden="true" [class.icon-ready]="file.ready"></i>
+</div>
