@@ -11,13 +11,15 @@ import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 import { RouterModule }   from '@angular/router';
 import { CxFormModule } from './shared.cxform/cxform.module';
 import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
+import { NewFormComponent } from './new-form/new-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     TicketsComponent,
-    TicketFilterComponent
+    TicketFilterComponent,
+    NewFormComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
       { path: 'tickets', component: TicketsComponent },
       { path: 'tickets/:id', component: TicketsComponent },
-      { path: 'new', component: TicketsComponent },
+      { path: 'new', component: NewFormComponent },
       {
         path: 'edit',
         loadChildren: './+edit/edit.module#EditModule'

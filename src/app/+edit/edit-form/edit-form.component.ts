@@ -5,8 +5,6 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Uuid } from './utils';
-
 @Component({
   selector: 'cx-edit-form',
   templateUrl: './edit-form.component.html',
@@ -21,8 +19,6 @@ export class EditFormComponent {
   public currentPartnerId: string;
   public currentPartnerIdChange = new EventEmitter();
 
-  private new: boolean;
-
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
@@ -31,21 +27,15 @@ export class EditFormComponent {
     private form: FormContext) {
     this.activeRoute.params.subscribe(params => {
       let ticketId = params['id'];
-      if (!ticketId) {
-        ticketId = Uuid.create();
-        this.new = true;
-      }
 
       this.ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
 
-      if (!this.new) {
-        this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
-          if (!partner[0].partnerId) { return; };
+      this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
+        if (!partner[0].partnerId) { return; };
 
-          this.currentPartnerId = partner[0].partnerId;
-          this.currentPartnerIdChange.emit(this.currentPartnerId);
-        });
-      }
+        this.currentPartnerId = partner[0].partnerId;
+        this.currentPartnerIdChange.emit(this.currentPartnerId);
+      });
     });
   }
 
@@ -61,14 +51,7 @@ export class EditFormComponent {
   }
 
   public save() {
-    if (this.new) {
-      this.saveRoutine().subscribe(() => {
-        this.form.submitted();
-        this.router.navigateByUrl(`/edit/${this.ticket.id}`);
-      });
-    } else {
-      this.saveRoutine().subscribe(() => this.form.submitted());
-    }
+    this.saveRoutine().subscribe(() => this.form.submitted());
   }
 
   public cancel() {

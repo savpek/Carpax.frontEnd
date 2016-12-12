@@ -1,0 +1,12 @@
+<div>
+  <form class="form-horizontal" role="form">
+    <cx-ticket-fields [ticket]="ticket" [(currentPartnerId)]="currentPartnerId"></cx-ticket-fields>
+    <div class="form-group">
+      <label class="col-sm-3 control-label"></label>
+      <div class="col-sm-8">
+        <cx-button icon="fa-floppy-o" (action)="save()" text="Tallenna" [disabled]="saveDisabled()"></cx-button>
+        <cx-button icon="fa-undo" (action)="cancel()" text="Peruuta"></cx-button>
+      </div>
+    </div>
+  </form>
+</div>
