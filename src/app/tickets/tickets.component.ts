@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { AttachedPartnerRepo } from '../data/attachedPartnerRepo';
 import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
@@ -23,24 +22,13 @@ export class TicketsComponent {
   constructor(
     private headerFactory: TicketHeaderRepoFactory,
     private router: Router,
-    private attachedPartnerRepo: AttachedPartnerRepo,
-    private activeRoute: ActivatedRoute) {
+    private attachedPartnerRepo: AttachedPartnerRepo) {
 
-    activeRoute.params.subscribe(params => {
-      if (params['id']) {
-        this.headerFactory.createForPartner(params['id'])
-          .get()
-          .subscribe(x => {
-            this.tickets = x;
-          });
-      } else {
-        this.headerFactory.create()
-          .get()
-          .subscribe(x => {
-            this.tickets = x;
-          });
-      }
-    });
+    this.headerFactory.create()
+      .get()
+      .subscribe(x => {
+        this.tickets = x;
+      });
 
     this.attachedPartnerRepo.get()
       .flatMap(x => x)
@@ -50,7 +38,7 @@ export class TicketsComponent {
       }));
   }
 
-  public openTicket(ticketId: string) {
-    this.router.navigate([`/edit/${ticketId}`]);
+  public openTicket(ticket: any) {
+    this.router.navigate([`/edit/${ticket.id}`]);
   }
 }

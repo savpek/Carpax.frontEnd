@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NotificationRepo } from '../../data/notificationRepo';
 
 export interface ITabRoute {
   path: string;
@@ -13,6 +14,4 @@ export interface ITabRoute {
 export class TabsComponent {
   @Input()
   public routes: ITabRoute[] = [];
-
-  constructor() {}
 }

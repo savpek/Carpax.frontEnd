@@ -11,6 +11,7 @@ import { TicketFilesFormComponent } from './ticket-files-form/ticket-files-form.
 import { FileInputComponent } from './ticket-files-form/file-input/file-input.component';
 import { ImageThumbnailComponent } from './ticket-files-form/image-thumbnail/image-thumbnail.component';
 import { FileThumbnailComponent } from './ticket-files-form/file-thumbnail/file-thumbnail.component';
+import { NotificationRepo } from '../data/notificationRepo';
 
 @NgModule({
   imports: [CommonModule, CxFormModule, RouterModule],

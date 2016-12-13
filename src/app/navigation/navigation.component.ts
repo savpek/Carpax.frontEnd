@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '../service/auth';
 
 @Component({
   selector: 'cx-navigation',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  public user : any = {
-    name: "name",
-    customerName: "customerName"
+  public user: any = {
+    name: '-',
+    customerName: '-'
   }
 
   public partnerInfo: any = {
@@ -20,9 +21,13 @@ export class NavigationComponent implements OnInit {
     return false;
   }
 
-  constructor() { }
+  constructor(auth: Auth) { 
+    auth.getCurrent().subscribe(x => this.user = {
+      name: x.userName,
+      customerName: x.customerName
+    });
+  }
 
   ngOnInit() {
   }
-
 }

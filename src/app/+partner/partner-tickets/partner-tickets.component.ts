@@ -3,9 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ITicketHeader, TicketHeaderRepoFactory } from '../../data/ticketHeaderRepo';
 
 @Component({
-  selector: 'cx-partner-tickets',
-  templateUrl: './partner-tickets.component.html',
-  styleUrls: ['./partner-tickets.component.scss'],
+  template: '<cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>',
   providers: [TicketHeaderRepoFactory]
 })
 export class PartnerTicketsComponent {

@@ -14,12 +14,14 @@ export abstract class RepoBase<T> {
     constructor(private http: Http) {}
 
     protected get(api: string): Observable<T[]> {
-        this.http.get(`${environment.apiBase}/${api}`)
-            .map(response => response.json())
-            .subscribe(result => {
-                this.current = result;
-                this.subject.next(this.current.slice());
-            });
+        if (this.current.length === 0) {
+            this.http.get(`${environment.apiBase}/${api}`)
+                .map(response => response.json())
+                .subscribe(result => {
+                    this.current = result;
+                    this.subject.next(this.current.slice());
+                });
+        }
 
         return this.subject;
     }

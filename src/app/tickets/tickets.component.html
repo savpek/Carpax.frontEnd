@@ -2,22 +2,6 @@
     <div>
         <cx-tabs [routes]="tabs" *ngIf="tabs.length > 1"></cx-tabs>
         <cx-ticket-filter></cx-ticket-filter>
-        <table>
-            <tr>
-                <th class="tableHeader"></th>
-                <th class="tableHeader">Rekisterinumero</th>
-                <th class="tableHeader visible-lg visible-md">Malli</th>
-                <th class="tableHeader">Asiakas</th>
-                <th class="tableHeader visible-lg visible-md">Muokattu</th>
-            </tr>
-            <tr *ngFor="let ticket of tickets" [class.mouseover]="ticket.hover" (mouseenter)="ticket.hover=true" (mouseleave)="ticket.hover=false"
-                (click)="openTicket(ticket.id)">
-                <td><i class="fa fa-exclamation new-items-marker" aria-hidden="true" ng-show="ticket.hasNew"></i></td>
-                <td ng-class="{nonActiveTicket: ticket.ready}">{{ ticket.registerPlate }}</td>
-                <td ng-class="{nonActiveTicket: ticket.ready}" class="visible-lg visible-md">{{ ticket.model }}</td>
-                <td ng-class="{nonActiveTicket: ticket.ready}">{{ ticket.customer }}</td>
-                <td ng-class="{nonActiveTicket: ticket.ready}" class="visible-lg visible-md">{{ ticket.lastModified }}</td>
-            </tr>
-        </table>
+        <cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
     </div>
 </div>

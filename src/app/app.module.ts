@@ -12,6 +12,8 @@ import { RouterModule }   from '@angular/router';
 import { CxFormModule } from './shared.cxform/cxform.module';
 import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
 import { NewFormComponent } from './new-form/new-form.component';
+import { NotificationRepo } from './data/notificationRepo';
+import { Auth } from './service/auth';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,7 @@ import { NewFormComponent } from './new-form/new-form.component';
       },
     ])
   ],
-  providers: [],
+  providers: [NotificationRepo, Auth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
