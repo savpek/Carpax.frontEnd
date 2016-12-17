@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { TicketsComponent } from './tickets/tickets.component';
-import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 
 import { RouterModule }   from '@angular/router';
 import { CxFormModule } from './shared.cxform/cxform.module';
@@ -20,7 +19,6 @@ import { Auth } from './service/auth';
     AppComponent,
     NavigationComponent,
     TicketsComponent,
-    TicketFilterComponent,
     NewFormComponent
   ],
   imports: [

@@ -12,6 +12,7 @@ import { FileInputComponent } from './ticket-files-form/file-input/file-input.co
 import { ImageThumbnailComponent } from './ticket-files-form/image-thumbnail/image-thumbnail.component';
 import { FileThumbnailComponent } from './ticket-files-form/file-thumbnail/file-thumbnail.component';
 import { NotificationRepo } from '../data/notificationRepo';
+import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 
 @NgModule({
   imports: [CommonModule, CxFormModule, RouterModule],
@@ -24,7 +25,8 @@ import { NotificationRepo } from '../data/notificationRepo';
       TicketFilesFormComponent,
       FileInputComponent,
       ImageThumbnailComponent,
-      FileThumbnailComponent
+      FileThumbnailComponent,
+      TicketFilterComponent
   ],
   exports: [
       TicketFieldsComponent,
@@ -32,7 +34,8 @@ import { NotificationRepo } from '../data/notificationRepo';
       TicketListComponent,
       TicketFeedbackFormComponent,
       TicketExpensesFormComponent,
-      TicketFilesFormComponent
+      TicketFilesFormComponent,
+      TicketFilterComponent
   ],
   providers: []
 })

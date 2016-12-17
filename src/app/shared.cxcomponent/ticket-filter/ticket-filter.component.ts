@@ -1,5 +1,5 @@
-import { TicketHeaderServiceFactory, ITicketHeaderFilter, TicketState } from '../service/ticketHeaderService';
-import { Component, OnInit, Input } from '@angular/core';
+import { TicketHeaderServiceFactory, ITicketHeaderFilter, TicketState } from '../../service/ticketHeaderService';
+import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -16,7 +16,7 @@ export class TicketFilterComponent {
     this.headerFilter = this.headerService.create();
 
     this.filter
-      .debounceTime(700)
+      .debounceTime(500)
       .subscribe(x =>
         this.headerFilter.textFilter(x));
   }

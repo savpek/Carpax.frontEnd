@@ -54,6 +54,10 @@ export class TicketHeaderService implements ITicketHeaderRepo {
         switch(this.state) {
             case TicketState.all:
                 return true;
+            case TicketState.ready:
+                return x.ready;
+            case TicketState.nonready:
+                return !x.ready;
             default:
                 return false;
         }

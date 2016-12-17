@@ -71,13 +71,6 @@ input.ng-invalid {
     font-size: 1.2em;
 }
 
-
-#fileUpload {
-    display:none;
-}
-
-
-
 th.tableHeader {
     border-bottom: 2px solid $light;
 }
@@ -86,11 +79,6 @@ img.login-image {
     width: 30px;
     margin-bottom: -10px;
     margin-top: -10px;
-}
-
-[ng-cloak]
-{
-  display: none !important;
 }
 
 div.email {
