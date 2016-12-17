@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { AttachedPartnerRepo } from '../data/attachedPartnerRepo';
 import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
 import { ITicketHeader, TicketHeaderRepoFactory } from '../data/ticketHeaderRepo';
-import { TicketHeaderServiceFactory } from '../service/ticketHeaderFilter';
+import { TicketHeaderServiceFactory } from '../service/ticketHeaderService';
 
 @Component({
   selector: 'cx-tickets',
@@ -20,7 +20,7 @@ export class TicketsComponent {
   }];
 
   constructor(
-    private headerFactory: TicketHeaderRepoFactory,
+    private headerFactory: TicketHeaderServiceFactory,
     private router: Router,
     private attachedPartnerRepo: AttachedPartnerRepo) {
 

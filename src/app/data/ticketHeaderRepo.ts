@@ -5,6 +5,7 @@ import { RepoBase } from './RepoBase';
 
 export interface ITicketHeader {
         id: string;
+        ready: boolean;
         registerPlate: string;
         model: string;
         customer: string;

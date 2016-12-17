@@ -1,5 +1,5 @@
-import { TicketHeaderServiceFactory } from '../service/ticketHeaderFilter';
-import { Component, OnInit } from '@angular/core';
+import { TicketHeaderServiceFactory, ITicketHeaderFilter, TicketState } from '../service/ticketHeaderService';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -8,17 +8,17 @@ import { Subject } from 'rxjs';
   styleUrls: ['./ticket-filter.component.scss'],
   providers: []
 })
-export class TicketFilterComponent implements OnInit {
+export class TicketFilterComponent {
   private filter: Subject<string> = new Subject<string>();
+  private headerFilter: ITicketHeaderFilter;
 
   constructor(private headerService: TicketHeaderServiceFactory) {
+    this.headerFilter = this.headerService.create();
+
     this.filter
       .debounceTime(700)
       .subscribe(x =>
-        this.headerService.create().textFilter(x));
-  }
-
-  ngOnInit() {
+        this.headerFilter.textFilter(x));
   }
 
   public textFilterChanged($newValue) {
@@ -26,5 +26,15 @@ export class TicketFilterComponent implements OnInit {
   }
 
   public showReadyFilter(value: string) {
+    switch(value) {
+      case 'nonready':
+        this.headerFilter.stateFilter(TicketState.nonready);
+        break;
+      case 'ready':
+        this.headerFilter.stateFilter(TicketState.ready);
+        break;
+      default:
+        this.headerFilter.stateFilter(TicketState.all);
+    }
   }
 }

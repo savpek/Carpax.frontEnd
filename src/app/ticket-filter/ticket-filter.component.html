@@ -1,8 +1,4 @@
 <div class="btn-toolbar" role="toolbar">
-  <cx-dropdown headerIcon="fa-calendar" 
-    [items]="[{icon: 'fa-list-alt', value: 'list'},{icon: 'fa-calendar', value: 'calendar'}]"
-    (valueChange)="showReadyFilter($event.value)">
-  </cx-dropdown>
   <div class="btn-group">
     <div class="filter">
       <input 
@@ -15,6 +11,6 @@
   <cx-dropdown 
     header="Näytä" 
     [items]="[{text: 'Kaikki', value: 'all'}, {text: 'Valmiit', value: 'ready'}, {text: 'Keskeneräiset', value: 'nonready'}]" 
-    (valueChange)="showReadyFilter($event.value)">
+    (valueChange)="showReadyFilter($event)">
   </cx-dropdown>
 </div>
