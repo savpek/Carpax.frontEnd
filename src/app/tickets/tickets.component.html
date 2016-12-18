@@ -3,5 +3,8 @@
         <cx-tabs [routes]="tabs" *ngIf="tabs.length > 1"></cx-tabs>
         <cx-ticket-filter></cx-ticket-filter>
         <cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
+        <div style="height:800px">
+        <cx-ticket-calendar  [tickets]="tickets"></cx-ticket-calendar>
+        </div>
     </div>
 </div>

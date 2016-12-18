@@ -6,7 +6,7 @@ import { Auth } from '../service/auth';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent {
 
   public user: any = {
     name: '-',
@@ -26,8 +26,5 @@ export class NavigationComponent implements OnInit {
       name: x.userName,
       customerName: x.customerName
     });
-  }
-
-  ngOnInit() {
   }
 }

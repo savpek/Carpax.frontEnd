@@ -255,8 +255,8 @@ div.navigation-current-user {
     margin-right: 15px;
 }
 
-.calendar .fc-state-highlight {
-    background-color: darken($light, 10%);
+.fc-state-highlight {
+    background-color: darken($light, 10%) !important;
 }
 
 .fc th, .fc td {

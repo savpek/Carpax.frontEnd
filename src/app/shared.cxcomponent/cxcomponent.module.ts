@@ -11,8 +11,10 @@ import { TicketFilesFormComponent } from './ticket-files-form/ticket-files-form.
 import { FileInputComponent } from './ticket-files-form/file-input/file-input.component';
 import { ImageThumbnailComponent } from './ticket-files-form/image-thumbnail/image-thumbnail.component';
 import { FileThumbnailComponent } from './ticket-files-form/file-thumbnail/file-thumbnail.component';
-import { NotificationRepo } from '../data/notificationRepo';
 import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
+import { TicketCalendarComponent } from './ticket-calendar/ticket-calendar.component';
+
+import {CalendarComponent} from 'angular2-fullcalendar/src/calendar/calendar';
 
 @NgModule({
   imports: [CommonModule, CxFormModule, RouterModule],
@@ -26,7 +28,9 @@ import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
       FileInputComponent,
       ImageThumbnailComponent,
       FileThumbnailComponent,
-      TicketFilterComponent
+      TicketFilterComponent,
+      TicketCalendarComponent,
+      CalendarComponent
   ],
   exports: [
       TicketFieldsComponent,
@@ -35,7 +39,8 @@ import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
       TicketFeedbackFormComponent,
       TicketExpensesFormComponent,
       TicketFilesFormComponent,
-      TicketFilterComponent
+      TicketFilterComponent,
+      TicketCalendarComponent
   ],
   providers: []
 })

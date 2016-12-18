@@ -10,6 +10,8 @@ export interface ITicketHeader {
         model: string;
         customer: string;
         lastModified: Date;
+        workStartDate: Date;
+        workEndDate: Date;
 }
 
 export interface ITicketHeaderRepo {
