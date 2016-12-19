@@ -9,6 +9,8 @@ import 'fullcalendar';
   styleUrls: ['./ticket-calendar.component.scss']
 })
 export class TicketCalendarComponent {
+  private eventCallback: (any) => void = (_) => {};
+
   public config: any = {
       editable: false,
       firstDay: 1,
@@ -20,12 +22,14 @@ export class TicketCalendarComponent {
       timezone: 'local',
       height: 'parent',
       contentHeight: 'auto',
-      events: []
+      events: (start, end, timezone, callback) => {
+        this.eventCallback = callback;
+      }
   }
 
   @Input()
   set tickets(value: ITicketHeader[]) {
-    this.config.events = value
+    let events = value
             .filter(x => x.workStartDate && x.workEndDate)
             .map(x => {
                 return {
@@ -37,9 +41,14 @@ export class TicketCalendarComponent {
                 }});
 
     setTimeout(() => {
-        $('cx-ticket-calendar').fullCalendar(this.config);
-    }, 1500);
+        this.eventCallback(events);
+        $('cx-ticket-calendar').fullCalendar('refetchEvents');
+    }, 200);
   }
 
-  constructor(private changeRef: ApplicationRef) { }
+  constructor(private changeRef: ApplicationRef) {
+    setTimeout(() => {
+        $('cx-ticket-calendar').fullCalendar(this.config);
+    });
+   }
 }
