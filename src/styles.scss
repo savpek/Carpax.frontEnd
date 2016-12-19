@@ -280,6 +280,11 @@ a.fc-event  {
     font-weight: 700
 }
 
+.fc-event-nonready {
+    background-color:$yellow;
+    border-color: $yellow;
+}
+
 span.fc-title {
     color: white;
 }

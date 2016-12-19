@@ -1,6 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ITicketHeader } from '../../data/ticketHeaderRepo';
 import { NotificationRepo, INotification } from '../../data/notificationRepo';
+import * as moment from 'moment';
 
 @Component({
   selector: 'cx-ticket-list',
@@ -28,5 +29,9 @@ export class TicketListComponent {
 
   public openTicketClick(ticket: ITicketHeader) {
     this.openTicket.emit(ticket);
+  }
+
+  public formatLastModified(value: string) {
+     return moment(value).format('DD.MM.YYYY HH:mm');
   }
 }

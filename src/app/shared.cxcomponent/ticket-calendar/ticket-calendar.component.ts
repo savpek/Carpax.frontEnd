@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ApplicationRef } from '@angular/core';
 import { ITicketHeader } from '../../data/ticketHeaderRepo';
 import * as $ from 'jquery';
 import 'fullcalendar';
+import * as moment from 'moment';
 
 @Component({
   selector: 'cx-ticket-calendar',
@@ -9,8 +10,6 @@ import 'fullcalendar';
   styleUrls: ['./ticket-calendar.component.scss']
 })
 export class TicketCalendarComponent {
-  private eventCallback: (any) => void = (_) => {};
-
   public config: any = {
       editable: false,
       firstDay: 1,
@@ -27,17 +26,35 @@ export class TicketCalendarComponent {
       }
   }
 
+  private eventCallback: (any) => void = (_) => {};
+
+  private getEndDate(header: ITicketHeader): Date {
+    if (header.workEndDate) {
+      return moment(header.workEndDate).add(1, 'days').toDate();
+    }
+
+    return header.workStartDate;
+  }
+
+  private getEventColor(header: ITicketHeader) {
+    if (!header.workEndDate) {
+      return '#f0ad4e';
+    }
+    return '#449d44';
+  }
+
   @Input()
   set tickets(value: ITicketHeader[]) {
     let events = value
-            .filter(x => x.workStartDate && x.workEndDate)
+            .filter(x => x.workStartDate)
             .map(x => {
                 return {
                     title: `${x.registerPlate}, ${x.customer}`,
                     start: x.workStartDate,
-                    end: x.workEndDate,
+                    end: this.getEndDate(x),
                     allDay: true,
-                    url: `./edit/${x.id}`
+                    url: `./edit/${x.id}`,
+                    color: this.getEventColor(x)
                 }});
 
     setTimeout(() => {
