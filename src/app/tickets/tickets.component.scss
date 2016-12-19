@@ -12,3 +12,11 @@ tr.mouseover {
     background-color: darken($light, 10%);
     cursor: pointer;
 }
+
+.filter-row {
+  width: 100%;
+  margin: 0 auto;
+}
+.filter-block {
+  display: inline-block;
+}

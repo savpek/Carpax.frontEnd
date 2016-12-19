@@ -1,10 +1,16 @@
 <div>
     <div>
         <cx-tabs [routes]="tabs" *ngIf="tabs.length > 1"></cx-tabs>
-        <cx-ticket-filter></cx-ticket-filter>
-        <cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
-        <div style="height:800px">
-        <cx-ticket-calendar  [tickets]="tickets"></cx-ticket-calendar>
+        <div class="filter-row">
+            <div class="filter-block">
+                <cx-dropdown [items]="views" [(value)]="currentView">
+                </cx-dropdown>
+            </div>
+            <div class="filter-block">
+                <cx-ticket-filter></cx-ticket-filter>
+            </div>
         </div>
-    </div>
+        <cx-ticket-list *ngIf="currentView === 'list'" [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
+<cx-ticket-calendar *ngIf="currentView === 'calendar'" [tickets]="tickets"></cx-ticket-calendar>
+</div>
 </div>

@@ -19,6 +19,9 @@ export class TicketsComponent {
     text: 'Omat'
   }];
 
+  public views: any[] = [{icon: 'fa-list', value: 'list'}, {icon: 'fa-calendar', value: 'calendar'}];
+  public currentView = 'list';
+
   constructor(
     private headerFactory: TicketHeaderServiceFactory,
     private router: Router,

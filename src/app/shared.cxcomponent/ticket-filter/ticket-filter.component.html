@@ -1,16 +1,9 @@
-<div class="btn-toolbar" role="toolbar">
-  <div class="btn-group">
-    <div class="filter">
-      <input 
-        type="text" 
-        class="form-control filter-input" 
-        placeholder="Hae..." 
-        (keyup)="textFilterChanged($event.target.value)"/>
-    </div>
+<div>
+  <div class="filter">
+    <input type="text" class="form-control filter-input" placeholder="Hae..." (keyup)="textFilterChanged($event.target.value)"
+    />
   </div>
-  <cx-dropdown 
-    header="Näytä" 
-    [items]="[{text: 'Kaikki', value: 'all'}, {text: 'Valmiit', value: 'ready'}, {text: 'Keskeneräiset', value: 'nonready'}]" 
+  <cx-dropdown header="Näytä" [items]="[{text: 'Kaikki', value: 'all'}, {text: 'Valmiit', value: 'ready'}, {text: 'Keskeneräiset', value: 'nonready'}]"
     (valueChange)="showReadyFilter($event)">
   </cx-dropdown>
 </div>
