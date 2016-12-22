@@ -18,6 +18,10 @@ export class FormContext {
         return !this.entries.find(x => !x.isValid);
     }
 
+    public isDirty() {
+        return !!this.entries.find(x => x.isDirty);
+    }
+
     public submitted() {
         this.entries.forEach(x => x.isDirty = false);
     };

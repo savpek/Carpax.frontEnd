@@ -4,6 +4,8 @@ import { ITicket, TicketRepo } from '../../data/ticketRepo';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CanDeactivateForm } from '../../shared.cxform/canDeactivateForm';
+import { CxModal } from '../../service/modal';
 
 @Component({
   selector: 'cx-edit-form',
@@ -11,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./edit-form.component.scss'],
   providers: [FormContext, PartnerRepo, TicketRepo]
 })
-export class EditFormComponent {
+export class EditFormComponent extends CanDeactivateForm {
   public ticket: ITicket = {
     id: ''
   };
@@ -24,7 +26,10 @@ export class EditFormComponent {
     private router: Router,
     private ticketRepo: TicketRepo,
     private partnerRepo: PartnerRepo,
-    private form: FormContext) {
+    private form: FormContext,
+    modal: CxModal) {
+    super(form, modal);
+
     this.activeRoute.params.subscribe(params => {
       let ticketId = params['id'];
 
