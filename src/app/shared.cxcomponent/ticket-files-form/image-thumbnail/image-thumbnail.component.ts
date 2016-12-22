@@ -9,7 +9,6 @@ import { CxModal } from '../../../service/modal';
   providers: [CxModal]
 })
 export class ImageThumbnailComponent {
-
   @Input()
   public file: any;
 

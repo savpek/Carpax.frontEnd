@@ -17,6 +17,7 @@ import { Auth } from './service/auth';
 import { ModalModule } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { CxModal } from './service/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,7 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
       },
     ])
   ],
-  providers: [NotificationRepo, Auth, Modal],
+  providers: [NotificationRepo, Auth, Modal, CxModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
