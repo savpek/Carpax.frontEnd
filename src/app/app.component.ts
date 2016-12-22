@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef  } from '@angular/core';
+
+import { Overlay } from 'angular2-modal';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   providers: []
 })
-
 export class AppComponent {
+    constructor(overlay: Overlay, vcRef: ViewContainerRef) {
+    overlay.defaultViewContainer = vcRef;
+  }
 }
 

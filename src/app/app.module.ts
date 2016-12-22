@@ -14,6 +14,9 @@ import { NewFormComponent } from './new-form/new-form.component';
 import { NotificationRepo } from './data/notificationRepo';
 import { Auth } from './service/auth';
 
+import { ModalModule } from 'angular2-modal';
+import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +30,8 @@ import { Auth } from './service/auth';
     HttpModule,
     CxFormModule,
     CxComponentModule,
+    ModalModule.forRoot(),
+    BootstrapModalModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
       { path: 'tickets', component: TicketsComponent },
@@ -46,7 +51,7 @@ import { Auth } from './service/auth';
       },
     ])
   ],
-  providers: [NotificationRepo, Auth],
+  providers: [NotificationRepo, Auth, Modal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
