@@ -228,25 +228,6 @@ i.new-items-marker {
     margin-right: 10px;
 }
 
-div.ng-enter {
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    opacity: 0;
-}
-
-div.ng-enter-active {
-    opacity: 1;
-}
-
-div.ng-move {
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    opacity: 0;
-}
-div.ng-move-active {
-    opacity: 1;
-}
-
 div.navigation-current-user {
     float: left !important;
     margin-top: -10px !important;
@@ -296,4 +277,21 @@ button.fc-button {
     border: 0 !important;
     text-shadow: none;
     box-shadow: none;
+}
+
+router-outlet ~ * > div, router-outlet ~ * > * > div, router-outlet ~ * > * > button {
+    animation-duration: 1s;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

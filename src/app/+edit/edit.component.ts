@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component,   trigger,
+  state,
+  style,
+  transition,
+  animate } from '@angular/core';
 import { ITabRoute } from '../shared.cxcomponent/tabs/tabs.component';
 import { NotificationRepo, INotification } from '../data/notificationRepo';
 
 @Component({
-  template: '<cx-tabs [routes]="routes"></cx-tabs>',
+  template: '<cx-tabs [routes]="routes"></cx-tabs>'
 })
 export class EditComponent {
   public routes: ITabRoute[] = [
