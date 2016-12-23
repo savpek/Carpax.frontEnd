@@ -42,6 +42,6 @@ export class TicketsComponent {
   }
 
   public openTicket(ticket: any) {
-    this.router.navigate([`/edit/${ticket.id}`]);
+    this.router.navigate([`/edit/${ticket.id}/fields`]);
   }
 }
