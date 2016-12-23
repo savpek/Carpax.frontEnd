@@ -14,6 +14,7 @@ const routes: any = [
         path: '',
         component: ControlPanelComponent,
         children: [
+          { path: '', component: ControlPanelUsersComponent },
           { path: 'users', component: ControlPanelUsersComponent },
           { path: 'partners', component: ControlPanelPartnersComponent },
           { path: 'attached', component: ControlPanelAttachedPartnersComponent }

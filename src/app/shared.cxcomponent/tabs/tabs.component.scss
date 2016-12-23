@@ -37,3 +37,7 @@
 .tab-content {
     padding-top: 30px
 }
+
+.active {
+    border-bottom: 2px solid darken($main-color, 20%) !important;
+}
