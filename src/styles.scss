@@ -58,19 +58,6 @@ input.ng-invalid {
   background-color: #5f0000;
 }
 
-
-.image-in-modal {
-    width: 100%;
-}
-
-.a-remove {
-    color: red;
-    float: right;
-    margin-bottom: -15px;
-    margin-right: -7px;
-    font-size: 1.2em;
-}
-
 th.tableHeader {
     border-bottom: 2px solid $light;
 }
@@ -97,12 +84,6 @@ i.logo {
 i.logo-text {
     color: lighten($light, 40%);
 }
-
-
-td.nonActiveTicket {
-    color: darken($main-color, 30%);
-}
-
 
 #loading-bar .bar { 
    background: darken($main-color, 10%) !important; 
@@ -210,22 +191,6 @@ i.new-items-marker {
     color:lighten( red, 10%);
     padding-left: 5px;
     padding-right: 0px;
-}
-
-.red-test {
-    background-color: red; 
-}
-
-
-.part-input {
-    margin: 5px;   
-}
-
-
-
-.part-toggle-btn {
-    min-width: 50px;
-    margin-right: 10px;
 }
 
 div.navigation-current-user {

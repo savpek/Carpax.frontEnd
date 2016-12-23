@@ -4,17 +4,17 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12 visible-xs visible-sm">
                     <cx-button icon="fa-times" text="Poista" class="pull-right" (action)="delete(part)"></cx-button>
-                    <cx-dropdown [items]="partStates" class="pull-right" theme="light"></cx-dropdown>
+                    <cx-dropdown [items]="partStates" class="pull-right" theme="light" [(value)]="part.status"></cx-dropdown>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-12">
-                    <cx-form-text-input-small headerIcon="fa-info-circle" [(text)]="part.description"></cx-form-text-input-small>
+                    <cx-form-text-input-small headerIcon="fa-info-circle" [(text)]="part.description" format="uppercase"></cx-form-text-input-small>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-12">
                     <cx-form-text-input-small headerText="Id" [(text)]="part.identifier"></cx-form-text-input-small>
                 </div>
                 <div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
                     <cx-button icon="fa-times" text="Poista" class="pull-right" (action)="delete(part)"></cx-button>
-                    <cx-dropdown [items]="partStates" class="pull-right" theme="light"></cx-dropdown>
+                    <cx-dropdown [items]="partStates" class="pull-right" theme="light" [(value)]="part.status"></cx-dropdown>
                 </div>
             </div>
             <div class="row">
@@ -57,7 +57,7 @@
                     <cx-button icon="fa-times" text="Poista" (action)="delete(work)" class="pull-right"></cx-button>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-12">
-                    <cx-form-text-input-small headerIcon="fa-info-circle" [(text)]="work.description"></cx-form-text-input-small>
+                    <cx-form-text-input-small headerIcon="fa-info-circle" [(text)]="work.description" format="uppercase"></cx-form-text-input-small>
                 </div>
                 <div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
                     <cx-button icon="fa-times" text="Poista" (action)="delete(work)" class="pull-right"></cx-button>

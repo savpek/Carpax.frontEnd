@@ -12,3 +12,7 @@ tr.mouseover {
     background-color: darken($light, 10%);
     cursor: pointer;
 }
+
+tr.ticketready {
+    color: darken($main-color, 30%);
+}
