@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FeedbackRepo, IFeedback } from '../../data/feedbackRepo';
+import * as moment from 'moment';
 
 @Component({
   selector: 'cx-ticket-feedback-form',
@@ -20,10 +21,10 @@ export class TicketFeedbackFormComponent {
 
   private newMessageText: string = '';
 
-  constructor(private repo: FeedbackRepo) {}
+  constructor(private repo: FeedbackRepo) { }
 
   public getLabel(feedback: IFeedback) {
-    return `${feedback.created} ${feedback.whoIs}`;
+    return `${this.formatMessageTimeStamp(feedback.created)} ${feedback.whoIs}`;
   }
 
   public sendDisabled(): boolean {
@@ -34,5 +35,9 @@ export class TicketFeedbackFormComponent {
     this.repo.Add(this.currentTicket, {
       message: this.newMessageText
     });
+  }
+
+  private formatMessageTimeStamp(value: Date) {
+    return moment(value).format('DD.MM.YYYY HH:mm');
   }
 }

@@ -3,7 +3,6 @@ import { PartnerRepo } from '../../data/partnerRepo';
 import { CanDeactivate } from '@angular/router';
 import { CxModal } from '../../service/modal';
 import { Observable } from 'rxjs';
-import { CanDeactivateFormGuard } from '../../service/canDeactivateFormGuard';
 
 
 @Component({
@@ -11,7 +10,7 @@ import { CanDeactivateFormGuard } from '../../service/canDeactivateFormGuard';
   templateUrl: './ticket-fields.component.html',
   styleUrls: ['./ticket-fields.component.scss']
 })
-export class TicketFieldsComponent implements CanDeactivateFormGuard {
+export class TicketFieldsComponent {
   @Input()
   public ticket: any = {};
 
@@ -31,6 +30,11 @@ export class TicketFieldsComponent implements CanDeactivateFormGuard {
     { text: 'Lasivakuutus', value: 5 }
   ];
 
+  public readyTypes: any[] = [
+    { text: 'Kyllä', value: true },
+    { text: 'Ei', value: false }
+  ]
+
   public partners: any[] = [];
 
   @Input()
@@ -41,11 +45,14 @@ export class TicketFieldsComponent implements CanDeactivateFormGuard {
 
   constructor(private partnerRepo: PartnerRepo, private modal: CxModal) {
     this.partnerRepo.Get().subscribe(
-      result => this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; }));
+      result => { 
+        this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; })
+        this.partners.unshift({text: 'Ei valintaa', value: undefined});
+  });
   }
 
-  canDeactivate() {
-    console.log('i am navigating away');
-    return window.confirm('Discard changes?');
+  public currentPartnerUpdated(partnerSelection: any) {
+    this.currentPartnerId = partnerSelection;
+    this.currentPartnerIdChange.emit(partnerSelection);
   }
 }

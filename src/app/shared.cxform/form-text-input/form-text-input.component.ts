@@ -15,10 +15,21 @@ export class FormTextInputComponent implements OnChanges {
 
   @Input() public disabled = false;
 
+  @Input() format: string;
+
   public entry: FormEntry;
 
   constructor(private form: FormContext) {
     this.entry = form.Join();
+  }
+
+  private applyFormat(text: string): string {
+    switch (this.format) {
+      case 'uppercase':
+        return text.toUpperCase();
+      default:
+        return text;
+    }
   }
 
   public isDisabled(): boolean {
@@ -27,7 +38,9 @@ export class FormTextInputComponent implements OnChanges {
 
   public keyboardEvent() {
     this.entry.isDirty = true;
+    this.text = this.applyFormat(this.text);
     this.validateData();
+
     this.textChange.emit(this.text);
   }
 
