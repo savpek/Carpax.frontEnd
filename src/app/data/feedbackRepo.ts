@@ -1,8 +1,8 @@
 import { RepoBase } from './RepoBase';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { DataApi, DataApiFactory } from './DataApi';
 
 export interface IFeedback {
     message: string;
@@ -11,16 +11,18 @@ export interface IFeedback {
 }
 
 @Injectable()
-export class FeedbackRepo extends RepoBase<IFeedback> {
-    constructor(http: Http) {
-        super(http);
+export class FeedbackRepo {
+    private api: DataApi<IFeedback>;
+
+    constructor(apiFactory: DataApiFactory) {
+        this.api = apiFactory.create<IFeedback>();
     }
 
     public get(ticketId: string): Observable<IFeedback[]> {
-        return super.get(`feedbackmessages/${ticketId}`);
+        return this.api.get(`feedbackmessages/${ticketId}`);
     }
 
     public Add(ticketId: string, feedback: IFeedback) {
-        super.post(`feedbackmessages/${ticketId}`, feedback);
+        this.api.post(`feedbackmessages/${ticketId}`, feedback);
     }
 }

@@ -6,7 +6,7 @@
 </cx-form-dropdown-input>
 
 <h3>Auton tiedot</h3>
-<cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate"></cx-form-text-input>
+<cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate" format="uppercase"></cx-form-text-input>
 <cx-form-text-input label="VIN" [(text)]="ticket.vin" format="uppercase"></cx-form-text-input>
 <cx-form-text-input label="Merkki" [(text)]="ticket.brand"></cx-form-text-input>
 <cx-form-text-input label="Malli" [(text)]="ticket.model"></cx-form-text-input>
