@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
-import { RepoBase } from './RepoBase';
+import { DataApiFactory, DataApi } from './DataApi';
 
 export interface ITicketHeader {
         id: string;
@@ -20,34 +19,38 @@ export interface ITicketHeaderRepo {
 
 @Injectable()
 export class TicketHeaderRepoFactory {
-    constructor(private http: Http) {
+    constructor(private apiFactory: DataApiFactory) {
     }
 
     public createForPartner(partnerId: string): ITicketHeaderRepo {
-        return new TicketHeaderRepoForPartners(this.http, partnerId);
+        return new TicketHeaderRepoForPartners(this.apiFactory, partnerId);
     }
 
     public create(): ITicketHeaderRepo {
-        return new TicketHeaderRepo(this.http);
+        return new TicketHeaderRepo(this.apiFactory);
     }
 }
 
-class TicketHeaderRepoForPartners extends RepoBase<ITicketHeader> implements ITicketHeaderRepo {
-    constructor(http: Http, private partnerId: string) {
-        super(http);
+class TicketHeaderRepoForPartners implements ITicketHeaderRepo {
+    private api: DataApi<ITicketHeader>;
+
+    constructor(apiFactory: DataApiFactory, private partnerId: string) {
+        this.api = apiFactory.create<ITicketHeader>();
     }
 
     public get(): Observable<ITicketHeader[]> {
-        return super.get(`ticketforpartner/${this.partnerId}`);
+        return this.api.get(`ticketforpartner/${this.partnerId}`);
     }
 }
 
-class TicketHeaderRepo extends RepoBase<ITicketHeader> implements ITicketHeaderRepo {
-    constructor(http: Http) {
-        super(http);
+class TicketHeaderRepo implements ITicketHeaderRepo {
+    private api: DataApi<ITicketHeader>;
+
+    constructor(apiFactory: DataApiFactory, ) {
+        this.api = apiFactory.create<ITicketHeader>();
     }
 
     public get(): Observable<ITicketHeader[]> {
-        return super.get(`ticket/`);
+        return this.api.get(`ticket/`);
     }
 }
