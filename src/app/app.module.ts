@@ -42,7 +42,7 @@ import { DataApi, DataApiFactory } from './data/DataApi';
     RouterModule.forRoot([
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
       { path: 'tickets', component: TicketsComponent },
-      { path: 'tickets/:id', component: TicketsComponent },
+      { path: 'tickets/:partnerId', component: TicketsComponent },
       { path: 'new', component: NewFormComponent },
       {
         path: 'edit',
