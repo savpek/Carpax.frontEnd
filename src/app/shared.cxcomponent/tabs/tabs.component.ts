@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NotificationRepo } from '../../data/notificationRepo';
+import { Router } from '@angular/router';
 
 export interface ITabRoute {
   path: string;
@@ -14,4 +15,11 @@ export interface ITabRoute {
 export class TabsComponent {
   @Input()
   public routes: ITabRoute[] = [];
+
+  constructor(private router: Router) {
+  }
+
+  public isActive(path: string): boolean {
+    return this.router.isActive(path, true);
+  }
 }

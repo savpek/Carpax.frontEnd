@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { AttachedPartnerRepo } from '../data/attachedPartnerRepo';
 import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
@@ -19,19 +19,30 @@ export class TicketsComponent {
     text: 'Omat'
   }];
 
-  public views: any[] = [{icon: 'fa-list', value: 'list'}, {icon: 'fa-calendar', value: 'calendar'}];
+  public views: any[] = [{ icon: 'fa-list', value: 'list' }, { icon: 'fa-calendar', value: 'calendar' }];
   public currentView = 'list';
 
   constructor(
     private headerFactory: TicketHeaderServiceFactory,
     private router: Router,
+    private activeRoute: ActivatedRoute,
     private attachedPartnerRepo: AttachedPartnerRepo) {
 
-    this.headerFactory.create()
-      .get()
-      .subscribe(x => {
-        this.tickets = x;
-      });
+    activeRoute.params.subscribe(params => {
+      if (params['partnerId']) {
+        this.headerFactory.createForPartner(params['partnerId'])
+          .get()
+          .subscribe(x => {
+            this.tickets = x;
+          });
+      } else {
+        this.headerFactory.create()
+          .get()
+          .subscribe(x => {
+            this.tickets = x;
+          });
+      }
+    });
 
     this.attachedPartnerRepo.get()
       .flatMap(x => x)
@@ -42,6 +53,6 @@ export class TicketsComponent {
   }
 
   public openTicket(ticket: any) {
-    this.router.navigate([`/edit/${ticket.id}`]);
+    this.router.navigate([`/edit/${ticket.id}/fields`]);
   }
 }

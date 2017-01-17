@@ -1,12 +1,13 @@
 <cx-form-dropdown-input 
   label="Korjaamo" 
   [items]="partners"
-  [(value)]="currentPartnerId">
+  [value]="currentPartnerId"
+  (valueChange)="currentPartnerUpdated($event)">
 </cx-form-dropdown-input>
 
 <h3>Auton tiedot</h3>
-<cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate"></cx-form-text-input>
-<cx-form-text-input label="VIN" [(text)]="ticket.vin"></cx-form-text-input>
+<cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate" format="uppercase"></cx-form-text-input>
+<cx-form-text-input label="VIN" [(text)]="ticket.vin" format="uppercase"></cx-form-text-input>
 <cx-form-text-input label="Merkki" [(text)]="ticket.brand"></cx-form-text-input>
 <cx-form-text-input label="Malli" [(text)]="ticket.model"></cx-form-text-input>
 <cx-form-text-input label="Värikoodi" [(text)]="ticket.colorCode"></cx-form-text-input>
@@ -56,3 +57,9 @@
 <cx-form-date-input label="Aloituspäivä" [(dateModel)]="ticket.workStartDate"></cx-form-date-input>
 <cx-form-date-input label="Valmistumispäivä" [(dateModel)]="ticket.workEndDate"></cx-form-date-input>
 <cx-form-date-input label="Luotu" [editAllowed]="false" [(dateModel)]="ticket.created"></cx-form-date-input>
+
+<cx-form-dropdown-input 
+  label="Valmis" 
+  [items]="readyTypes"
+  [(value)]="ticket.ready">
+</cx-form-dropdown-input>

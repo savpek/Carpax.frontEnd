@@ -16,7 +16,7 @@ const routes: any = [
         path: ':id',
         component: EditComponent,
         children: [
-            { path: '', component: EditFormComponent, canDeactivate: [CxCanDeactivate] },
+            { path: 'fields', component: EditFormComponent, canDeactivate: [CxCanDeactivate] },
             { path: 'files', component: FilesComponent },
             { path: 'feedback', component: FeedbackComponent },
             { path: 'expenses', component: ExpensesComponent }

@@ -1,15 +1,13 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { PartnerRepo } from '../../data/partnerRepo';
 import { CxModal } from '../../service/modal';
-import { CxCanDeactivate } from '../../service/cxCanDeactivate';
-
 
 @Component({
   selector: 'cx-ticket-fields',
   templateUrl: './ticket-fields.component.html',
   styleUrls: ['./ticket-fields.component.scss']
 })
-export class TicketFieldsComponent implements CxCanDeactivate {
+export class TicketFieldsComponent {
   @Input()
   public ticket: any = {};
 
@@ -29,6 +27,11 @@ export class TicketFieldsComponent implements CxCanDeactivate {
     { text: 'Lasivakuutus', value: 5 }
   ];
 
+  public readyTypes: any[] = [
+    { text: 'Kyllä', value: true },
+    { text: 'Ei', value: false }
+  ]
+
   public partners: any[] = [];
 
   @Input()
@@ -39,11 +42,14 @@ export class TicketFieldsComponent implements CxCanDeactivate {
 
   constructor(private partnerRepo: PartnerRepo, private modal: CxModal) {
     this.partnerRepo.Get().subscribe(
-      result => this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; }));
+      result => { 
+        this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; })
+        this.partners.unshift({text: 'Ei valintaa', value: undefined});
+  });
   }
 
-  canDeactivate() {
-    console.log('i am navigating away');
-    return window.confirm('Discard changes?');
+  public currentPartnerUpdated(partnerSelection: any) {
+    this.currentPartnerId = partnerSelection;
+    this.currentPartnerIdChange.emit(partnerSelection);
   }
 }

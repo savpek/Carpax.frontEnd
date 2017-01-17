@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { TicketsComponent } from './tickets/tickets.component';
 
-import { RouterModule }   from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CxFormModule } from './shared.cxform/cxform.module';
 import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
 import { NewFormComponent } from './new-form/new-form.component';
@@ -18,6 +18,11 @@ import { ModalModule } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { CxModal } from './service/modal';
+
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { LoadingBar } from './service/loadingBar';
+import { DataApiFactory } from './data/DataApi';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,11 +37,12 @@ import { CxModal } from './service/modal';
     CxFormModule,
     CxComponentModule,
     ModalModule.forRoot(),
+    SlimLoadingBarModule.forRoot(),
     BootstrapModalModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
       { path: 'tickets', component: TicketsComponent },
-      { path: 'tickets/:id', component: TicketsComponent },
+      { path: 'tickets/:partnerId', component: TicketsComponent },
       { path: 'new', component: NewFormComponent },
       {
         path: 'edit',
@@ -56,7 +62,7 @@ import { CxModal } from './service/modal';
       },
     ])
   ],
-  providers: [NotificationRepo, Auth, Modal, CxModal],
+  providers: [NotificationRepo, Auth, Modal, CxModal, LoadingBar, DataApiFactory],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

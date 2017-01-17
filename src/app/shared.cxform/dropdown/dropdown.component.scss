@@ -41,20 +41,22 @@ button.btn {
 }
 
 button.yellow {
-    background-color: $yellow;
-    border-color: $yellow;
+    border-right-width: 8px !important;
+    border-right-style: solid !important;
+    border-right-color: $yellow !important;
 }
 
 button.green {
-    background-color: $green;
-    border-color: $green;
+    border-right-width: 8px !important;
+    border-right-style: solid !important;
+    border-right-color: $green !important;
 }
 
 button.default {
 }
 
 .dirty {
-    border-width: 0 0 0 4px !important;
-    border-style: solid !important;
-    border-color: $yellow !important;
+    border-left-width: 4px !important;
+    border-left-style: solid !important;
+    border-left-color: $yellow !important;
 }

@@ -1,8 +1,6 @@
-import { RepoBase, IEntry } from './RepoBase';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { DataApiFactory, DataApi, IEntry } from './DataApi';
 
 export interface IAttachedPartner extends IEntry {
     partnerId: string;
@@ -10,17 +8,19 @@ export interface IAttachedPartner extends IEntry {
 }
 
 @Injectable()
-export class AttachedPartnerRepo extends RepoBase<IAttachedPartner> {
-    constructor(http: Http) {
-        super(http);
+export class AttachedPartnerRepo {
+    private api: DataApi<IAttachedPartner>;
+
+    constructor(apiFactory: DataApiFactory) {
+        this.api = apiFactory.create<IAttachedPartner>();
     }
 
     public get(): Observable<IAttachedPartner[]> {
-        return super.get(`attachedpartner/`);
+        return this.api.get(`attachedpartner/`);
     }
 
     public add(attachedPartner: IAttachedPartner) {
-        super.post(`attachedpartner/`, attachedPartner);
+        this.api.post(`attachedpartner/`, attachedPartner);
     }
 
     public delete(attachedPartner: IAttachedPartner) {

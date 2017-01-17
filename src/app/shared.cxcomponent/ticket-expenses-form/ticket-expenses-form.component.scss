@@ -33,7 +33,7 @@ cx-dropdown {
 }
 
 .dirty {
-    border-width: 0 0 0 4px !important;
-    border-style: solid !important;
-    border-color: $yellow !important;
+    border-left-width: 4px !important;
+    border-left-style: solid !important;
+    border-left-color: $yellow !important;
 }

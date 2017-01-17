@@ -1,7 +1,7 @@
-import { RepoBase } from './RepoBase';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
+import { DataApiFactory, DataApi } from './DataApi';
 
 export interface INotification {
     ticketId: string;
@@ -9,13 +9,15 @@ export interface INotification {
 }
 
 @Injectable()
-export class NotificationRepo extends RepoBase<INotification> {
-    constructor(http: Http) {
-        super(http);
+export class NotificationRepo {
+    private api: DataApi<INotification>;
+
+    constructor(apiFactory: DataApiFactory) {
+        this.api = apiFactory.create<INotification>();
     }
 
     public get(): Observable<INotification[]> {
-        return super.get(`notification/`);
+        return this.api.get(`notification/`);
     }
 
     public clear(notification: INotification) {

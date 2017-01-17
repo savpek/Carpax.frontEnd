@@ -30,7 +30,7 @@ export class EditFormComponent extends CanDeactivateForm {
     modal: CxModal) {
     super(form, modal);
 
-    this.activeRoute.params.subscribe(params => {
+    this.activeRoute.parent.params.subscribe(params => {
       let ticketId = params['id'];
 
       this.ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
@@ -54,6 +54,7 @@ export class EditFormComponent extends CanDeactivateForm {
       this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId)
     );
   }
+
 
   public save() {
     this.saveRoutine().subscribe(() => this.form.submitted());
