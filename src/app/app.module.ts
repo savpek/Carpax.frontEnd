@@ -50,6 +50,10 @@ import { CxModal } from './service/modal';
         path: 'partner',
         loadChildren: './+partner/partner.module#PartnerModule'
       },
+      {
+        path: 'auth',
+        loadChildren: './+auth/auth.module#AuthModule'
+      },
     ])
   ],
   providers: [NotificationRepo, Auth, Modal, CxModal],

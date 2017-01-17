@@ -1,0 +1,10 @@
+div.login {
+    margin:auto;
+    width: 50%;
+    clear: both;
+    padding: 30px;
+
+    @media (max-width: 500px) {
+        width: 100% !important
+    }
+}

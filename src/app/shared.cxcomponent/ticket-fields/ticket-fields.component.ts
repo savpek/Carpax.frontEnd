@@ -1,9 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { PartnerRepo } from '../../data/partnerRepo';
-import { CanDeactivate } from '@angular/router';
 import { CxModal } from '../../service/modal';
-import { Observable } from 'rxjs';
-import { CanDeactivateFormGuard } from '../../service/canDeactivateFormGuard';
+import { CxCanDeactivate } from '../../service/cxCanDeactivate';
 
 
 @Component({
@@ -11,7 +9,7 @@ import { CanDeactivateFormGuard } from '../../service/canDeactivateFormGuard';
   templateUrl: './ticket-fields.component.html',
   styleUrls: ['./ticket-fields.component.scss']
 })
-export class TicketFieldsComponent implements CanDeactivateFormGuard {
+export class TicketFieldsComponent implements CxCanDeactivate {
   @Input()
   public ticket: any = {};
 
