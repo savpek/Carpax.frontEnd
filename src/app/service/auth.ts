@@ -16,6 +16,12 @@ export class Auth {
 
     constructor(private http: Http) {}
 
+    public login(userName: string, password: string) {
+    }
+
+    public passwordReset() {
+    }
+
     public getCurrent(): Observable<ICurrentUser> {
         this.http.get(`${environment.apiBase}/currentuser/`)
             .subscribe(response => {

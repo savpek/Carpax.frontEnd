@@ -17,11 +17,11 @@ export class NavigationComponent {
     id: "1234"
   }
 
-  public isPartnerPage() : boolean {
+  public isPartnerPage(): boolean {
     return false;
   }
 
-  constructor(auth: Auth) { 
+  constructor(auth: Auth) {
     auth.getCurrent().subscribe(x => this.user = {
       name: x.userName,
       customerName: x.customerName

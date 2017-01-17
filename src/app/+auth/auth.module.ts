@@ -8,7 +8,8 @@ import { LoginComponent } from './login/login.component';
 
 const routes: any = [
     {
-
+        path: 'login',
+        component: LoginComponent,
     }
 ];
 
