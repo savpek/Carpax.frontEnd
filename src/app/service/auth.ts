@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { Observable, Subject} from 'rxjs';
+import { Http } from '@angular/http';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
@@ -11,9 +11,14 @@ export interface ICurrentUser {
 
 @Injectable()
 export class Auth {
-    private currentUserSubject: Subject<ICurrentUser> = new Subject<ICurrentUser>();
-    private currentUser: ICurrentUser;
-    private jwt: any;
+    private currentUserSubject: BehaviorSubject<ICurrentUser> =
+        new BehaviorSubject<ICurrentUser>({
+            userName: '',
+            customerName: ''
+        });
+
+    private jwt: string;
+    private expires: number;
 
     constructor(private http: Http) {}
 
@@ -22,29 +27,36 @@ export class Auth {
             userName: userName,
             password: password
         }).subscribe(
-            x => this.jwt = x.json(),
+            response => {
+                let asObject = response.json();
+                this.jwt = asObject.access_token;
+                this.expires = asObject.expires;
+
+                this.currentUserSubject.next({
+                    userName: asObject.userName,
+                    customerName: asObject.customerName,
+                });
+            },
             error => {
+                this.currentUserSubject.next({
+                    userName: '',
+                    customerName: ''
+                });
                 console.error('Login failed', error);
         });
     }
 
-    public accessToken() {
+    public getAccessToken() {
         if (this.jwt) {
             return this.jwt;
         }
-        return {};
+        return '';
+    }
+
+    public getCurrentUser(): Observable<ICurrentUser> {
+        return this.currentUserSubject;
     }
 
     public passwordReset() {
-    }
-
-    public getCurrent(): Observable<ICurrentUser> {
-        this.http.get(`${environment.apiBase}/currentuser/`)
-            .subscribe(response => {
-                this.currentUser = <ICurrentUser>response.json();
-                this.currentUserSubject.next(this.currentUser);
-            });
-
-        return this.currentUserSubject;
     }
 }

@@ -22,7 +22,7 @@ export class NavigationComponent {
   }
 
   constructor(auth: Auth) {
-    auth.getCurrent().subscribe(x => this.user = {
+    auth.getCurrentUser().subscribe(x => this.user = {
       name: x.userName,
       customerName: x.customerName
     });
