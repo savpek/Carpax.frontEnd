@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+import { DataApi, DataApiFactory } from './DataApi';
 
 export interface IUser {
     userName: string;
@@ -11,39 +12,20 @@ export interface IUser {
 
 @Injectable()
 export class UserRepo {
-    private subject: BehaviorSubject<IUser[]> = new BehaviorSubject([]);
-    private current: IUser[] = [];
+    private api: DataApi<IUser>;
 
-    constructor(private http: Http) {}
-
+    constructor(apiFactory: DataApiFactory) {
+        this.api = apiFactory.create<IUser>();
+    }
     public Get(): Observable<IUser[]> {
-        this.http.get(`${environment.apiBase}/user/`)
-            .map(response => response.json())
-            .subscribe(x => {
-                this.current = x;
-                this.subject.next(this.current.slice());
-            });
-
-        return this.subject;
+        return this.api.get('user/');
     }
 
     public Add(user: IUser) {
-        this.http.post(`${environment.apiBase}/user/`, user)
-            .map(response => response.json())
-            .subscribe(result => {
-                if (result.isSuccess === true) {
-                    this.current.push(result.result);
-                    this.subject.next(this.current.slice());
-                }
-            });
+        this.api.post('user', user);
     }
 
     public Delete(user: IUser) {
-        this.http.delete(`${environment.apiBase}/user/${user.userName}`)
-            .map(response => response.json())
-            .subscribe(result => {
-                this.current = this.current.filter(c => c !== user);
-                this.subject.next(this.current.slice());
-            });
+        this.api.delete(`user/${user.userName}`, x => x.userName);
     }
 }

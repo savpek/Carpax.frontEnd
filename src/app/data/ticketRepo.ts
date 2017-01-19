@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+import { DataApiFactory, DataApi } from './DataApi';
 
 export interface ITicket {
     id: string;
@@ -10,23 +11,25 @@ export interface ITicket {
 
 @Injectable()
 export class TicketRepo {
-    constructor(private http: Http) {}
+    private api: DataApi<ITicket>;
+
+    constructor(apiFactory: DataApiFactory) {
+        this.api = apiFactory.create<ITicket>();
+    }
 
     public Get(id: string): Observable<ITicket> {
-        return this.http.get(`${environment.apiBase}/ticket/${id}`)
-            .map(response => response.json());
+        return this.api.getSingle(`ticket/${id}`);
     }
 
     public Add(ticket: ITicket) {
+        return this.api.post(`ticket/${ticket.id}`, ticket);
     }
 
     public Update(ticket: ITicket) {
-        return this.http.post(`${environment.apiBase}/ticket/${ticket.id}`, ticket)
-            .map(response => response.json());
+        return this.api.post(`ticket/${ticket.id}`, ticket);
     }
 
     public Delete(ticket: ITicket) {
-        return this.http.delete(`${environment.apiBase}/ticket/${ticket.id}`)
-            .map(response => response.json());
+        this.api.delete(`ticket/${ticket.id}`);
     }
 }

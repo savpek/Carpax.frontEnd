@@ -30,9 +30,9 @@ export class DataApi<T> {
         return new Headers({ 'Authorization': 'Bearer ' + this.auth.getAccessToken() });
     }
 
-    public get(api: string): Observable<T[]> {
+    public get(resource: string): Observable<T[]> {
         if (this.current.length === 0) {
-            this.http.get(`${environment.apiBase}/${api}`, { headers: this.getHeader() })
+            this.http.get(`${environment.apiBase}/${resource}`, { headers: this.getHeader() })
                 .do(_ => this.loadingBar.operationStarted())
                 .map(response => response.json())
                 .subscribe(result => {
@@ -45,11 +45,37 @@ export class DataApi<T> {
         return this.subject;
     }
 
-    public post(api: string, data: any): void {
-        this.http.post(`${environment.apiBase}/${api}`, data, { headers: this.getHeader() })
+    public getSingle(resource: string): Observable<T> {
+        return this.http.get(`${environment.apiBase}/${resource}`, { headers: this.getHeader() })
+            .map(response => response.json());
+    }
+
+    public post(resource: string, data: any): void {
+        this.http.post(`${environment.apiBase}/${resource}`, data, { headers: this.getHeader() })
+            .do(_ => this.loadingBar.operationStarted())
             .map(response => response.json())
             .subscribe(result => {
-                this.current.push(result);
+                if (result.isSuccess === undefined) {
+                    this.current.push(result);
+                } else if(result.isSuccess === true) {
+                    this.current.push(result.value);
+                } else {
+                    console.log('Todo: error popup', result.error);
+                }
+
+                this.loadingBar.operationStopped();
+                this.subject.next(this.current.slice());
+            });
+    }
+
+    public delete(resource: string, idSelector: (x: T) => any): void {
+        this.http.delete(`${environment.apiBase}/${resource}`, { headers: this.getHeader() })
+            .do(_ => this.loadingBar.operationStarted())
+            .map(response => response.json())
+            .subscribe(result => {
+                this.loadingBar.operationStopped();
+
+                this.current = this.current.filter(c => idSelector(c) !== idSelector(result));
                 this.subject.next(this.current.slice());
             });
     }
