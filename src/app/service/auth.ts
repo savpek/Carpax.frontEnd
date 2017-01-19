@@ -13,10 +13,26 @@ export interface ICurrentUser {
 export class Auth {
     private currentUserSubject: Subject<ICurrentUser> = new Subject<ICurrentUser>();
     private currentUser: ICurrentUser;
+    private jwt: any;
 
     constructor(private http: Http) {}
 
     public login(userName: string, password: string) {
+        this.http.post(`${environment.authBase}/user/token/`, {
+            userName: userName,
+            password: password
+        }).subscribe(
+            x => this.jwt = x.json(),
+            error => {
+                console.error('Login failed', error);
+        });
+    }
+
+    public accessToken() {
+        if (this.jwt) {
+            return this.jwt;
+        }
+        return {};
     }
 
     public passwordReset() {
