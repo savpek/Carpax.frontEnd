@@ -7,7 +7,6 @@ import { Auth } from '../service/auth';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-
   public user: any = {
     name: '-',
     customerName: '-'
@@ -21,7 +20,11 @@ export class NavigationComponent {
     return false;
   }
 
-  constructor(auth: Auth) {
+  public isVisible(): boolean {
+    return this.auth.isCurrentlyLogin();
+  }
+
+  constructor(private auth: Auth) {
     auth.getCurrentUser().subscribe(x => this.user = {
       name: x.userName,
       customerName: x.customerName

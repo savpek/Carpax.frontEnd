@@ -22,6 +22,7 @@ import { CxModal } from './service/modal';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { LoadingBar } from './service/loadingBar';
 import { DataApiFactory } from './data/DataApi';
+import { RequiresLoginGuard } from './service/RequiresLoginGuard';
 
 @NgModule({
   declarations: [
@@ -41,20 +42,23 @@ import { DataApiFactory } from './data/DataApi';
     BootstrapModalModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
-      { path: 'tickets', component: TicketsComponent },
-      { path: 'tickets/:partnerId', component: TicketsComponent },
-      { path: 'new', component: NewFormComponent },
+      { path: 'tickets', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
+      { path: 'tickets/:partnerId', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
+      { path: 'new', component: NewFormComponent, canActivate: [RequiresLoginGuard] },
       {
         path: 'edit',
-        loadChildren: './+edit/edit.module#EditModule'
+        loadChildren: './+edit/edit.module#EditModule',
+        canActivate: [RequiresLoginGuard]
       },
       {
         path: 'controlpanel',
-        loadChildren: './+control-panel/controlpanel.module#ControlPanelModule'
+        loadChildren: './+control-panel/controlpanel.module#ControlPanelModule',
+        canActivate: [RequiresLoginGuard]
       },
       {
         path: 'partner',
-        loadChildren: './+partner/partner.module#PartnerModule'
+        loadChildren: './+partner/partner.module#PartnerModule',
+        canActivate: [RequiresLoginGuard]
       },
       {
         path: 'auth',
@@ -62,7 +66,7 @@ import { DataApiFactory } from './data/DataApi';
       },
     ])
   ],
-  providers: [NotificationRepo, Auth, Modal, CxModal, LoadingBar, DataApiFactory],
+  providers: [NotificationRepo, Auth, Modal, CxModal, LoadingBar, DataApiFactory, RequiresLoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

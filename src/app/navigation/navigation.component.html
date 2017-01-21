@@ -1,4 +1,4 @@
-<div ng-controller="naviCtrl">
+<div *ngIf="isVisible()">
   <nav class="navbar navbar-inverse" role="navigation" ng-show="settings.naviVisible">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -19,7 +19,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a class="" href="/logout/">
+            <a class="" routerLink="/auth/logout">
               <div class="navigation-current-user">
                 {{user.name}} <br> {{user.customerName}}
               </div>

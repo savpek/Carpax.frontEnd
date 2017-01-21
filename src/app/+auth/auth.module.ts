@@ -10,6 +10,10 @@ const routes: any = [
     {
         path: 'login',
         component: LoginComponent,
+    },
+    {
+        path: 'logout',
+        component: LoginComponent
     }
 ];
 
