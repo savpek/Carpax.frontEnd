@@ -23,6 +23,7 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { LoadingBar } from './service/loadingBar';
 import { DataApiFactory } from './data/DataApi';
 import { RequiresLoginGuard } from './service/RequiresLoginGuard';
+import { LocalStorage } from './service/localStorage';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { RequiresLoginGuard } from './service/RequiresLoginGuard';
       },
     ])
   ],
-  providers: [NotificationRepo, Auth, Modal, CxModal, LoadingBar, DataApiFactory, RequiresLoginGuard],
+  providers: [NotificationRepo, Auth, Modal, CxModal, LoadingBar, DataApiFactory, RequiresLoginGuard, LocalStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 import * as moment from 'moment';
-import { TicketState } from './ticketHeaderService';
+import { LocalStorage } from './localStorage';
 
 export interface ICurrentUser {
     userName: string;
@@ -23,7 +23,15 @@ export class Auth {
     private jwt: string;
     private expires: any;
 
-    constructor(private http: Http) {}
+    constructor(private http: Http, private storage: LocalStorage) {
+        let current = storage.get('user');
+
+        if (current) {
+            this.jwt = current.jwt;
+            this.expires = moment(current.expires);
+            this.currentUserSubject.next(current.user);
+        }
+    }
 
     public login(userName: string, password: string): Observable<ICurrentUser> {
         this.http.post(`${environment.authBase}/user/token/`, {
@@ -35,9 +43,17 @@ export class Auth {
                 this.jwt = asObject.access_token;
                 this.expires = moment().add(asObject.expires_in, 'seconds');
 
-                this.currentUserSubject.next({
+                let user = {
                     userName: asObject.userName,
                     customerName: asObject.customerName,
+                };
+
+                this.currentUserSubject.next(user);
+
+                this.storage.set('user', {
+                    user: user,
+                    expires: this.expires,
+                    jwt: this.jwt
                 });
             },
             error => {
