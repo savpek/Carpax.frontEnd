@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { environment } from '../../environments/environment';
+import { DataApiFactory, DataApi } from './DataApi';
 
 export interface IPart {
     id: string;
@@ -22,45 +21,26 @@ export interface IPartRepo {
 }
 
 class PartRepo implements IPartRepo {
-    private current: IPart[] = [];
-    private subject: BehaviorSubject<IPart[]> = new BehaviorSubject([]);
-
-    constructor(private http: Http, private ticketId: string) {}
+    constructor(private api: DataApi<IPart>, private ticketId: string) {}
 
     public Get(): Observable<IPart[]> {
-        this.http.get(`${environment.apiBase}/part/${this.ticketId}`)
-            .map(response => response.json())
-            .subscribe(result => {
-                this.current = result;
-                this.subject.next(this.current.slice());
-            });
-
-        return this.subject;
+        return this.api.get(`part/${this.ticketId}`);
     }
 
     public AddOrUpdate(work: IPart[]) {
-        this.http.post(`${environment.apiBase}/part/${this.ticketId}`, work)
-            .map(response => response.json())
-            .subscribe(result => {
-                this.current = result;
-                this.subject.next(this.current.slice());
-            });
+        this.api.post(`part/${this.ticketId}`, work);
     }
 
     public Delete(work: IPart[]) {
-        work.forEach(workRow => this.http.delete(`${environment.apiBase}/part/${this.ticketId}/${workRow.id}`)
-            .subscribe(result => {
-                this.current = this.current.filter(x => x.id !== workRow.id);
-                this.subject.next(this.current.slice());
-            }));
+        work.forEach(workRow => this.api.delete(`part/${this.ticketId}/${workRow.id}`, x => x.id));
     }
 }
 
 @Injectable()
 export class PartRepoFactory {
-    constructor(private http: Http) {}
+    constructor(private apiFactory: DataApiFactory) {}
 
     public Create(ticketId: string): IPartRepo {
-        return new PartRepo(this.http, ticketId);
+        return new PartRepo(this.apiFactory.create<IPart>(), ticketId);
     }
 }
