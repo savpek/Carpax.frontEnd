@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { environment } from '../../environments/environment';
 import { DataApiFactory, DataApi } from './DataApi';
 
 export interface ITicket {
@@ -30,6 +28,6 @@ export class TicketRepo {
     }
 
     public Delete(ticket: ITicket) {
-        this.api.delete(`ticket/${ticket.id}`);
+        this.api.delete(`ticket/${ticket.id}`, x => x.id);
     }
 }

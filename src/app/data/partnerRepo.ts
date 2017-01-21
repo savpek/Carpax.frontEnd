@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-
-import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { DataApi, DataApiFactory } from './DataApi';
 
 export interface IPartner {
     id: string;
@@ -19,49 +17,31 @@ export interface IPartnerMap {
 
 @Injectable()
 export class PartnerRepo {
-    private subject: BehaviorSubject<IPartner[]> = new BehaviorSubject([]);
-    private current: IPartner[] = [];
+    private api: DataApi<IPartner>;
+    private mapApi: DataApi<IPartnerMap>;
 
-    constructor(private http: Http) {}
+    constructor(apiFactory: DataApiFactory) {
+        this.api = apiFactory.create<IPartner>();
+        this.mapApi = apiFactory.create<IPartnerMap>();
+    }
 
     public Get(): Observable<IPartner[]> {
-        this.http.get(`${environment.apiBase}/partner/`)
-            .map(response => <IPartner[]>response.json())
-            .subscribe(x => {
-                this.current = x;
-                this.subject.next(x.slice());
-            });
-
-        return this.subject;
+        return this.api.get('partner/');
     }
 
     public GetCurrentForTicket(ticketId: string): Observable<IPartnerMap[]> {
-        return this.http.get(`${environment.apiBase}/partnerforticket/${ticketId}`)
-            .map(response => <IPartnerMap[]>response.json());
+        return this.mapApi.get(`partnerforticket/${ticketId}`);
     }
 
     public UpdateCurrentForTicket(ticketId: string, partnerId: string) {
-        return this.http.post(`${environment.apiBase}/partnerforticket/`, {
-            ticketId: ticketId, partnerId: partnerId
-        }).map(
-            response => <IPartnerMap[]>response.json());
+        this.mapApi.post('partnerforticket/', { ticketId: ticketId, partnerId: partnerId });
     }
 
     public Add(partner: IPartner) {
-        this.http.post(`${environment.apiBase}/partner/`, partner)
-            .map(response => <IPartner>response.json())
-            .subscribe(x => {
-                this.current.push(x);
-                this.subject.next(this.current.slice());
-            })
+        this.api.post('partner/', partner);
     }
 
     public Delete(partner: IPartner) {
-        this.http.delete(`${environment.apiBase}/partner/${partner.id}`)
-            .map(response => response.json())
-            .subscribe(result => {
-                this.current = this.current.filter(c => c !== partner);
-                this.subject.next(this.current.slice());
-            });
+        this.api.delete(`partner/${partner.id}`, x => x.id);
     }
 }

@@ -1,5 +1,4 @@
 import { Http, Headers } from '@angular/http';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
@@ -75,7 +74,13 @@ export class DataApi<T> {
             .subscribe(result => {
                 this.loadingBar.operationStopped();
 
-                this.current = this.current.filter(c => idSelector(c) !== idSelector(result));
+                // Maybe is serialized as array, this isn't bood implementation, requires custom
+                // serialization.
+                if (result.length && result[0]) {
+                    this.current = this.current.filter(c => idSelector(c) !== idSelector(result[0]));
+                } else {
+                    this.current = this.current.filter(c => idSelector(c) !== idSelector(result));
+                }
                 this.subject.next(this.current.slice());
             });
     }
