@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DataApiFactory, DataApi, IEntry } from './DataApi';
 
 export interface IAttachedPartner extends IEntry {

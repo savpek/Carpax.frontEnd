@@ -29,6 +29,10 @@ export class PartnerRepo {
         return this.api.get('partner/');
     }
 
+    public GetById(id: string): Observable<IPartner> {
+        return this.api.getSingle(`partner/${id}`);
+    }
+
     public GetCurrentForTicket(ticketId: string): Observable<IPartnerMap[]> {
         return this.mapApi.get(`partnerforticket/${ticketId}`);
     }

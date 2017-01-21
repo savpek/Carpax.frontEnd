@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { LoadingBar } from '../service/loadingBar';
 import { Auth } from '../service/auth';
+
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 export interface IEntry {
@@ -13,10 +14,10 @@ export interface IEntry {
 
 @Injectable()
 export class DataApiFactory {
-    constructor(private http: Http, private loadingBar: LoadingBar, private auth: Auth) {}
+    constructor(private http: Http, private loadingBar: LoadingBar, private auth: Auth, private toast: ToastsManager) {}
 
     public create<T>(): DataApi<T> {
-        return new DataApi<T>(this.http, this.loadingBar, this.auth);
+        return new DataApi<T>(this.http, this.loadingBar, this.auth, this.toast);
     }
 }
 

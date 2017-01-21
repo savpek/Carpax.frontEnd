@@ -1,0 +1,12 @@
+<div class="login">
+    <h1>Kirjaudu sisään</h1>
+    <h2 class="partnerNameLogin"><i class="fa fa-arrow-circle-right"></i> {{name}}</h2>
+    <form class="form-horizontal" role="form" name="partnerLoginForm">
+        <div>
+            <input type="password" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="pin" maxlength="4" placeholder="PIN">
+        </div>
+        <div>
+            <button class="btn btn-default" (click)="login()"><i class="fa fa-user fa-lg"></i> Kirjaudu</button>
+        </div>
+    </form>
+</div>

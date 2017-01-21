@@ -20,6 +20,6 @@ export class LoginComponent {
   }
 
   public requestReset() {
-    this.toast.info("abcjormavittu");
+    this.toast.info("TODO");
   }
 }
