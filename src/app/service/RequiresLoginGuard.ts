@@ -7,7 +7,7 @@ export class RequiresLoginGuard implements CanActivate {
   constructor(private authService: Auth, private router: Router) {}
 
   canActivate() {
-    if (!this.authService.isCurrentlyLogin()) {
+    if (!this.authService.isLoggedIn()) {
         this.router.navigate(['/auth/login']);
         return false;
     }

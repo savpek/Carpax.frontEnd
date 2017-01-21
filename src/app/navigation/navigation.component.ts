@@ -21,12 +21,12 @@ export class NavigationComponent {
   }
 
   public isVisible(): boolean {
-    return this.auth.isCurrentlyLogin();
+    return this.auth.isLoggedIn();
   }
 
   constructor(private auth: Auth) {
     auth.getCurrentUser().subscribe(x => this.user = {
-      name: x.userName,
+      name: x.name,
       customerName: x.customerName
     });
   }
