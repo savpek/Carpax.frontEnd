@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '../../service/auth';
 import { Router } from '@angular/router';
-
+    import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
   selector: 'cx-login',
   templateUrl: './login.component.html',
@@ -11,7 +11,7 @@ export class LoginComponent {
   public userName: string;
   public password: string;
 
-  constructor(private auth: Auth, private router: Router) {
+  constructor(private auth: Auth, private router: Router, private toast: ToastsManager) {
     auth.logOut();
   }
 
@@ -19,6 +19,7 @@ export class LoginComponent {
     this.auth.login(this.userName, this.password).subscribe(x => this.router.navigate(['/tickets']));
   }
 
-  public resetPassword() {
+  public requestReset() {
+    this.toast.info("abcjormavittu");
   }
 }

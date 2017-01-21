@@ -22,7 +22,8 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/fullcalendar/dist/fullcalendar.min.css",
-        "../node_modules/ng2-slim-loading-bar/bundles/style.css"
+        "../node_modules/ng2-slim-loading-bar/bundles/style.css",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

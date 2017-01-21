@@ -1,6 +1,7 @@
 import { Component, ViewContainerRef  } from '@angular/core';
 
 import { Overlay } from 'angular2-modal';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,9 @@ import { Overlay } from 'angular2-modal';
   providers: []
 })
 export class AppComponent {
-    constructor(overlay: Overlay, vcRef: ViewContainerRef) {
+    constructor(overlay: Overlay, vcRef: ViewContainerRef, private toastr: ToastsManager) {
     overlay.defaultViewContainer = vcRef;
+    this.toastr.setRootViewContainerRef(vcRef);
   }
 }
 

@@ -28,6 +28,6 @@ export class TicketRepo {
     }
 
     public Delete(ticket: ITicket) {
-        this.api.delete(`ticket/${ticket.id}`, x => x.id);
+        return this.api.delete(`ticket/${ticket.id}`, x => x.id);
     }
 }

@@ -34,7 +34,7 @@ export class PartnerRepo {
     }
 
     public UpdateCurrentForTicket(ticketId: string, partnerId: string) {
-        this.mapApi.post('partnerforticket/', { ticketId: ticketId, partnerId: partnerId });
+        return this.mapApi.post('partnerforticket/', { ticketId: ticketId, partnerId: partnerId });
     }
 
     public Add(partner: IPartner) {

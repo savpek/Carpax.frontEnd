@@ -15,11 +15,11 @@ export class LoadingBar {
     public operationStopped() {
         this.operationCounter--;
 
-        if(this.operationCounter < 0) {
+        if (this.operationCounter < 0) {
             this.operationCounter = 0;
         }
 
-        if(this.operationCounter <= 0) {
+        if (this.operationCounter <= 0) {
             this.slimBar.complete();
         }
     }

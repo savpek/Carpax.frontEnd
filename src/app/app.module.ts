@@ -24,6 +24,7 @@ import { LoadingBar } from './service/loadingBar';
 import { DataApiFactory } from './data/DataApi';
 import { RequiresLoginGuard } from './service/RequiresLoginGuard';
 import { LocalStorage } from './service/localStorage';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LocalStorage } from './service/localStorage';
     HttpModule,
     CxFormModule,
     CxComponentModule,
+    ToastModule,
     ModalModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
     BootstrapModalModule,
