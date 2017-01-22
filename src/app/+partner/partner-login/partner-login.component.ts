@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { PartnerRepo } from '../../data/partnerRepo';
-import { Auth } from '../../service/auth';
+import { PartnerRepo } from 'app/data/partnerRepo';
+import { Auth } from 'app/service/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -32,7 +32,7 @@ export class PartnerLoginComponent {
 
   public login() {
     this.auth.loginPartner(this.id, this.pin)
-      .subscribe(x => this.router.navigate(['/partner', this.id]),
+      .subscribe(x => this.router.navigate(['/partner', this.id, 'tickets']),
         error => this.toast.error('Kirjautuminen epäonnistui. Varmistathan että PIN on oikein.'));
   }
 }

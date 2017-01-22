@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ITicketHeader, TicketHeaderRepoFactory } from '../../data/ticketHeaderRepo';
+import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
 
 @Component({
   template: '<cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>',

@@ -6,10 +6,10 @@ import { EditComponent } from './edit.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
 import { FilesComponent } from './files.component';
 import { FeedbackComponent } from './feedback.component';
-import { CxFormModule } from '../shared.cxform/cxform.module';
-import { CxComponentModule } from '../shared.cxcomponent/cxcomponent.module';
+import { CxFormModule } from 'app/shared.cxform/cxform.module';
+import { CxComponentModule } from 'app/shared.cxcomponent/cxcomponent.module';
+import { CxCanDeactivate } from 'app/service/cxCanDeactivate';
 import { ExpensesComponent } from './expenses.component';
-import { CxCanDeactivate } from '../service/cxCanDeactivate';
 
 const routes: any = [
     {

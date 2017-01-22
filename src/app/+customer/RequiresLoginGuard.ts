@@ -8,7 +8,7 @@ export class RequiresLoginGuard implements CanActivate {
 
   canActivate() {
     if (!this.authService.isLoggedIn('user')) {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/customer/login']);
         return false;
     }
     return true;

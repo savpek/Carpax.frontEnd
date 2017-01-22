@@ -18,9 +18,10 @@ export class LoginComponent {
   public login() {
     this.auth.login(this.userName, this.password)
       .subscribe(
-        x => this.router.navigate(['/tickets']),
+        x => this.router.navigate(['/customer/tickets']),
         error => this.toast.error('Kirjautuminen epäonnistui, tarkistathan että käyttäjätunnus ja salasana ovat oikein'));
   }
+
 
   public requestReset() {
     this.auth.passwordReset(this.userName)

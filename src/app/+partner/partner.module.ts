@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CxFormModule } from '../shared.cxform/cxform.module';
-import { CxComponentModule } from '../shared.cxcomponent/cxcomponent.module';
+import { CxFormModule } from 'app/shared.cxform/cxform.module';
+import { CxComponentModule } from 'app/shared.cxcomponent/cxcomponent.module';
 import { PartnerTicketsComponent } from './partner-tickets/partner-tickets.component';
 import { PartnerTicketFieldsComponent } from './partner-ticket-fields/partner-ticket-fields.component';
 import { PartnerTicketComponent } from './partner-ticket.component';
@@ -12,29 +12,35 @@ import { PartnerTicketExpensesComponent } from './partner-ticket-expenses/partne
 import { PartnerTicketFilesComponent } from './partner-files/partner-ticket-files.component';
 import { RequiresPartnerLoginGuard } from './RequiresPartnerLoginGuard';
 import { PartnerLoginComponent } from './partner-login/partner-login.component';
+import { PartnerRootComponent } from './partner-root.component';
+import { PartnerNavigationComponent } from './partner-navigation/partnerNavigation.component';
 
 const routes: any = [
     {
         path: ':id',
-        component: PartnerTicketsComponent,
-        canActivate: [RequiresPartnerLoginGuard]
-    },
-    {
-        path: ':id/edit/:ticketId',
-        component: PartnerTicketComponent,
+        component: PartnerRootComponent,
+        canActivate: [RequiresPartnerLoginGuard],
         children: [
-            { path: '', component: PartnerTicketFieldsComponent },
-            { path: 'feedback', component: PartnerTicketFeedbackComponent },
-            { path: 'expenses', component: PartnerTicketExpensesComponent },
-            { path: 'files', component: PartnerTicketFilesComponent },
+            {
+                path: 'tickets',
+                component: PartnerTicketsComponent,
+                canActivate: [RequiresPartnerLoginGuard]
+            },
+            {
+                path: 'edit/:ticketId',
+                component: PartnerTicketComponent,
+                children: [
+                    { path: '', component: PartnerTicketFieldsComponent },
+                    { path: 'feedback', component: PartnerTicketFeedbackComponent },
+                    { path: 'expenses', component: PartnerTicketExpensesComponent },
+                    { path: 'files', component: PartnerTicketFilesComponent },
+                ],
+                canActivate: [RequiresPartnerLoginGuard]
+            },
         ]
     },
     {
         path: ':id/login',
-        component: PartnerLoginComponent,
-    },
-    {
-        path: ':id/logout',
         component: PartnerLoginComponent,
     }
 ];
@@ -54,7 +60,8 @@ const routes: any = [
         PartnerTicketExpensesComponent,
         PartnerTicketFilesComponent,
         PartnerLoginComponent,
-        PartnerLoginComponent
+        PartnerRootComponent,
+        PartnerNavigationComponent
     ],
     exports: [
     ],

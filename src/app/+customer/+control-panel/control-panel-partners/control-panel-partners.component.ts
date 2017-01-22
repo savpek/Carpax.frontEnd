@@ -29,7 +29,7 @@ export class ControlPanelPartnersComponent {
   }
 
   public buildUri(partner: IPartner) {
-    return `${environment.base}/partner/${partner.id}`;
+    return `${environment.base}/partner/${partner.id}/tickets`;
   }
 
   public save() {

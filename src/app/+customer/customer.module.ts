@@ -9,22 +9,29 @@ import { NewFormComponent } from './new-form/new-form.component';
 import { RequiresLoginGuard } from './RequiresLoginGuard';
 import { TicketsComponent } from './tickets/tickets.component';
 import { CustomerRootComponent } from './customer-root.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: any = [
     {
         path: '',
         component: CustomerRootComponent,
         children: [
-            { path: 'new', component: NewFormComponent },
-            { path: 'tickets', component: TicketsComponent },
-            { path: 'tickets/:partnerId', component: TicketsComponent },
+            { path: 'new', component: NewFormComponent, canActivate: [RequiresLoginGuard] },
+            { path: 'tickets', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
+            { path: 'tickets/:partnerId', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
             {
                 path: 'controlpanel',
-                loadChildren: 'app/+customer/+control-panel/controlpanel.module#ControlPanelModule'
+                loadChildren: 'app/+customer/+control-panel/controlpanel.module#ControlPanelModule',
+                canActivate: [RequiresLoginGuard]
+            },
+            {
+                path: 'edit',
+                loadChildren: './+edit/edit.module#EditModule',
+                canActivate: [RequiresLoginGuard]
             },
         ],
-        canActivate: [RequiresLoginGuard]
     },
+    { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -38,7 +45,8 @@ const routes: any = [
         CustomerRootComponent,
         CustomerNavigationComponent,
         NewFormComponent,
-        TicketsComponent],
+        TicketsComponent,
+        LoginComponent],
     exports: [
     ],
     providers: [RequiresLoginGuard]

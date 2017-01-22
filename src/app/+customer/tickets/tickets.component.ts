@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { AttachedPartnerRepo } from '../../data/attachedPartnerRepo';
-import { ITabRoute } from '../../shared.cxcomponent/cxcomponent.module';
-import { ITicketHeader, TicketHeaderRepoFactory } from '../../data/ticketHeaderRepo';
-import { TicketHeaderServiceFactory } from '../../service/ticketHeaderService';
+import { AttachedPartnerRepo } from 'app/data/attachedPartnerRepo';
+import { ITabRoute } from 'app/shared.cxcomponent/cxcomponent.module';
+import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
+import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
 
 @Component({
   selector: 'cx-tickets',
@@ -47,12 +47,12 @@ export class TicketsComponent {
     this.attachedPartnerRepo.get()
       .flatMap(x => x)
       .subscribe(attachedPartner => this.tabs.push({
-        path: `/tickets/${attachedPartner.partnerId}`,
+        path: `customer/tickets/${attachedPartner.partnerId}/`,
         text: attachedPartner.description
       }));
   }
 
   public openTicket(ticket: any) {
-    this.router.navigate([`/edit/${ticket.id}/fields`]);
+    this.router.navigate([`customer/edit/${ticket.id}/fields`]);
   }
 }

@@ -1,8 +1,8 @@
 import { Component, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TicketRepo } from '../../data/ticketRepo';
-import { FormContext } from '../../shared.cxform/formContext';
-import { PartnerRepo } from '../../data/partnerRepo';
+import { TicketRepo } from 'app/data/ticketRepo';
+import { FormContext } from 'app/shared.cxform/formContext';
+import { PartnerRepo } from 'app/data/partnerRepo';
 
 @Component({
   selector: 'cx-partner-ticket-fields',

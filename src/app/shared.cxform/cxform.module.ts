@@ -10,7 +10,7 @@ import { FormDropdownInputComponent } from './form-dropdown-input/form-dropdown-
 import { FormTextInputComponent } from './form-text-input/form-text-input.component';
 import { FormTextInputSmallComponent } from './form-text-input-small/form-text-input-small.component';
 import { FormTextAreaInputComponent } from './form-text-area-input/form-text-area-input.component';
-import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { DatepickerModule } from 'ng2-bootstrap';
 
 @NgModule({
   imports: [CommonModule, FormsModule, DatepickerModule],

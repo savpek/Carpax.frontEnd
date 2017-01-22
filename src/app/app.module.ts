@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
 
 import { RouterModule } from '@angular/router';
 import { CxFormModule } from './shared.cxform/cxform.module';
@@ -26,8 +25,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavigationComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -40,13 +38,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     SlimLoadingBarModule.forRoot(),
     BootstrapModalModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/tickets', pathMatch: 'full' },
-      {
-        path: 'edit',
-        loadChildren: './+edit/edit.module#EditModule',
-        canActivate: [RequiresLoginGuard]
-      },
-
+      { path: '', redirectTo: 'customer/tickets', pathMatch: 'full' },
       {
         path: 'partner',
         loadChildren: './+partner/partner.module#PartnerModule',
@@ -54,11 +46,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
       {
         path: 'customer',
         loadChildren: './+customer/customer.module#CustomerModule',
-      },
-      {
-        path: 'auth',
-        loadChildren: './+auth/auth.module#AuthModule'
-      },
+      }
     ])
   ],
   providers: [
