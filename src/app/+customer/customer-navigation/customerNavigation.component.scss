@@ -1,0 +1,13 @@
+@import '../../../styles.mixins.scss';
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: $light;
+}
+
+.navbar {
+    border-radius: 3px;
+}
+
+.active {
+    border-bottom: 2px solid darken($main-color, 20%) !important;
+}

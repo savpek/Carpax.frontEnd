@@ -1,6 +1,6 @@
-import { PartnerRepo } from '../data/partnerRepo';
-import { FormContext } from '../shared.cxform/formContext';
-import { ITicket, TicketRepo } from '../data/ticketRepo';
+import { PartnerRepo } from '../../data/partnerRepo';
+import { FormContext } from '../../shared.cxform/formContext';
+import { ITicket, TicketRepo } from '../../data/ticketRepo';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';

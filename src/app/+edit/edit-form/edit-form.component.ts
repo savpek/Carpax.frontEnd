@@ -1,11 +1,11 @@
-import { IPartner, PartnerRepo } from '../../data/partnerRepo';
-import { FormContext } from '../../shared.cxform/formContext';
-import { ITicket, TicketRepo } from '../../data/ticketRepo';
+import { IPartner, PartnerRepo } from 'app/data/partnerRepo';
+import { FormContext } from 'app/shared.cxform/formContext';
+import { ITicket, TicketRepo } from 'app/data/ticketRepo';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CanDeactivateForm } from '../../shared.cxform/canDeactivateForm';
-import { CxModal } from '../../service/modal';
+import { CanDeactivateForm } from 'app/shared.cxform/canDeactivateForm';
+import { CxModal } from 'app/service/modal';
 
 @Component({
   selector: 'cx-edit-form',

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { AttachedPartnerRepo } from '../data/attachedPartnerRepo';
-import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
-import { ITicketHeader, TicketHeaderRepoFactory } from '../data/ticketHeaderRepo';
-import { TicketHeaderServiceFactory } from '../service/ticketHeaderService';
+import { AttachedPartnerRepo } from '../../data/attachedPartnerRepo';
+import { ITabRoute } from '../../shared.cxcomponent/cxcomponent.module';
+import { ITicketHeader, TicketHeaderRepoFactory } from '../../data/ticketHeaderRepo';
+import { TicketHeaderServiceFactory } from '../../service/ticketHeaderService';
 
 @Component({
   selector: 'cx-tickets',

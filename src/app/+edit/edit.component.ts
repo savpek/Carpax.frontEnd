@@ -1,10 +1,12 @@
-import { Component,   trigger,
+import { 
+  Component,
+  trigger,
   state,
   style,
   transition,
   animate } from '@angular/core';
-import { ITabRoute } from '../shared.cxcomponent/tabs/tabs.component';
-import { NotificationRepo, INotification } from '../data/notificationRepo';
+import { ITabRoute } from 'app/shared.cxcomponent/tabs/tabs.component';
+import { NotificationRepo, INotification } from 'app/data/notificationRepo';
 
 @Component({
   template: '<cx-tabs [routes]="routes"></cx-tabs>'

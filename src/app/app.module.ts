@@ -5,12 +5,10 @@ import { HttpModule, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { TicketsComponent } from './tickets/tickets.component';
 
 import { RouterModule } from '@angular/router';
 import { CxFormModule } from './shared.cxform/cxform.module';
 import { CxComponentModule } from './shared.cxcomponent/cxcomponent.module';
-import { NewFormComponent } from './new-form/new-form.component';
 import { NotificationRepo } from './data/notificationRepo';
 import { Auth } from './service/auth';
 
@@ -29,9 +27,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    TicketsComponent,
-    NewFormComponent
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -45,22 +41,19 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     BootstrapModalModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/tickets', pathMatch: 'full' },
-      { path: 'tickets', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
-      { path: 'tickets/:partnerId', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
-      { path: 'new', component: NewFormComponent, canActivate: [RequiresLoginGuard] },
       {
         path: 'edit',
         loadChildren: './+edit/edit.module#EditModule',
         canActivate: [RequiresLoginGuard]
       },
-      {
-        path: 'controlpanel',
-        loadChildren: './+control-panel/controlpanel.module#ControlPanelModule',
-        canActivate: [RequiresLoginGuard]
-      },
+
       {
         path: 'partner',
         loadChildren: './+partner/partner.module#PartnerModule',
+      },
+      {
+        path: 'customer',
+        loadChildren: './+customer/customer.module#CustomerModule',
       },
       {
         path: 'auth',
