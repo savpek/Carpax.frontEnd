@@ -20,52 +20,53 @@ export class Auth {
     private currentLogin: ILogin = new NotLoggedIn();
 
     private currentUserSubject: BehaviorSubject<ICurrentLogin> =
-        new BehaviorSubject<ICurrentLogin>(this.currentLogin.loginInformation);
+        new BehaviorSubject<ICurrentLogin>(this.currentLogin.getInfo());
 
     constructor(private http: Http, private storage: LocalStorage) {
         let current = storage.get('login');
 
-        if (current) {
-            switch (current.type) {
-                case 'user':
-                    this.currentLogin = new UserLogin(this.http);
-                    this.currentLogin.loginInformation = current;
-                    break;
-                case 'partner':
-                    this.currentLogin = new PartnerLogin(this.http);
-                    this.currentLogin.loginInformation = current;
-            }
+        if (current && current.type) {
+            this.currentLogin = new Login(this.http, current.type, current);
+            this.currentUserSubject.next(this.currentLogin.getInfo());
         }
     }
 
     public login(userName: string, password: string): Observable<ICurrentLogin> {
-        let currentLogin = new UserLogin(this.http);
+        let login = new Login(this.http, 'user');
 
-        currentLogin.login(userName, password)
-            .subscribe(user => {
-                this.currentLogin = currentLogin;
-                this.storage.set('login', this.currentLogin.loginInformation);
-                this.currentUserSubject.next(this.currentLogin.loginInformation);
+        return login.login('user/token/', { userName: userName, password: password })
+            .map(user => {
+                this.currentLogin = login;
+                this.storage.set('login', this.currentLogin.getInfo());
+                this.currentUserSubject.next(this.currentLogin.getInfo());
+                return user;
             });
+    }
 
-        return this.currentUserSubject;
+    public loginPartner(id: string, pin: string): Observable<ICurrentLogin>  {
+        let login = new Login(this.http, 'partner');
+
+        return login.login('partner/token/', { id: id, pin: pin })
+            .map(user => {
+                this.currentLogin = login;
+                this.storage.set('login', this.currentLogin.getInfo());
+                this.currentUserSubject.next(this.currentLogin.getInfo());
+                return user;
+            });
     }
 
     public logOut() {
         this.currentLogin = new NotLoggedIn();
         this.storage.set('login', {});
-        this.currentUserSubject.next(this.currentLogin.loginInformation);
+        this.currentUserSubject.next(this.currentLogin.getInfo());
     }
 
-    public isLoggedIn() {
-        return !!this.getAccessToken();
+    public isLoggedIn(type: string) {
+        return this.currentLogin.isValid() && this.currentLogin.getInfo().type === type;
     }
 
     public getAccessToken() {
-        if (this.currentLogin.loginInformation.token && moment() < this.currentLogin.loginInformation.expires) {
-            return this.currentLogin.loginInformation.token;
-        }
-        return '';
+        return this.currentLogin.getInfo().token;
     }
 
     public getCurrentUser(): Observable<ICurrentLogin> {
@@ -77,75 +78,51 @@ export class Auth {
 }
 
 interface ILogin {
-    loginInformation: ICurrentLogin;
+    getInfo(): ICurrentLogin;
     isValid(): boolean;
 }
 
 class NotLoggedIn implements ILogin {
-    public loginInformation: ICurrentLogin = {
-        type: 'none',
-        name: '',
-        customerName: '',
-        token: ''
+    public getInfo() {
+        return {
+            type: 'none',
+            name: '',
+            customerName: '',
+            token: ''
+        };
     };
     public isValid() { return false; }
 }
 
-class PartnerLogin implements ILogin {
-    public type: string = 'partner';
-    public token: string;
-    public loginInformation: any;
-    public expires: any;
-
-    constructor(private http: Http) {
+class Login implements ILogin {
+    constructor(private http: Http, private type: string, private loginInformation?: ICurrentLogin) {
     }
 
-    public login(id: string, pin: string) {
-    }
-    public isValid() { return false; }
+    public getInfo() {
+        if (this.loginInformation) {
+            return this.loginInformation;
+        }
 
-    public dispose() {
-        this.token = '';
-        this.loginInformation = {};
-    }
-}
-
-class UserLogin implements ILogin {
-    public type: string = 'user';
-    public loginInformation: ICurrentLogin;
-
-    constructor(private http: Http) {
+        return {};
     }
 
-    public login(userName: string, password: string): Observable<ICurrentLogin> {
-        let subject = new Subject<ICurrentLogin>();
-
-        this.http.post(`${environment.authBase}/user/token/`, {
-            userName: userName,
-            password: password
-        }).subscribe(
+    public login(resource: string, loginObject: any) {
+        return this.http.post(`${environment.authBase}/${resource}`, loginObject).map(
             response => {
                 let asObject = response.json();
 
                 this.loginInformation = {
-                    type: 'user',
-                    name: asObject.userName,
+                    type: this.type,
+                    name: asObject.name,
                     customerName: asObject.customerName,
                     token: asObject.access_token,
-                    expires: moment().add(asObject.expires_in, 'seconds')
+                    expires: asObject.expires_in
                 };
-
-                subject.next(this.loginInformation);
-            },
-            error => {
-                console.error('Login failed', error);
-                subject.error(error);
+                return this.loginInformation;
         });
-
-        return subject;
     }
 
     public isValid() {
-        return this.loginInformation.token && moment() < this.loginInformation.expires;
+        return this.loginInformation.token && moment() < moment().add(this.loginInformation.expires, 'seconds');
     }
 }

@@ -42,7 +42,7 @@ export class TicketFieldsComponent {
 
   constructor(private partnerRepo: PartnerRepo, private modal: CxModal) {
     this.partnerRepo.Get().subscribe(
-      result => { 
+      result => {
         this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; })
         this.partners.unshift({text: 'Ei valintaa', value: undefined});
   });

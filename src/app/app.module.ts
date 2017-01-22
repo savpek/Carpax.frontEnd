@@ -61,7 +61,6 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
       {
         path: 'partner',
         loadChildren: './+partner/partner.module#PartnerModule',
-        canActivate: [RequiresLoginGuard]
       },
       {
         path: 'auth',
@@ -69,7 +68,15 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
       },
     ])
   ],
-  providers: [NotificationRepo, Auth, Modal, CxModal, LoadingBar, DataApiFactory, RequiresLoginGuard, LocalStorage],
+  providers: [
+    NotificationRepo,
+    Auth,
+    Modal,
+    CxModal,
+    LoadingBar,
+    DataApiFactory,
+    RequiresLoginGuard,
+    LocalStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

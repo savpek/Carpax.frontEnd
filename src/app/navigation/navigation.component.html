@@ -11,7 +11,7 @@
         <div><a class="navbar-brand" routerLink="/">CARPAX</a>
         </div>
       </div>
-      <div class="collapse navbar-collapse" ng-if="settings.navigationBar === 'default'">
+      <div class="collapse navbar-collapse" *ngIf="!isPartnerPage()">
         <ul class="nav navbar-nav">
           <li><a routerLink="/tickets" [routerLinkActive]="['active']"><i class="fa fa-home fa-m"></i> Etusivu</a></li>
           <li><a routerLink="/new" [routerLinkActive]="['active']"><i class="fa fa-file fa-m"></i> Uusi</a></li>
@@ -31,11 +31,11 @@
 
       <div class="collapse navbar-collapse" *ngIf="isPartnerPage()">
         <ul class="nav navbar-nav">
-          <li ng-class="{active: isLinkActive('/partnertickets')}"><a href="/partnertickets/{{partnerInfo.id}}"><i class="fa fa-home fa-m"></i> Tehtävät</a></li>
+          <li><a routerLink="/partner/tickets" [routerLinkActive]="['active']"><i class="fa fa-home fa-m"></i> Etusivu</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="/partnerlogout/{{partnerInfo.id}}/">
+            <a (click)="logoutPartner()">
               <div class="navigation-current-user">
                 {{user.name}} <br> {{user.customerName}}
               </div>

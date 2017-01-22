@@ -19,6 +19,10 @@ const routes: any = [
     {
         path: 'partnerlogin/:id',
         component: PartnerLoginComponent,
+    },
+    {
+        path: 'partnerlogout/:id',
+        component: PartnerLoginComponent,
     }
 ];
 

@@ -1,8 +1,8 @@
-import { IPartner, PartnerRepo } from '../data/partnerRepo';
+import { PartnerRepo } from '../data/partnerRepo';
 import { FormContext } from '../shared.cxform/formContext';
 import { ITicket, TicketRepo } from '../data/ticketRepo';
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Uuid } from './utils';

@@ -36,7 +36,7 @@ export class EditFormComponent extends CanDeactivateForm {
       this.ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
 
       this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
-        if (!partner[0].partnerId) { return; };
+        if (partner.length === 0 || !partner[0].partnerId) { return; };
 
         this.currentPartnerId = partner[0].partnerId;
         this.currentPartnerIdChange.emit(this.currentPartnerId);

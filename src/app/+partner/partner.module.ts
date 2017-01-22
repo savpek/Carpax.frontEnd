@@ -10,11 +10,13 @@ import { PartnerTicketComponent } from './partner-ticket.component';
 import { PartnerTicketFeedbackComponent } from './partner-ticket-feedback/partner-ticket-feedback.component';
 import { PartnerTicketExpensesComponent } from './partner-ticket-expenses/partner-ticket-expenses.component';
 import { PartnerTicketFilesComponent } from './partner-files/partner-ticket-files.component';
+import { RequiresPartnerLoginGuard } from './RequiresPartnerLoginGuard';
 
 const routes: any = [
     {
         path: ':id',
         component: PartnerTicketsComponent,
+        canActivate: [RequiresPartnerLoginGuard]
     },
     {
         path: ':id/edit/:ticketId',
@@ -45,6 +47,6 @@ const routes: any = [
     ],
     exports: [
     ],
-    providers: []
+    providers: [RequiresPartnerLoginGuard]
 })
 export class PartnerModule { }
