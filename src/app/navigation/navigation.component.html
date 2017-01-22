@@ -35,7 +35,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a (click)="logoutPartner()">
+            <a [routerLink]="['partner', partnerId, 'logout']">
               <div class="navigation-current-user">
                 {{user.name}} <br> {{user.customerName}}
               </div>

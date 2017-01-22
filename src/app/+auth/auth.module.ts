@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { CxFormModule } from '../shared.cxform/cxform.module';
 import { CxComponentModule } from '../shared.cxcomponent/cxcomponent.module';
 import { LoginComponent } from './login/login.component';
-import { PartnerLoginComponent } from './partner-login/partner-login.component';
 
 const routes: any = [
     {
@@ -16,14 +15,7 @@ const routes: any = [
         path: 'logout',
         component: LoginComponent
     },
-    {
-        path: 'partnerlogin/:id',
-        component: PartnerLoginComponent,
-    },
-    {
-        path: 'partnerlogout/:id',
-        component: PartnerLoginComponent,
-    }
+
 ];
 
 @NgModule({
@@ -34,8 +26,7 @@ const routes: any = [
         CxComponentModule,
         RouterModule.forChild(routes)],
     declarations: [
-    LoginComponent,
-    PartnerLoginComponent],
+    LoginComponent],
     exports: [
     ],
     providers: []

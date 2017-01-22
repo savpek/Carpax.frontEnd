@@ -73,7 +73,10 @@ export class Auth {
         return this.currentUserSubject;
     }
 
-    public passwordReset() {
+    public passwordReset(email: string): Observable<any> {
+        return this.http.post(`${environment.apiBase}/passwordreset/`, {
+            email: email
+        }).map(result => result.json());
     }
 }
 

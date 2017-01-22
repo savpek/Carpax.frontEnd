@@ -9,7 +9,7 @@ export class RequiresPartnerLoginGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot) {
     if (!this.authService.isLoggedIn('partner')) {
-        this.router.navigate(['/auth/partnerlogin', route.params['id']]);
+        this.router.navigate(['partner', route.params['id'], 'login']);
         return false;
     }
     return true;

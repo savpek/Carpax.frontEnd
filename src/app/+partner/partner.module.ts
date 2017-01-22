@@ -11,6 +11,7 @@ import { PartnerTicketFeedbackComponent } from './partner-ticket-feedback/partne
 import { PartnerTicketExpensesComponent } from './partner-ticket-expenses/partner-ticket-expenses.component';
 import { PartnerTicketFilesComponent } from './partner-files/partner-ticket-files.component';
 import { RequiresPartnerLoginGuard } from './RequiresPartnerLoginGuard';
+import { PartnerLoginComponent } from './partner-login/partner-login.component';
 
 const routes: any = [
     {
@@ -27,6 +28,14 @@ const routes: any = [
             { path: 'expenses', component: PartnerTicketExpensesComponent },
             { path: 'files', component: PartnerTicketFilesComponent },
         ]
+    },
+    {
+        path: ':id/login',
+        component: PartnerLoginComponent,
+    },
+    {
+        path: ':id/logout',
+        component: PartnerLoginComponent,
     }
 ];
 
@@ -43,7 +52,9 @@ const routes: any = [
         PartnerTicketComponent,
         PartnerTicketFeedbackComponent,
         PartnerTicketExpensesComponent,
-        PartnerTicketFilesComponent
+        PartnerTicketFilesComponent,
+        PartnerLoginComponent,
+        PartnerLoginComponent
     ],
     exports: [
     ],

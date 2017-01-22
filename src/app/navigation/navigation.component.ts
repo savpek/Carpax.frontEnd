@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Auth } from '../service/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
+  public partnerId: '';
+
   public user: any = {
     name: '',
     customerName: ''
@@ -22,9 +24,9 @@ export class NavigationComponent {
   }
 
   public logoutPartner() {
-    this.activeRoute.params.subscribe(x => {
+    this.activeRoute.firstChild.firstChild.params.subscribe(x => {
       if (x['id']) {
-        this.route.navigate(['auth/partnerlogout', x['id']]);
+        this.route.navigate(['partner', x['id'], 'logout']);
       }
     });
   }
