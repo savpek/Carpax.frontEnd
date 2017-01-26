@@ -260,3 +260,7 @@ router-outlet ~ * > div, router-outlet ~ * > * > div, router-outlet ~ * > * > bu
     opacity: 1;
   }
 }
+
+img.image-in-modal {
+    width: 100% !important
+}

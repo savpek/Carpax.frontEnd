@@ -34,7 +34,9 @@ export class TicketFeedbackFormComponent {
   public send() {
     this.repo.Add(this.currentTicket, {
       message: this.newMessageText
-    });
+    })
+    
+    this.newMessageText = "";
   }
 
   private formatMessageTimeStamp(value: Date) {
