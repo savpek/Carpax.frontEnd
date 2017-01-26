@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  template: '<cx-ticket-feedback-form [ticketId]="ticketId"></cx-ticket-feedback-form>"',
+  template: '<cx-ticket-feedback-form [ticketId]="ticketId"></cx-ticket-feedback-form>',
 })
 export class FeedbackComponent {
   public ticketId: string;

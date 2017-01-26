@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  template: '<cx-ticket-files-form [ticketId]="ticketId"></cx-ticket-files-form>"',
+  template: '<cx-ticket-files-form [ticketId]="ticketId"></cx-ticket-files-form>',
 })
 export class FilesComponent {
   public ticketId: string;

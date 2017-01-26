@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  template: '<cx-ticket-expenses-form [ticketId]="ticketId"></cx-ticket-expenses-form>"',
+  template: '<cx-ticket-expenses-form [ticketId]="ticketId"></cx-ticket-expenses-form>',
 })
 export class ExpensesComponent {
   public ticketId: string;
