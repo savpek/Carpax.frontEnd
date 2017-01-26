@@ -10,6 +10,7 @@ import { RequiresLoginGuard } from './RequiresLoginGuard';
 import { TicketsComponent } from './tickets/tickets.component';
 import { CustomerRootComponent } from './customer-root.component';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: any = [
     {
@@ -31,7 +32,8 @@ const routes: any = [
             },
         ],
     },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'resetpassword/:token', component: ResetPasswordComponent }
 ];
 
 @NgModule({
@@ -46,7 +48,8 @@ const routes: any = [
         CustomerNavigationComponent,
         NewFormComponent,
         TicketsComponent,
-        LoginComponent],
+        LoginComponent,
+        ResetPasswordComponent],
     exports: [
     ],
     providers: [RequiresLoginGuard]

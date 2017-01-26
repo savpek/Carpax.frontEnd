@@ -1,11 +1,12 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { PartnerRepo } from '../../data/partnerRepo';
-import { CxModal } from '../../service/modal';
+import { PartnerRepo } from 'app/data/partnerRepo';
+import { CxModal } from 'app/service/modal';
 
 @Component({
   selector: 'cx-ticket-fields',
   templateUrl: './ticket-fields.component.html',
-  styleUrls: ['./ticket-fields.component.scss']
+  styleUrls: ['./ticket-fields.component.scss'],
+  providers: []
 })
 export class TicketFieldsComponent {
   @Input()

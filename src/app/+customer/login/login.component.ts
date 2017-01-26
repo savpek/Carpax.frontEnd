@@ -24,7 +24,7 @@ export class LoginComponent {
 
 
   public requestReset() {
-    this.auth.passwordReset(this.userName)
+    this.auth.passwordResetRequest(this.userName)
       .subscribe(result => {
         if (result.isSuccess) {
           this.toast.success(`Sähköposti salasanan vaihtamiseksi lähetetty osoitteeseen '${this.userName}'`);
