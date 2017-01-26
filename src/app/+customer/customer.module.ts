@@ -18,8 +18,8 @@ const routes: any = [
         component: CustomerRootComponent,
         children: [
             { path: 'new', component: NewFormComponent, canActivate: [RequiresLoginGuard] },
-            { path: 'tickets', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
-            { path: 'tickets/:partnerId', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
+            { path: 'tickets/own', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
+            { path: 'tickets/attached/:partnerId', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
             {
                 path: 'controlpanel',
                 loadChildren: 'app/+customer/+control-panel/controlpanel.module#ControlPanelModule',

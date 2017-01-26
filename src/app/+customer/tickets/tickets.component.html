@@ -11,6 +11,6 @@
             </div>
         </div>
         <cx-ticket-list *ngIf="currentView === 'list'" [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
-<cx-ticket-calendar *ngIf="currentView === 'calendar'" [tickets]="tickets"></cx-ticket-calendar>
-</div>
+        <cx-ticket-calendar *ngIf="currentView === 'calendar'" [tickets]="tickets"></cx-ticket-calendar>
+    </div>
 </div>

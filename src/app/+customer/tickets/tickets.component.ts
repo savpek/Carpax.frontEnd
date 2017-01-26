@@ -15,7 +15,7 @@ import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
 export class TicketsComponent {
   public tickets: ITicketHeader[];
   public tabs: ITabRoute[] = [{
-    path: '/tickets',
+    path: '/customer/tickets/own',
     text: 'Omat'
   }];
 
@@ -47,7 +47,7 @@ export class TicketsComponent {
     this.attachedPartnerRepo.get()
       .flatMap(x => x)
       .subscribe(attachedPartner => this.tabs.push({
-        path: `customer/tickets/${attachedPartner.partnerId}/`,
+        path: `/customer/tickets/attached/${attachedPartner.partnerId}/`,
         text: attachedPartner.description
       }));
   }

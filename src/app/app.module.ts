@@ -38,7 +38,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     SlimLoadingBarModule.forRoot(),
     BootstrapModalModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'customer/tickets', pathMatch: 'full' },
+      { path: '', redirectTo: 'customer/tickets/own', pathMatch: 'full' },
       {
         path: 'partner',
         loadChildren: './+partner/partner.module#PartnerModule',
