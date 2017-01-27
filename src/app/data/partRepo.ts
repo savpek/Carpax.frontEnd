@@ -21,18 +21,18 @@ export interface IPartRepo {
 }
 
 class PartRepo implements IPartRepo {
-    constructor(private api: Resources<IPart>) {}
+    constructor(private resource: Resources<IPart>) {}
 
     public Get(): Observable<IPart[]> {
-        return this.api.get();
+        return this.resource.get();
     }
 
     public AddOrUpdate(work: IPart[]) {
-        this.api.post(work, x => x.id);
+        this.resource.post(work, x => x.id);
     }
 
     public Delete(work: IPart[]) {
-        work.forEach(workRow => this.api.delete(workRow, x => x.id));
+        work.forEach(workRow => this.resource.delete(workRow, x => x.id));
     }
 }
 

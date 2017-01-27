@@ -17,16 +17,11 @@ export class FileInputComponent {
   upload(event) {
     let files = event.srcElement.files;
     for (let i = 0; i < files.length; i++) {
-      let uploadedFileStatus = {
-        name: files[i],
-        ready: false
-      }
-      this.uploadedfiles.push(uploadedFileStatus);
-
       let formData: FormData = new FormData();
       formData.append('file', files[i]);
 
-      this.fileRepo.upload(this.targetTicket, formData).subscribe(x => uploadedFileStatus.ready = true);
+      this.fileRepo.upload(this.targetTicket, formData)
+        .subscribe(x => {});
     }
   }
 }

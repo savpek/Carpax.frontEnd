@@ -1,11 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormContext, FormEntry } from '../formContext';
 import * as moment from 'moment';
+import { DatepickerConfig } from 'ng2-bootstrap';
 
 @Component({
   selector: 'cx-form-date-input',
   templateUrl: './form-date-input.component.html',
-  styleUrls: ['./form-date-input.component.scss']
+  styleUrls: ['./form-date-input.component.scss'],
+  providers: [DatepickerConfig]
 })
 export class FormDateInputComponent {
     @Input()

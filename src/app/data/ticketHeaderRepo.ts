@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataApiFactory, DataApi } from './DataApi';
+import { DataApiFactory, DataApi, ResourceFactory, Resources } from './DataApi';
 
 export interface ITicketHeader {
         id: string;
@@ -19,38 +19,38 @@ export interface ITicketHeaderRepo {
 
 @Injectable()
 export class TicketHeaderRepoFactory {
-    constructor(private apiFactory: DataApiFactory) {
+    constructor(private resourceFactory: ResourceFactory) {
     }
 
     public createForPartner(partnerId: string): ITicketHeaderRepo {
-        return new TicketHeaderRepoForPartners(this.apiFactory, partnerId);
+        return new TicketHeaderRepoForPartners(this.resourceFactory, partnerId);
     }
 
     public create(): ITicketHeaderRepo {
-        return new TicketHeaderRepo(this.apiFactory);
+        return new TicketHeaderRepo(this.resourceFactory);
     }
 }
 
 class TicketHeaderRepoForPartners implements ITicketHeaderRepo {
-    private api: DataApi<ITicketHeader>;
+    private resource: Resources<ITicketHeader>;
 
-    constructor(apiFactory: DataApiFactory, private partnerId: string) {
-        this.api = apiFactory.create<ITicketHeader>();
+    constructor(resourceFactory: ResourceFactory, private partnerId: string) {
+        this.resource = resourceFactory.createMany<ITicketHeader>(`ticketforpartner/${this.partnerId}`);
     }
 
     public get(): Observable<ITicketHeader[]> {
-        return this.api.get(`ticketforpartner/${this.partnerId}`);
+        return this.resource.get();
     }
 }
 
 class TicketHeaderRepo implements ITicketHeaderRepo {
-    private api: DataApi<ITicketHeader>;
+    private resource: Resources<ITicketHeader>;
 
-    constructor(apiFactory: DataApiFactory, ) {
-        this.api = apiFactory.create<ITicketHeader>();
+    constructor(resourceFactory: ResourceFactory, ) {
+        this.resource = resourceFactory.createMany<ITicketHeader>('ticket');
     }
 
     public get(): Observable<ITicketHeader[]> {
-        return this.api.get(`ticket/`);
+        return this.resource.get();
     }
 }
