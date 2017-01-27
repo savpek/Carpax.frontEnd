@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, Subscription } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
 import * as moment from 'moment';
 import { LocalStorage } from './localStorage';
-
+import {  } from 'rxjs';
+import { Router } from '@angular/router';
 export interface ICurrentLogin {
     type?: string;
     name?: string;
@@ -19,16 +20,29 @@ export interface ICurrentLogin {
 export class Auth {
     private currentLogin: ILogin = new NotLoggedIn();
 
+    private logoutSubscriber: Subscription;
+
     private currentUserSubject: BehaviorSubject<ICurrentLogin> =
         new BehaviorSubject<ICurrentLogin>(this.currentLogin.getInfo());
 
-    constructor(private http: Http, private storage: LocalStorage) {
+    constructor(private http: Http, private storage: LocalStorage, private route: Router) {
         let current = storage.get('login');
 
         if (current && current.type) {
             this.currentLogin = new Login(this.http, current.type, current);
             this.currentUserSubject.next(this.currentLogin.getInfo());
+
+            this.setLogoutTimer();
         }
+    }
+
+    private setLogoutTimer() {
+        if(this.logoutSubscriber) {
+            this.logoutSubscriber.unsubscribe();
+        }
+
+        this.logoutSubscriber = Observable.timer(this.currentLogin.getInfo().expires * 1000 - 20)
+            .subscribe(x => this.route.navigate(['/customer', 'login']));
     }
 
     public login(userName: string, password: string): Observable<ICurrentLogin> {
@@ -39,6 +53,9 @@ export class Auth {
                 this.currentLogin = login;
                 this.storage.set('login', this.currentLogin.getInfo());
                 this.currentUserSubject.next(this.currentLogin.getInfo());
+
+                this.setLogoutTimer();
+                
                 return user;
             });
     }
@@ -51,6 +68,9 @@ export class Auth {
                 this.currentLogin = login;
                 this.storage.set('login', this.currentLogin.getInfo());
                 this.currentUserSubject.next(this.currentLogin.getInfo());
+
+                this.setLogoutTimer();
+                
                 return user;
             });
     }
