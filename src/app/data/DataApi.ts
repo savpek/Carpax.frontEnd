@@ -8,6 +8,7 @@ import { Auth } from '../service/auth';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import Utils from './util';
+import { HttpWrapper } from './httpWrapper';
 
 export interface IEntry {
     transient?: string;
@@ -24,10 +25,10 @@ export class DataApiFactory {
 
 @Injectable()
 export class ResourceFactory {
-    constructor(private http: Http, private loadingBar: LoadingBar, private auth: Auth) {}
+    constructor(private http: HttpWrapper, private auth: Auth) {}
     
     public createMany<T>(resource: string): Resources<T> {
-        return new Resources<T>(resource, this.http, this.loadingBar, this.auth)
+        return new Resources<T>(resource, this.http, this.auth)
     }
 }
 
@@ -37,24 +38,17 @@ export class Resources<T> {
 
     constructor(
         private resourcePath: string,
-        private http: Http,
-        private loadingBar: LoadingBar,
+        private http: HttpWrapper,
         private auth: Auth) {}
-
-    private getHeader(): any {
-        return new Headers({ 'Authorization': 'Bearer ' + this.auth.getAccessToken() });
-    }
 
     public get(): Observable<T[]> {
         if (this.current.length === 0) {
-            this.http.get(`${environment.apiBase}/${this.resourcePath}`, { headers: this.getHeader() })
-                .do(_ => this.loadingBar.operationStarted())
+            this.http.get(`${environment.apiBase}/${this.resourcePath}`)
                 .map(response => response.json())
                 .map(data => Utils.unwrapResult<T[]>(data))
                 .subscribe(result => {
                     this.current = result;
                     this.subject.next(this.current.slice());
-                    this.loadingBar.operationStopped()
                 });
         }
 
@@ -62,8 +56,7 @@ export class Resources<T> {
     }
 
     public post(data: any, idSelector: (x: T) => any): Observable<T[]> {
-        this.http.post(`${environment.apiBase}/${this.resourcePath}`, data, { headers: this.getHeader() })
-            .do(_ => this.loadingBar.operationStarted())
+        this.http.post(`${environment.apiBase}/${this.resourcePath}`, data)
             .map(response => response.json())
             .map(data => Utils.unwrapResult<T[]>(data))
             .subscribe(result => {
@@ -72,7 +65,6 @@ export class Resources<T> {
 
                 result.forEach(x => this.current.push(x))
 
-                this.loadingBar.operationStopped();
                 this.subject.next(this.current.slice());
             });
 
@@ -80,10 +72,8 @@ export class Resources<T> {
     }
 
     public delete(target: T, idSelector: (x: T) => any): Observable<T[]> {
-        this.http.delete(`${environment.apiBase}/${this.resourcePath}/${idSelector(target)}`, { headers: this.getHeader() })
-            .do(_ => this.loadingBar.operationStarted())
+        this.http.delete(`${environment.apiBase}/${this.resourcePath}/${idSelector(target)}`)
             .subscribe(result => {
-                this.loadingBar.operationStopped();
                 this.current = this.current.filter(c => idSelector(c) !== idSelector(target));
                 this.subject.next(this.current.slice());
             });

@@ -22,6 +22,7 @@ import { DataApiFactory, ResourceFactory } from './data/DataApi';
 import { RequiresLoginGuard } from './service/RequiresLoginGuard';
 import { LocalStorage } from './service/localStorage';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { HttpWrapper } from './data/httpWrapper';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     DataApiFactory,
     ResourceFactory,
     RequiresLoginGuard,
-    LocalStorage],
+    LocalStorage,
+    HttpWrapper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
