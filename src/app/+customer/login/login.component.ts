@@ -18,7 +18,7 @@ export class LoginComponent {
   public login() {
     this.auth.login(this.userName, this.password)
       .subscribe(
-        x => this.router.navigate(['/customer/tickets']),
+        x => this.router.navigate(['/customer/tickets/own']),
         error => this.toast.error('Kirjautuminen epäonnistui, tarkistathan että käyttäjätunnus ja salasana ovat oikein'));
   }
 

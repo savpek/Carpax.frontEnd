@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { DataApiFactory, DataApi } from './DataApi';
+import { DataApiFactory, DataApi, ResourceFactory, Resources } from './DataApi';
 
 export interface IPart {
     id: string;
@@ -21,26 +21,26 @@ export interface IPartRepo {
 }
 
 class PartRepo implements IPartRepo {
-    constructor(private api: DataApi<IPart>, private ticketId: string) {}
+    constructor(private api: Resources<IPart>) {}
 
     public Get(): Observable<IPart[]> {
-        return this.api.get(`part/${this.ticketId}`);
+        return this.api.get();
     }
 
     public AddOrUpdate(work: IPart[]) {
-        this.api.post(`part/${this.ticketId}`, work);
+        this.api.post(work, x => x.id);
     }
 
     public Delete(work: IPart[]) {
-        work.forEach(workRow => this.api.delete(`part/${this.ticketId}/${workRow.id}`, x => x.id));
+        work.forEach(workRow => this.api.delete(workRow, x => x.id));
     }
 }
 
 @Injectable()
 export class PartRepoFactory {
-    constructor(private apiFactory: DataApiFactory) {}
+    constructor(private apiFactory: ResourceFactory) {}
 
     public Create(ticketId: string): IPartRepo {
-        return new PartRepo(this.apiFactory.create<IPart>(), ticketId);
+        return new PartRepo(this.apiFactory.createMany<IPart>(`part/${ticketId}`));
     }
 }

@@ -5,6 +5,7 @@ import { AttachedPartnerRepo } from 'app/data/attachedPartnerRepo';
 import { ITabRoute } from 'app/shared.cxcomponent/cxcomponent.module';
 import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
 import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
+import { NotificationRepo } from 'app/data/notificationRepo';
 
 @Component({
   selector: 'cx-tickets',
@@ -21,6 +22,8 @@ export class TicketsComponent {
 
   public views: any[] = [{ icon: 'fa-list', value: 'list' }, { icon: 'fa-calendar', value: 'calendar' }];
   public currentView = 'list';
+
+  private notificationLookup: any = {};
 
   constructor(
     private headerFactory: TicketHeaderServiceFactory,
@@ -42,6 +45,8 @@ export class TicketsComponent {
             this.tickets = x;
           });
       }
+
+
     });
 
     this.attachedPartnerRepo.get()

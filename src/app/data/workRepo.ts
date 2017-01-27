@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { DataApi, DataApiFactory } from './DataApi';
+import { DataApi, DataApiFactory, Resources, ResourceFactory } from './DataApi';
 
 export interface IWork {
     id: string;
@@ -18,27 +18,27 @@ export interface IWorkRepo {
 }
 
 class WorkRepo implements IWorkRepo {
-    constructor(private api: DataApi<IWork>, private ticketId: string) {
+    constructor(private api: Resources<IWork>) {
     }
 
     public Get(): Observable<IWork[]> {
-        return this.api.get(`work/${this.ticketId}`);
+        return this.api.get();
     }
 
     public AddOrUpdate(work: IWork[]) {
-        this.api.post(`work/${this.ticketId}`, work);
+        this.api.post(work, w => w.id);
     }
 
     public Delete(work: IWork[]) {
-        work.forEach(workRow => this.api.delete(`work/${this.ticketId}/${workRow.id}`, x => x.id));
+        work.forEach(workRow => this.api.delete(workRow, x => x.id));
     }
 }
 
 @Injectable()
 export class WorkRepoFactory {
-    constructor(private apiFactory: DataApiFactory) {}
+    constructor(private apiFactory: ResourceFactory) {}
 
     public Create(ticketId: string): IWorkRepo {
-        return new WorkRepo(this.apiFactory.create<IWork>(), ticketId);
+        return new WorkRepo(this.apiFactory.createMany<IWork>(`work/${ticketId}`));
     }
 }

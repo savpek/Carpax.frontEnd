@@ -18,7 +18,7 @@ import { CxModal } from './service/modal';
 
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { LoadingBar } from './service/loadingBar';
-import { DataApiFactory } from './data/DataApi';
+import { DataApiFactory, ResourceFactory } from './data/DataApi';
 import { RequiresLoginGuard } from './service/RequiresLoginGuard';
 import { LocalStorage } from './service/localStorage';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
@@ -56,6 +56,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     CxModal,
     LoadingBar,
     DataApiFactory,
+    ResourceFactory,
     RequiresLoginGuard,
     LocalStorage],
   bootstrap: [AppComponent]

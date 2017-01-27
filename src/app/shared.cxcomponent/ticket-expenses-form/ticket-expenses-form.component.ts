@@ -31,10 +31,12 @@ export class TicketExpensesFormComponent {
       this.partRepo = this.partRepoFactory.Create(value);
 
       this.workRepo.Get()
-        .subscribe(x => this.workRows = x);
+        .subscribe(x => 
+          this.workRows = x);
 
       this.partRepo.Get()
-        .subscribe(x => this.partRows = x);
+        .subscribe(x => 
+          this.partRows = x);
   }
 
   public constructor(private workRepoFactory: WorkRepoFactory, private partRepoFactory: PartRepoFactory) {

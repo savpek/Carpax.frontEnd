@@ -49,10 +49,8 @@ export class EditFormComponent extends CanDeactivateForm {
   }
 
   private saveRoutine() {
-    return Observable.forkJoin(
-      this.ticketRepo.Update(this.ticket),
       this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId)
-    );
+      return this.ticketRepo.Update(this.ticket)
   }
 
 

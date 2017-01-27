@@ -20,7 +20,8 @@ export class TicketListComponent {
   private notifications: INotification[] = []
 
   constructor(private notificationRepo: NotificationRepo) {
-    notificationRepo.get().subscribe(x => this.notifications = x);
+    notificationRepo.get()
+      .subscribe(x => this.notifications = x);
   }
 
   public hasNew(ticketId: string) {
