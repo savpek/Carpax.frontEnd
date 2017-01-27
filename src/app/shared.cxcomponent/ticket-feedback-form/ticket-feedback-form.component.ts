@@ -1,27 +1,27 @@
 import { Component, Input } from '@angular/core';
-import { FeedbackRepo, IFeedback } from '../../data/feedbackRepo';
+import { FeedbackRepo, IFeedback, FeedbackRepoFactory } from '../../data/feedbackRepo';
 import * as moment from 'moment';
 
 @Component({
   selector: 'cx-ticket-feedback-form',
   templateUrl: './ticket-feedback-form.component.html',
   styleUrls: ['./ticket-feedback-form.component.scss'],
-  providers: [FeedbackRepo]
+  providers: [FeedbackRepoFactory]
 })
 export class TicketFeedbackFormComponent {
   private feedback: IFeedback[] = [];
-  private currentTicket: string;
+  private repo: FeedbackRepo;
 
   @Input()
   set ticketId(value: string) {
-    this.currentTicket = value;
-    this.repo.get(this.currentTicket)
+    this.repo = this.repoFactory.create(value);
+    this.repo.get()
       .subscribe(x => this.feedback = x);
   }
 
   private newMessageText: string = '';
 
-  constructor(private repo: FeedbackRepo) { }
+  constructor(private repoFactory: FeedbackRepoFactory) { }
 
   public getLabel(feedback: IFeedback) {
     return `${this.formatMessageTimeStamp(feedback.created)} ${feedback.whoIs}`;
@@ -32,7 +32,7 @@ export class TicketFeedbackFormComponent {
   }
 
   public send() {
-    this.repo.Add(this.currentTicket, {
+    this.repo.Add({
       message: this.newMessageText
     })
     

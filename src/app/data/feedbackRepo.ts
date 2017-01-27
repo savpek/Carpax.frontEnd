@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
-import { DataApi, DataApiFactory } from './DataApi';
+import { DataApi, DataApiFactory, Resources, ResourceFactory } from './DataApi';
 
 export interface IFeedback {
     message: string;
@@ -10,18 +10,23 @@ export interface IFeedback {
 }
 
 @Injectable()
+export class FeedbackRepoFactory {
+    constructor(private apiFactory: ResourceFactory) {
+    }
+
+    public create(ticketId: string): FeedbackRepo {
+        return new FeedbackRepo(this.apiFactory.createMany<IFeedback>(`feedbackmessages/${ticketId}`))
+    }
+}
+
 export class FeedbackRepo {
-    private api: DataApi<IFeedback>;
+    constructor(private resource: Resources<IFeedback>){}
 
-    constructor(apiFactory: DataApiFactory) {
-        this.api = apiFactory.create<IFeedback>();
+    public get(): Observable<IFeedback[]> {
+        return this.resource.get();
     }
 
-    public get(ticketId: string): Observable<IFeedback[]> {
-        return this.api.get(`feedbackmessages/${ticketId}`);
-    }
-
-    public Add(ticketId: string, feedback: IFeedback) {
-        this.api.post(`feedbackmessages/${ticketId}`, feedback);
+    public Add(feedback: IFeedback) {
+        this.resource.post(feedback, x => x.created + x.whoIs);
     }
 }

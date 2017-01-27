@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { DataApi, DataApiFactory } from './DataApi';
+import { DataApi, DataApiFactory, ResourceFactory, Resources } from './DataApi';
 
 export interface IUser {
     userName: string;
@@ -12,20 +12,20 @@ export interface IUser {
 
 @Injectable()
 export class UserRepo {
-    private api: DataApi<IUser>;
+    private resource: Resources<IUser>;
 
-    constructor(apiFactory: DataApiFactory) {
-        this.api = apiFactory.create<IUser>();
+    constructor(resourceFactory: ResourceFactory) {
+        this.resource = resourceFactory.createMany<IUser>('user');
     }
     public Get(): Observable<IUser[]> {
-        return this.api.get('user/');
+        return this.resource.get();
     }
 
     public Add(user: IUser) {
-        this.api.post('user', user);
+        this.resource.post(user, x => x.userName);
     }
 
     public Delete(user: IUser) {
-        this.api.delete(`user/${user.userName}`, x => x.userName);
+        this.resource.delete(user, x => x.userName);
     }
 }

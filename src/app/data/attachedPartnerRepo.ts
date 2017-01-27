@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataApiFactory, DataApi, IEntry } from './DataApi';
+import { DataApiFactory, DataApi, IEntry, ResourceFactory, Resources } from './DataApi';
 
 export interface IAttachedPartner extends IEntry {
     partnerId: string;
@@ -9,20 +9,21 @@ export interface IAttachedPartner extends IEntry {
 
 @Injectable()
 export class AttachedPartnerRepo {
-    private api: DataApi<IAttachedPartner>;
+    private resource: Resources<IAttachedPartner>;
 
-    constructor(apiFactory: DataApiFactory) {
-        this.api = apiFactory.create<IAttachedPartner>();
+    constructor(resourceFactory: ResourceFactory) {
+        this.resource = resourceFactory.createMany<IAttachedPartner>(`attachedpartner`);
     }
 
     public get(): Observable<IAttachedPartner[]> {
-        return this.api.get(`attachedpartner/`);
+        return this.resource.get();
     }
 
     public add(attachedPartner: IAttachedPartner) {
-        this.api.post(`attachedpartner/`, attachedPartner);
+        this.resource.post(attachedPartner, x => x.partnerId);
     }
 
     public delete(attachedPartner: IAttachedPartner) {
+        this.resource.delete(attachedPartner, x => x.partnerId);
     }
 }
