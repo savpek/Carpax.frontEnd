@@ -14,7 +14,7 @@ export class FileRepo {
     constructor(private http: HttpWrapper, private auth: Auth) {}
 
     public Get(ticketId: string): Observable<FileEntry[]> {
-        this.http.get(`${environment.apiBase}/file/${ticketId}`)
+        this.http.get(`${environment.apiBase}/file/${ticketId}`, { headers: this.getHeader() })
             .subscribe(response => {
                 this.data = <FileEntry[]>response.json();
                 this.subject.next(this.data);
@@ -24,7 +24,7 @@ export class FileRepo {
     }
 
     public upload(ticketId: string, data: any): Observable<FileEntry> {
-        return this.http.post(`${environment.apiBase}/file/${ticketId}`, data)
+        return this.http.post(`${environment.apiBase}/file/${ticketId}`, data, { headers: this.getHeader() })
             .map(response => <FileEntry>response.json())
             .do(entry => {
                 this.data.push(entry);
@@ -33,7 +33,7 @@ export class FileRepo {
     }
 
     public delete(file: FileEntry): void {
-        this.http.delete(`${environment.apiBase}/file/${file.id}`)
+        this.http.delete(`${environment.apiBase}/file/${file.id}`, { headers: this.getHeader() })
             .subscribe(response => {
                 this.data = this.data.filter(f => f.uri !== file.uri);
                 this.subject.next(this.data);
