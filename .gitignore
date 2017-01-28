@@ -2,6 +2,7 @@
 
 /deploy/test.ps1
 /deploy/temp
+/deploy/dist
 
 # compiled output
 /dist
