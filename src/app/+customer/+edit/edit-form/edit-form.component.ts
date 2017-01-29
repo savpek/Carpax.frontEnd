@@ -1,7 +1,7 @@
 import { IPartner, PartnerRepo } from 'app/data/partnerRepo';
 import { FormContext } from 'app/shared.cxform/formContext';
 import { ITicket, TicketRepo } from 'app/data/ticketRepo';
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanDeactivateForm } from 'app/shared.cxform/canDeactivateForm';
@@ -27,20 +27,26 @@ export class EditFormComponent extends CanDeactivateForm {
     private ticketRepo: TicketRepo,
     private partnerRepo: PartnerRepo,
     private form: FormContext,
+    private changeDetect: ChangeDetectorRef,    
     modal: CxModal) {
     super(form, modal);
 
     this.activeRoute.parent.params.subscribe(params => {
       let ticketId = params['id'];
 
-      this.ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
+      this.ticketRepo.Get(ticketId).subscribe(ticket => { 
+        this.ticket = ticket
+        this.changeDetect.detectChanges();
+      });
 
       this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
         if (partner.length === 0 || !partner[0].partnerId) { return; };
 
         this.currentPartnerId = partner[0].partnerId;
         this.currentPartnerIdChange.emit(this.currentPartnerId);
+        this.changeDetect.detectChanges();
       });
+
     });
   }
 

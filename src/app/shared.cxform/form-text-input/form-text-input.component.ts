@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, AfterViewInit, Output, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormEntry, FormContext } from '../formContext';
 
 @Component({
@@ -7,10 +7,13 @@ import { FormEntry, FormContext } from '../formContext';
   styleUrls: ['./form-text-input.component.scss']
 })
 export class FormTextInputComponent implements OnChanges {
-  @Input() public text: string = '';
+  @Input()
+  public text: string;
+
   @Output() textChange = new EventEmitter();
 
   @Input() public validate;
+
   @Input() public label: string = 'DEFAULT LABEL';
 
   @Input() public disabled = false;
@@ -59,6 +62,6 @@ export class FormTextInputComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    //this.validateData();
+    this.validateData();
   }
 }
