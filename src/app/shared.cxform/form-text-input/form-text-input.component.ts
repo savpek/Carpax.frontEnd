@@ -8,7 +8,7 @@ import { FormEntry, FormContext } from '../formContext';
 })
 export class FormTextInputComponent implements OnChanges {
   @Input()
-  public text: string;
+  public text: string = '';
 
   @Output() textChange = new EventEmitter();
 

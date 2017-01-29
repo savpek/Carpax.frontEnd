@@ -28,16 +28,14 @@ export class NewFormComponent {
   }
 
   private saveRoutine() {
-    return Observable.forkJoin(
-      this.ticketRepo.Update(this.ticket),
-      this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId)
-    );
+      return this.ticketRepo.Update(this.ticket)
+        .flatMap(() => this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId));
   }
 
   public save() {
       this.saveRoutine().subscribe(() => {
         this.form.submitted();
-        this.router.navigateByUrl(`/edit/${this.ticket.id}`);
+        this.router.navigate(['customer', 'edit', this.ticket.id, 'fields']);
       });
   }
 
@@ -47,6 +45,6 @@ export class NewFormComponent {
 
   public cancel() {
     this.form.submitted();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/customer/tickets/own');
   }
 }
