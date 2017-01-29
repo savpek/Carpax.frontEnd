@@ -11,9 +11,13 @@ export class PartnerTicketsComponent {
   private currentPartnerId: string;
 
   constructor(private activeRoute: ActivatedRoute, private headerFactory: TicketHeaderRepoFactory, private router: Router) {
-        activeRoute.params.subscribe(params => {
+        activeRoute.parent.params.subscribe(params => {
 
         this.currentPartnerId = params['id'];
+
+        if(!this.currentPartnerId) {
+          throw "Assert: !this.currentPartnerId"
+        }
 
         this.headerFactory.createForPartner(this.currentPartnerId)
           .get()
