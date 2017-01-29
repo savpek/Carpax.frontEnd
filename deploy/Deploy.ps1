@@ -14,17 +14,22 @@ if(Test-Path $distFolder) {
 }
 
 Push-Location $root
-npm install
-ng build --prod --env=$Target
+    npm install
+    ng build --prod --env=$Target
 
-git clone https://github.com/savpek/Carpax.webapp.built.git $distFolder
+    $indexHtml = (Get-Content "$root\dist\index.html" | Out-String) -replace "<base href=`"/`">","<base href=`"/app/`">"
+    $indexHtml | Set-Content "$root\dist\index.html"
 
-Copy-Item "$root\dist\" "$distFrontendFolder" -Recurse -Force
-Copy-Item "$PsScriptRoot\assets\*" "$distFrontendFolder" -Recurse -Force
+    git clone https://github.com/savpek/Carpax.webapp.built.git $distFolder
 
-if($Push) {
-    Push-Location $distFolder
-    git add . -A
-    git commit -am "Deployment script."
-    git push
-}
+    Copy-Item "$root\dist\*" "$distFrontendFolder" -Recurse -Force
+    Copy-Item "$PsScriptRoot\assets\*" "$distFrontendFolder" -Recurse -Force
+
+    if($Push) {
+        Push-Location $distFolder
+            git add . -A
+            git commit -am "Deployment script."
+            git push
+        Pop-Location
+    }
+Pop-Location
