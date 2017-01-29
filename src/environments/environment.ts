@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   base: 'http://localhost:4200',
   apiBase: 'http://localhost:5000/api',
-  authBase: 'http://localhost:5000/auth'
+  authBase: 'http://localhost:5000/api/auth'
 };

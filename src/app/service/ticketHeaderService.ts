@@ -67,14 +67,15 @@ export class TicketHeaderService implements ITicketHeaderRepo {
         repo.get()
         .subscribe(x => {
             this.allTickets = x;
-            this.subject.next(this.allTickets.slice());
+            this.refresh();
         });
     }
 
     private refresh() {
         this.subject.next(this.allTickets
             .filter(this.textfilterFunc)
-            .filter(this.stateFilterFunc));
+            .filter(this.stateFilterFunc)
+            .sort((a,b) => a.lastModified > b.lastModified ? -1 : 1));
     }
 
     public get(): Observable<ITicketHeader[]> {
