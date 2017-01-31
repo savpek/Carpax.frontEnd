@@ -36,12 +36,20 @@ export class Auth {
         }
     }
 
+    private getLogoutTimeInSeconds() {
+        return this.currentLogin.getInfo().expires - moment().unix();
+    }
+
     private setLogoutTimer() {
         if(this.logoutSubscriber) {
             this.logoutSubscriber.unsubscribe();
         }
 
-        this.logoutSubscriber = Observable.timer(this.currentLogin.getInfo().expires * 1000 - 20)
+        if(this.getLogoutTimeInSeconds() <= 0) {
+            this.route.navigate(['/customer', 'login']);
+        }
+
+        this.logoutSubscriber = Observable.timer(this.getLogoutTimeInSeconds() * 1000)
             .subscribe(x => this.route.navigate(['/customer', 'login']));
     }
 
@@ -139,7 +147,7 @@ class Login implements ILogin {
                     name: asObject.name,
                     customerName: asObject.customerName,
                     token: asObject.access_token,
-                    expires: asObject.expires_in
+                    expires: moment().unix() + asObject.expires_in
                 };
                 return this.loginInformation;
         });
