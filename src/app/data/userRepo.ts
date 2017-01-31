@@ -21,11 +21,11 @@ export class UserRepo {
         return this.resource.get();
     }
 
-    public Add(user: IUser) {
-        this.resource.post(user, x => x.userName);
+    public Add(user: IUser): Observable<any> {
+        return this.resource.post(user, x => x.userName);
     }
 
-    public Delete(user: IUser) {
-        this.resource.delete(user, x => x.userName);
+    public Delete(user: IUser): Observable<any> {
+        return this.resource.delete(user, x => x.userName);
     }
 }

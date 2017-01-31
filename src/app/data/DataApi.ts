@@ -45,10 +45,11 @@ export class Resources<T> {
         if (this.current.length === 0) {
             this.http.get(`${environment.apiBase}/${this.resourcePath}`)
                 .map(response => response.json())
-                .map(data => Utils.unwrapResult<T[]>(data))
                 .subscribe(result => {
-                    this.current = result;
-                    this.subject.next(this.current.slice());
+                    Utils.unwrapResult<T[]>(result, data => {
+                        this.current = data;
+                        this.subject.next(this.current.slice());
+                    }, error => this.subject.error(error));
                 });
         }
 
@@ -56,29 +57,37 @@ export class Resources<T> {
     }
 
     public post(data: any, idSelector: (x: T) => any): Observable<T[]> {
+        let postSubject = new Subject<T[]>();
+
         this.http.post(`${environment.apiBase}/${this.resourcePath}`, data)
             .map(response => response.json())
-            .map(data => Utils.unwrapResult<T[]>(data))
             .subscribe(result => {
-                // Remove updated.
-                this.current = this.current.filter(c => !result.find(r => idSelector(r) == idSelector(c)));
+                Utils.unwrapResult<T[]>(result, data => {
+                    // Remove updated.
+                    this.current = this.current.filter(c => !data.find(r => idSelector(r) == idSelector(c)));
 
-                result.forEach(x => this.current.push(x))
+                    data.forEach(x => this.current.push(x))
 
-                this.subject.next(this.current.slice());
+                    this.subject.next(this.current.slice());
+                    postSubject.next(this.current.slice());
+                }, 
+                error => postSubject.error(error));
             });
 
-        return this.subject;
+        return postSubject;
     }
 
     public delete(target: T, idSelector: (x: T) => any): Observable<T[]> {
+        let deleteSubject = new Subject<T[]>();
+        
         this.http.delete(`${environment.apiBase}/${this.resourcePath}/${idSelector(target)}`)
             .subscribe(result => {
                 this.current = this.current.filter(c => idSelector(c) !== idSelector(target));
                 this.subject.next(this.current.slice());
+                deleteSubject.next(this.current.slice());
             });
 
-        return this.subject;
+        return deleteSubject;
     }
 }
 
