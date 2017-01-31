@@ -42,7 +42,7 @@ export class TicketHeaderService implements ITicketHeaderRepo {
 
     private textfilterFunc = (x: ITicketHeader) : boolean => {
         let isMatch = (item) =>
-            item && item.match(`.*${this.regex}.*`);
+            item && item.toLowerCase().match(`.*${this.regex.toLocaleLowerCase()}.*`);
 
         if (this.regex) {
             return isMatch(x.registerPlate) || isMatch(x.customer) || isMatch(x.model);
