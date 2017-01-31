@@ -1,6 +1,7 @@
 import { TicketHeaderServiceFactory, ITicketHeaderFilter, TicketState } from '../../service/ticketHeaderService';
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'cx-ticket-filter',
@@ -12,9 +13,14 @@ export class TicketFilterComponent {
   private filter: Subject<string> = new Subject<string>();
   private headerFilter: ITicketHeaderFilter;
 
-  constructor(private headerService: TicketHeaderServiceFactory) {
-    this.headerFilter = this.headerService.create();
-
+  constructor(private headerService: TicketHeaderServiceFactory, private activeRoute: ActivatedRoute) {
+    activeRoute.params.subscribe(params => {
+      if (params['partnerId']) {
+        this.headerFilter = this.headerService.createForPartner(params['partnerId']);
+      } else {
+        this.headerFilter = this.headerService.create();
+      }
+  })
     this.filter
       .debounceTime(500)
       .subscribe(x =>

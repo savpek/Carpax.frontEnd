@@ -11,7 +11,7 @@ import { NotificationRepo } from 'app/data/notificationRepo';
   selector: 'cx-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss'],
-  providers: [AttachedPartnerRepo, TicketHeaderRepoFactory, TicketHeaderServiceFactory]
+  providers: [AttachedPartnerRepo, TicketHeaderServiceFactory, TicketHeaderRepoFactory]
 })
 export class TicketsComponent {
   public tickets: ITicketHeader[];

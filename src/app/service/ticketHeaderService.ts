@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toArray';
 @Injectable()
 export class TicketHeaderServiceFactory {
     private headerService: TicketHeaderService;
+    private partnerHeaderService: TicketHeaderService;
 
     constructor(private factory: TicketHeaderRepoFactory) {
     }
@@ -20,7 +21,12 @@ export class TicketHeaderServiceFactory {
     }
 
     public createForPartner(partnerId: string): TicketHeaderService {
-        return new TicketHeaderService(this.factory.createForPartner(partnerId));
+        if (this.partnerHeaderService) {
+            return this.partnerHeaderService;
+        }
+
+        this.partnerHeaderService = new TicketHeaderService(this.factory.createForPartner(partnerId));
+        return this.partnerHeaderService;
     }
 }
 
