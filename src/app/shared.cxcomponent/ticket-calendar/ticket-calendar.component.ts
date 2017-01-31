@@ -53,7 +53,7 @@ export class TicketCalendarComponent {
                     start: x.workStartDate,
                     end: this.getEndDate(x),
                     allDay: true,
-                    url: `./edit/${x.id}`,
+                    url: `./customer/edit/${x.id}/fields`,
                     color: this.getEventColor(x)
                 }});
 
