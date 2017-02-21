@@ -16,7 +16,7 @@ export class EditComponent {
     { path: 'fields', text: 'Tiedot' },
     { path: 'files', text: 'Liitteet' },
     { path: 'feedback', text: 'Palaute' },
-    { path: 'expenses', text: 'Kulut' }
+    { path: 'expenses', text: 'Osat & Työt' }
   ];
 
   private notifications: INotification[] = [];

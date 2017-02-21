@@ -11,6 +11,6 @@ public routes: ITabRoute[] = [
     { path: './', text: 'Tiedot' },
     { path: 'files', text: 'Liitteet' },
     { path: 'feedback', text: 'Palaute' },
-    { path: 'expenses', text: 'Kulut' }
+    { path: 'expenses', text: 'Osat & Työt' }
   ];
 }
