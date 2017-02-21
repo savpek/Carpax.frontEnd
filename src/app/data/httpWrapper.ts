@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Auth } from 'app/service/auth';
 import { LoadingBar } from '../service/loadingBar';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class HttpWrapper {
@@ -17,27 +17,23 @@ export class HttpWrapper {
 
         this.loadingBar.operationStarted();
 
-        observable
-            .subscribe(
+        return observable
+            .do(
                 null, 
                 e => this.loadingBar.operationStopped(), 
                 () => this.loadingBar.operationStopped());
-
-        return observable;
     }
 
     public post(resource: string, data: any): Observable<Response> {
         let observable = this.http.post(resource, data, { headers: this.getHeader() });
-        
+       
         this.loadingBar.operationStarted();
 
-        observable
-            .subscribe(
+        return observable
+            .do(
                 null, 
                 e => this.loadingBar.operationStopped(), 
                 () => this.loadingBar.operationStopped());
-
-        return observable;
     }
 
     public delete(resource: string): Observable<Response> {
@@ -45,12 +41,10 @@ export class HttpWrapper {
         
         this.loadingBar.operationStarted();
 
-        observable
-            .subscribe(
+        return observable
+            .do(
                 null, 
                 e => this.loadingBar.operationStopped(), 
                 () => this.loadingBar.operationStopped());
-
-        return observable;
     }
 }
