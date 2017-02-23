@@ -18,9 +18,9 @@ export class TicketExpensesFormComponent {
   public workRows: any[] = [];
 
   public partStates: any[] = [
-    { text: 'Saapunut', value: 0, color: 'green' },
+    { text: 'Saapunut', value: 2, color: 'green' },
     { text: 'Tilattu', value: 1, color: 'yellow' },
-    { text: 'Tilaamatta', value: 2 },
+    { text: 'Tilaamatta', value: 0 },
   ];
 
   private currentTicket: string;
@@ -67,6 +67,7 @@ export class TicketExpensesFormComponent {
       price: 0,
       amount: 0,
       discount: 0,
+      status: 0,
       transient: 'new'
     });
   }
