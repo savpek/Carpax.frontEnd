@@ -27,6 +27,10 @@ export class FormTextInputComponent implements OnChanges {
   }
 
   private applyFormat(text: string): string {
+    if(!text) {
+      return text;
+    }
+
     switch (this.format) {
       case 'uppercase':
         return text.toUpperCase();
