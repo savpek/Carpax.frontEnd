@@ -37,7 +37,7 @@ export class TicketCalendarComponent {
   }
 
   private getEventColor(header: ITicketHeader) {
-    if (!header.workEndDate) {
+    if (!header.ready) {
       return '#f0ad4e';
     }
     return '#449d44';
