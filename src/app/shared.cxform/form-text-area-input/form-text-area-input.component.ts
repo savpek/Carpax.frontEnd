@@ -17,7 +17,7 @@ export class FormTextAreaInputComponent {
   constructor() {}
 
   public rows(): number {
-    let currentCount = this.text.split(/\r\n|\r|\n/).length;
+    let currentCount = this.text ? this.text.split(/\r\n|\r|\n/).length : 0;
 
     if(currentCount <= 5) {
       return 5;
