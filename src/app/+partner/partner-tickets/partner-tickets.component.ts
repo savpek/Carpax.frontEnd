@@ -1,29 +1,30 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
+import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
 
 @Component({
-  template: '<cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>',
-  providers: [TicketHeaderRepoFactory]
+  templateUrl: './partner-tickets.component.html',
+  providers: [TicketHeaderServiceFactory, TicketHeaderRepoFactory]
 })
 export class PartnerTicketsComponent {
   public tickets: ITicketHeader[];
   private currentPartnerId: string;
 
-  constructor(private activeRoute: ActivatedRoute, private headerFactory: TicketHeaderRepoFactory, private router: Router) {
-        activeRoute.parent.params.subscribe(params => {
+  constructor(private activeRoute: ActivatedRoute, private headerFactory: TicketHeaderServiceFactory, private router: Router) {
+    activeRoute.parent.params.subscribe(params => {
 
-        this.currentPartnerId = params['id'];
+      this.currentPartnerId = params['partnerId'];
 
-        if(!this.currentPartnerId) {
-          throw "Assert: !this.currentPartnerId"
-        }
+      if (!this.currentPartnerId) {
+        throw "Assert: !this.currentPartnerId"
+      }
 
-        this.headerFactory.createForPartner(this.currentPartnerId)
-          .get()
-          .subscribe(x => {
-            this.tickets = x;
-          });
+      this.headerFactory.createForPartner(this.currentPartnerId)
+        .get()
+        .subscribe(x => {
+          this.tickets = x;
+        });
     });
   }
 

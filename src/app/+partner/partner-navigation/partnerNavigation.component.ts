@@ -17,8 +17,8 @@ export class PartnerNavigationComponent {
 
   public logoutPartner() {
     this.activeRoute.params.subscribe(x => {
-      if (x['id']) {
-        this.route.navigate(['partner', x['id'], 'login']);
+      if (x['partnerId']) {
+        this.route.navigate(['partner', x['partnerId'], 'login']);
       }
     });
   }

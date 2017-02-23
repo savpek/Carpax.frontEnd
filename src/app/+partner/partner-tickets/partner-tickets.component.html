@@ -1,0 +1,10 @@
+<div>
+    <div>
+        <div class="filter-row">
+            <div class="filter-block">
+                <cx-ticket-filter mode="partner"></cx-ticket-filter>
+            </div>
+        </div>
+        <cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { TicketHeaderServiceFactory, ITicketHeaderFilter, TicketState } from '../../service/ticketHeaderService';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,22 +9,31 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ticket-filter.component.scss'],
   providers: []
 })
-export class TicketFilterComponent {
+export class TicketFilterComponent implements OnInit {
   private filter: Subject<string> = new Subject<string>();
   private headerFilter: ITicketHeaderFilter;
 
+  @Input()
+  public mode: string = "customer"
+
   constructor(private headerService: TicketHeaderServiceFactory, private activeRoute: ActivatedRoute) {
-    activeRoute.params.subscribe(params => {
-      if (params['partnerId']) {
-        this.headerFilter = this.headerService.createForPartner(params['partnerId']);
-      } else {
-        this.headerFilter = this.headerService.create();
-      }
-  })
     this.filter
       .debounceTime(500)
       .subscribe(x =>
         this.headerFilter.textFilter(x));
+  }
+
+  ngOnInit() {
+    switch(this.mode) {
+      case "customer":
+        this.activeRoute.params.subscribe(params => this.headerFilter = this.headerService.create());
+        break;
+      case "partner":
+        this.activeRoute.parent.params.subscribe(params => this.headerFilter = this.headerService.createForPartner(params['partnerId']));
+        break;
+      default:
+        throw `Invalid ticket filter mode '${this.mode}'`
+    }
   }
 
   public textFilterChanged($newValue) {
@@ -32,7 +41,7 @@ export class TicketFilterComponent {
   }
 
   public showReadyFilter(value: string) {
-    switch(value) {
+    switch (value) {
       case 'nonready':
         this.headerFilter.stateFilter(TicketState.nonready);
         break;

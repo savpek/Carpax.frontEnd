@@ -45,8 +45,6 @@ export class TicketsComponent {
             this.tickets = x;
           });
       }
-
-
     });
 
     this.attachedPartnerRepo.get()

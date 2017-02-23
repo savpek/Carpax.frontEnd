@@ -22,7 +22,7 @@ export class PartnerLoginComponent {
       private router: Router,
       private toast: ToastsManager) {
     this.activeRoute.params.subscribe(x => {
-      this.id = x['id'];
+      this.id = x['partnerId'];
       this.partnerRepo.GetById(this.id)
         .subscribe(partner => this.name = partner.name);
     });

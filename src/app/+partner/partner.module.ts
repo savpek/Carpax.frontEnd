@@ -17,7 +17,7 @@ import { PartnerNavigationComponent } from './partner-navigation/partnerNavigati
 
 const routes: any = [
     {
-        path: ':id',
+        path: ':partnerId',
         component: PartnerRootComponent,
         canActivate: [RequiresPartnerLoginGuard],
         children: [
@@ -40,7 +40,7 @@ const routes: any = [
         ]
     },
     {
-        path: ':id/login',
+        path: ':partnerId/login',
         component: PartnerLoginComponent,
     }
 ];
