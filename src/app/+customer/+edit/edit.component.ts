@@ -20,7 +20,7 @@ export class EditComponent {
     { path: 'expenses', text: 'Osat & Työt' }
   ];
 
-  constructor(notificationRepo: NotificationRepo, private route: ActivatedRoute) {
+  constructor(private notificationRepo: NotificationRepo, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       notificationRepo.getForTicket(params['id'])
         .subscribe(notifications => {
@@ -39,6 +39,8 @@ export class EditComponent {
                 this.routes.find(x => x.path === 'expenses').hasNew = true;
                 break;
             }
+
+            this.notificationRepo.clear(n);
           });
         });
     })

@@ -25,6 +25,6 @@ export class NotificationRepo {
     }
 
     public clear(notification: INotification) {
-        this.resources.delete(notification, x => `${x.type}_${x.ticketId}`)
+        this.resources.delete(notification, x => `${x.ticketId}/${x.type}`)
     }
 }
