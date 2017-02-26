@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
-import { DataApiFactory, DataApi } from './DataApi';
+import { DataApiFactory, DataApi, Resource, Resources, ResourceFactory } from './DataApi';
 
 export interface INotification {
     ticketId: string;
-    notificationType: string;
+    type: string;
 }
 
 @Injectable()
 export class NotificationRepo {
-    private api: DataApi<INotification>;
+    private resources: Resources<INotification>;
 
-    constructor(apiFactory: DataApiFactory) {
-        this.api = apiFactory.create<INotification>();
+    constructor(private resourceFactory: ResourceFactory) {
+        this.resources = resourceFactory.createMany<INotification>(`notification`);
     }
 
     public get(): Observable<INotification[]> {
-        return this.api.get(`notification/`);
+        return this.resources.get();
+    }
+
+    public getForTicket(ticketId: string): Observable<INotification[]> {
+        return this.resourceFactory.createMany<INotification>(`notification/${ticketId}`).get();
     }
 
     public clear(notification: INotification) {
+        this.resources.delete(notification, x => `${x.type}_${x.ticketId}`)
     }
 }

@@ -16,3 +16,9 @@ tr.mouseover {
 tr.ticketready {
     color: darken($main-color, 30%);
 }
+
+i.new-items-marker {
+    color:lighten( red, 10%);
+    padding-left: 5px;
+    padding-right: 0px;
+}

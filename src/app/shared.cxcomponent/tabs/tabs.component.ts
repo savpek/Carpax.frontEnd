@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 export interface ITabRoute {
   path: string;
   text: string;
+  hasNew?: boolean;
 }
 
 @Component({

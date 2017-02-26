@@ -41,3 +41,7 @@
 .active {
     border-bottom: 2px solid darken($main-color, 20%) !important;
 }
+
+.fa-exclamation {
+    color: lighten( red, 10%);
+}
