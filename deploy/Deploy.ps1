@@ -22,9 +22,6 @@ Push-Location $root
 
     git clone https://github.com/savpek/Carpax.webapp.built.git $distFolder
 
-    Copy-Item "$root\dist\*" "$distFrontendFolder" -Recurse -Force
-    Copy-Item "$PsScriptRoot\assets\*" "$distFrontendFolder" -Recurse -Force
-
     Push-Location $distFolder
         switch ($Target) {
             "staging" { git checkout master }
@@ -32,12 +29,14 @@ Push-Location $root
             default { throw "Invalid target" }
         }
 
+        Copy-Item "$root\dist\*" "$distFrontendFolder" -Recurse -Force
+        Copy-Item "$PsScriptRoot\assets\*" "$distFrontendFolder" -Recurse -Force
+
         git add . -A
         git commit -am "Deployment script."
 
-    if($Push) {
-        git push
-    }
-    
+        if($Push) {
+            git push
+        }
     Pop-Location
 Pop-Location
