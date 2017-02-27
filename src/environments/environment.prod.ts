@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  base: 'http://carpaxstage.azurewebsites.net/app/',
-  apiBase: 'http://localhost:5000/api',
-  authBase: 'http://localhost:5000/auth'
+  base: 'https://www.carpax.fi/app',
+  apiBase: 'https://www.carpax.fi/api',
+  authBase: 'https://www.carpax.fi/api/auth'
 };

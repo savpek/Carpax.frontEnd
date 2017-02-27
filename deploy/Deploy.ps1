@@ -1,6 +1,6 @@
 [CmdletBinding()]
 Param(
-    [ValidateSet("staging")]
+    [ValidateSet("staging", "prod")]
     [Parameter(Mandatory)][string]$Target,
     [switch]$Push
 )
@@ -25,11 +25,19 @@ Push-Location $root
     Copy-Item "$root\dist\*" "$distFrontendFolder" -Recurse -Force
     Copy-Item "$PsScriptRoot\assets\*" "$distFrontendFolder" -Recurse -Force
 
+    Push-Location $distFolder
+        switch ($Target) {
+            "staging" { git checkout master }
+            "prod" { git checkout prod }
+            default { throw "Invalid target" }
+        }
+
+        git add . -A
+        git commit -am "Deployment script."
+
     if($Push) {
-        Push-Location $distFolder
-            git add . -A
-            git commit -am "Deployment script."
-            git push
-        Pop-Location
+        git push
     }
+    
+    Pop-Location
 Pop-Location
