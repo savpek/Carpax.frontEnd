@@ -21,7 +21,9 @@ export class TicketListComponent {
 
   constructor(private notificationRepo: NotificationRepo) {
     notificationRepo.get()
-      .subscribe(x => this.notifications = x);
+      .subscribe(notifications => {
+        this.notifications = notifications;
+      });
   }
 
   public hasNew(ticketId: string) {

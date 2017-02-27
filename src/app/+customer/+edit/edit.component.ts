@@ -43,6 +43,6 @@ export class EditComponent {
             this.notificationRepo.clear(n);
           });
         });
-    })
+    });
   }
 }

@@ -23,8 +23,6 @@ export class TicketsComponent {
   public views: any[] = [{ icon: 'fa-list', value: 'list' }, { icon: 'fa-calendar', value: 'calendar' }];
   public currentView = 'list';
 
-  private notificationLookup: any = {};
-
   constructor(
     private headerFactory: TicketHeaderServiceFactory,
     private router: Router,
