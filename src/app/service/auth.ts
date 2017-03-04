@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { LocalStorage } from './localStorage';
 import {  } from 'rxjs';
 import { Router } from '@angular/router';
+import { LoadingBar } from './loadingBar';
 export interface ICurrentLogin {
     type?: string;
     name?: string;
@@ -25,11 +26,11 @@ export class Auth {
     private currentUserSubject: BehaviorSubject<ICurrentLogin> =
         new BehaviorSubject<ICurrentLogin>(this.currentLogin.getInfo());
 
-    constructor(private http: Http, private storage: LocalStorage, private route: Router) {
+    constructor(private http: Http, private storage: LocalStorage, private route: Router, private loadingBar: LoadingBar) {
         let current = storage.get('login');
 
         if (current && current.type) {
-            this.currentLogin = new Login(this.http, current.type, current);
+            this.currentLogin = new Login(this.http, current.type, loadingBar, current);
             this.currentUserSubject.next(this.currentLogin.getInfo());
 
             this.setLogoutTimer();
@@ -54,7 +55,8 @@ export class Auth {
     }
 
     public login(userName: string, password: string): Observable<ICurrentLogin> {
-        let login = new Login(this.http, 'user');
+        let login = new Login(this.http, 'user', this.loadingBar);
+
 
         return login.login('user/token/', { userName: userName, password: password })
             .map(user => {
@@ -69,9 +71,12 @@ export class Auth {
     }
 
     public loginPartner(id: string, pin: string): Observable<ICurrentLogin>  {
-        let login = new Login(this.http, 'partner');
+        let login = new Login(this.http, 'partner', this.loadingBar);
+
+        this.loadingBar.operationStarted();
 
         return login.login('partner/token/', { id: id, pin: pin })
+
             .map(user => {
                 this.currentLogin = login;
                 this.storage.set('login', this.currentLogin.getInfo());
@@ -126,7 +131,7 @@ class NotLoggedIn implements ILogin {
 }
 
 class Login implements ILogin {
-    constructor(private http: Http, private type: string, private loginInformation?: ICurrentLogin) {
+    constructor(private http: Http, private type: string, private loadingBar: LoadingBar ,private loginInformation?: ICurrentLogin) {
     }
 
     public getInfo() {
@@ -138,8 +143,12 @@ class Login implements ILogin {
     }
 
     public login(resource: string, loginObject: any) {
-        return this.http.post(`${environment.authBase}/${resource}`, loginObject).map(
-            response => {
+        return this.http.post(`${environment.authBase}/${resource}`, loginObject)
+            .do(
+                null, 
+                e => this.loadingBar.operationStopped(), 
+                () => this.loadingBar.operationStopped())
+            .map(response => {
                 let asObject = response.json();
 
                 this.loginInformation = {
