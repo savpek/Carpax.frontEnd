@@ -260,3 +260,7 @@ router-outlet ~ * > div, router-outlet ~ * > * > div, router-outlet ~ * > * > bu
 img.image-in-modal {
     width: 100% !important
 }
+
+div.modal-lg {
+    width: 93%;
+}
