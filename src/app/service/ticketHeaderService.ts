@@ -2,13 +2,14 @@ import { TicketHeaderRepoFactory, ITicketHeaderRepo, ITicketHeader } from '../da
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/toArray';
+import { LocalStorage } from './localStorage';
 
 @Injectable()
 export class TicketHeaderServiceFactory {
     private headerService: TicketHeaderService;
     private partnerHeaderService: TicketHeaderService;
 
-    constructor(private factory: TicketHeaderRepoFactory) {
+    constructor(private factory: TicketHeaderRepoFactory, private storage: LocalStorage) {
     }
 
     public create(): TicketHeaderService {
@@ -16,7 +17,7 @@ export class TicketHeaderServiceFactory {
             return this.headerService;
         }
 
-        this.headerService = new TicketHeaderService(this.factory.create());
+        this.headerService = new TicketHeaderService(this.factory.create(), this.storage);
         return this.headerService;
     }
 
@@ -25,7 +26,7 @@ export class TicketHeaderServiceFactory {
             return this.partnerHeaderService;
         }
 
-        this.partnerHeaderService = new TicketHeaderService(this.factory.createForPartner(partnerId));
+        this.partnerHeaderService = new TicketHeaderService(this.factory.createForPartner(partnerId), this.storage);
         return this.partnerHeaderService;
     }
 }
@@ -69,7 +70,12 @@ export class TicketHeaderService implements ITicketHeaderRepo {
         }
     }
 
-    constructor(private repo: ITicketHeaderRepo) {
+    constructor(private repo: ITicketHeaderRepo, private storage: LocalStorage) {
+        let stateIfAny = this.storage.get('currentStateFilter');
+        if(stateIfAny !== null) {
+            this.state = <TicketState>stateIfAny;
+        }
+
         repo.get()
         .subscribe(x => {
             this.allTickets = x;
@@ -96,6 +102,9 @@ export class TicketHeaderService implements ITicketHeaderRepo {
 
     public stateFilter(state: TicketState): TicketState {
         this.state = state;
+
+        this.storage.set('currentStateFilter', this.state);
+        
         this.refresh();
         return state;
     }

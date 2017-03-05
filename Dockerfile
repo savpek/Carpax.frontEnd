@@ -1,4 +1,4 @@
-FROM node:7.7
+FROM node:6.6
 
 COPY ./ /usr/var/src/
 
