@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FileRepo, FileEntry } from '../../../data/fileRepo';
+import { FileRepo, FileEntry } from 'app/data/fileRepo';
 
 @Component({
   selector: 'cx-file-thumbnail',

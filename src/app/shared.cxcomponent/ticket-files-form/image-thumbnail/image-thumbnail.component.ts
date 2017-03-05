@@ -1,6 +1,6 @@
-import { FileRepo, FileEntry } from '../../../data/fileRepo';
+import { FileRepo, FileEntry } from 'app/data/fileRepo';
 import { Component, Input } from '@angular/core';
-import { CxModal } from '../../../service/modal';
+import { CxModal } from 'app/service/modal';
 
 @Component({
   selector: 'cx-image-thumbnail',

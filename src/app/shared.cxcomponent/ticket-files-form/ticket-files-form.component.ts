@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileRepo, FileEntry } from '../../data/fileRepo';
+import { FileRepo, FileEntry } from 'app/data/fileRepo';
 
 @Component({
   selector: 'cx-ticket-files-form',

@@ -1,4 +1,4 @@
-import { FileEntry, FileRepo } from '../../../data/fileRepo';
+import { FileEntry, FileRepo } from 'app/data/fileRepo';
 import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
 
