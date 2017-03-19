@@ -37,6 +37,10 @@ export class FormTextInputSmallComponent {
     switch (this.format) {
       case 'uppercase':
         return text.toUpperCase();
+      case 'money':
+        return text.replace(",",".");
+      case 'percent':
+        return text.replace(",",".");
       default:
         return text;
     }
