@@ -34,7 +34,7 @@ export class NewFormComponent {
 
   public save() {
       // Delay is fix to azure table atomic operation issue.
-      this.saveRoutine().delay(1500).subscribe(() => {
+      this.saveRoutine().delay(2500).subscribe(() => {
         this.form.submitted();
         this.router.navigate(['customer', 'edit', this.ticket.id, 'fields']);
       });
