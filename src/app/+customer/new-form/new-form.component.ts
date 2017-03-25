@@ -13,7 +13,7 @@ import { Uuid } from './utils';
 })
 export class NewFormComponent {
   public ticket: ITicket = {
-    id: ''
+    id: Uuid.create()
   };
 
   public currentPartnerId: string;
@@ -23,8 +23,6 @@ export class NewFormComponent {
     private ticketRepo: TicketRepo,
     private partnerRepo: PartnerRepo,
     private form: FormContext) {
-      let ticketId = Uuid.create();
-      this.ticketRepo.Get(ticketId).subscribe(ticket => this.ticket = ticket);
   }
 
   private saveRoutine() {
@@ -33,8 +31,7 @@ export class NewFormComponent {
   }
 
   public save() {
-      // Delay is fix to azure table atomic operation issue.
-      this.saveRoutine().delay(2500).subscribe(() => {
+      this.saveRoutine().subscribe(() => {
         this.form.submitted();
         this.router.navigate(['customer', 'edit', this.ticket.id, 'fields']);
       });

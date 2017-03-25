@@ -34,7 +34,7 @@ export class EditFormComponent extends CanDeactivateForm {
     this.activeRoute.parent.params.subscribe(params => {
       let ticketId = params['id'];
 
-      this.ticketRepo.Get(ticketId).subscribe(ticket => { 
+      this.ticketRepo.Get(ticketId).retry(10).subscribe(ticket => { 
         this.ticket = ticket
         this.changeDetect.detectChanges();
       });
@@ -71,6 +71,7 @@ export class EditFormComponent extends CanDeactivateForm {
 
   public extracActions(event) {
     this.ticketRepo.Delete(this.ticket)
-      .subscribe(() => this.router.navigateByUrl('/'));
+      .subscribe(() => 
+        this.router.navigateByUrl('/'));
   }
 }

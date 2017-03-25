@@ -30,10 +30,14 @@ export class ResourceFactory {
     public createMany<T>(resource: string): Resources<T> {
         return new Resources<T>(resource, this.http, this.auth)
     }
+
+    public create<T>(resource: string): Resource<T> {
+        return new Resource<T>(resource, this.http, this.auth)
+    }
 }
 
 export class Resources<T> {
-        private subject: BehaviorSubject<T[]> = new BehaviorSubject([]);
+    private subject: BehaviorSubject<T[]> = new BehaviorSubject([]);
     private current: T[] = [];
 
     constructor(
@@ -92,6 +96,53 @@ export class Resources<T> {
 }
 
 export class Resource<T> {
+    private subject: Subject<T> = new Subject();
+
+    constructor(
+        private resourcePath: string,
+        private http: HttpWrapper,
+        private auth: Auth) {}
+
+    public get(): Observable<T> {
+        this.http.get(`${environment.apiBase}/${this.resourcePath}`)
+            .map(response => response.json())
+            .subscribe(result => {
+                Utils.unwrapResult<T>(result, data => {
+                    this.subject.next(data);
+                }, error => this.subject.error(error));
+            });
+
+        return this.subject;
+    }
+
+    public post(data: any): Observable<T> {
+        let postSubject = new Subject<T>();
+
+        this.http.post(`${environment.apiBase}/${this.resourcePath}`, data)
+            .map(response => response.json())
+            .subscribe(result => {
+                Utils.unwrapResult<T>(result, data => {
+                    this.subject.next(data);
+                    postSubject.next(data);
+                }, 
+                error => postSubject.error(error));
+            });
+
+        return postSubject;
+    }
+
+    public delete(): Observable<void> {
+        let deleteSubject = new Subject<void>();
+        
+        this.http.delete(`${environment.apiBase}/${this.resourcePath}`)
+            .map(response => response.json())
+            .subscribe(result => {
+                this.subject.next();
+                deleteSubject.next();
+            }, error => deleteSubject.error(error));
+
+        return deleteSubject;
+    }
 }
 
 export class DataApi<T> {

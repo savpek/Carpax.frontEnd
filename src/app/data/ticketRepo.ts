@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { DataApiFactory, DataApi } from './DataApi';
+import { DataApiFactory, DataApi, Resource, ResourceFactory } from './DataApi';
 
 export interface ITicket {
     id: string;
@@ -9,25 +9,22 @@ export interface ITicket {
 
 @Injectable()
 export class TicketRepo {
-    private api: DataApi<ITicket>;
-
-    constructor(apiFactory: DataApiFactory) {
-        this.api = apiFactory.create<ITicket>();
+    constructor(private apiFactory: ResourceFactory) {
     }
 
     public Get(id: string): Observable<ITicket> {
-        return this.api.getSingle(`ticket/${id}`);
+        return this.apiFactory.create(`ticket/${id}`).get();
     }
 
-    public Add(ticket: ITicket) {
-        return this.api.post(`ticket/${ticket.id}`, ticket);
+    public Add(ticket: ITicket): Observable<ITicket> {
+        return this.apiFactory.create(`ticket/${ticket.id}`).post(ticket);
     }
 
-    public Update(ticket: ITicket) {
-        return this.api.post(`ticket/${ticket.id}`, ticket);
+    public Update(ticket: ITicket): Observable<ITicket> {
+        return this.apiFactory.create(`ticket/${ticket.id}`).post(ticket);
     }
 
-    public Delete(ticket: ITicket) {
-        return this.api.delete(`ticket/${ticket.id}`, x => x.id);
+    public Delete(ticket: ITicket): Observable<void> {
+        return this.apiFactory.create(`ticket/${ticket.id}`).delete();
     }
 }
