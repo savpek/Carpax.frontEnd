@@ -46,18 +46,16 @@ export class FormTextInputSmallComponent {
     }
   }
 
-  keyUpPress(event: any) {
+  inputEvent(event: any) {
       this.entry.isDirty = true;
       this.text = this.applyFormat(event.target.value);
       this.textChange.emit(this.text);
   }
 
   keyPress(event: any) {
-      let inputChar = String.fromCharCode(event.charCode);
-
       let matcher = new RegExp(this.constraint, 'i')
 
-      if (!matcher.test(inputChar)) {
+      if (!matcher.test(event.key)) {
         event.preventDefault();
         return;
       }
