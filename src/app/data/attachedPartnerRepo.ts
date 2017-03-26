@@ -19,8 +19,9 @@ export class AttachedPartnerRepo {
         return this.resource.get();
     }
 
-    public add(attachedPartner: IAttachedPartner) {
-        this.resource.post(attachedPartner, x => x.partnerId);
+    public add(attachedPartner: IAttachedPartner): Observable<void> {
+        return this.resource.post(attachedPartner, x => x.partnerId)
+            .map(x => {});
     }
 
     public delete(attachedPartner: IAttachedPartner) {

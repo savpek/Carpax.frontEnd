@@ -6,6 +6,7 @@ export default class Utils {
             handler(target);
         }
         else if(!target.isSuccess && target.error && errorHandler) {
+            console.error("Result returned error:", target.error);
             errorHandler(target.error);
         }
         else {

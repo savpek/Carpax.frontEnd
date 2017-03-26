@@ -7,7 +7,7 @@
       <cx-form-text-input-small *ngIf="partner.transient !== 'delete'" (click)="changeIdModal(partner)" headerText="Id" [(text)]="partner.partnerId" [disabled]="partner.transient !== 'new'" placeholder="2fb1ffb4-528e-4757-a7c4-798820610cd5"></cx-form-text-input-small>
     </div>
     <div class="col-lg-2 col-md-2 col-xs-12">
-      <cx-form-text-input-small maxlength="4" *ngIf="partner.transient && partner.transient !== 'delete'" headerIcon="fa-key" [text]="partner.pin" format="uppercase"></cx-form-text-input-small>
+      <cx-form-text-input-small maxlength="4" *ngIf="partner.transient && partner.transient !== 'delete'" headerIcon="fa-key" [(text)]="partner.pin" format="uppercase"></cx-form-text-input-small>
     </div>
     <div class="input-group col-lg-1 col-md-1 col-xs-12">
       <cx-button *ngIf="partner.transient !== 'delete'" icon="fa-times" text="Poista" class="pull-right" (action)="delete(partner)"></cx-button>

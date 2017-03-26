@@ -21,7 +21,9 @@ export class ControlPanelAttachedPartnersComponent {
 
   public save() {
     let current = this.attachedPartners;
-    current.filter(x => x.transient === 'new').forEach(x => this.attachedPartnerRepo.add(x));
+    current.filter(x => x.transient === 'new')
+      .forEach(x => this.attachedPartnerRepo.add(x)
+        .subscribe(_ => {}, err => this.toast.error("Virheellinen tunniste tai PIN")));
     current.filter(x => x.transient === 'delete').forEach(x => this.attachedPartnerRepo.delete(x));
   }
 

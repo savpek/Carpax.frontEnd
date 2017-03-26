@@ -76,7 +76,7 @@ export class Resources<T> {
                     postSubject.next(this.current.slice());
                 }, 
                 error => postSubject.error(error));
-            });
+            }, error => postSubject.error(error));
 
         return postSubject;
     }
