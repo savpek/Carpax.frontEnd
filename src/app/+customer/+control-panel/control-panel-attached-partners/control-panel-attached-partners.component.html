@@ -1,12 +1,15 @@
 <div class="cx-row" *ngFor="let partner of attachedPartners" [class.dirty]="!!partner.transient">
   <div class="row">
-    <div class="col-lg-5 col-md-5 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-xs-12">
       <cx-form-text-input-small *ngIf="partner.transient !== 'delete'" headerIcon="fa-info" [(text)]="partner.description" [disabled]="partner.transient !== 'new'" placeholder="Yritys OY AB"></cx-form-text-input-small>
     </div>
-    <div class="col-lg-5 col-md-5 col-xs-12">
-      <cx-form-text-input-small *ngIf="partner.transient !== 'delete'" headerText="Id" [(text)]="partner.partnerId" [disabled]="partner.transient !== 'new'" placeholder="2fb1ffb4-528e-4757-a7c4-798820610cd5"></cx-form-text-input-small>
+    <div class="col-lg-4 col-md-4 col-xs-12">
+      <cx-form-text-input-small *ngIf="partner.transient !== 'delete'" (click)="changeIdModal(partner)" headerText="Id" [(text)]="partner.partnerId" [disabled]="partner.transient !== 'new'" placeholder="2fb1ffb4-528e-4757-a7c4-798820610cd5"></cx-form-text-input-small>
     </div>
-    <div class="input-group col-lg-2 col-md-2 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-xs-12">
+      <cx-form-text-input-small maxlength="4" *ngIf="partner.transient && partner.transient !== 'delete'" headerIcon="fa-key" [text]="partner.pin" format="uppercase"></cx-form-text-input-small>
+    </div>
+    <div class="input-group col-lg-1 col-md-1 col-xs-12">
       <cx-button *ngIf="partner.transient !== 'delete'" icon="fa-times" text="Poista" class="pull-right" (action)="delete(partner)"></cx-button>
       <cx-button *ngIf="partner.transient === 'delete'" icon="fa-undo" text="Palauta" class="pull-right" (action)="restore(partner)"></cx-button>
     </div>

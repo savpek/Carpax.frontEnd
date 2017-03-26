@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataApiFactory, DataApi, ResourceFactory, Resources } from './DataApi';
+import { ResourceFactory, Resources } from './DataApi';
 
 export interface ITicketHeader {
         id: string;

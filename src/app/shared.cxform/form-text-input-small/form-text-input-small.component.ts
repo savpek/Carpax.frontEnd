@@ -27,6 +27,8 @@ export class FormTextInputSmallComponent {
 
   @Input() format: string;
 
+  @Input() maxlength: 100000;
+
   @Input() placeholder: string = '';
 
   constructor(private form: FormContext) {

@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { DataApi, DataApiFactory, ResourceFactory, Resources } from './DataApi';
+import { ResourceFactory, Resources } from './DataApi';
 
 export interface IUser {
     userName: string;

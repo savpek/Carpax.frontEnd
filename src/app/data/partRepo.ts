@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { DataApiFactory, DataApi, ResourceFactory, Resources } from './DataApi';
+import { ResourceFactory, Resources } from './DataApi';
 
 export interface IPart {
     id: string;
