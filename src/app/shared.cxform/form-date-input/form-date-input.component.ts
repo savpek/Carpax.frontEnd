@@ -21,7 +21,7 @@ export class FormDateInputComponent {
     @Input()
     editAllowed: boolean = true;
 
-    private showDatepicker: boolean = false;
+    public showDatepicker: boolean = false;
 
     public entry: FormEntry;
 

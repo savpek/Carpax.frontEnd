@@ -8,7 +8,7 @@ import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
   providers: [TicketHeaderServiceFactory, TicketHeaderRepoFactory]
 })
 export class PartnerTicketsComponent {
-  public tickets: ITicketHeader[];
+  public tickets: ITicketHeader[] = [];
   private currentPartnerId: string;
 
   constructor(private activeRoute: ActivatedRoute, private headerFactory: TicketHeaderServiceFactory, private router: Router) {

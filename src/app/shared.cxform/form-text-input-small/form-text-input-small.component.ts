@@ -8,7 +8,7 @@ import * as Clipboard from 'clipboard-js';
   styleUrls: ['./form-text-input-small.component.scss']
 })
 export class FormTextInputSmallComponent {
-  private entry: FormEntry;
+  public entry: FormEntry;
 
   @Input() text: string;
   @Output() textChange: EventEmitter<string> = new EventEmitter<string>();

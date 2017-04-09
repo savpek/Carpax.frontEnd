@@ -9,7 +9,9 @@ import * as moment from 'moment';
   providers: [FeedbackRepoFactory]
 })
 export class TicketFeedbackFormComponent {
-  private feedback: IFeedback[] = [];
+  public feedback: IFeedback[] = [];
+  public newMessageText: string = '';
+
   private repo: FeedbackRepo;
 
   @Input()
@@ -18,8 +20,6 @@ export class TicketFeedbackFormComponent {
     this.repo.get()
       .subscribe(x => this.feedback = x);
   }
-
-  private newMessageText: string = '';
 
   constructor(private repoFactory: FeedbackRepoFactory) { }
 

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { ITabRoute } from '../shared.cxcomponent/cxcomponent.module';
+import { ITabRoute } from 'app/shared.cxcomponent/cxcomponent.module';
+import { NotificationRepo } from 'app/data/notificationRepo';
 import { ActivatedRoute } from '@angular/router';
-import { NotificationRepo } from '../data/notificationRepo';
 
 @Component({
   selector: 'cx-partner-ticket',
-  template: '<cx-tabs [routes]="routes"></cx-tabs>',
-  styleUrls: []
+  template: '<cx-tabs [routes]="routes"></cx-tabs>'
 })
 export class PartnerTicketComponent {
   public routes: ITabRoute[] = [

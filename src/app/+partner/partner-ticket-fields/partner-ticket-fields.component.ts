@@ -7,15 +7,16 @@ import { PartnerRepo } from 'app/data/partnerRepo';
 @Component({
   selector: 'cx-partner-ticket-fields',
   templateUrl: './partner-ticket-fields.component.html',
-  providers: [FormContext, TicketRepo,, PartnerRepo]
+  providers: [FormContext, TicketRepo, PartnerRepo]
 })
 export class PartnerTicketFieldsComponent {
   public ticket: any = {};
 
   constructor(private activeRoute: ActivatedRoute, private ticketRepo: TicketRepo, private form: FormContext) {
-    form.disabled = true;
+    this.form.disabled = true;
 
     this.activeRoute.params.subscribe(params =>
-          this.ticketRepo.Get(params['ticketId']).subscribe(ticket => this.ticket = ticket));
+      this.ticketRepo.Get(params['ticketId'])
+        .subscribe(ticket => this.ticket = ticket));
    }
 }

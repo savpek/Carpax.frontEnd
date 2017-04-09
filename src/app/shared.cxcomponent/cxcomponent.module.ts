@@ -14,8 +14,6 @@ import { FileThumbnailComponent } from './ticket-files-form/file-thumbnail/file-
 import { TicketFilterComponent } from './ticket-filter/ticket-filter.component';
 import { TicketCalendarComponent } from './ticket-calendar/ticket-calendar.component';
 
-import {CalendarComponent} from 'angular2-fullcalendar/src/calendar/calendar';
-
 @NgModule({
   imports: [CommonModule, CxFormModule, RouterModule],
   declarations: [
@@ -29,8 +27,7 @@ import {CalendarComponent} from 'angular2-fullcalendar/src/calendar/calendar'
       ImageThumbnailComponent,
       FileThumbnailComponent,
       TicketFilterComponent,
-      TicketCalendarComponent,
-      CalendarComponent
+      TicketCalendarComponent
   ],
   exports: [
       TicketFieldsComponent,

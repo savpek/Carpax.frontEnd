@@ -10,7 +10,7 @@ import { ToastsManager, ToastModule } from 'ng2-toastr/ng2-toastr';
   providers: [UserRepo, FormContext]
 })
 export class ControlPanelUsersComponent {
-  private users: IUser[] = [];
+  public users: IUser[] = [];
 
   constructor(private userRepo: UserRepo, private toast: ToastsManager) {
     userRepo.Get().subscribe(x => this.users = x);
