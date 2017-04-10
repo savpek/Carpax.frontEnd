@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataApi, DataApiFactory } from './DataApi';
+import { Resources, ResourceFactory } from './DataApi';
 
 export interface IPartner {
     id: string;
@@ -17,35 +17,30 @@ export interface IPartnerMap {
 
 @Injectable()
 export class PartnerRepo {
-    private api: DataApi<IPartner>;
-    private mapApi: DataApi<IPartnerMap>;
-
-    constructor(apiFactory: DataApiFactory) {
-        this.api = apiFactory.create<IPartner>();
-        this.mapApi = apiFactory.create<IPartnerMap>();
+    constructor(private resourceFactory: ResourceFactory) {
     }
 
     public Get(): Observable<IPartner[]> {
-        return this.api.get('partner/');
+        return this.resourceFactory.createMany('partner/').get();
     }
 
     public GetById(id: string): Observable<IPartner> {
-        return this.api.getSingle(`partner/${id}`);
+        return this.resourceFactory.create(`partner/${id}`).get();
     }
 
     public GetCurrentForTicket(ticketId: string): Observable<IPartnerMap[]> {
-        return this.mapApi.get(`partnerforticket/${ticketId}`);
+        return this.resourceFactory.create(`partnerforticket/${ticketId}`).get();
     }
 
-    public UpdateCurrentForTicket(ticketId: string, partnerId: string) {
-        return this.mapApi.post('partnerforticket/', { ticketId: ticketId, partnerId: partnerId });
+    public UpdateCurrentForTicket(ticketId: string, partnerId: string): Observable<IPartnerMap[]> {
+        return this.resourceFactory.create(`partnerforticket/`).post({ ticketId: ticketId, partnerId: partnerId });
     }
 
-    public Add(partner: IPartner) {
-        this.api.post('partner/', partner);
+    public Add(partner: IPartner): Observable<IPartner> {
+        return this.resourceFactory.create<IPartner>('partner/').post(partner);
     }
 
-    public Delete(partner: IPartner) {
-        this.api.delete(`partner/${partner.id}`, x => x.id);
+    public Delete(partner: IPartner): Observable<IPartner[]> {
+        return this.resourceFactory.createMany<IPartner>('partner/').delete(partner, x => x.id);
     }
 }
