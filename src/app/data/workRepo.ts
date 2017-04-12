@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { Resources, ResourceFactory } from './DataApi';
+import { Resources, ResourceFactory } from './resource';
 
 export interface IWork {
     id: string;

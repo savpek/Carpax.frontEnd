@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ApplicationRef } from '@angular/core';
-import { ITicketHeader } from '../../data/ticketHeaderRepo';
+import { ITicketHeader } from 'app/data/ticketHeaderRepo';
 import * as $ from 'jquery';
 import 'fullcalendar';
 import * as moment from 'moment';

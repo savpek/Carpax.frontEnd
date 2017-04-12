@@ -6,28 +6,15 @@ import { LocalStorage } from './localStorage';
 
 @Injectable()
 export class TicketHeaderServiceFactory {
-    private headerService: TicketHeaderService;
-    private partnerHeaderService: TicketHeaderService;
-
     constructor(private factory: TicketHeaderRepoFactory, private storage: LocalStorage) {
     }
 
     public create(): TicketHeaderService {
-        if (this.headerService) {
-            return this.headerService;
-        }
-
-        this.headerService = new TicketHeaderService(this.factory.create(), this.storage);
-        return this.headerService;
+        return new TicketHeaderService(this.factory.create(), this.storage);
     }
 
     public createForPartner(partnerId: string): TicketHeaderService {
-        if (this.partnerHeaderService) {
-            return this.partnerHeaderService;
-        }
-
-        this.partnerHeaderService = new TicketHeaderService(this.factory.createForPartner(partnerId), this.storage);
-        return this.partnerHeaderService;
+        return new TicketHeaderService(this.factory.createForPartner(partnerId), this.storage);
     }
 }
 

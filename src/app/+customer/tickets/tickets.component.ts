@@ -1,24 +1,17 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/map';
-import { AttachedPartnerRepo } from 'app/data/attachedPartnerRepo';
 import { ITabRoute } from 'app/shared.cxcomponent/cxcomponent.module';
 import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
 import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
 import { NotificationRepo } from 'app/data/notificationRepo';
 
 @Component({
-  selector: 'cx-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss'],
-  providers: [AttachedPartnerRepo, TicketHeaderServiceFactory, TicketHeaderRepoFactory]
+  providers: [TicketHeaderServiceFactory, TicketHeaderRepoFactory]
 })
 export class TicketsComponent {
   public tickets: ITicketHeader[];
-  public tabs: ITabRoute[] = [{
-    path: '/customer/tickets/own',
-    text: 'Omat'
-  }];
 
   public views: any[] = [{ icon: 'fa-list', value: 'list' }, { icon: 'fa-calendar', value: 'calendar' }];
   public currentView = 'list';
@@ -26,8 +19,7 @@ export class TicketsComponent {
   constructor(
     private headerFactory: TicketHeaderServiceFactory,
     private router: Router,
-    private activeRoute: ActivatedRoute,
-    private attachedPartnerRepo: AttachedPartnerRepo) {
+    private activeRoute: ActivatedRoute) {
 
     activeRoute.params.subscribe(params => {
       if (params['partnerId']) {
@@ -44,13 +36,6 @@ export class TicketsComponent {
           });
       }
     });
-
-    this.attachedPartnerRepo.get()
-      .flatMap(x => x)
-      .subscribe(attachedPartner => this.tabs.push({
-        path: `/customer/tickets/attached/${attachedPartner.partnerId}/`,
-        text: attachedPartner.description
-      }));
   }
 
   public openTicket(ticket: any) {

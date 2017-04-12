@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEntry, ResourceFactory, Resources } from './DataApi';
+import { IEntry, ResourceFactory, Resources } from './resource';
 
 export interface IAttachedPartner extends IEntry {
     partnerId: string;

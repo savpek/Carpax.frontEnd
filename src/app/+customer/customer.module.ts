@@ -11,6 +11,8 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { CustomerRootComponent } from './customer-root.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TicketListComponent } from '../shared.cxcomponent/ticket-list/ticket-list.component';
+import { TicketsTabsComponent } from './tickets/ticketsTabs.component';
 
 const routes: any = [
     {
@@ -18,8 +20,15 @@ const routes: any = [
         component: CustomerRootComponent,
         children: [
             { path: 'new', component: NewFormComponent, canActivate: [RequiresLoginGuard] },
-            { path: 'tickets/own', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
-            { path: 'tickets/attached/:partnerId', component: TicketsComponent, canActivate: [RequiresLoginGuard] },
+            {
+                path: 'tickets',
+                component: TicketsTabsComponent,
+                canActivate: [RequiresLoginGuard],
+                children: [
+                    { path: 'own', component: TicketsComponent },
+                    { path: 'attached/:partnerId', component: TicketsComponent }
+                ]
+            },
             {
                 path: 'controlpanel',
                 loadChildren: 'app/+customer/+control-panel/controlpanel.module#ControlPanelModule',
@@ -49,7 +58,8 @@ const routes: any = [
         NewFormComponent,
         TicketsComponent,
         LoginComponent,
-        ResetPasswordComponent],
+        ResetPasswordComponent,
+        TicketsTabsComponent],
     exports: [
     ],
     providers: [RequiresLoginGuard]
