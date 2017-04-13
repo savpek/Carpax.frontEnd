@@ -13,6 +13,8 @@ import { NotificationRepo } from 'app/data/notificationRepo';
 export class TicketsComponent {
   public tickets: ITicketHeader[];
 
+  private context: string;
+
   public views: any[] = [{ icon: 'fa-list', value: 'list' }, { icon: 'fa-calendar', value: 'calendar' }];
   public currentView = 'list';
 
@@ -23,12 +25,16 @@ export class TicketsComponent {
 
     activeRoute.params.subscribe(params => {
       if (params['partnerId']) {
+        this.context = 'partner';
+
         this.headerFactory.createForPartner(params['partnerId'])
           .get()
           .subscribe(x => {
             this.tickets = x;
           });
       } else {
+        this.context = 'customer';
+
         this.headerFactory.create()
           .get()
           .subscribe(x => {
@@ -39,6 +45,13 @@ export class TicketsComponent {
   }
 
   public openTicket(ticket: any) {
-    this.router.navigate([`customer/edit/${ticket.id}/fields`]);
+    switch (this.context) {
+      case 'partner':
+        this.router.navigate([`customer/view/${ticket.id}/fields`]);
+        break;
+      case 'customer':
+        this.router.navigate([`customer/edit/${ticket.id}/fields`]);
+        break;
+    }
   }
 }

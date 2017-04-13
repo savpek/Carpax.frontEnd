@@ -39,6 +39,11 @@ const routes: any = [
                 loadChildren: './+edit/edit.module#EditModule',
                 canActivate: [RequiresLoginGuard]
             },
+            {
+                path: 'view',
+                loadChildren: 'app/+view/view.module#ViewModule',
+                canActivate: [RequiresLoginGuard]
+            },
         ],
     },
     { path: 'login', component: LoginComponent },
