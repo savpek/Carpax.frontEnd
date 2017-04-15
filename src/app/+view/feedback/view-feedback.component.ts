@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  template: '<cx-ticket-expenses-form [ticketId]="ticketId"></cx-ticket-expenses-form>',
+  template: '<cx-ticket-feedback-form [ticketId]="ticketId"></cx-ticket-feedback-form>',
 })
-export class ViewTicketExpensesComponent {
+export class ViewFeedbackComponent {
   public ticketId: string;
 
   constructor(private route: ActivatedRoute) {

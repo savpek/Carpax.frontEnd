@@ -8,6 +8,8 @@ import { CxCanDeactivate } from 'app/service/cxCanDeactivate';
 import { ViewComponent } from './view.component';
 import { TicketFieldsComponent } from './fields/view-ticket-fields.component';
 import { ViewTicketExpensesComponent } from './expenses/view-ticket-expenses.component';
+import { ViewFeedbackComponent } from './feedback/view-feedback.component';
+import { ViewFilesComponent } from './files/view-files.component';
 
 const routes: any = [
     {
@@ -16,7 +18,7 @@ const routes: any = [
         children: [
             { path: 'fields', component: TicketFieldsComponent },
             { path: 'files', component: ViewTicketExpensesComponent },
-            { path: 'feedback', component: TicketFieldsComponent },
+            { path: 'feedback', component: ViewFeedbackComponent },
             { path: 'expenses', component: ViewTicketExpensesComponent }
         ]
     }
@@ -32,7 +34,9 @@ const routes: any = [
     declarations: [
         TicketFieldsComponent,
         ViewComponent,
-        ViewTicketExpensesComponent
+        ViewTicketExpensesComponent,
+        ViewFeedbackComponent,
+        ViewFilesComponent
     ],
     exports: [
     ],
