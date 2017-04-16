@@ -20,5 +20,29 @@ export class ViewComponent {
     { path: 'expenses', text: 'Osat & Työt' }
   ];
 
-  constructor(private notificationRepo: NotificationRepo, private route: ActivatedRoute) {}
+  constructor(private notificationRepo: NotificationRepo, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      notificationRepo.getForTicket(params['ticketId'])
+        .subscribe(notifications => {
+          notifications.forEach(n => {
+            switch (n.type.toString()) {
+              case '0':
+                this.routes.find(x => x.path === 'fields').hasNew = true;
+                break;
+              case '1':
+                this.routes.find(x => x.path === 'files').hasNew = true;
+                break;
+              case '2':
+                this.routes.find(x => x.path === 'feedback').hasNew = true;
+                break;
+              case '3':
+                this.routes.find(x => x.path === 'expenses').hasNew = true;
+                break;
+            }
+
+            this.notificationRepo.clear(n);
+          });
+        });
+    })
+  }
 }
