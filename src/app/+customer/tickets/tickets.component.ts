@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ITabRoute } from 'app/shared.cxcomponent/cxcomponent.module';
 import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
-import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
 import { NotificationRepo } from 'app/data/notificationRepo';
+import { TicketFilter } from '../../service/ticketFilter';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './tickets.component.html',
-  styleUrls: ['./tickets.component.scss'],
-  providers: [TicketHeaderServiceFactory, TicketHeaderRepoFactory]
+  styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent {
   public tickets: ITicketHeader[];
@@ -19,7 +19,8 @@ export class TicketsComponent {
   public currentView = 'list';
 
   constructor(
-    private headerFactory: TicketHeaderServiceFactory,
+    private headerFactory: TicketHeaderRepoFactory,
+    private headerFilter: TicketFilter,
     private router: Router,
     private activeRoute: ActivatedRoute) {
 
@@ -29,17 +30,19 @@ export class TicketsComponent {
 
         this.headerFactory.createForPartner(params['partnerId'])
           .get()
-          .subscribe(x => {
-            this.tickets = x;
-          });
+          .combineLatest(this.headerFilter.get(), (tickets, filter) => ({tickets, filter}))
+          .subscribe(combined => {
+            this.tickets = combined.filter(combined.tickets);
+          })
       } else {
         this.context = 'customer';
 
         this.headerFactory.create()
           .get()
-          .subscribe(x => {
-            this.tickets = x;
-          });
+          .combineLatest(this.headerFilter.get(), (tickets, filter) => ({tickets: tickets, filter: filter}))
+          .subscribe(combined => {
+            this.tickets = combined.filter(combined.tickets);
+          })
       }
     });
   }

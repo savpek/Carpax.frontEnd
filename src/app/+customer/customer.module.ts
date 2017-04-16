@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TicketListComponent } from '../shared.cxcomponent/ticket-list/ticket-list.component';
 import { TicketsTabsComponent } from './tickets/ticketsTabs.component';
+import { TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
+import { TicketFilter } from '../service/ticketFilter';
 
 const routes: any = [
     {
@@ -67,6 +69,6 @@ const routes: any = [
         TicketsTabsComponent],
     exports: [
     ],
-    providers: [RequiresLoginGuard]
+    providers: [RequiresLoginGuard, TicketFilter, TicketHeaderRepoFactory]
 })
-export class CustomerModule { }
+export class CustomerModule {}

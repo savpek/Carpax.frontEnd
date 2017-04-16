@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
-import { TicketHeaderServiceFactory } from 'app/service/ticketHeaderService';
+import { TicketFilter } from 'app/service/ticketFilter';
 
 @Component({
   templateUrl: './partner-tickets.component.html',
-  providers: [TicketHeaderServiceFactory, TicketHeaderRepoFactory]
+  providers: [TicketFilter, TicketHeaderRepoFactory]
 })
 export class PartnerTicketsComponent {
   public tickets: ITicketHeader[] = [];
   private currentPartnerId: string;
 
-  constructor(private activeRoute: ActivatedRoute, private headerFactory: TicketHeaderServiceFactory, private router: Router) {
+  constructor(
+      private activeRoute: ActivatedRoute,
+      private headerFactory: TicketHeaderRepoFactory,
+      private router: Router,
+      private ticketFilter: TicketFilter) {
     activeRoute.parent.params.subscribe(params => {
 
       this.currentPartnerId = params['partnerId'];
@@ -22,8 +26,9 @@ export class PartnerTicketsComponent {
 
       this.headerFactory.createForPartner(this.currentPartnerId)
         .get()
+        .combineLatest(ticketFilter.get(), (tickets, filter) => ({tickets, filter}))
         .subscribe(x => {
-          this.tickets = x;
+          this.tickets = x.filter(x.tickets);
         });
     });
   }

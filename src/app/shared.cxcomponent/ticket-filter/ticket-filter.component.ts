@@ -1,7 +1,7 @@
-import { TicketHeaderServiceFactory, ITicketHeaderFilter, TicketState } from '../../service/ticketHeaderService';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { TicketFilter, ITicketHeaderFilter, TicketState } from 'app/service/ticketFilter';
 
 @Component({
   selector: 'cx-ticket-filter',
@@ -9,31 +9,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ticket-filter.component.scss'],
   providers: []
 })
-export class TicketFilterComponent implements OnInit {
+export class TicketFilterComponent {
   private filter: Subject<string> = new Subject<string>();
-  private headerFilter: ITicketHeaderFilter;
 
   @Input()
-  public mode: string = "customer"
+  public mode = 'customer'
 
-  constructor(private headerService: TicketHeaderServiceFactory, private activeRoute: ActivatedRoute) {
+  constructor(private ticketFilter: TicketFilter, private activeRoute: ActivatedRoute) {
     this.filter
       .debounceTime(500)
       .subscribe(x =>
-        this.headerFilter.textFilter(x));
-  }
-
-  ngOnInit() {
-    switch(this.mode) {
-      case "customer":
-        this.activeRoute.params.subscribe(params => this.headerFilter = this.headerService.create());
-        break;
-      case "partner":
-        this.activeRoute.parent.params.subscribe(params => this.headerFilter = this.headerService.createForPartner(params['partnerId']));
-        break;
-      default:
-        throw `Invalid ticket filter mode '${this.mode}'`
-    }
+        this.ticketFilter.textFilter(x));
   }
 
   public textFilterChanged($newValue) {
@@ -43,13 +29,13 @@ export class TicketFilterComponent implements OnInit {
   public showReadyFilter(value: string) {
     switch (value) {
       case 'nonready':
-        this.headerFilter.stateFilter(TicketState.nonready);
+        this.ticketFilter.stateFilter(TicketState.nonready);
         break;
       case 'ready':
-        this.headerFilter.stateFilter(TicketState.ready);
+        this.ticketFilter.stateFilter(TicketState.ready);
         break;
       default:
-        this.headerFilter.stateFilter(TicketState.all);
+        this.ticketFilter.stateFilter(TicketState.all);
     }
   }
 }
