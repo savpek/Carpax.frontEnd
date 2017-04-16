@@ -15,15 +15,13 @@ export class TicketCalendarComponent {
       firstDay: 1,
       dayNamesShort:['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
       titleFormat: 'MM / YYYY',
-      header:{
+      header: {
           right: 'prev,next'
       },
       timezone: 'local',
       height: 'parent',
       contentHeight: 'auto',
-      events: (start, end, timezone, callback) => {
-        this.eventCallback = callback;
-      }
+      events: []
   }
 
   private eventCallback: (any) => void = (_) => {};
@@ -58,14 +56,11 @@ export class TicketCalendarComponent {
                 }});
 
     setTimeout(() => {
-        this.eventCallback(events);
-        $('cx-ticket-calendar').fullCalendar('refetchEvents');
-    }, 200);
+        this.config.events = events;
+        $('cx-ticket-calendar').fullCalendar(this.config);
+    }, 500);
   }
 
   constructor(private changeRef: ApplicationRef) {
-    setTimeout(() => {
-        $('cx-ticket-calendar').fullCalendar(this.config);
-    });
    }
 }

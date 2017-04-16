@@ -15,7 +15,7 @@ export class FormTextInputComponent implements OnChanges {
 
   @Input() public validate;
 
-  @Input() public labe = 'DEFAULT LABEL';
+  @Input() public label = 'DEFAULT LABEL';
 
   @Input() public disabled = false;
 

@@ -15,20 +15,20 @@ import { DatepickerModule } from 'ng2-bootstrap';
 @NgModule({
   imports: [CommonModule, FormsModule, DatepickerModule],
   declarations: [
-    DropdownComponent, 
-    ButtonComponent, 
-    FormDateInputComponent, 
-    FormDropdownInputComponent, 
-    FormTextInputComponent, 
+    DropdownComponent,
+    ButtonComponent,
+    FormDateInputComponent,
+    FormDropdownInputComponent,
+    FormTextInputComponent,
     FormTextInputSmallComponent,
     FormTextAreaInputComponent],
   exports: [
-    DropdownComponent, 
-    ButtonComponent, 
-    FormDateInputComponent, 
-    FormDropdownInputComponent, 
-    FormTextInputComponent, 
-    FormTextInputSmallComponent, 
+    DropdownComponent,
+    ButtonComponent,
+    FormDateInputComponent,
+    FormDropdownInputComponent,
+    FormTextInputComponent,
+    FormTextInputSmallComponent,
     FormTextAreaInputComponent],
   providers: []
 })
