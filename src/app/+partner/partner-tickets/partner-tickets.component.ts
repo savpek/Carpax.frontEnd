@@ -17,7 +17,7 @@ export class PartnerTicketsComponent {
       this.currentPartnerId = params['partnerId'];
 
       if (!this.currentPartnerId) {
-        throw "Assert: !this.currentPartnerId"
+        throw 'Assert: !this.currentPartnerId'
       }
 
       this.headerFactory.createForPartner(this.currentPartnerId)
@@ -29,6 +29,6 @@ export class PartnerTicketsComponent {
   }
 
   public openTicket(ticket) {
-    this.router.navigate([`/partner/${this.currentPartnerId}/edit/${ticket.id}`]);
+    this.router.navigate([`/partner/${this.currentPartnerId}/view/${ticket.id}/fields`]);
   }
 }

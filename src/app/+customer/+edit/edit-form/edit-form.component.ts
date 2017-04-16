@@ -27,7 +27,7 @@ export class EditFormComponent extends CanDeactivateForm {
     private ticketRepo: TicketRepo,
     private partnerRepo: PartnerRepo,
     private form: FormContext,
-    private changeDetect: ChangeDetectorRef,    
+    private changeDetect: ChangeDetectorRef,
     modal: CxModal) {
     super(form, modal);
 

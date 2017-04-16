@@ -27,14 +27,8 @@ const routes: any = [
                 canActivate: [RequiresPartnerLoginGuard]
             },
             {
-                path: 'edit/:ticketId',
-                component: PartnerTicketComponent,
-                children: [
-                    { path: '', component: PartnerTicketFieldsComponent },
-                    { path: 'feedback', component: PartnerTicketFeedbackComponent },
-                    { path: 'expenses', component: PartnerTicketExpensesComponent },
-                    { path: 'files', component: PartnerTicketFilesComponent },
-                ],
+                path: 'view',
+                loadChildren: 'app/+view/view.module#ViewModule',
                 canActivate: [RequiresPartnerLoginGuard]
             },
         ]

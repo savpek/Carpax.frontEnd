@@ -13,19 +13,19 @@ import { Auth } from '../../service/auth';
   providers: [PasswordReset]
 })
 export class ResetPasswordComponent {
-  public newPassword: string = "";
-  public newPasswordAgain: string = "";
+  public newPassword = '';
+  public newPasswordAgain = '';
 
-  public userName: string = "";
-  public customerName: string = "";
+  public userName = '';
+  public customerName = '';
   public customerId: string = undefined;
 
   private token: string;
 
   constructor(
-    private activeRoute: ActivatedRoute, 
-    private toast: ToastsManager, 
-    private reset: PasswordReset, 
+    private activeRoute: ActivatedRoute,
+    private toast: ToastsManager,
+    private reset: PasswordReset,
     private auth: Auth,
     private route: Router) {
     auth.logOut();
@@ -52,8 +52,8 @@ export class ResetPasswordComponent {
     this.reset.resetPassword(this.token, this.newPassword)
       .subscribe(
         data => {
-          if(!data.isSuccess) {
-            this.toast.error("Salasanan vaihtaminen epäonnistui.");
+          if (!data.isSuccess) {
+            this.toast.error('Salasanan vaihtaminen epäonnistui.');
             return;
           }
 
