@@ -7,13 +7,13 @@ import { Component, Input, Output, EventEmitter} from '@angular/core';
 })
 export class ButtonComponent {
   @Input()
-  public disabled: boolean = false;
+  public disabled = false;
 
   @Input()
   public icon: string;
 
   @Input()
-  public text: string = '';
+  public text = '';
 
   @Output()
   public action = new EventEmitter();

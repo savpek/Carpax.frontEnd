@@ -4,7 +4,7 @@
     <p class="input-group">
       <input type='text' [class.dirty]="entry.isDirty" class="form-control date-input disabled" [value]="formatCurrent()" disabled/>
       <span class="input-group-btn" >
-          <button *ngIf="editAllowed" type="button" class="btn btn-default" (click)="toggleCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+          <button *ngIf="!isDisabled()" type="button" class="btn btn-default" (click)="toggleCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
       </span>
     </p>
     <datepicker *ngIf="showDatepicker" [startingDay]="1" class="popup" [(ngModel)]="dateModel" [showWeeks]="true" (selectionDone)="hidePopup($event)"></datepicker>

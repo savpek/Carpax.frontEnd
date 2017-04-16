@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, AfterViewInit, Output, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, AfterViewInit, 
+  Output, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormEntry, FormContext } from '../formContext';
 
 @Component({
@@ -8,13 +9,13 @@ import { FormEntry, FormContext } from '../formContext';
 })
 export class FormTextInputComponent implements OnChanges {
   @Input()
-  public text: string = '';
+  public text = '';
 
   @Output() textChange = new EventEmitter();
 
   @Input() public validate;
 
-  @Input() public label: string = 'DEFAULT LABEL';
+  @Input() public labe = 'DEFAULT LABEL';
 
   @Input() public disabled = false;
 
@@ -27,7 +28,7 @@ export class FormTextInputComponent implements OnChanges {
   }
 
   private applyFormat(text: string): string {
-    if(!text) {
+    if (!text) {
       return text;
     }
 

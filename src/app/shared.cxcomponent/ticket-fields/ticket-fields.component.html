@@ -56,7 +56,7 @@
 <cx-form-date-input label="Tapahtuma-aika" [(dateModel)]="ticket.when"></cx-form-date-input>
 <cx-form-date-input label="Aloituspäivä" [(dateModel)]="ticket.workStartDate"></cx-form-date-input>
 <cx-form-date-input label="Valmistumispäivä" [(dateModel)]="ticket.workEndDate"></cx-form-date-input>
-<cx-form-date-input label="Luotu" [editAllowed]="false" [(dateModel)]="ticket.created"></cx-form-date-input>
+<cx-form-date-input label="Luotu" [disabled]="true" [(dateModel)]="ticket.created"></cx-form-date-input>
 
 <cx-form-dropdown-input 
   label="Valmis" 

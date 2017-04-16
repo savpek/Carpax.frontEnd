@@ -17,7 +17,7 @@ const routes: any = [
         component: ViewComponent,
         children: [
             { path: 'fields', component: TicketFieldsComponent },
-            { path: 'files', component: ViewTicketExpensesComponent },
+            { path: 'files', component: ViewFilesComponent },
             { path: 'feedback', component: ViewFeedbackComponent },
             { path: 'expenses', component: ViewTicketExpensesComponent }
         ]

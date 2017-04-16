@@ -4,6 +4,11 @@ button.btn {
     border-radius: 3px !important;
 }
 
+button.btn:disabled {
+    cursor: auto;
+}
+
+
 .dropdown-menu {
     cursor: pointer;
     min-width: 50px;

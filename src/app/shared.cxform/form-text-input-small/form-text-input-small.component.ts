@@ -21,15 +21,15 @@ export class FormTextInputSmallComponent {
 
   @Input() clipboard: false;
 
-  @Input() constraint: string = '.';
+  @Input() constraint = '.';
 
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
 
   @Input() format: string;
 
   @Input() maxlength: 100000;
 
-  @Input() placeholder: string = '';
+  @Input() placeholder = '';
 
   constructor(private form: FormContext) {
     this.entry = form.Join();
@@ -40,9 +40,9 @@ export class FormTextInputSmallComponent {
       case 'uppercase':
         return text.toUpperCase();
       case 'money':
-        return text.replace(",",".");
+        return text.replace(',', '.');
       case 'percent':
-        return text.replace(",",".");
+        return text.replace(',', '.');
       default:
         return text;
     }

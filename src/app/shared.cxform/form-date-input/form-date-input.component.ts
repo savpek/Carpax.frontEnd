@@ -12,16 +12,17 @@ import { DatepickerConfig } from 'ng2-bootstrap';
 export class FormDateInputComponent {
     @Input()
     dateModel: Date;
+
     @Output()
     dateModelChange: EventEmitter<string> = new EventEmitter<string>();
 
     @Input()
-    label: string = 'NOT_SET';
+    label = 'NOT_SET';
 
     @Input()
-    editAllowed: boolean = true;
+    disabled = false;
 
-    public showDatepicker: boolean = false;
+    public showDatepicker = false;
 
     public entry: FormEntry;
 
@@ -39,6 +40,10 @@ export class FormDateInputComponent {
         this.dateModel = asUtc.toDate();
         this.dateModelChange.emit(asUtc.toISOString());
         this.entry.isDirty = true;
+    }
+
+    public isDisabled(): boolean {
+      return this.disabled || this.form.disabled;
     }
 
     public formatCurrent() {
