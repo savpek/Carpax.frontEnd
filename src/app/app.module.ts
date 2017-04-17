@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 
 import { RouterModule } from '@angular/router';
@@ -21,8 +23,9 @@ import { LoadingBar } from './service/loadingBar';
 import { ResourceFactory } from './data/resource';
 import { RequiresLoginGuard } from './service/RequiresLoginGuard';
 import { LocalStorage } from './service/localStorage';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastModule, ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { HttpWrapper } from './data/httpWrapper';
+import { ToastOptions } from "ng2-toastr/src/toast-options";
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { HttpWrapper } from './data/httpWrapper';
     HttpModule,
     CxFormModule,
     CxComponentModule,
+    BrowserAnimationsModule,
     ToastModule,
     ModalModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
@@ -59,7 +63,9 @@ import { HttpWrapper } from './data/httpWrapper';
     ResourceFactory,
     RequiresLoginGuard,
     LocalStorage,
-    HttpWrapper],
+    HttpWrapper,
+    ToastsManager,
+    ToastOptions],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
