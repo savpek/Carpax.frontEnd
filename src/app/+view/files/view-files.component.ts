@@ -8,11 +8,12 @@ export class ViewFilesComponent {
   public ticketId: string;
 
   constructor(private route: ActivatedRoute) {
-            route.parent.params.subscribe(params => {
-              if (!params['ticketId']) {
-                throw 'params[ticketId]';
-              }
-              this.ticketId = params['ticketId'];
-        });
+    route.parent.params.subscribe(params => {
+      if (!params['ticketId']) {
+        throw `Assert: params['ticketId']`;
+      }
+
+      this.ticketId = params['ticketId'];
+    });
   }
 }

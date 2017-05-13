@@ -51,4 +51,5 @@ const routes: any = [
     ],
     providers: [RequiresPartnerLoginGuard]
 })
-export class PartnerModule { }
+export class PartnerModule {
+}

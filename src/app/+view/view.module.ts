@@ -42,4 +42,5 @@ const routes: any = [
     ],
     providers: []
 })
-export class ViewModule {}
+export class ViewModule {
+}

@@ -14,8 +14,13 @@ export class TicketFieldsComponent {
   constructor(private activeRoute: ActivatedRoute, private ticketRepo: TicketRepo, private form: FormContext) {
     this.form.disabled = true;
 
-    this.activeRoute.params.subscribe(params =>
+    this.activeRoute.parent.params.subscribe(params => {
+      if (!params['ticketId']) {
+        throw `Assert: params['ticketId']`;
+      }
+
       this.ticketRepo.Get(params['ticketId'])
-        .subscribe(ticket => this.ticket = ticket));
+        .subscribe(ticket => this.ticket = ticket)
+      });
    }
 }
