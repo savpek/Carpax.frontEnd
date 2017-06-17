@@ -25,7 +25,7 @@ export class TicketFilter {
             item && item.toLowerCase().match(`.*${this.regex.toLocaleLowerCase()}.*`);
 
         if (this.regex) {
-            return isMatch(x.registerPlate) || isMatch(x.customer) || isMatch(x.model);
+            return isMatch(x.registerPlate) || isMatch(x.customer) || isMatch(x.model) || isMatch(x.partner);
         }
         return true;
     };

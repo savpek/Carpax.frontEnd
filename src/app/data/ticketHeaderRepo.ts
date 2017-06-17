@@ -11,6 +11,7 @@ export interface ITicketHeader {
         lastModified: Date;
         workStartDate: Date;
         workEndDate: Date;
+        partner: string
 }
 
 export interface ITicketHeaderRepo {
