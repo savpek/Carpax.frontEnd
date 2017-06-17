@@ -20,6 +20,8 @@ export class ResetPasswordComponent {
   public customerName = '';
   public customerId: string = undefined;
 
+  public acceptEula = false;
+
   private token: string;
 
   constructor(
@@ -49,6 +51,16 @@ export class ResetPasswordComponent {
   }
 
   public resetPassword() {
+    if (!this.acceptEula) {
+      this.toast.error('Hyväksythän käyttöehdot jatkaaksesi.');
+      return;
+    }
+
+    if (!this.isValid()) {
+      this.toast.error('Tarkistathan että salasanasi on vähintään 8 merkkiä pitkä ja sisältää sekä numeroita että kirjaimia.');
+      return;
+    }
+
     this.reset.resetPassword(this.token, this.newPassword)
       .subscribe(
         data => {
