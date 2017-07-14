@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormContext, FormEntry } from '../formContext';
 import * as moment from 'moment';
-import { DatepickerConfig } from 'ng2-bootstrap';
+import { DatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'cx-form-date-input',
