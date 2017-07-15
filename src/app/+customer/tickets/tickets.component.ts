@@ -5,10 +5,12 @@ import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRep
 import { NotificationRepo } from 'app/data/notificationRepo';
 import { TicketFilter } from '../../service/ticketFilter';
 import { Observable } from 'rxjs';
+import { TicketFilterComponent } from '../../shared.cxcomponent/ticket-filter/ticket-filter.component';
 
 @Component({
   templateUrl: './tickets.component.html',
-  styleUrls: ['./tickets.component.scss']
+  styleUrls: ['./tickets.component.scss'],
+  providers: [TicketFilter]
 })
 export class TicketsComponent {
   public tickets: ITicketHeader[];

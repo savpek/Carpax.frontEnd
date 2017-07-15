@@ -69,6 +69,6 @@ const routes: any = [
         TicketsTabsComponent],
     exports: [
     ],
-    providers: [RequiresLoginGuard, TicketFilter, TicketHeaderRepoFactory]
+    providers: [RequiresLoginGuard, TicketHeaderRepoFactory]
 })
 export class CustomerModule {}
