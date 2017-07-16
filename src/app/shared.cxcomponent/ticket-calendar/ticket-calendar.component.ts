@@ -1,30 +1,37 @@
-import { Component, OnInit, Input, ApplicationRef } from '@angular/core';
+import { Component, OnInit, Input, ApplicationRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ITicketHeader } from 'app/data/ticketHeaderRepo';
-import * as $ from 'jquery';
+import * as jQuery from 'jquery';
 import 'fullcalendar';
 import * as moment from 'moment';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { element } from 'protractor';
 
 @Component({
   selector: 'cx-ticket-calendar',
   templateUrl: './ticket-calendar.component.html',
   styleUrls: ['./ticket-calendar.component.scss']
 })
-export class TicketCalendarComponent {
+export class TicketCalendarComponent implements AfterViewInit {
   public config: any = {
-      editable: false,
-      firstDay: 1,
-      dayNamesShort:['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
-      titleFormat: 'MM / YYYY',
-      header: {
-          right: 'prev,next'
-      },
-      timezone: 'local',
-      height: 'parent',
-      contentHeight: 'auto',
-      events: []
+    editable: false,
+    firstDay: 1,
+    dayNamesShort: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
+    titleFormat: 'MM / YYYY',
+    header: {
+      right: 'prev,next'
+    },
+    timezone: 'local',
+    height: 'parent',
+    contentHeight: 'auto',
+    events: []
   }
 
-  private eventCallback: (any) => void = (_) => {};
+  @ViewChild('calendar')
+  private calendar: any;
+
+  private current: Observable<ITicketHeader[]>;
+
+  private eventCallback: (any) => void = (_) => { };
 
   private getEndDate(header: ITicketHeader): Date {
     if (header.workEndDate) {
@@ -42,25 +49,32 @@ export class TicketCalendarComponent {
   }
 
   @Input()
-  set tickets(value: ITicketHeader[]) {
-    let events = value
-            .filter(x => x.workStartDate)
-            .map(x => {
-                return {
-                    title: `${x.registerPlate}, ${x.customer}`,
-                    start: x.workStartDate,
-                    end: this.getEndDate(x),
-                    allDay: true,
-                    url: `./customer/edit/${x.id}/fields`,
-                    color: this.getEventColor(x)
-                }});
+  set tickets(value: Observable<ITicketHeader[]>) {
+    value.subscribe(tickets => {
 
-    setTimeout(() => {
-        this.config.events = events;
-        $('cx-ticket-calendar').fullCalendar(this.config);
-    }, 500);
+      console.log(tickets);
+
+      this.config.events = tickets
+        .filter(x => x.workStartDate)
+        .map(x => {
+          return {
+            title: `${x.registerPlate}, ${x.customer}`,
+            start: x.workStartDate,
+            end: this.getEndDate(x),
+            allDay: true,
+            url: `./customer/edit/${x.id}/fields`,
+            color: this.getEventColor(x)
+          }
+        });
+      // jQuery(this.calendar.nativeElement).fullCalendar('removeEvents');
+      jQuery(this.calendar.nativeElement).fullCalendar('rerenderEvents');
+    });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => jQuery(this.calendar.nativeElement).fullCalendar(this.config), 100);
   }
 
   constructor(private changeRef: ApplicationRef) {
-   }
+  }
 }

@@ -13,7 +13,7 @@ import { TicketFilterComponent } from '../../shared.cxcomponent/ticket-filter/ti
   providers: [TicketFilter]
 })
 export class TicketsComponent {
-  public tickets: ITicketHeader[];
+  public tickets: Observable<ITicketHeader[]>;
 
   private context: string;
 
@@ -30,21 +30,17 @@ export class TicketsComponent {
       if (params['partnerId']) {
         this.context = 'partner';
 
-        this.headerFactory.createForPartner(params['partnerId'])
+        this.tickets = this.headerFactory.createForPartner(params['partnerId'])
           .get()
           .combineLatest(this.headerFilter.get(), (tickets, filter) => ({tickets, filter}))
-          .subscribe(combined => {
-            this.tickets = combined.filter(combined.tickets);
-          })
+          .map(combined => combined.filter(combined.tickets));
       } else {
         this.context = 'customer';
 
-        this.headerFactory.create()
+        this.tickets = this.headerFactory.create()
           .get()
           .combineLatest(this.headerFilter.get(), (tickets, filter) => ({tickets: tickets, filter: filter}))
-          .subscribe(combined => {
-            this.tickets = combined.filter(combined.tickets);
-          })
+          .map(combined => combined.filter(combined.tickets));
       }
     });
   }

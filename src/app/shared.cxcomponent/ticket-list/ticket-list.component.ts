@@ -2,6 +2,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ITicketHeader } from '../../data/ticketHeaderRepo';
 import { NotificationRepo, INotification } from '../../data/notificationRepo';
 import * as moment from 'moment';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'cx-ticket-list',
@@ -12,7 +13,7 @@ import * as moment from 'moment';
 export class TicketListComponent {
 
   @Input()
-  public tickets: ITicketHeader[] = [];
+  public tickets: Observable<ITicketHeader[]> = new BehaviorSubject([]);
 
   @Output()
   public openTicket: EventEmitter<ITicketHeader> = new EventEmitter<ITicketHeader>();

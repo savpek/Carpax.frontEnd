@@ -8,7 +8,7 @@
       <th class="tableHeader">Asiakas</th>
       <th class="tableHeader visible-lg visible-md">Muokattu</th>
     </tr>
-    <tr *ngFor="let ticket of tickets" [class.mouseover]="ticket.hover" [class.ticketready]="ticket.ready" (mouseenter)="ticket.hover=true" (mouseleave)="ticket.hover=false"
+    <tr *ngFor="let ticket of tickets | async" [class.mouseover]="ticket.hover" [class.ticketready]="ticket.ready" (mouseenter)="ticket.hover=true" (mouseleave)="ticket.hover=false"
       (click)="openTicketClick(ticket)">
       <td><i class="fa fa-exclamation new-items-marker" aria-hidden="true" *ngIf="hasNew(ticket.id)"></i></td>
       <td ng-class="{nonActiveTicket: ticket.ready}">{{ ticket.registerPlate }}</td>
