@@ -15,7 +15,7 @@ export interface IEntry {
 @Injectable()
 export class ResourceFactory {
     constructor(private http: HttpWrapper, private auth: Auth) {}
-    
+
     public createMany<T>(resource: string): Resources<T> {
         return new Resources<T>(resource, this.http, this.auth)
     }
@@ -57,13 +57,13 @@ export class Resources<T> {
             .subscribe(result => {
                 Utils.unwrapResult<T[]>(result, data => {
                     // Remove updated.
-                    this.current = this.current.filter(c => !data.find(r => idSelector(r) == idSelector(c)));
+                    this.current = this.current.filter(c => !data.find(r => idSelector(r) === idSelector(c)));
 
                     data.forEach(x => this.current.push(x))
 
                     this.subject.next(this.current.slice());
                     postSubject.next(this.current.slice());
-                }, 
+                },
                 error => postSubject.error(error));
             }, error => postSubject.error(error));
 
