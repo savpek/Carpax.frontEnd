@@ -54,7 +54,7 @@ export class TicketCalendarComponent implements AfterViewInit {
 
       console.log(tickets);
 
-      this.config.events = tickets
+      let events = tickets
         .filter(x => x.workStartDate)
         .map(x => {
           return {
@@ -66,6 +66,11 @@ export class TicketCalendarComponent implements AfterViewInit {
             color: this.getEventColor(x)
           }
         });
+
+      this.config.events = events;
+
+      jQuery(this.calendar.nativeElement).fullCalendar('removeEvents');
+      jQuery(this.calendar.nativeElement).fullCalendar('addEventSource', events)
       jQuery(this.calendar.nativeElement).fullCalendar('rerenderEvents');
     });
   }
