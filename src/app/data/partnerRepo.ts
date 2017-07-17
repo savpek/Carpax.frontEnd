@@ -21,19 +21,20 @@ export class PartnerRepo {
     }
 
     public Get(): Observable<IPartner[]> {
-        return this.resourceFactory.createMany('partner/').get();
+        return this.resourceFactory.createMany<IPartner>('partner/').get();
     }
 
     public GetById(id: string): Observable<IPartner> {
-        return this.resourceFactory.create(`partner/${id}`).get();
+        return this.resourceFactory.create<IPartner>(`partner/${id}`).get();
     }
 
     public GetCurrentForTicket(ticketId: string): Observable<IPartnerMap[]> {
-        return this.resourceFactory.create(`partnerforticket/${ticketId}`).get();
+        return this.resourceFactory.create<IPartnerMap[]>(`partnerforticket/${ticketId}`).get();
     }
 
     public UpdateCurrentForTicket(ticketId: string, partnerId: string): Observable<IPartnerMap[]> {
-        return this.resourceFactory.create(`partnerforticket/`).post({ ticketId: ticketId, partnerId: partnerId });
+        return this.resourceFactory.create<IPartnerMap[]>(`partnerforticket/`)
+            .post({ ticketId: ticketId, partnerId: partnerId });
     }
 
     public Add(partner: IPartner): Observable<IPartner> {

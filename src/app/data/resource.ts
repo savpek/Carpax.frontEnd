@@ -113,7 +113,7 @@ export class Resource<T> {
                 Utils.unwrapResult<T>(result, data => {
                     this.subject.next(data);
                     postSubject.next(data);
-                }, 
+                },
                 error => postSubject.error(error));
             });
 
@@ -122,7 +122,7 @@ export class Resource<T> {
 
     public delete(): Observable<void> {
         let deleteSubject = new Subject<void>();
-        
+
         this.http.delete(`${environment.apiBase}/${this.resourcePath}`)
             .map(response => response.json())
             .subscribe(result => {
