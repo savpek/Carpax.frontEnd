@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
 import { TicketFilter } from 'app/service/ticketFilter';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './partner-tickets.component.html',
   providers: [TicketFilter, TicketHeaderRepoFactory]
 })
 export class PartnerTicketsComponent {
-  public tickets: ITicketHeader[] = [];
   private currentPartnerId: string;
+  public tickets: Observable<ITicketHeader[]>;
 
   constructor(
       private activeRoute: ActivatedRoute,
@@ -24,12 +25,10 @@ export class PartnerTicketsComponent {
         throw 'Assert: !this.currentPartnerId'
       }
 
-      this.headerFactory.createForPartner(this.currentPartnerId)
+      this.tickets = this.headerFactory.createForPartner(this.currentPartnerId)
         .get()
         .combineLatest(ticketFilter.get(), (tickets, filter) => ({tickets, filter}))
-        .subscribe(x => {
-          this.tickets = x.filter(x.tickets);
-        });
+        .map(combined => combined.filter(combined.tickets));
     });
   }
 
