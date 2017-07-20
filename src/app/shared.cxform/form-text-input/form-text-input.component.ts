@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, AfterViewInit, 
-  Output, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component, EventEmitter, Input, OnChanges, AfterViewInit,
+  Output, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy
+} from '@angular/core';
 import { FormEntry, FormContext } from '../formContext';
 
 @Component({
@@ -13,7 +15,7 @@ export class FormTextInputComponent implements OnChanges {
 
   @Output() textChange = new EventEmitter();
 
-  @Input() public validate;
+  @Input() public validate: string;
 
   @Input() public label = 'DEFAULT LABEL';
 
@@ -44,14 +46,6 @@ export class FormTextInputComponent implements OnChanges {
     return this.disabled || this.form.disabled;
   }
 
-  public keyboardEvent() {
-    this.entry.isDirty = true;
-    this.text = this.applyFormat(this.text);
-    this.validateData();
-
-    this.textChange.emit(this.text);
-  }
-
   private validateData() {
     if (!this.validate) {
       this.entry.isValid = true;
@@ -64,6 +58,14 @@ export class FormTextInputComponent implements OnChanges {
     }
 
     this.entry.isValid = !!this.text.match(this.validate);
+  }
+
+  inputEvent(event: any) {
+    this.entry.isDirty = true;
+    this.text = this.applyFormat(event.target.value);
+    this.validateData();
+
+    this.textChange.emit(this.text);
   }
 
   ngOnChanges(changes: SimpleChanges) {
