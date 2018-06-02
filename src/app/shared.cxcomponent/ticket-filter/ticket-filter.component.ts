@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { TicketFilter, ITicketHeaderFilter, TicketState } from 'app/service/ticketFilter';
+import { debounceTime, map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'cx-ticket-filter',

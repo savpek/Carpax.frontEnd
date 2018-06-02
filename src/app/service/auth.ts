@@ -6,9 +6,10 @@ import { environment } from '../../environments/environment';
 
 import * as moment from 'moment';
 import { LocalStorage } from './localStorage';
-import {  } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoadingBar } from './loadingBar';
+import { tap, map } from 'rxjs/operators';
+
 export interface ICurrentLogin {
     type?: string;
     name?: string;
@@ -42,11 +43,11 @@ export class Auth {
     }
 
     private setLogoutTimer() {
-        if(this.logoutSubscriber) {
+        if (this.logoutSubscriber) {
             this.logoutSubscriber.unsubscribe();
         }
 
-        if(this.getLogoutTimeInSeconds() <= 0) {
+        if (this.getLogoutTimeInSeconds() <= 0) {
             this.route.navigate(['/customer', 'login']);
         }
 
@@ -59,15 +60,15 @@ export class Auth {
 
 
         return login.login('user/token/', { userName: userName, password: password })
-            .map(user => {
+            .pipe(map(user => {
                 this.currentLogin = login;
                 this.storage.set('login', this.currentLogin.getInfo());
                 this.currentUserSubject.next(this.currentLogin.getInfo());
 
                 this.setLogoutTimer();
-                
+
                 return user;
-            });
+            }));
     }
 
     public loginPartner(id: string, pin: string): Observable<ICurrentLogin>  {
@@ -76,16 +77,15 @@ export class Auth {
         this.loadingBar.operationStarted();
 
         return login.login('partner/token/', { id: id, pin: pin })
-
-            .map(user => {
+            .pipe(map(user => {
                 this.currentLogin = login;
                 this.storage.set('login', this.currentLogin.getInfo());
                 this.currentUserSubject.next(this.currentLogin.getInfo());
 
                 this.setLogoutTimer();
-                
+
                 return user;
-            });
+            }));
     }
 
     public logOut() {
@@ -109,7 +109,7 @@ export class Auth {
     public passwordResetRequest(email: string): Observable<any> {
         return this.http.post(`${environment.apiBase}/passwordreset/`, {
             email: email
-        }).map(result => result.json());
+        }).pipe(map(result => result.json()));
     }
 }
 
@@ -131,7 +131,11 @@ class NotLoggedIn implements ILogin {
 }
 
 class Login implements ILogin {
-    constructor(private http: Http, private type: string, private loadingBar: LoadingBar ,private loginInformation?: ICurrentLogin) {
+    constructor(
+        private http: Http,
+        private type: string,
+        private loadingBar: LoadingBar,
+        private loginInformation?: ICurrentLogin) {
     }
 
     public getInfo() {
@@ -144,11 +148,11 @@ class Login implements ILogin {
 
     public login(resource: string, loginObject: any) {
         return this.http.post(`${environment.authBase}/${resource}`, loginObject)
-            .do(
-                null, 
-                e => this.loadingBar.operationStopped(), 
+            .pipe(tap(
+                null,
+                e => this.loadingBar.operationStopped(),
                 () => this.loadingBar.operationStopped())
-            .map(response => {
+            ).pipe(map(response => {
                 let asObject = response.json();
 
                 this.loginInformation = {
@@ -159,7 +163,7 @@ class Login implements ILogin {
                     expires: moment().unix() + asObject.expires_in
                 };
                 return this.loginInformation;
-        });
+            }));
     }
 
     public isValid() {

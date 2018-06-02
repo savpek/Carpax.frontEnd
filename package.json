@@ -33,7 +33,7 @@
     "font-awesome": "4.7.0",
     "jquery": "3.3.1",
     "moment": "2.22.2",
-    "ngx-bootstrap": "1.7.1",
+    "ngx-bootstrap": "3.0.0",
     "ng2-slim-loading-bar": "4.0.0",
     "ng2-toastr": "4.1.2",
     "ts-helpers": "1.1.2",

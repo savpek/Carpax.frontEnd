@@ -1,4 +1,4 @@
-import { FileRepo, FileEntry } from 'app/data/fileRepo';
+import { FileRepo, FileEntry } from 'app/data/FileRepo';
 import { Component, Input } from '@angular/core';
 import { CxModal } from 'app/service/modal';
 

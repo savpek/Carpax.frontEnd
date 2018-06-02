@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { IResult } from '../data/iresult';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PasswordReset {
@@ -10,12 +11,12 @@ export class PasswordReset {
 
     public requestDataForToken(token: string): Observable<IResult<any>> {
         return this.http.get(`${environment.apiBase}/password/${token}/`)
-            .map(x => x.json())
+            .pipe(map(x => x.json()))
     }
 
     public resetPassword(token: string, newPassword: string): Observable<IResult<any>> {
         return this.http.put(`${environment.apiBase}/password/${token}/`, {
             newPassword: newPassword
-        }).map(x => x.json())
+        }).pipe(map(x => x.json()))
     }
 }

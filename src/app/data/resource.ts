@@ -1,12 +1,14 @@
 import { Http, Headers } from '@angular/http';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Auth } from '../service/auth';
 
+import { map } from 'rxjs/operators';
+
 import Utils from './util';
 import { HttpWrapper } from './httpWrapper';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 export interface IEntry {
     transient?: string;
@@ -37,7 +39,7 @@ export class Resources<T> {
     public get(): Observable<T[]> {
         if (this.current.length === 0) {
             this.http.get(`${environment.apiBase}/${this.resourcePath}`)
-                .map(response => response.json())
+                .pipe(map(response => response.json()))
                 .subscribe(result => {
                     Utils.unwrapResult<T[]>(result, data => {
                         this.current = data;
@@ -49,11 +51,11 @@ export class Resources<T> {
         return this.subject;
     }
 
-    public post(data: any, idSelector: (x: T) => any): Observable<T[]> {
+    public post(body: any, idSelector: (x: T) => any): Observable<T[]> {
         let postSubject = new Subject<T[]>();
 
-        this.http.post(`${environment.apiBase}/${this.resourcePath}`, data)
-            .map(response => response.json())
+        this.http.post(`${environment.apiBase}/${this.resourcePath}`, body)
+            .pipe(map(response => response.json()))
             .subscribe(result => {
                 Utils.unwrapResult<T[]>(result, data => {
                     // Remove updated.
@@ -72,7 +74,7 @@ export class Resources<T> {
 
     public delete(target: T, idSelector: (x: T) => any): Observable<T[]> {
         let deleteSubject = new Subject<T[]>();
-        
+
         this.http.delete(`${environment.apiBase}/${this.resourcePath}/${idSelector(target)}`)
             .subscribe(result => {
                 this.current = this.current.filter(c => idSelector(c) !== idSelector(target));
@@ -94,7 +96,7 @@ export class Resource<T> {
 
     public get(): Observable<T> {
         this.http.get(`${environment.apiBase}/${this.resourcePath}`)
-            .map(response => response.json())
+            .pipe(map(response => response.json()))
             .subscribe(result => {
                 Utils.unwrapResult<T>(result, data => {
                     this.subject.next(data);
@@ -104,11 +106,11 @@ export class Resource<T> {
         return this.subject;
     }
 
-    public post(data: any): Observable<T> {
+    public post(body: any): Observable<T> {
         let postSubject = new Subject<T>();
 
-        this.http.post(`${environment.apiBase}/${this.resourcePath}`, data)
-            .map(response => response.json())
+        this.http.post(`${environment.apiBase}/${this.resourcePath}`, body)
+            .pipe(map(response => response.json()))
             .subscribe(result => {
                 Utils.unwrapResult<T>(result, data => {
                     this.subject.next(data);
@@ -124,7 +126,7 @@ export class Resource<T> {
         let deleteSubject = new Subject<void>();
 
         this.http.delete(`${environment.apiBase}/${this.resourcePath}`)
-            .map(response => response.json())
+            .pipe(map(response => response.json()))
             .subscribe(result => {
                 this.subject.next();
                 deleteSubject.next();
