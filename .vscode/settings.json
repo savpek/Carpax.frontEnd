@@ -1,12 +1,11 @@
 {
-    "typescript.check.workspaceVersion": false,
-
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "deploy/**/*.*": true
+        "deploy/dist": true,
+        "dist": true
     }
 }
