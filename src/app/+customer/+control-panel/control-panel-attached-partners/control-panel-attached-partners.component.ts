@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AttachedPartnerRepo, IAttachedPartner } from '../../../data/attachedPartnerRepo';
 import { FormContext } from '../../../shared.cxform/formContext';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'cx-control-panel-attached-partners',
@@ -15,7 +15,7 @@ export class ControlPanelAttachedPartnersComponent {
 
   public guidRegexp: RegExp = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
 
-  constructor(private attachedPartnerRepo: AttachedPartnerRepo, private modal: Modal, private toast: ToastsManager) {
+  constructor(private attachedPartnerRepo: AttachedPartnerRepo, private modal: Modal, private toast: ToastrService) {
     attachedPartnerRepo.get().subscribe(x => this.attachedPartners = x);
   }
 
@@ -23,7 +23,7 @@ export class ControlPanelAttachedPartnersComponent {
     let current = this.attachedPartners;
     current.filter(x => x.transient === 'new')
       .forEach(x => this.attachedPartnerRepo.add(x)
-        .subscribe(_ => {}, err => this.toast.error("Virheellinen tunniste tai PIN")));
+        .subscribe(_ => {}, err => this.toast.error('Virheellinen tunniste tai PIN')));
     current.filter(x => x.transient === 'delete').forEach(x => this.attachedPartnerRepo.delete(x));
   }
 
@@ -44,12 +44,12 @@ export class ControlPanelAttachedPartnersComponent {
   }
 
   public changeIdModal(partner: IAttachedPartner) {
-    if(partner.transient !== 'new') {
+    if (partner.transient !== 'new') {
       return;
     }
 
     this.modal.prompt()
-    .size("lg")
+    .size('lg')
     .isBlocking(true)
     .showClose(true)
     .keyboard(27)
@@ -63,8 +63,8 @@ export class ControlPanelAttachedPartnersComponent {
     .then(inputValue => {
       let guidCandidate = /http.*\/(.*?)\/tickets/.exec(inputValue.toString());
 
-      if(!guidCandidate || !this.guidRegexp.test(guidCandidate[1])) {
-        this.toast.error("Virheellinen linkki. Kumppanin tunnistetta ei löydy.")
+      if (!guidCandidate || !this.guidRegexp.test(guidCandidate[1])) {
+        this.toast.error('Virheellinen linkki. Kumppanin tunnistetta ei löydy.')
         return;
       }
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { environment } from '../../../environments/environment';
 import { PasswordReset } from '../../service/passwordReset';
 import { Auth } from '../../service/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'cx-reset-password',
@@ -26,7 +26,7 @@ export class ResetPasswordComponent {
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private toast: ToastsManager,
+    private toast: ToastrService,
     private reset: PasswordReset,
     private auth: Auth,
     private route: Router) {

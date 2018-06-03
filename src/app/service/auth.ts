@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable, BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, Subscription, timer } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
@@ -51,7 +51,7 @@ export class Auth {
             this.route.navigate(['/customer', 'login']);
         }
 
-        this.logoutSubscriber = Observable.timer(this.getLogoutTimeInSeconds() * 1000)
+        this.logoutSubscriber = timer(this.getLogoutTimeInSeconds() * 1000)
             .subscribe(x => this.route.navigate(['/customer', 'login']));
     }
 

@@ -18,7 +18,7 @@ export class TicketFilterComponent {
 
   constructor(private ticketFilter: TicketFilter, private activeRoute: ActivatedRoute) {
     this.filter
-      .debounceTime(500)
+      .pipe(debounceTime(500))
       .subscribe(x =>
         this.ticketFilter.textFilter(x));
   }

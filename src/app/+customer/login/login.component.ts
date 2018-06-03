@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Auth } from '../../service/auth';
 import { Router } from '@angular/router';
-    import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'cx-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,7 @@ export class LoginComponent {
   public userName: string;
   public password: string;
 
-  constructor(private auth: Auth, private router: Router, private toast: ToastsManager) {
+  constructor(private auth: Auth, private router: Router, private toast: ToastrService) {
     auth.logOut();
   }
 
