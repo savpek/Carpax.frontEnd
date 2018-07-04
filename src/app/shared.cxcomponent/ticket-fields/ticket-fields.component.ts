@@ -1,12 +1,13 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { PartnerRepo } from 'app/data/partnerRepo';
 import { CxModal } from 'app/service/modal';
+import { TicketSchema } from '../../service/ticketSchema';
 
 @Component({
   selector: 'cx-ticket-fields',
   templateUrl: './ticket-fields.component.html',
   styleUrls: ['./ticket-fields.component.scss'],
-  providers: []
+  providers: [TicketSchema]
 })
 export class TicketFieldsComponent {
   @Input()
@@ -41,7 +42,7 @@ export class TicketFieldsComponent {
   @Output()
   public currentPartnerIdChange = new EventEmitter();
 
-  constructor(private partnerRepo: PartnerRepo, private modal: CxModal) {
+  constructor(private partnerRepo: PartnerRepo, private modal: CxModal, public schema: TicketSchema) {
     this.partnerRepo.Get().subscribe(
       result => {
         this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; })

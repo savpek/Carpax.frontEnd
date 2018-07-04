@@ -23,7 +23,8 @@ export class TicketCalendarComponent implements AfterViewInit {
     timezone: 'local',
     height: 'parent',
     contentHeight: 'auto',
-    events: []
+    events: [],
+    themeSystem: 'bootstrap3'
   }
 
   @ViewChild('calendar')

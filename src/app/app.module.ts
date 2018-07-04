@@ -26,6 +26,7 @@ import { LocalStorage } from './service/localStorage';
 import { HttpWrapper } from './data/httpWrapper';
 
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { TooltipModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     SlimLoadingBarModule.forRoot(),
     BootstrapModalModule,
     ToastrModule.forRoot(),
+    TooltipModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: 'customer/tickets/own', pathMatch: 'full' },
       {
