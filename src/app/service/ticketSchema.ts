@@ -78,9 +78,79 @@ const schema = {
             'groupName': 'Vahinkotiedot',
             items: [
                 {
-                    'name': 'customer',
-                    'label': 'Asiakas',
-                    'type': 'text'
+                    'name': 'insurance',
+                    'label': 'Vakuutus',
+                    'type': 'dropdown',
+                    'options': [
+                        { text: 'Liikenne', value: 0 },
+                        { text: 'Kasko', value: 1 },
+                        { text: 'Vastuuvakuutus', value: 2 },
+                        { text: 'Asiakas maksaa', value: 3 }
+                    ]
+                },
+                {
+                    'name': 'otherSideRegisterPlate',
+                    'label': 'Vastapuolen rekisterinumero',
+                    'type': 'text',
+                    'showWhen': { 'name': 'insurance', 'equals': '0' }
+                },
+                {
+                    'name': 'otherSideInsurance',
+                    'label': 'Vastapuolen vakuutus',
+                    'type': 'text',
+                    'showWhen': { 'name': 'insurance', 'equals': '0' }
+                },
+                {
+                    'name': 'accidentType',
+                    'label': 'Vahinkolaji',
+                    'type': 'dropdown',
+                    'showWhen': { 'name': 'insurance', 'equals': '1' },
+                    'options': [
+                        { text: 'Törmäys', value: 0 },
+                        { text: 'Ilkivalta', value: 1 },
+                        { text: 'Parkkipaikka', value: 2 },
+                        { text: 'Varkaus', value: 3 },
+                        { text: 'Palo', value: 4 },
+                        { text: 'Lasivakuutus', value: 5 }
+                    ]
+                },
+                {
+                    'name': 'accidentNumber',
+                    'label': 'Vahinkonumero',
+                    'type': 'text',
+                    'showWhen': { 'name': 'insurance', 'notEquals': '3' }
+                },
+                {
+                    'name': 'insuranceCompany',
+                    'label': 'Vakuutusyhtiö',
+                    'type': 'text',
+                    'showWhen': { 'name': 'insurance', 'notEquals': '3' }
+                },
+                {
+                    'name': 'excess',
+                    'label': 'Omavastuu',
+                    'type': 'text',
+                    'showWhen': { 'name': 'insurance', 'notEquals': '3' }
+                },
+                {
+                    'name': 'description',
+                    'label': 'Selite',
+                    'type': 'textArea'
+                },
+                {
+                    'name': 'when',
+                    'label': 'Tapahtuma-aika',
+                    'type': 'date'
+                },
+                {
+                    'name': 'workStartDate',
+                    'label': 'Aloituspäivä',
+                    'type': 'date'
+                },
+                {
+                    'name': 'workEndDate',
+                    'label': 'Valmistumispäivä',
+                    'type': 'date'
                 }
             ]
         }
