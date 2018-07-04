@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Resource, ResourceFactory } from './resource';
 
 export interface ITicket {
-    id: string;
+    id?: string;
     ready?: boolean;
     lastModified?: Date;
     created?: Date;

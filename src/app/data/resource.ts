@@ -10,10 +10,6 @@ import Utils from './util';
 import { HttpWrapper } from './httpWrapper';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-export interface IEntry {
-    transient?: string;
-}
-
 @Injectable()
 export class ResourceFactory {
     constructor(private http: HttpWrapper, private auth: Auth) {}

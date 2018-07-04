@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEntry, ResourceFactory, Resources } from './resource';
+import { ResourceFactory, Resources } from './resource';
 import { map } from 'rxjs/operators';
 
-export interface IAttachedPartner extends IEntry {
-    partnerId: string;
+export interface IAttachedPartner {
+    transient?: string;
+    partnerId?: string;
     description: string;
 }
 

@@ -29,7 +29,6 @@ export class ControlPanelAttachedPartnersComponent {
 
   public add() {
     this.attachedPartners.push({
-      partnerId: '',
       description: '',
       transient: 'new'
     });

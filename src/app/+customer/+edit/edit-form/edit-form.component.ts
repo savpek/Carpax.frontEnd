@@ -1,9 +1,8 @@
-import { IPartner, PartnerRepo } from 'app/data/partnerRepo';
+import { PartnerRepo } from 'app/data/partnerRepo';
 import { FormContext } from 'app/shared.cxform/formContext';
 import { ITicket, TicketRepo } from 'app/data/ticketRepo';
 import { Component, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { CanDeactivateForm } from 'app/shared.cxform/canDeactivateForm';
 import { CxModal } from 'app/service/modal';
 import { retry } from 'rxjs/operators';
@@ -16,7 +15,6 @@ import { retry } from 'rxjs/operators';
 })
 export class EditFormComponent extends CanDeactivateForm {
   public ticket: ITicket = {
-    id: '',
     data: {}
   };
 

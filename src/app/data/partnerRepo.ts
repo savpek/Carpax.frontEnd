@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Resources, ResourceFactory } from './resource';
 
 export interface IPartner {
-    id: string;
+    id?: string;
     name: string;
     pin: string;
     transient: string;
@@ -17,11 +17,14 @@ export interface IPartnerMap {
 
 @Injectable()
 export class PartnerRepo {
+    private resource: Resources<IPartner>;
+
     constructor(private resourceFactory: ResourceFactory) {
+        this.resource = this.resourceFactory.createMany<IPartner>('partner/');
     }
 
     public Get(): Observable<IPartner[]> {
-        return this.resourceFactory.createMany<IPartner>('partner/').get();
+        return this.resource.get();
     }
 
     public GetById(id: string): Observable<IPartner> {
@@ -37,11 +40,11 @@ export class PartnerRepo {
             .post({ ticketId: ticketId, partnerId: partnerId });
     }
 
-    public Add(partner: IPartner): Observable<IPartner> {
-        return this.resourceFactory.create<IPartner>('partner/').post(partner);
+    public Add(partner: IPartner): Observable<IPartner[]> {
+        return this.resource.post(partner, x => x.id);
     }
 
     public Delete(partner: IPartner): Observable<IPartner[]> {
-        return this.resourceFactory.createMany<IPartner>('partner/').delete(partner, x => x.id);
+        return this.resource.delete(partner, x => x.id);
     }
 }
