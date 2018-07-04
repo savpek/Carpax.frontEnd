@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export abstract class CanDeactivateForm implements ICanDeactive {
     constructor(private formContext: FormContext, private modal: CxModal) {}
 
-    public canDeactivate() {
+    public canDeactivate(): Promise<boolean> {
         if (this.formContext.isDirty()) {
             return new Promise((resolve) => this.modal.show.confirm()
                 .message('Sinulla on tallentamattomia muutoksia, oletko varma että haluat jatkaa?')

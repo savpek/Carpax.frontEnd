@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Uuid } from './utils';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './new-form.component.html',
@@ -27,7 +28,7 @@ export class NewFormComponent {
 
   private saveRoutine() {
       return this.ticketRepo.Update(this.ticket)
-        .flatMap(() => this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId));
+        .pipe(flatMap(() => this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId)));
   }
 
   public save() {

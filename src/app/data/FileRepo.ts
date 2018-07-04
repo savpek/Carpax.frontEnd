@@ -5,6 +5,7 @@ import { Observable, Subject} from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Auth } from 'app/service/auth';
 import { HttpWrapper } from './httpWrapper';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FileRepo {
@@ -25,11 +26,13 @@ export class FileRepo {
 
     public upload(ticketId: string, data: any): Observable<FileEntry> {
         return this.http.post(`${environment.apiBase}/file/${ticketId}`, data)
-            .map(response => <FileEntry>response.json())
-            .do(entry => {
-                this.data.push(entry);
-                this.subject.next(this.data);
-            });
+            .pipe(
+                map(response => <FileEntry>response.json()
+                .tap(entry => {
+                    this.data.push(entry);
+                    this.subject.next(this.data);
+                }))
+            );
     }
 
     public delete(file: FileEntry): void {

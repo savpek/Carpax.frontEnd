@@ -1,7 +1,7 @@
 import { FormContext } from '../../../shared.cxform/formContext';
 import { IUser, UserRepo } from '../../../data/userRepo';
 import { Component } from '@angular/core';
-import { ToastsManager, ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'cx-control-panel',
@@ -12,7 +12,7 @@ import { ToastsManager, ToastModule } from 'ng2-toastr/ng2-toastr';
 export class ControlPanelUsersComponent {
   public users: IUser[] = [];
 
-  constructor(private userRepo: UserRepo, private toast: ToastsManager) {
+  constructor(private userRepo: UserRepo, private toast: ToastrService) {
     userRepo.Get().subscribe(x => this.users = x);
   }
 
@@ -35,7 +35,7 @@ export class ControlPanelUsersComponent {
     let current = this.users;
     current.filter(x => x.transient === 'delete').forEach(x => this.userRepo.Delete(x));
     current.filter(x => x.transient === 'new')
-      .forEach(x => 
+      .forEach(x =>
         this.userRepo.Add(x)
           .subscribe(() => {},
             error => this.toast.error(error)));

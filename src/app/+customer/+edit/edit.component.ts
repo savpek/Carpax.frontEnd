@@ -1,10 +1,4 @@
-import { 
-  Component,
-  trigger,
-  state,
-  style,
-  transition,
-  animate } from '@angular/core';
+import { Component } from '@angular/core';
 import { ITabRoute } from 'app/shared.cxcomponent/tabs/tabs.component';
 import { NotificationRepo, INotification } from 'app/data/notificationRepo';
 import { ActivatedRoute } from '@angular/router';
@@ -25,7 +19,7 @@ export class EditComponent {
       notificationRepo.getForTicket(params['id'])
         .subscribe(notifications => {
           notifications.forEach(n => {
-            switch(n.type.toString()) {
+            switch (n.type.toString()) {
               case '0':
                 this.routes.find(x => x.path === 'fields').hasNew = true;
                 break;

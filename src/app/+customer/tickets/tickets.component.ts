@@ -4,8 +4,9 @@ import { ITabRoute } from 'app/shared.cxcomponent/cxcomponent.module';
 import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
 import { NotificationRepo } from 'app/data/notificationRepo';
 import { TicketFilter } from '../../service/ticketFilter';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { TicketFilterComponent } from '../../shared.cxcomponent/ticket-filter/ticket-filter.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   templateUrl: './tickets.component.html',
@@ -30,17 +31,19 @@ export class TicketsComponent {
       if (params['partnerId']) {
         this.context = 'partner';
 
-        this.tickets = this.headerFactory.createForPartner(params['partnerId'])
-          .get()
-          .combineLatest(this.headerFilter.get(), (tickets, filter) => ({tickets, filter}))
-          .map(combined => combined.filter(combined.tickets));
+        this.tickets =
+          combineLatest(
+            this.headerFactory.createForPartner(params['partnerId']).get(),
+            this.headerFilter.get(), (tickets, filter) => ({tickets, filter}))
+          .pipe(map(combined => combined.filter(combined.tickets)));
       } else {
         this.context = 'customer';
 
-        this.tickets = this.headerFactory.create()
-          .get()
-          .combineLatest(this.headerFilter.get(), (tickets, filter) => ({tickets: tickets, filter: filter}))
-          .map(combined => combined.filter(combined.tickets));
+        this.tickets =
+          combineLatest(
+            this.headerFactory.create().get(),
+            this.headerFilter.get(), (tickets, filter) => ({tickets: tickets, filter: filter}))
+          .pipe(map(combined => combined.filter(combined.tickets)));
       }
     });
   }

@@ -13,18 +13,18 @@ export class TicketRepo {
     }
 
     public Get(id: string): Observable<ITicket> {
-        return this.apiFactory.create(`ticket/${id}`).get();
+        return this.apiFactory.create<ITicket>(`ticket/${id}`).get();
     }
 
     public Add(ticket: ITicket): Observable<ITicket> {
-        return this.apiFactory.create(`ticket/${ticket.id}`).post(ticket);
+        return this.apiFactory.create<ITicket>(`ticket/${ticket.id}`).post(ticket);
     }
 
     public Update(ticket: ITicket): Observable<ITicket> {
-        return this.apiFactory.create(`ticket/${ticket.id}`).post(ticket);
+        return this.apiFactory.create<ITicket>(`ticket/${ticket.id}`).post(ticket);
     }
 
     public Delete(ticket: ITicket): Observable<void> {
-        return this.apiFactory.create(`ticket/${ticket.id}`).delete();
+        return this.apiFactory.create<ITicket>(`ticket/${ticket.id}`).delete();
     }
 }

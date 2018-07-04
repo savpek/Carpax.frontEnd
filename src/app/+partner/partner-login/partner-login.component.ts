@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PartnerRepo } from 'app/data/partnerRepo';
 import { Auth } from 'app/service/auth';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'cx-partner-login',
@@ -12,7 +12,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class PartnerLoginComponent {
   public id: undefined;
-  public name: string = '';
+  public name = '';
   public pin: string;
 
   constructor(
@@ -20,7 +20,7 @@ export class PartnerLoginComponent {
       private auth: Auth,
       private activeRoute: ActivatedRoute,
       private router: Router,
-      private toast: ToastsManager) {
+      private toast: ToastrService) {
     this.activeRoute.params.subscribe(x => {
       this.id = x['partnerId'];
       this.partnerRepo.GetById(this.id)

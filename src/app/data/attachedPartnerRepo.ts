@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IEntry, ResourceFactory, Resources } from './resource';
+import { map } from 'rxjs/operators';
 
 export interface IAttachedPartner extends IEntry {
     partnerId: string;
@@ -21,7 +22,7 @@ export class AttachedPartnerRepo {
 
     public add(attachedPartner: IAttachedPartner): Observable<void> {
         return this.resource.post(attachedPartner, x => x.partnerId)
-            .map(x => {});
+            .pipe(map(x => {}));
     }
 
     public delete(attachedPartner: IAttachedPartner) {

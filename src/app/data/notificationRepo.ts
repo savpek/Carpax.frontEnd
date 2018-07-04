@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, interval } from 'rxjs';
 import { Resource, Resources, ResourceFactory } from './resource';
+import { timeout, switchMap } from 'rxjs/operators';
 
 export interface INotification {
     ticketId: string;
@@ -17,11 +18,13 @@ export class NotificationRepo {
     }
 
     public get(): Observable<INotification[]> {
-        return this.resources.get();
+        return interval(60000)
+            .pipe(switchMap(() => this.resources.get()));
     }
 
     public getForTicket(ticketId: string): Observable<INotification[]> {
-        return this.resourceFactory.createMany<INotification>(`notification/${ticketId}`).get();
+        return interval(60000)
+            .pipe(switchMap(() => this.resourceFactory.createMany<INotification>(`notification/${ticketId}`).get()));
     }
 
     public clear(notification: INotification) {

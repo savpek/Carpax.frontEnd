@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanDeactivateForm } from 'app/shared.cxform/canDeactivateForm';
 import { CxModal } from 'app/service/modal';
+import { retry } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-edit-form',
@@ -34,9 +35,11 @@ export class EditFormComponent extends CanDeactivateForm {
     this.activeRoute.parent.params.subscribe(params => {
       let ticketId = params['id'];
 
-      this.ticketRepo.Get(ticketId).retry(10).subscribe(ticket => { 
-        this.ticket = ticket
-        this.changeDetect.detectChanges();
+      this.ticketRepo.Get(ticketId)
+        .pipe(retry(10))
+        .subscribe(ticket => {
+          this.ticket = ticket
+          this.changeDetect.detectChanges();
       });
 
       this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
@@ -71,7 +74,7 @@ export class EditFormComponent extends CanDeactivateForm {
 
   public extracActions(event) {
     this.ticketRepo.Delete(this.ticket)
-      .subscribe(() => 
+      .subscribe(() =>
         this.router.navigateByUrl('/'));
   }
 }

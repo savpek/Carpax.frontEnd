@@ -1,6 +1,6 @@
-import { FileEntry, FileRepo } from 'app/data/fileRepo';
 import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
+import { FileRepo } from 'app/data/FileRepo';
 
 @Component({
   selector: 'cx-file-input',

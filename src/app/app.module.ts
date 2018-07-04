@@ -23,9 +23,9 @@ import { LoadingBar } from './service/loadingBar';
 import { ResourceFactory } from './data/resource';
 import { RequiresLoginGuard } from './service/RequiresLoginGuard';
 import { LocalStorage } from './service/localStorage';
-import { ToastModule, ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { HttpWrapper } from './data/httpWrapper';
-import { ToastOptions } from "ng2-toastr/src/toast-options";
+
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,10 +38,10 @@ import { ToastOptions } from "ng2-toastr/src/toast-options";
     CxFormModule,
     CxComponentModule,
     BrowserAnimationsModule,
-    ToastModule,
     ModalModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
     BootstrapModalModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: 'customer/tickets/own', pathMatch: 'full' },
       {
@@ -64,8 +64,8 @@ import { ToastOptions } from "ng2-toastr/src/toast-options";
     RequiresLoginGuard,
     LocalStorage,
     HttpWrapper,
-    ToastsManager,
-    ToastOptions],
+    ToastrService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
