@@ -15,39 +15,18 @@ export interface ITicketHeaderRepo {
 }
 
 @Injectable()
-export class TicketHeaderRepoFactory {
-    constructor(private resourceFactory: ResourceFactory) {
-    }
-
-    public createForPartner(partnerId: string): ITicketHeaderRepo {
-        return new TicketHeaderRepoForPartners(this.resourceFactory, partnerId);
-    }
-
-    public create(): ITicketHeaderRepo {
-        return new TicketHeaderRepo(this.resourceFactory);
-    }
-}
-
-class TicketHeaderRepoForPartners implements ITicketHeaderRepo {
+export class TicketHeaderRepo implements ITicketHeaderRepo {
     private resource: Resources<ITicketHeader>;
 
-    constructor(resourceFactory: ResourceFactory, private partnerId: string) {
-        this.resource = resourceFactory.createMany<ITicketHeader>(`ticketforpartner/${this.partnerId}`);
-    }
-
-    public get(): Observable<ITicketHeader[]> {
-        return this.resource.get();
-    }
-}
-
-class TicketHeaderRepo implements ITicketHeaderRepo {
-    private resource: Resources<ITicketHeader>;
-
-    constructor(resourceFactory: ResourceFactory, ) {
+    constructor(private resourceFactory: ResourceFactory, ) {
         this.resource = resourceFactory.createMany<ITicketHeader>('ticket');
     }
 
     public get(): Observable<ITicketHeader[]> {
         return this.resource.get();
+    }
+
+    public getForPartner(partnerId: string): Observable<ITicketHeader[]> {
+        return this.resourceFactory.createMany<ITicketHeader>(`ticketforpartner/${partnerId}`).get()
     }
 }

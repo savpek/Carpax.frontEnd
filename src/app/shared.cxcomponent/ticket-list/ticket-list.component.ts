@@ -21,7 +21,7 @@ export class TicketListComponent {
 
   private notifications: INotification[] = []
 
-  constructor(private notificationRepo: NotificationRepo, public schema: TicketSchema) {
+  constructor(notificationRepo: NotificationRepo, public schema: TicketSchema) {
     notificationRepo.get()
       .subscribe(notifications => {
         this.notifications = notifications;

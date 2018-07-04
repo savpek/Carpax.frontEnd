@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
+import { ITicketHeader, TicketHeaderRepo } from 'app/data/ticketHeaderRepo';
 import { TicketFilter } from 'app/service/ticketFilter';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
   templateUrl: './partner-tickets.component.html',
-  providers: [TicketFilter, TicketHeaderRepoFactory]
+  providers: [TicketFilter, TicketHeaderRepo]
 })
 export class PartnerTicketsComponent {
   private currentPartnerId: string;
   public tickets: Observable<ITicketHeader[]>;
 
   constructor(
-      private activeRoute: ActivatedRoute,
-      private headerFactory: TicketHeaderRepoFactory,
+      activeRoute: ActivatedRoute,
+      private headerRepo: TicketHeaderRepo,
       private router: Router,
-      private ticketFilter: TicketFilter) {
+      ticketFilter: TicketFilter) {
     activeRoute.parent.params.subscribe(params => {
 
       this.currentPartnerId = params['partnerId'];
@@ -28,7 +28,7 @@ export class PartnerTicketsComponent {
 
       this.tickets =
         combineLatest(
-            this.headerFactory.createForPartner(this.currentPartnerId).get(),
+            this.headerRepo.get(),
             ticketFilter.get(),
             (tickets, filter) => ({tickets, filter}))
         .pipe(map(combined => combined.filter(combined.tickets)));
