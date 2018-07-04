@@ -1,7 +1,7 @@
 import { IResult } from './iresult';
 
 export default class Utils {
-    static unwrapResult<T>(target: any, handler: (x: any) => void , errorHandler?: (x: string) => void): void  {
+    static unwrapResult<T>(target: any, handler: (x: T[]) => void , errorHandler?: (x: string) => void): void  {
         if (target.isSuccess === undefined) {
             if (!Array.isArray(target)) {
                 handler(([target]))
