@@ -5,6 +5,7 @@ import { Resource, ResourceFactory } from './resource';
 
 export interface ITicket {
     id: string;
+    data: any;
 }
 
 @Injectable()
@@ -17,7 +18,7 @@ export class TicketRepo {
     }
 
     public Add(ticket: ITicket): Observable<ITicket> {
-        return this.apiFactory.create<ITicket>(`ticket/${ticket.id}`).post(ticket);
+        return this.apiFactory.create<ITicket>(`ticket/`).post(ticket);
     }
 
     public Update(ticket: ITicket): Observable<ITicket> {

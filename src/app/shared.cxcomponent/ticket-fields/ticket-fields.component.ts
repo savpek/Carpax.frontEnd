@@ -11,23 +11,9 @@ import { TicketSchema } from '../../service/ticketSchema';
 })
 export class TicketFieldsComponent {
   @Input()
-  public ticket: any = {};
-
-  public insuranceTypes: any[] = [
-    { text: 'Liikenne', value: 0 },
-    { text: 'Kasko', value: 1 },
-    { text: 'Vastuuvakuutus', value: 2 },
-    { text: 'Asiakas maksaa', value: 3 }
-  ];
-
-  public accidentTypes: any[] = [
-    { text: 'Törmäys', value: 0 },
-    { text: 'Ilkivalta', value: 1 },
-    { text: 'Parkkipaikka', value: 2 },
-    { text: 'Varkaus', value: 3 },
-    { text: 'Palo', value: 4 },
-    { text: 'Lasivakuutus', value: 5 }
-  ];
+  public ticket: any = {
+    data: {}
+  };
 
   public readyTypes: any[] = [
     { text: 'Kyllä', value: true },

@@ -12,19 +12,20 @@ export interface INotification {
 @Injectable()
 export class NotificationRepo {
     private resources: Resources<INotification>;
+    private current: Observable<INotification[]>;
 
     constructor(private resourceFactory: ResourceFactory) {
         this.resources = resourceFactory.createMany<INotification>(`notification`);
-    }
-
-    public get(): Observable<INotification[]> {
-        return interval(60000)
+        this.current = interval(60000)
             .pipe(switchMap(() => this.resources.get()));
     }
 
+    public get(): Observable<INotification[]> {
+        return this.current;
+    }
+
     public getForTicket(ticketId: string): Observable<INotification[]> {
-        return interval(60000)
-            .pipe(switchMap(() => this.resourceFactory.createMany<INotification>(`notification/${ticketId}`).get()));
+        return this.resourceFactory.createMany<INotification>(`notification/${ticketId}`).get();
     }
 
     public clear(notification: INotification) {

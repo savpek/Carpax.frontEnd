@@ -3,10 +3,8 @@ import { FormContext } from '../../shared.cxform/formContext';
 import { ITicket, TicketRepo } from '../../data/ticketRepo';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
-import { Uuid } from './utils';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './new-form.component.html',
@@ -14,7 +12,8 @@ import { flatMap } from 'rxjs/operators';
 })
 export class NewFormComponent {
   public ticket: ITicket = {
-    id: Uuid.create()
+    id: '00000000-0000-0000-0000-000000000000',
+    data: {}
   };
 
   public currentPartnerId: string;
@@ -27,8 +26,10 @@ export class NewFormComponent {
   }
 
   private saveRoutine() {
-      return this.ticketRepo.Update(this.ticket)
-        .pipe(flatMap(() => this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId)));
+      return this.ticketRepo.Add(this.ticket)
+        .pipe(
+          tap(ticket => this.ticket = ticket),
+          flatMap(() => this.partnerRepo.UpdateCurrentForTicket(this.ticket.id, this.currentPartnerId)))
   }
 
   public save() {

@@ -16,7 +16,8 @@ import { retry } from 'rxjs/operators';
 })
 export class EditFormComponent extends CanDeactivateForm {
   public ticket: ITicket = {
-    id: ''
+    id: '',
+    data: {}
   };
 
   public currentPartnerId: string;
