@@ -32,12 +32,12 @@ export class PartnerRepo {
     }
 
     public GetCurrentForTicket(ticketId: string): Observable<IPartnerMap[]> {
-        return this.resourceFactory.create<IPartnerMap[]>(`partnerforticket/${ticketId}`).get();
+        return this.resourceFactory.createMany<IPartnerMap>(`partnerforticket/${ticketId}`).get();
     }
 
     public UpdateCurrentForTicket(ticketId: string, partnerId: string): Observable<IPartnerMap[]> {
-        return this.resourceFactory.create<IPartnerMap[]>(`partnerforticket/`)
-            .post({ ticketId: ticketId, partnerId: partnerId });
+        return this.resourceFactory.createMany<IPartnerMap>(`partnerforticket/`)
+            .post({ ticketId: ticketId, partnerId: partnerId }, x => x.partnerId + x.ticketId);
     }
 
     public Add(partner: IPartner): Observable<IPartner[]> {

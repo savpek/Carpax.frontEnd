@@ -42,8 +42,7 @@ export class EditFormComponent extends CanDeactivateForm {
       });
 
       this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
-        if (partner.length === 0 || !partner[0].partnerId) { return; };
-
+        if (partner.length === undefined || partner.length === 0 || !partner[0].partnerId) { return; };
         this.currentPartnerId = partner[0].partnerId;
         this.currentPartnerIdChange.emit(this.currentPartnerId);
         this.changeDetect.detectChanges();
