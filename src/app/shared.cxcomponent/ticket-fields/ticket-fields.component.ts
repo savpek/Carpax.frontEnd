@@ -7,7 +7,7 @@ import { TicketSchema } from '../../service/ticketSchema';
   selector: 'cx-ticket-fields',
   templateUrl: './ticket-fields.component.html',
   styleUrls: ['./ticket-fields.component.scss'],
-  providers: [TicketSchema]
+  providers: []
 })
 export class TicketFieldsComponent {
   @Input()

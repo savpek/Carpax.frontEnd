@@ -5,6 +5,9 @@ import { Resource, ResourceFactory } from './resource';
 
 export interface ITicket {
     id: string;
+    ready?: boolean;
+    lastModified?: Date;
+    created?: Date;
     data: any;
 }
 
@@ -22,7 +25,7 @@ export class TicketRepo {
     }
 
     public Update(ticket: ITicket): Observable<ITicket> {
-        return this.apiFactory.create<ITicket>(`ticket/${ticket.id}`).post(ticket);
+        return this.apiFactory.create<ITicket>(`ticket/`).post(ticket);
     }
 
     public Delete(ticket: ITicket): Observable<void> {

@@ -27,6 +27,7 @@ import { HttpWrapper } from './data/httpWrapper';
 
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TooltipModule } from 'ngx-bootstrap';
+import { TicketSchema } from 'app/service/ticketSchema';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { TooltipModule } from 'ngx-bootstrap';
     RequiresLoginGuard,
     LocalStorage,
     HttpWrapper,
-    ToastrService
+    ToastrService,
+    TicketSchema
   ],
   bootstrap: [AppComponent]
 })

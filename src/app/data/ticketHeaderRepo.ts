@@ -5,13 +5,9 @@ import { ResourceFactory, Resources } from './resource';
 export interface ITicketHeader {
         id: string;
         ready: boolean;
-        registerPlate: string;
-        model: string;
-        customer: string;
         lastModified: Date;
-        workStartDate: Date;
-        workEndDate: Date;
-        partner: string
+        partner: string;
+        data: any;
 }
 
 export interface ITicketHeaderRepo {

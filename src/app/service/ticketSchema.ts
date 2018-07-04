@@ -1,5 +1,22 @@
 const schema = {
     'version': 'v1',
+    'ticketList': [
+        {
+            'name': 'registerPlate',
+            'label': 'Rekisterinumero',
+            'hideOnMobile': 'true'
+        },
+        {
+            'name': 'customer',
+            'label': 'Asiakas',
+        },
+    ],
+    'calendar': {
+        'enabled': true,
+        'titleField': 'registerPlate',
+        'startDateSelector': 'workStartDate',
+        'endDateSelector': 'workEndDate'
+    },
     'basicForm': [
         {
             'groupName': 'Auton tiedot',

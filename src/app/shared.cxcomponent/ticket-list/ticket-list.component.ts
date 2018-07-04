@@ -3,6 +3,7 @@ import { ITicketHeader } from '../../data/ticketHeaderRepo';
 import { NotificationRepo, INotification } from '../../data/notificationRepo';
 import * as moment from 'moment';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { TicketSchema } from 'app/service/ticketSchema';
 
 @Component({
   selector: 'cx-ticket-list',
@@ -20,7 +21,7 @@ export class TicketListComponent {
 
   private notifications: INotification[] = []
 
-  constructor(private notificationRepo: NotificationRepo) {
+  constructor(private notificationRepo: NotificationRepo, public schema: TicketSchema) {
     notificationRepo.get()
       .subscribe(notifications => {
         this.notifications = notifications;

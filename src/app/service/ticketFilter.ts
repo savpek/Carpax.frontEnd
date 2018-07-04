@@ -20,12 +20,15 @@ export class TicketFilter {
     private regex: string;
     private state: TicketState = TicketState.all;
 
-    private textfilterFunc = (x: ITicketHeader): boolean => {
+    private textfilterFunc = (header: ITicketHeader): boolean => {
         let isMatch = (item) =>
             item && item.toLowerCase().match(`.*${this.regex.toLocaleLowerCase()}.*`);
 
         if (this.regex) {
-            return isMatch(x.registerPlate) || isMatch(x.customer) || isMatch(x.model) || isMatch(x.partner);
+            let dataMatches = Object.getOwnPropertyNames(header.data)
+                .filter(propertyName => isMatch(header.data[propertyName]))
+
+            return dataMatches.length > 0 || isMatch(header.partner);
         }
         return true;
     };

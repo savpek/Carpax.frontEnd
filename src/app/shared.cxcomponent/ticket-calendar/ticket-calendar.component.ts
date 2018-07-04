@@ -35,11 +35,11 @@ export class TicketCalendarComponent implements AfterViewInit {
   private eventCallback: (any) => void = (_) => { };
 
   private getEndDate(header: ITicketHeader): Date {
-    if (header.workEndDate) {
-      return moment(header.workEndDate).add(1, 'days').toDate();
+    if (header.data.workEndDate) {
+      return moment(header.data.workEndDate).add(1, 'days').toDate();
     }
 
-    return header.workStartDate;
+    return header.data.workStartDate;
   }
 
   private getEventColor(header: ITicketHeader) {
@@ -56,11 +56,11 @@ export class TicketCalendarComponent implements AfterViewInit {
       console.log(tickets);
 
       let events = tickets
-        .filter(x => x.workStartDate)
+        .filter(x => x.data.workStartDate)
         .map(x => {
           return {
-            title: `${x.registerPlate}, ${x.customer}`,
-            start: x.workStartDate,
+            title: `${x.data.registerPlate}`,
+            start: x.data.workStartDate,
             end: this.getEndDate(x),
             allDay: true,
             url: `./customer/edit/${x.id}/fields`,

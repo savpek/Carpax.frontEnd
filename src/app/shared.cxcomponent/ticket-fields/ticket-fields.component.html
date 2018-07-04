@@ -25,7 +25,8 @@
   </div>
 </div>
 
-<cx-form-date-input label="Luotu" [disabled]="true" [(dateModel)]="ticket.created"></cx-form-date-input>
+<cx-form-date-input *ngIf="ticket.created" label="Luotu" [disabled]="true" [(dateModel)]="ticket.created"></cx-form-date-input>
+<cx-form-date-input *ngIf="ticket.lastModified" label="Muokattu" [disabled]="true" [(dateModel)]="ticket.created"></cx-form-date-input>
 
 <cx-form-dropdown-input
   label="Valmis"
