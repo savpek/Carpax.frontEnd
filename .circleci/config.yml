@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    docker:
+      - image: node:10.5
     steps:
       - checkout
       - run: docker build .
