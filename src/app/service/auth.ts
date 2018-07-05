@@ -14,6 +14,8 @@ export interface ICurrentLogin {
     type?: string;
     name?: string;
     customerName?: string;
+    customerId?: string;
+    userId?: string;
     token?: string;
     expires?: any;
 }
@@ -159,8 +161,10 @@ class Login implements ILogin {
                     type: this.type,
                     name: asObject.name,
                     customerName: asObject.customerName,
-                    token: asObject.access_token,
-                    expires: moment().unix() + asObject.expires_in
+                    customerId: asObject.customerId,
+                    userId: asObject.userId,
+                    token: asObject.accessToken,
+                    expires: moment().unix() + asObject.expiresIn
                 };
                 return this.loginInformation;
             }));

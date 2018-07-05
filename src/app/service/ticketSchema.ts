@@ -174,12 +174,26 @@ const schema = {
     ]
 };
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+
+import { Injectable } from '@angular/core';
+import { Auth } from 'app/service/auth';
+import { flatMap, map } from 'rxjs/operators';
+import { ResourceFactory } from '../data/resource';
+
+@Injectable()
 export class TicketSchema {
+    private currentSchema: ReplaySubject<any> = new ReplaySubject(1);
+
+    constructor(auth: Auth, resourceFactory: ResourceFactory) {
+        auth.getCurrentUser()
+        .pipe(flatMap(user =>
+            resourceFactory.create<any>(`customer/${user.customerId}`).get()
+        )).subscribe(x => this.currentSchema.next(x.schema))
+    }
+
     public get(): Observable<any> {
-        return Observable.create(x => {
-            x.next(schema)
-        });
+        return this.currentSchema;
     }
 }
 
