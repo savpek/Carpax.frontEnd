@@ -5,6 +5,9 @@ import 'fullcalendar';
 import * as moment from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { element } from 'protractor';
+import { TicketSchema } from '../../service/ticketSchema';
+import { pipe } from '@angular/core/src/render3/pipe';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-ticket-calendar',
@@ -23,8 +26,7 @@ export class TicketCalendarComponent implements AfterViewInit {
     timezone: 'local',
     height: 'parent',
     contentHeight: 'auto',
-    events: [],
-    themeSystem: 'bootstrap3'
+    events: []
   }
 
   @ViewChild('calendar')
@@ -34,12 +36,12 @@ export class TicketCalendarComponent implements AfterViewInit {
 
   private eventCallback: (any) => void = (_) => { };
 
-  private getEndDate(header: ITicketHeader): Date {
-    if (header.data.workEndDate) {
-      return moment(header.data.workEndDate).add(1, 'days').toDate();
+  private getEndDate(header: ITicketHeader, schema): Date {
+    if (header.data[schema.calendar.endDateSelector]) {
+      return moment(header.data[schema.calendar.endDateSelector]).add(1, 'days').toDate();
     }
 
-    return header.data.workStartDate;
+    return header.data[schema.calendar.startDateSelector];
   }
 
   private getEventColor(header: ITicketHeader) {
@@ -51,35 +53,34 @@ export class TicketCalendarComponent implements AfterViewInit {
 
   @Input()
   set tickets(value: Observable<ITicketHeader[]>) {
-    value.subscribe(tickets => {
-
-      console.log(tickets);
-
-      let events = tickets
-        .filter(x => x.data.workStartDate)
-        .map(x => {
-          return {
-            title: `${x.data.registerPlate}`,
-            start: x.data.workStartDate,
-            end: this.getEndDate(x),
-            allDay: true,
-            url: `./customer/edit/${x.id}/fields`,
-            color: this.getEventColor(x)
-          }
-        });
-
-      this.config.events = events;
-
-      jQuery(this.calendar.nativeElement).fullCalendar('removeEvents');
-      jQuery(this.calendar.nativeElement).fullCalendar('addEventSource', events)
-      jQuery(this.calendar.nativeElement).fullCalendar('rerenderEvents');
-    });
+    this.schema.get().pipe(take(1)).subscribe(schema => {
+      value.subscribe(tickets => {
+        let events = tickets
+          .filter(x => x.data[schema.calendar.startDateSelector])
+          .map(x => {
+            return {
+              title: `${x.data[schema.calendar.titleField]}`,
+              start: x.data.workStartDate,
+              end: this.getEndDate(x, schema),
+              allDay: true,
+              url: `./customer/edit/${x.id}/fields`,
+              color: this.getEventColor(x)
+            }
+          });
+  
+        this.config.events = events;
+  
+        jQuery(this.calendar.nativeElement).fullCalendar('removeEvents');
+        jQuery(this.calendar.nativeElement).fullCalendar('addEventSource', events)
+        jQuery(this.calendar.nativeElement).fullCalendar('rerenderEvents');
+      });
+    })
   }
 
   ngAfterViewInit() {
     setTimeout(() => jQuery(this.calendar.nativeElement).fullCalendar(this.config), 100);
   }
 
-  constructor(private changeRef: ApplicationRef) {
+  constructor(private schema: TicketSchema) {
   }
 }

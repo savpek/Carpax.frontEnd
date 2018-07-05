@@ -176,7 +176,7 @@ const schema = {
 
 import { Observable } from 'rxjs';
 export class TicketSchema {
-    public get(): Observable<string> {
+    public get(): Observable<any> {
         return Observable.create(x => {
             x.next(schema)
         });
