@@ -67,9 +67,9 @@ export class TicketCalendarComponent implements AfterViewInit {
               color: this.getEventColor(x)
             }
           });
-  
+
         this.config.events = events;
-  
+
         jQuery(this.calendar.nativeElement).fullCalendar('removeEvents');
         jQuery(this.calendar.nativeElement).fullCalendar('addEventSource', events)
         jQuery(this.calendar.nativeElement).fullCalendar('rerenderEvents');
