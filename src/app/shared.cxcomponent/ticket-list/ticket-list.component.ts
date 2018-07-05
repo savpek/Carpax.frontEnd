@@ -1,8 +1,8 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 import { ITicketHeader } from '../../data/ticketHeaderRepo';
-import { NotificationRepo, INotification } from '../../data/notificationRepo';
+import { NotificationRepo } from '../../data/notificationRepo';
 import * as moment from 'moment';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, zip, combineLatest } from 'rxjs';
 import { TicketSchema } from 'app/service/ticketSchema';
 
 @Component({
@@ -11,25 +11,32 @@ import { TicketSchema } from 'app/service/ticketSchema';
   styleUrls: ['./ticket-list.component.scss'],
   providers: []
 })
-export class TicketListComponent {
-
+export class TicketListComponent implements OnChanges  {
   @Input()
-  public tickets: Observable<ITicketHeader[]> = new BehaviorSubject([]);
+  public tickets: Observable<ITicketHeader[]>;
 
   @Output()
   public openTicket: EventEmitter<ITicketHeader> = new EventEmitter<ITicketHeader>();
 
-  private notifications: INotification[] = []
+  public ticketsWithNotifications: BehaviorSubject<Array<ITicketHeader|{hasNotification: boolean}>> = new BehaviorSubject([]);
 
-  constructor(notificationRepo: NotificationRepo, public schema: TicketSchema) {
-    notificationRepo.get()
-      .subscribe(notifications => {
-        this.notifications = notifications;
-      });
+  constructor(private notificationRepo: NotificationRepo, public schema: TicketSchema) {
   }
 
-  public hasNew(ticketId: string) {
-    return !!this.notifications.find(x => x.ticketId === ticketId);
+  ngOnChanges() {
+    combineLatest(
+      this.notificationRepo.get(),
+      this.tickets
+    )
+    .subscribe(result => {
+      let withNotifications = result[1]
+        .map((t: any) => {
+          t.hasNotification = !!result[0].find(n => n.ticketId === t.id);
+          return t;
+        });
+
+      this.ticketsWithNotifications.next(withNotifications);
+    });
   }
 
   public openTicketClick(ticket: ITicketHeader) {

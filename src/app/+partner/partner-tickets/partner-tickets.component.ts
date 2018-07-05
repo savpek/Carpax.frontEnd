@@ -19,7 +19,6 @@ export class PartnerTicketsComponent {
       private router: Router,
       ticketFilter: TicketFilter) {
     activeRoute.parent.params.subscribe(params => {
-
       this.currentPartnerId = params['partnerId'];
 
       if (!this.currentPartnerId) {

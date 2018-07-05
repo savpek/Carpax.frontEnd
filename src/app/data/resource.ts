@@ -26,6 +26,7 @@ export class ResourceFactory {
 export class Resources<T> {
     private subject: BehaviorSubject<T[]> = new BehaviorSubject([]);
     private current: T[] = [];
+    private fetching: boolean;
 
     constructor(
         private resourcePath: string,
@@ -33,7 +34,8 @@ export class Resources<T> {
         private auth: Auth) {}
 
     public get(): Observable<T[]> {
-        if (this.current.length === 0) {
+        if (!this.fetching) {
+            this.fetching = true;
             this.http.get(`${environment.apiBase}/${this.resourcePath}`)
                 .pipe(map(response => response.json()))
                 .subscribe(result => {
@@ -41,6 +43,7 @@ export class Resources<T> {
                         this.current = data;
                         this.subject.next(this.current.slice());
                     }, error => this.subject.error(error));
+                    this.fetching = false;
                 });
         }
 
