@@ -5,7 +5,7 @@
   (valueChange)="currentPartnerUpdated($event)">
 </cx-form-dropdown-input>
 
-<div *ngIf="schema.get() | async; let schema; else loading">
+<div *ngIf="schema.get() | async; let schema">
   <div *ngFor="let group of schema.basicForm">
     <h3 *ngIf="group.groupName">{{group.groupName}}</h3>
     <div *ngFor="let item of group.items" [ngSwitch]="item.type">

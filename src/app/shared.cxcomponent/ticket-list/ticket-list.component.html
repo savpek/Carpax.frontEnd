@@ -1,5 +1,5 @@
 <div>
-  <table *ngIf="schema.get() | async; let schema; else loading">
+  <table *ngIf="schema.get() | async; let schema">
     <tr>
       <th class="tableHeader"></th>
       <th class="tableHeader" *ngFor="let column of schema.ticketList">{{column.label}}</th>
