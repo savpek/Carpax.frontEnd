@@ -16,7 +16,7 @@ export class NotificationRepo {
     constructor(private resourceFactory: ResourceFactory) {
         this.resources = resourceFactory.createMany<INotification>(`notification`);
 
-        timer(0, 10000)
+        timer(0, 30000)
             .pipe(
                 switchMap(() => this.resources.get())
             )
