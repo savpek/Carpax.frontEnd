@@ -3,7 +3,7 @@
     <tr>
       <th class="tableHeader"></th>
       <th class="tableHeader" *ngFor="let column of schema.ticketList">{{column.label}}</th>
-      <th class="tableHeader visible-lg visible-md">Partneri</th>
+      <th class="tableHeader visible-lg visible-md">Kumppani</th>
     </tr>
     <tr
       *ngFor="let ticket of ticketsWithNotifications | async"
