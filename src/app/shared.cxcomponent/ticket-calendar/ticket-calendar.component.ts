@@ -60,7 +60,7 @@ export class TicketCalendarComponent implements AfterViewInit {
           .map(x => {
             return {
               title: `${x.data[schema.calendar.titleField]}`,
-              start: x.data.workStartDate,
+              start: x.data[schema.calendar.startDateSelector],
               end: this.getEndDate(x, schema),
               allDay: true,
               url: `./customer/edit/${x.id}/fields`,
