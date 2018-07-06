@@ -1,10 +1,9 @@
-FROM node:6.6
+FROM node:10.5
 
 COPY ./ /usr/var/src/
-
 WORKDIR /usr/var/src/
 
-RUN npm install --silent
-RUN npm install -g angular-cli@1.0.0-beta.26 --silent && npm cache clean --silent
+RUN npm install
+RUN npm install -g @angular/cli
 
-RUN ng build -prod
+RUN ng build --prod

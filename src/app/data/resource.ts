@@ -10,10 +10,6 @@ import Utils from './util';
 import { HttpWrapper } from './httpWrapper';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-export interface IEntry {
-    transient?: string;
-}
-
 @Injectable()
 export class ResourceFactory {
     constructor(private http: HttpWrapper, private auth: Auth) {}
@@ -30,6 +26,7 @@ export class ResourceFactory {
 export class Resources<T> {
     private subject: BehaviorSubject<T[]> = new BehaviorSubject([]);
     private current: T[] = [];
+    private fetching: boolean;
 
     constructor(
         private resourcePath: string,
@@ -37,14 +34,16 @@ export class Resources<T> {
         private auth: Auth) {}
 
     public get(): Observable<T[]> {
-        if (this.current.length === 0) {
+        if (!this.fetching) {
+            this.fetching = true;
             this.http.get(`${environment.apiBase}/${this.resourcePath}`)
                 .pipe(map(response => response.json()))
                 .subscribe(result => {
-                    Utils.unwrapResult<T[]>(result, data => {
+                    Utils.unwrapResult<T>(result, data => {
                         this.current = data;
                         this.subject.next(this.current.slice());
                     }, error => this.subject.error(error));
+                    this.fetching = false;
                 });
         }
 
@@ -57,7 +56,7 @@ export class Resources<T> {
         this.http.post(`${environment.apiBase}/${this.resourcePath}`, body)
             .pipe(map(response => response.json()))
             .subscribe(result => {
-                Utils.unwrapResult<T[]>(result, data => {
+                Utils.unwrapResult<T>(result, data => {
                     // Remove updated.
                     this.current = this.current.filter(c => !data.find(r => idSelector(r) === idSelector(c)));
 
@@ -99,7 +98,7 @@ export class Resource<T> {
             .pipe(map(response => response.json()))
             .subscribe(result => {
                 Utils.unwrapResult<T>(result, data => {
-                    this.subject.next(data);
+                    this.subject.next(data[0]);
                 }, error => this.subject.error(error));
             });
 
@@ -113,8 +112,8 @@ export class Resource<T> {
             .pipe(map(response => response.json()))
             .subscribe(result => {
                 Utils.unwrapResult<T>(result, data => {
-                    this.subject.next(data);
-                    postSubject.next(data);
+                    this.subject.next(data[0]);
+                    postSubject.next(data[0]);
                 },
                 error => postSubject.error(error));
             });

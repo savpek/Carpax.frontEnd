@@ -6,10 +6,10 @@
     <div class="col-lg-3 col-md-3 col-xs-12">
       <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-location-arrow" [text]="buildUri(partner)" [disabled]="true" [clipboard]="true"></cx-form-text-input-small>
     </div>
-    <div class="col-lg-3 col-md-3 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-xs-12">
       <cx-form-text-input-small *ngIf="!partner.transient" headerIcon="fa-key" [text]="partner.pin" format="uppercase" [disabled]="true" [clipboard]="true"></cx-form-text-input-small>
     </div>
-    <div class="input-group col-lg-2 col-md-2 col-xs-12">
+    <div class="input-group col-lg-1 col-md-1 col-xs-12">
       <cx-button *ngIf="partner.transient !== 'delete'" icon="fa-times" text="Poista" class="pull-right" (action)="delete(partner)"></cx-button>
       <cx-button *ngIf="partner.transient === 'delete'" icon="fa-undo" text="Palauta" class="pull-right" (action)="restore(partner)"></cx-button>
     </div>

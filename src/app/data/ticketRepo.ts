@@ -4,7 +4,11 @@ import { Observable } from 'rxjs';
 import { Resource, ResourceFactory } from './resource';
 
 export interface ITicket {
-    id: string;
+    id?: string;
+    ready?: boolean;
+    lastModified?: Date;
+    created?: Date;
+    data: any;
 }
 
 @Injectable()
@@ -17,11 +21,11 @@ export class TicketRepo {
     }
 
     public Add(ticket: ITicket): Observable<ITicket> {
-        return this.apiFactory.create<ITicket>(`ticket/${ticket.id}`).post(ticket);
+        return this.apiFactory.create<ITicket>(`ticket/`).post(ticket);
     }
 
     public Update(ticket: ITicket): Observable<ITicket> {
-        return this.apiFactory.create<ITicket>(`ticket/${ticket.id}`).post(ticket);
+        return this.apiFactory.create<ITicket>(`ticket/`).post(ticket);
     }
 
     public Delete(ticket: ITicket): Observable<void> {

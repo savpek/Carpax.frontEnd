@@ -1,65 +1,35 @@
-<cx-form-dropdown-input 
-  label="Korjaamo" 
+<cx-form-dropdown-input
+  label="Kumppani"
   [items]="partners"
   [value]="currentPartnerId"
   (valueChange)="currentPartnerUpdated($event)">
 </cx-form-dropdown-input>
 
-<h3>Auton tiedot</h3>
-<cx-form-text-input validate=".+" label="Rekisterinumero*" [(text)]="ticket.registerPlate" format="uppercase"></cx-form-text-input>
-<cx-form-text-input label="VIN" [(text)]="ticket.vin" format="uppercase"></cx-form-text-input>
-<cx-form-text-input label="Merkki" [(text)]="ticket.brand"></cx-form-text-input>
-<cx-form-text-input label="Malli" [(text)]="ticket.model"></cx-form-text-input>
-<cx-form-text-input label="Värikoodi" [(text)]="ticket.colorCode"></cx-form-text-input>
-<cx-form-text-input label="Ajetut kilometrit" [(text)]="ticket.kilometersDriven"></cx-form-text-input>
+<div *ngIf="schema.get() | async; let schema">
+  <div *ngFor="let group of schema.basicForm">
+    <h3 *ngIf="group.groupName">{{group.groupName}}</h3>
+    <div *ngFor="let item of group.items" [ngSwitch]="item.type">
+      <div *ngIf="!item.showWhen || (item.showWhen.equals && ticket.data[item.showWhen.name] == item.showWhen.equals) || (item.showWhen.notEquals && ticket.data[item.showWhen.name] != item.showWhen.notEquals)">
+      <cx-form-text-input *ngSwitchCase="'text'" [validate]="item.validator" [label]="item.label" [(text)]="ticket.data[item.name]" [format]="item.format"></cx-form-text-input>
 
-<h3>Asiakastiedot</h3>
-<cx-form-text-input label="Asiakas" [(text)]="ticket.customer"></cx-form-text-input>
-<cx-form-text-input label="Puhelin" [(text)]="ticket.phone"></cx-form-text-input>
-<cx-form-text-input label="Sähköposti" [(text)]="ticket.email"></cx-form-text-input>
-<cx-form-text-input label="Lähiosoite" [(text)]="ticket.address"></cx-form-text-input>
-<cx-form-text-input label="Postinumero" [(text)]="ticket.postNumber"></cx-form-text-input>
-<cx-form-text-input label="Kaupunki" [(text)]="ticket.city"></cx-form-text-input>
+      <cx-form-dropdown-input *ngSwitchCase="'dropdown'"
+        [label]="item.label"
+        [items]="item.options"
+        [(value)]="ticket.data[item.name]">
+      </cx-form-dropdown-input>
 
-<h3>Vahinkotiedot</h3>
-<cx-form-dropdown-input 
-  label="Vakuutus" 
-  [items]="insuranceTypes" 
-  [(value)]="ticket.insurance">
-</cx-form-dropdown-input>
-
-<div *ngIf="ticket.insurance == 0">
-  <cx-form-text-input label="Vastapuolen rekisterinumero" [(text)]="ticket.otherSideRegisterPlate"></cx-form-text-input>
-  <cx-form-text-input label="Vastapuolen vakuutus" [(text)]="ticket.otherSideInsurance"></cx-form-text-input>
+      <cx-form-text-area-input *ngSwitchCase="'textArea'" [label]="item.label" [(text)]="ticket.data[item.name]"></cx-form-text-area-input>
+      <cx-form-date-input *ngSwitchCase="'date'" [label]="item.label" [(dateModel)]="ticket.data[item.name]"></cx-form-date-input>
+    </div>
+    </div>
+  </div>
 </div>
+
+<cx-form-date-input *ngIf="ticket.created" label="Luotu" [disabled]="true" [(dateModel)]="ticket.created"></cx-form-date-input>
+<cx-form-date-input *ngIf="ticket.lastModified" label="Muokattu" [disabled]="true" [(dateModel)]="ticket.created"></cx-form-date-input>
 
 <cx-form-dropdown-input
-  *ngIf="ticket.insurance == 1" 
-  label="Vahinkolaji" 
-  [items]="accidentTypes" 
-  [(value)]="ticket.accidentType">
-</cx-form-dropdown-input>
-
-<div *ngIf="ticket.insurance == 2">
-  <cx-form-text-input label="Vakuutuksenottajan nimi" [(text)]="ticket.insuranceHolder"></cx-form-text-input>
-  <cx-form-text-input label="Vakuutuksenottajan puhelinnumero" [(text)]="ticket.insuranceHolderPhone"></cx-form-text-input>
-</div>
-
-<div *ngIf="ticket.insurance != 3">
-  <cx-form-text-input label="Vahinkonumero" [(text)]="ticket.accidentNumber"></cx-form-text-input>
-  <cx-form-text-input label="Vakuutusyhtiö" [(text)]="ticket.insuranceCompany"></cx-form-text-input>
-  <cx-form-text-input label="Omavastuu" [(text)]="ticket.excess"></cx-form-text-input>
-</div>
-
-<cx-form-text-area-input label="Selite" [(text)]="ticket.description"></cx-form-text-area-input>
-
-<cx-form-date-input label="Tapahtuma-aika" [(dateModel)]="ticket.when"></cx-form-date-input>
-<cx-form-date-input label="Aloituspäivä" [(dateModel)]="ticket.workStartDate"></cx-form-date-input>
-<cx-form-date-input label="Valmistumispäivä" [(dateModel)]="ticket.workEndDate"></cx-form-date-input>
-<cx-form-date-input label="Luotu" [disabled]="true" [(dateModel)]="ticket.created"></cx-form-date-input>
-
-<cx-form-dropdown-input 
-  label="Valmis" 
+  label="Valmis"
   [items]="readyTypes"
   [(value)]="ticket.ready">
 </cx-form-dropdown-input>

@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ITabRoute } from 'app/shared.cxcomponent/cxcomponent.module';
-import { ITicketHeader, TicketHeaderRepoFactory } from 'app/data/ticketHeaderRepo';
-import { NotificationRepo } from 'app/data/notificationRepo';
+import { ITicketHeader, TicketHeaderRepo } from 'app/data/ticketHeaderRepo';
 import { TicketFilter } from '../../service/ticketFilter';
 import { Observable, combineLatest } from 'rxjs';
-import { TicketFilterComponent } from '../../shared.cxcomponent/ticket-filter/ticket-filter.component';
 import { map } from 'rxjs/operators';
 
 @Component({
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss'],
-  providers: [TicketFilter]
+  providers: [TicketFilter, TicketHeaderRepo]
 })
 export class TicketsComponent {
   public tickets: Observable<ITicketHeader[]>;
@@ -22,10 +19,10 @@ export class TicketsComponent {
   public currentView = 'list';
 
   constructor(
-    private headerFactory: TicketHeaderRepoFactory,
+    private headerRepo: TicketHeaderRepo,
     private headerFilter: TicketFilter,
     private router: Router,
-    private activeRoute: ActivatedRoute) {
+    activeRoute: ActivatedRoute) {
 
     activeRoute.params.subscribe(params => {
       if (params['partnerId']) {
@@ -33,7 +30,7 @@ export class TicketsComponent {
 
         this.tickets =
           combineLatest(
-            this.headerFactory.createForPartner(params['partnerId']).get(),
+            this.headerRepo.getForPartner(params['partnerId']),
             this.headerFilter.get(), (tickets, filter) => ({tickets, filter}))
           .pipe(map(combined => combined.filter(combined.tickets)));
       } else {
@@ -41,7 +38,7 @@ export class TicketsComponent {
 
         this.tickets =
           combineLatest(
-            this.headerFactory.create().get(),
+            this.headerRepo.get(),
             this.headerFilter.get(), (tickets, filter) => ({tickets: tickets, filter: filter}))
           .pipe(map(combined => combined.filter(combined.tickets)));
       }

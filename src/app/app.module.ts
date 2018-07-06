@@ -26,6 +26,8 @@ import { LocalStorage } from './service/localStorage';
 import { HttpWrapper } from './data/httpWrapper';
 
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { TooltipModule } from 'ngx-bootstrap';
+import { TicketSchema } from 'app/service/ticketSchema';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     SlimLoadingBarModule.forRoot(),
     BootstrapModalModule,
     ToastrModule.forRoot(),
+    TooltipModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: 'customer/tickets/own', pathMatch: 'full' },
       {
@@ -64,7 +67,8 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     RequiresLoginGuard,
     LocalStorage,
     HttpWrapper,
-    ToastrService
+    ToastrService,
+    TicketSchema
   ],
   bootstrap: [AppComponent]
 })

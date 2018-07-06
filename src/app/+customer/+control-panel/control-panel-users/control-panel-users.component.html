@@ -3,7 +3,7 @@
     <div class="col-lg-4 col-md-4 col-xs-12">
       <cx-form-text-input-small *ngIf="user.transient !== 'delete'" headerIcon="fa-envelope-o" [(text)]="user.userName" [disabled]="user.transient !== 'new'"></cx-form-text-input-small>
     </div>
-    <div class="col-lg-2 col-md-2 col-xs-12">
+    <div class="col-lg-1 col-md-1 col-xs-12">
       <cx-button *ngIf="user.transient !== 'delete'" icon="fa-times" text="Poista" class="pull-right" (action)="delete(user)"></cx-button>
       <cx-button *ngIf="user.transient === 'delete'" icon="fa-undo" text="Palauta" class="pull-right" (action)="restore(user)"></cx-button>
     </div>

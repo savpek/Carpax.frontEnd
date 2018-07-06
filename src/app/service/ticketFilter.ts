@@ -17,15 +17,19 @@ export class TicketFilter {
     private subject: BehaviorSubject<(t: ITicketHeader[]) => ITicketHeader[]> =
         new BehaviorSubject<(t: ITicketHeader[]) => ITicketHeader[]>(t => []);
 
-    private regex: string;
+    private regex: RegExp;
     private state: TicketState = TicketState.all;
 
-    private textfilterFunc = (x: ITicketHeader): boolean => {
-        let isMatch = (item) =>
-            item && item.toLowerCase().match(`.*${this.regex.toLocaleLowerCase()}.*`);
+    private textfilterFunc = (header: ITicketHeader): boolean => {
+        let isMatch = (item): boolean => {
+            return item && this.regex.test(String(item).toLocaleLowerCase())
+        };
 
         if (this.regex) {
-            return isMatch(x.registerPlate) || isMatch(x.customer) || isMatch(x.model) || isMatch(x.partner);
+            let dataMatches = Object.getOwnPropertyNames(header.data)
+                .filter(propertyName => isMatch(header.data[propertyName]))
+
+            return dataMatches.length > 0 || isMatch(header.partner);
         }
         return true;
     };
@@ -63,7 +67,7 @@ export class TicketFilter {
     }
 
     public textFilter(regex: string): string {
-        this.regex = regex;
+        this.regex = new RegExp(`.*${regex.toLocaleLowerCase()}.*`);
         this.subject.next(this.combinedFilterFunction);
         return regex;
     }

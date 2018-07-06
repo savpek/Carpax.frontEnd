@@ -43,7 +43,6 @@ export class ControlPanelPartnersComponent {
 
   public add() {
     this.partners.push({
-      id: '',
       name: '',
       pin: '',
       transient: 'new'
