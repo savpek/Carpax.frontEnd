@@ -1,7 +1,8 @@
 @import '../../../styles.mixins.scss';
 
 input:disabled {
-    background-color: lighten($light, 1%)
+    background-color: lighten($light, 1%);
+    color: white !important
 }
 
 * {
