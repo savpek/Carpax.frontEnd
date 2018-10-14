@@ -5,6 +5,6 @@
                 <cx-ticket-filter mode="partner"></cx-ticket-filter>
             </div>
         </div>
-        <cx-ticket-list [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
+        <cx-ticket-list [tickets]="tickets" [schema]="schema" (openTicket)="openTicket($event)"></cx-ticket-list>
     </div>
 </div>

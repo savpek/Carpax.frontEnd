@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ITicketHeader, TicketHeaderRepo } from 'app/data/ticketHeaderRepo';
 import { TicketFilter } from 'app/service/ticketFilter';
 import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './partner-tickets.component.html',
@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 export class PartnerTicketsComponent {
   private currentPartnerId: string;
   public tickets: Observable<ITicketHeader[]>;
+  public schema = [];
 
   constructor(
       activeRoute: ActivatedRoute,
@@ -27,7 +28,8 @@ export class PartnerTicketsComponent {
 
       this.tickets =
         combineLatest(
-            this.headerRepo.get(),
+            this.headerRepo.get()
+              .pipe(tap(x => this.schema = x.listSchema)),
             ticketFilter.get(),
             (tickets, filter) => ({tickets, filter}))
         .pipe(map(combined => combined.filter(combined.tickets.tickets)));
