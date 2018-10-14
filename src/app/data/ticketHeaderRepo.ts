@@ -11,7 +11,8 @@ export interface ITicketHeader {
 }
 
 export interface ITicketHeaders {
-    listSchema: any;
+    listSchema: any[];
+    calendarSchema: any;
     tickets: ITicketHeader[];
 }
 
