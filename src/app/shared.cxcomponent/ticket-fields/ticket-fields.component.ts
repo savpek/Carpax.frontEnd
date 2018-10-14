@@ -12,7 +12,8 @@ import { TicketSchema } from '../../service/ticketSchema';
 export class TicketFieldsComponent {
   @Input()
   public ticket: any = {
-    data: {}
+    data: {},
+    schema: {}
   };
 
   public readyTypes: any[] = [
@@ -28,7 +29,7 @@ export class TicketFieldsComponent {
   @Output()
   public currentPartnerIdChange = new EventEmitter();
 
-  constructor(private partnerRepo: PartnerRepo, private modal: CxModal, public schema: TicketSchema) {
+  constructor(private partnerRepo: PartnerRepo, private modal: CxModal) {
     this.partnerRepo.Get().subscribe(
       result => {
         this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; })

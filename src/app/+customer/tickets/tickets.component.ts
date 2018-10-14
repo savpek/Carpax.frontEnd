@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ITicketHeader, TicketHeaderRepo } from 'app/data/ticketHeaderRepo';
 import { TicketFilter } from '../../service/ticketFilter';
 import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './tickets.component.html',
@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class TicketsComponent {
   public tickets: Observable<ITicketHeader[]>;
+  public schema = [];
 
   private context: string;
 
@@ -30,17 +31,18 @@ export class TicketsComponent {
 
         this.tickets =
           combineLatest(
-            this.headerRepo.getForPartner(params['partnerId']),
+            this.headerRepo.getForPartner(params['partnerId'])
+              .pipe(tap(x => this.schema = x.listSchema)),
             this.headerFilter.get(), (tickets, filter) => ({tickets, filter}))
-          .pipe(map(combined => combined.filter(combined.tickets)));
+          .pipe(map(combined => combined.filter(combined.tickets.tickets)));
       } else {
         this.context = 'customer';
 
         this.tickets =
           combineLatest(
-            this.headerRepo.get(),
+            this.headerRepo.get().pipe(tap(x => this.schema = x.listSchema)),
             this.headerFilter.get(), (tickets, filter) => ({tickets: tickets, filter: filter}))
-          .pipe(map(combined => combined.filter(combined.tickets)));
+          .pipe(map(combined => combined.filter(combined.tickets.tickets)));
       }
     });
   }

@@ -9,7 +9,7 @@
                 <cx-ticket-filter></cx-ticket-filter>
             </div>
         </div>
-        <cx-ticket-list *ngIf="currentView === 'list'" [tickets]="tickets" (openTicket)="openTicket($event)"></cx-ticket-list>
+        <cx-ticket-list *ngIf="currentView === 'list'" [tickets]="tickets" [schema]="schema" (openTicket)="openTicket($event)"></cx-ticket-list>
         <cx-ticket-calendar *ngIf="currentView === 'calendar'" [tickets]="tickets"></cx-ticket-calendar>
     </div>
 </div>

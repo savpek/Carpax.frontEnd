@@ -30,7 +30,7 @@ export class PartnerTicketsComponent {
             this.headerRepo.get(),
             ticketFilter.get(),
             (tickets, filter) => ({tickets, filter}))
-        .pipe(map(combined => combined.filter(combined.tickets)));
+        .pipe(map(combined => combined.filter(combined.tickets.tickets)));
     });
   }
 

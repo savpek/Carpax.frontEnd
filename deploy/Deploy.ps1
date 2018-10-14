@@ -1,6 +1,6 @@
 [CmdletBinding()]
 Param(
-    [ValidateSet("staging", "prod")]
+    [ValidateSet("staging", "production")]
     [Parameter(Mandatory)][string]$Target,
     [switch]$Push
 )
@@ -29,7 +29,7 @@ Push-Location $root
     Push-Location $distFolder
         switch ($Target) {
             "staging" { git checkout master }
-            "prod" { git checkout prod }
+            "production" { git checkout prod }
             default { throw "Invalid target" }
         }
 

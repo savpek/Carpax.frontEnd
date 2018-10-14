@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Resource, ResourceFactory } from './resource';
+import { ResourceFactory } from './resource';
 
 export interface ITicket {
     id?: string;
