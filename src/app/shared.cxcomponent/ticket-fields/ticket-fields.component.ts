@@ -2,6 +2,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { PartnerRepo } from 'app/data/partnerRepo';
 import { CxModal } from 'app/service/modal';
 import { TicketSchema } from '../../service/ticketSchema';
+import { ITicket } from '../../data/ticketRepo';
 
 @Component({
   selector: 'cx-ticket-fields',
@@ -11,9 +12,9 @@ import { TicketSchema } from '../../service/ticketSchema';
 })
 export class TicketFieldsComponent {
   @Input()
-  public ticket: any = {
+  public ticket: ITicket = {
     data: {},
-    schema: {}
+    schema: []
   };
 
   public readyTypes: any[] = [

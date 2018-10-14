@@ -9,6 +9,7 @@ export interface ITicket {
     lastModified?: Date;
     created?: Date;
     data: any;
+    schema: any[];
 }
 
 @Injectable()
