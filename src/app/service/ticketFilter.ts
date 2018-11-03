@@ -21,14 +21,24 @@ export class TicketFilter {
     private regex: RegExp;
     private state: TicketState = TicketState.all;
     private dateFilter: moment.Moment;
+    private dateFilterEnd: moment.Moment;
     private fieldNameFilter: string;
 
     private textfilterFunc = (header: ITicketHeader): boolean => {
         if (this.regex || (this.dateFilter && this.dateFilter.isValid())) {
             let isMatch = (item): boolean => {
-                return (item && this.regex.test(String(item).toLocaleLowerCase()))
-                        || (item && moment(String(item)).isValid()
-                            && moment(String(item)).diff(this.dateFilter, 'days') === 0);
+                if (!item) {
+                    return false;
+                }
+
+                let textMatch = this.regex.test(String(item).toLocaleLowerCase());
+
+                let dateMatch = moment(String(item)).isValid()
+                    && moment(String(item))
+                        // Hacky range search for days...
+                        .isBetween(moment(this.dateFilter).add('hours', -4), this.dateFilterEnd || moment(this.dateFilter).add('days', 1));
+
+                return textMatch || dateMatch;
             };
 
             let dataMatches = Object.getOwnPropertyNames(header.data)
@@ -76,12 +86,19 @@ export class TicketFilter {
     public textFilter(searchString: string): string {
         let fieldNameFilterRegex = /([a-zA-Z]+?):(.*)/.exec(searchString);
 
-        if (fieldNameFilterRegex && fieldNameFilterRegex.length > 0) {
+        if (fieldNameFilterRegex) {
             this.fieldNameFilter = fieldNameFilterRegex[1];
             searchString = fieldNameFilterRegex[2];
         }
 
         this.dateFilter = moment(searchString, 'DD.MM.YYYY');
+
+        let dateFilterRangeRegex = /(\d+?\.\d+?\.\d+?)-(\d+?\.\d+?\.\d+)/.exec(searchString);
+
+        if (dateFilterRangeRegex) {
+            this.dateFilter = moment(dateFilterRangeRegex[1], 'DD.MM.YYYY');
+            this.dateFilterEnd = moment(dateFilterRangeRegex[2], 'DD.MM.YYYY');
+        }
 
         this.regex = new RegExp(`.*${searchString.toLocaleLowerCase()}.*`);
         this.subject.next(this.combinedFilterFunction);
