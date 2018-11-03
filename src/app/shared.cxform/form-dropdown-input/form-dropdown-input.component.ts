@@ -7,7 +7,7 @@ import { FormEntry, FormContext } from '../formContext';
   styleUrls: ['./form-dropdown-input.component.scss']
 })
 export class FormDropdownInputComponent {
-  @Input() public label: string = 'DEFAULT LABEL';
+  @Input() public label = 'DEFAULT LABEL';
   @Input() public disabled = false;
   @Input() public required: boolean;
   @Input() public dropdownHeader: string;

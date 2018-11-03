@@ -2,6 +2,7 @@ import { LocalStorage } from 'app/service/localStorage';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ITicketHeader } from 'app/data/ticketHeaderRepo';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 export enum TicketState {
     ready, nonready, all
@@ -19,18 +20,22 @@ export class TicketFilter {
 
     private regex: RegExp;
     private state: TicketState = TicketState.all;
+    private dateFilter: moment.Moment;
 
     private textfilterFunc = (header: ITicketHeader): boolean => {
-        let isMatch = (item): boolean => {
-            return item && this.regex.test(String(item).toLocaleLowerCase())
-        };
+        if (this.regex || (this.dateFilter && this.dateFilter.isValid())) {
+            let isMatch = (item): boolean => {
+                return (item && this.regex.test(String(item).toLocaleLowerCase()))
+                        || (item && moment(String(item)).isValid()
+                            && moment(String(item)).diff(this.dateFilter, 'days') === 0);
+            };
 
-        if (this.regex) {
             let dataMatches = Object.getOwnPropertyNames(header.data)
                 .filter(propertyName => isMatch(header.data[propertyName]))
 
             return dataMatches.length > 0 || isMatch(header.partner);
         }
+
         return true;
     };
 
@@ -66,10 +71,11 @@ export class TicketFilter {
         return this.subject;
     }
 
-    public textFilter(regex: string): string {
-        this.regex = new RegExp(`.*${regex.toLocaleLowerCase()}.*`);
+    public textFilter(searchString: string): string {
+        this.dateFilter = moment(searchString, 'DD.MM.YYYY');
+        this.regex = new RegExp(`.*${searchString.toLocaleLowerCase()}.*`);
         this.subject.next(this.combinedFilterFunction);
-        return regex;
+        return searchString;
     }
 
     public stateFilter(state: TicketState): TicketState {
