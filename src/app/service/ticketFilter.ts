@@ -21,6 +21,7 @@ export class TicketFilter {
     private regex: RegExp;
     private state: TicketState = TicketState.all;
     private dateFilter: moment.Moment;
+    private fieldNameFilter: string;
 
     private textfilterFunc = (header: ITicketHeader): boolean => {
         if (this.regex || (this.dateFilter && this.dateFilter.isValid())) {
@@ -31,6 +32,7 @@ export class TicketFilter {
             };
 
             let dataMatches = Object.getOwnPropertyNames(header.data)
+                .filter(propertyName => !this.fieldNameFilter || propertyName === this.fieldNameFilter)
                 .filter(propertyName => isMatch(header.data[propertyName]))
 
             return dataMatches.length > 0 || isMatch(header.partner);
@@ -72,7 +74,15 @@ export class TicketFilter {
     }
 
     public textFilter(searchString: string): string {
+        let fieldNameFilterRegex = /([a-zA-Z]+?):(.*)/.exec(searchString);
+
+        if (fieldNameFilterRegex && fieldNameFilterRegex.length > 0) {
+            this.fieldNameFilter = fieldNameFilterRegex[1];
+            searchString = fieldNameFilterRegex[2];
+        }
+
         this.dateFilter = moment(searchString, 'DD.MM.YYYY');
+
         this.regex = new RegExp(`.*${searchString.toLocaleLowerCase()}.*`);
         this.subject.next(this.combinedFilterFunction);
         return searchString;
