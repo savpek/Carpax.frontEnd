@@ -32,7 +32,7 @@ export class TicketFieldsComponent {
   public currentPartnerIdChange = new EventEmitter();
 
   public isDisabled(item: any): boolean {
-    return this.disabledDefault && !item.alwaysAllowEdit;
+    return this.disabledDefault && item && !item.alwaysAllowEdit;
   }
 
   constructor(private partnerRepo: PartnerRepo) {

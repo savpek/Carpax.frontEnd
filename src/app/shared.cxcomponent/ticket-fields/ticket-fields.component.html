@@ -2,7 +2,8 @@
   label="Kumppani"
   [items]="partners"
   [value]="currentPartnerId"
-  (valueChange)="currentPartnerUpdated($event)">
+  (valueChange)="currentPartnerUpdated($event)"
+  [disabled]="disabledDefault">
 </cx-form-dropdown-input>
 
 <div *ngFor="let group of ticket.schema">
@@ -30,5 +31,6 @@
 <cx-form-dropdown-input
   label="Valmis"
   [items]="readyTypes"
-  [(value)]="ticket.ready">
+  [(value)]="ticket.ready"
+  [disabled]="disabledDefault">
 </cx-form-dropdown-input>
