@@ -25,8 +25,15 @@ export class TicketFieldsComponent {
   @Input()
   public currentPartnerId: string;
 
+  @Input()
+  public disabledDefault: false;
+
   @Output()
   public currentPartnerIdChange = new EventEmitter();
+
+  public isDisabled(item: any): boolean {
+    return this.disabledDefault && !item.alwaysAllowEdit;
+  }
 
   constructor(private partnerRepo: PartnerRepo) {
     this.partnerRepo.Get().subscribe(

@@ -26,6 +26,6 @@ export class FormDropdownInputComponent {
   }
 
   public isDisabled(): boolean {
-    return this.disabled || this.form.disabled;
+    return this.disabled;
   }
 }

@@ -12,7 +12,6 @@ export class TicketFieldsComponent {
   public ticket: any = {};
 
   constructor(private activeRoute: ActivatedRoute, private ticketRepo: TicketRepo, private form: FormContext) {
-    this.form.disabled = true;
 
     this.activeRoute.parent.params.subscribe(params => {
       if (!params['ticketId']) {

@@ -9,16 +9,17 @@
   <h3 *ngIf="group.groupName">{{group.groupName}}</h3>
   <div *ngFor="let item of group.items" [ngSwitch]="item.type">
     <div *ngIf="!item.showWhen || (item.showWhen.equals && ticket.data[item.showWhen.name] == item.showWhen.equals) || (item.showWhen.notEquals && ticket.data[item.showWhen.name] != item.showWhen.notEquals)">
-    <cx-form-text-input *ngSwitchCase="'text'" [validate]="item.validator" [label]="item.label" [(text)]="ticket.data[item.name]" [format]="item.format"></cx-form-text-input>
+    <cx-form-text-input *ngSwitchCase="'text'" [validate]="item.validator" [label]="item.label" [disabled]="isDisabled(item)" [(text)]="ticket.data[item.name]" [format]="item.format"></cx-form-text-input>
 
     <cx-form-dropdown-input *ngSwitchCase="'dropdown'"
       [label]="item.label"
       [items]="item.options"
-      [(value)]="ticket.data[item.name]">
+      [(value)]="ticket.data[item.name]"
+      [disabled]="isDisabled(item)">
     </cx-form-dropdown-input>
 
-    <cx-form-text-area-input *ngSwitchCase="'textArea'" [label]="item.label" [(text)]="ticket.data[item.name]"></cx-form-text-area-input>
-    <cx-form-date-input *ngSwitchCase="'date'" [label]="item.label" [(dateModel)]="ticket.data[item.name]"></cx-form-date-input>
+    <cx-form-text-area-input *ngSwitchCase="'textArea'" [label]="item.label" [disabled]="isDisabled(item)" [(text)]="ticket.data[item.name]"></cx-form-text-area-input>
+    <cx-form-date-input *ngSwitchCase="'date'" [label]="item.label" [disabled]="isDisabled(item)" [(dateModel)]="ticket.data[item.name]"></cx-form-date-input>
   </div>
   </div>
 </div>
