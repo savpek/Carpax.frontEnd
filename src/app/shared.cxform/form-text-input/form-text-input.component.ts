@@ -43,7 +43,7 @@ export class FormTextInputComponent implements OnChanges {
   }
 
   public isDisabled(): boolean {
-    return this.disabled || this.form.disabled;
+    return this.disabled;
   }
 
   private validateData() {

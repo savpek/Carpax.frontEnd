@@ -1,7 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { PartnerRepo } from 'app/data/partnerRepo';
-import { CxModal } from 'app/service/modal';
-import { TicketSchema } from '../../service/ticketSchema';
+import { ITicket } from '../../data/ticketRepo';
 
 @Component({
   selector: 'cx-ticket-fields',
@@ -11,8 +10,9 @@ import { TicketSchema } from '../../service/ticketSchema';
 })
 export class TicketFieldsComponent {
   @Input()
-  public ticket: any = {
-    data: {}
+  public ticket: ITicket = {
+    data: {},
+    schema: []
   };
 
   public readyTypes: any[] = [
@@ -25,10 +25,17 @@ export class TicketFieldsComponent {
   @Input()
   public currentPartnerId: string;
 
+  @Input()
+  public disabledDefault: false;
+
   @Output()
   public currentPartnerIdChange = new EventEmitter();
 
-  constructor(private partnerRepo: PartnerRepo, private modal: CxModal, public schema: TicketSchema) {
+  public isDisabled(item: any): boolean {
+    return this.disabledDefault && item && !item.alwaysAllowEdit;
+  }
+
+  constructor(private partnerRepo: PartnerRepo) {
     this.partnerRepo.Get().subscribe(
       result => {
         this.partners = result.map<any>(partnerMap => { return { text: partnerMap.name, value: partnerMap.id }; })

@@ -32,7 +32,7 @@ export class FormTextAreaInputComponent {
   }
 
   public isDisabled(): boolean {
-    return this.disabled || this.form.disabled;
+    return this.disabled;
   }
 
   public keyboardEvent() {

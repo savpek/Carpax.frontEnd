@@ -2,6 +2,7 @@ import { LocalStorage } from 'app/service/localStorage';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ITicketHeader } from 'app/data/ticketHeaderRepo';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 export enum TicketState {
     ready, nonready, all
@@ -19,18 +20,34 @@ export class TicketFilter {
 
     private regex: RegExp;
     private state: TicketState = TicketState.all;
+    private dateFilter: moment.Moment;
+    private dateFilterEnd: moment.Moment;
+    private fieldNameFilter: string;
 
     private textfilterFunc = (header: ITicketHeader): boolean => {
-        let isMatch = (item): boolean => {
-            return item && this.regex.test(String(item).toLocaleLowerCase())
-        };
+        if (this.regex || (this.dateFilter && this.dateFilter.isValid())) {
+            let isMatch = (item): boolean => {
+                if (!item) {
+                    return false;
+                }
 
-        if (this.regex) {
+                let textMatch = this.regex.test(String(item).toLocaleLowerCase());
+
+                let dateMatch = moment(String(item)).isValid()
+                    && moment(String(item))
+                        // Hacky range search for days...
+                        .isBetween(moment(this.dateFilter).add('hours', -4), this.dateFilterEnd || moment(this.dateFilter).add('days', 1));
+
+                return textMatch || dateMatch;
+            };
+
             let dataMatches = Object.getOwnPropertyNames(header.data)
+                .filter(propertyName => !this.fieldNameFilter || propertyName === this.fieldNameFilter)
                 .filter(propertyName => isMatch(header.data[propertyName]))
 
             return dataMatches.length > 0 || isMatch(header.partner);
         }
+
         return true;
     };
 
@@ -66,10 +83,26 @@ export class TicketFilter {
         return this.subject;
     }
 
-    public textFilter(regex: string): string {
-        this.regex = new RegExp(`.*${regex.toLocaleLowerCase()}.*`);
+    public textFilter(searchString: string): string {
+        let fieldNameFilterRegex = /([a-zA-Z]+?):(.*)/.exec(searchString);
+
+        if (fieldNameFilterRegex) {
+            this.fieldNameFilter = fieldNameFilterRegex[1];
+            searchString = fieldNameFilterRegex[2];
+        }
+
+        this.dateFilter = moment(searchString, 'DD.MM.YYYY');
+
+        let dateFilterRangeRegex = /(\d+?\.\d+?\.\d+?)-(\d+?\.\d+?\.\d+)/.exec(searchString);
+
+        if (dateFilterRangeRegex) {
+            this.dateFilter = moment(dateFilterRangeRegex[1], 'DD.MM.YYYY');
+            this.dateFilterEnd = moment(dateFilterRangeRegex[2], 'DD.MM.YYYY');
+        }
+
+        this.regex = new RegExp(`.*${searchString.toLocaleLowerCase()}.*`);
         this.subject.next(this.combinedFilterFunction);
-        return regex;
+        return searchString;
     }
 
     public stateFilter(state: TicketState): TicketState {

@@ -43,7 +43,7 @@ export class FormDateInputComponent {
     }
 
     public isDisabled(): boolean {
-      return this.disabled || this.form.disabled;
+      return this.disabled;
     }
 
     public formatCurrent() {

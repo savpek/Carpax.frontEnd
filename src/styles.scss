@@ -228,6 +228,11 @@ a.fc-event  {
     border-color: $yellow;
 }
 
+.fc-unthemed td.fc-today
+{
+    background-color: #1b1b1b !important
+}
+
 span.fc-title {
     color: white;
 }

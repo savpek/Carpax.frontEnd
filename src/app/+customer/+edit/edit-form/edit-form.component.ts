@@ -15,7 +15,8 @@ import { retry } from 'rxjs/operators';
 })
 export class EditFormComponent extends CanDeactivateForm {
   public ticket: ITicket = {
-    data: {}
+    data: {},
+    schema: []
   };
 
   public currentPartnerId: string;
@@ -27,7 +28,6 @@ export class EditFormComponent extends CanDeactivateForm {
     private ticketRepo: TicketRepo,
     private partnerRepo: PartnerRepo,
     private form: FormContext,
-    private changeDetect: ChangeDetectorRef,
     modal: CxModal) {
     super(form, modal);
 
@@ -38,14 +38,12 @@ export class EditFormComponent extends CanDeactivateForm {
         .pipe(retry(10))
         .subscribe(ticket => {
           this.ticket = ticket
-          this.changeDetect.detectChanges();
       });
 
       this.partnerRepo.GetCurrentForTicket(ticketId).subscribe(partner => {
         if (partner.length === undefined || partner.length === 0 || !partner[0].partnerId) { return; };
         this.currentPartnerId = partner[0].partnerId;
         this.currentPartnerIdChange.emit(this.currentPartnerId);
-        this.changeDetect.detectChanges();
       });
 
     });

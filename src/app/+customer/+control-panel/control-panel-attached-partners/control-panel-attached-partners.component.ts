@@ -54,7 +54,7 @@ export class ControlPanelAttachedPartnersComponent {
     .keyboard(27)
     .title('Kumppanilinkki')
     .body('Pyydä kumppanilinkki ja syötä se tähän. Tällöin näet kyseisen kumppanin tapahtumat etusivullasi.')
-    .placeholder('https://www.carpax.fi/app/partner/8c70a2x2-60a1-2822-8544-80sxe70ie9e6/tickets')
+    .placeholder('https://www.korjaamolinkki.fi/app/partner/8c70a2x2-60a1-2822-8544-80sxe70ie9e6/tickets')
     .okBtn('Hyväksy')
     .cancelBtn('Peruuta')
     .open()

@@ -1,9 +1,8 @@
 import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core';
-import { ITicketHeader } from '../../data/ticketHeaderRepo';
+import { ITicketHeader, ITicketHeaders } from '../../data/ticketHeaderRepo';
 import { NotificationRepo } from '../../data/notificationRepo';
 import * as moment from 'moment';
 import { Observable, BehaviorSubject, zip, combineLatest } from 'rxjs';
-import { TicketSchema } from 'app/service/ticketSchema';
 
 @Component({
   selector: 'cx-ticket-list',
@@ -15,12 +14,15 @@ export class TicketListComponent implements OnChanges  {
   @Input()
   public tickets: Observable<ITicketHeader[]>;
 
+  @Input()
+  public schema = [];
+
   @Output()
   public openTicket: EventEmitter<ITicketHeader> = new EventEmitter<ITicketHeader>();
 
   public ticketsWithNotifications: BehaviorSubject<Array<ITicketHeader|{hasNotification: boolean}>> = new BehaviorSubject([]);
 
-  constructor(private notificationRepo: NotificationRepo, public schema: TicketSchema) {
+  constructor(private notificationRepo: NotificationRepo) {
   }
 
   ngOnChanges() {

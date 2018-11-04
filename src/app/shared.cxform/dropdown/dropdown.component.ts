@@ -10,7 +10,7 @@ export class DropdownComponent {
   @Input() public header: string;
   @Input() public headerIcon: string;
 
-  @Input() public theme: string = 'dark';
+  @Input() public theme = 'dark';
 
   @Input() public value: any;
   @Output() public valueChange = new EventEmitter();
