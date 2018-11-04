@@ -49,7 +49,7 @@ export class TicketListComponent implements OnChanges {
     let timeCandidate = moment(value);
 
     if (value && timeCandidate.isValid()) {
-      return timeCandidate.format('DD.MM.YYYY HH:mm');
+      return timeCandidate.format('DD.MM.YYYY');
     }
 
     return value;
