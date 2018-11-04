@@ -18,7 +18,7 @@
         *ngFor="let column of schema"
         ng-class="{nonActiveTicket: ticket.ready}"
       >
-      {{ ticket.data[column.name] }}
+      {{ format(ticket.data[column.name]) }}
       </td>
       <td ng-class="{nonActiveTicket: ticket.ready}" class="visible-lg visible-md">{{ ticket.partner }}</td>
     </tr>
