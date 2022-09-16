@@ -25,7 +25,7 @@
     "@angular/animations": "6.0.3",
     "@types/clipboard-js": "0.3.2",
     "angular2-modal": "3.0.3",
-    "bootstrap": "3.3.7",
+    "bootstrap": "3.4.1",
     "bootstrap-datepicker": "1.8.0",
     "clipboard-js": "0.3.6",
     "core-js": "2.5.7",
